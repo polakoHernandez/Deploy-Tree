@@ -44,14 +44,12 @@ function GestionarPiscinas() {
     maxRange: 0,
   });
 
+  document.body.style.overflow = "hidden";
+
   const [historicoId, setIdHistorico] = useState("");
 
   const [openModalAjustar, setOpenModalAjustar] = useState(false);
   const [renderTabla, setRenderTabla] = useState(0);
-
-  const aumentarRenderTabla = () => {
-    setRenderTabla(renderTabla + 1);
-  };
 
   const [contador, setContador] = useState(0);
   const [miHistorico, setMiHistorico] = useState([]);
@@ -403,6 +401,7 @@ function GestionarPiscinas() {
         setColor("success");
 
         crearNotificacion(response._id);
+        setRenderTabla(renderTabla + 1);
         break;
 
       case 400:
@@ -541,7 +540,7 @@ function GestionarPiscinas() {
         setIdHistorico(response.historyPoolId[0]._id);
 
         console.log({ AQUIDATAREAL: response.historyPoolIdFormatted });
-        aumentarRenderTabla();
+        // setRenderTabla(renderTabla + 1);
 
         // const newArray = response.historyPoolIdFormatted.flatMap((elemento) =>
         //   elemento.parameters.map((parametro, index) => ({
@@ -574,6 +573,8 @@ function GestionarPiscinas() {
             mensaje: parametro.message,
             minimo: parametro.min,
             real: parametro.real,
+            usuario: elemento.modifiedBy.name,
+            apellido: elemento.modifiedBy.lastName || "",
           }))
         );
 
@@ -622,11 +623,12 @@ function GestionarPiscinas() {
     listarAforo(pool._id);
   }, [contadorAforo]);
 
-  // useEffect(() => {
-  //   listarHistorico2();
-  // }, [renderTabla]);
+  useEffect(() => {
+    listarHistorico2();
+  }, [renderTabla]);
+
   return (
-    <Box sx={{ ...styles.generalContainer }}>
+    <Box sx={{ ...styles.generalContainer, overflow: "hidden" }}>
       <SearchAppBar
         onClick={() => moverTabla()}
         moverUsuario={moverTablaUsuarios}
@@ -1787,6 +1789,7 @@ function GestionarPiscinas() {
                       }}
                     >
                       <TablaLisaHistorico
+                        renderizar={() => setRenderTabla(renderTabla + 1)}
                         idPool={pool._id}
                         idHistorico={historicoId}
                         // CloroPh={}

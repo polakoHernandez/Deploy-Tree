@@ -6,22 +6,32 @@ import { Button, Typography, Box, IconButton } from "@mui/material";
 import ModalAjustar from "./ModalAjustar";
 import { Visibility } from "@mui/icons-material";
 import ModalAjustado from "./ModalAjustado";
+import ModalDetalles from "./ModalDetalles";
 
 export default function TablaLisaHistorico({
   data,
   contador,
   idHistorico,
   idPool,
+  renderizar,
 }) {
   console.log({ dataTabla: data });
+  console.log(typeof renderizar);
 
   const [rowIdCounter, setRowIdCounter] = useState(1);
   const [openModalAjustar, setOpenModalAjustar] = useState(false);
   const [abrirModal, setAbrirModal] = useState(false);
   const [prop2, setProp2] = useState(false);
+  const [openModalDetalle, setOpenModalDetalle] = useState(false);
+  const [dataDetalle, setDataDetalle] = useState("");
 
   const handleIncrementRowId = () => {
     setRowIdCounter((prevCounter) => prevCounter + 1);
+  };
+
+  const mostrarModalDetalle = (params) => {
+    setDataDetalle(params);
+    setOpenModalDetalle(true);
   };
 
   const [DataPropModal, setDataModalprop] = useState("");
@@ -261,6 +271,7 @@ export default function TablaLisaHistorico({
           }}
         >
           <Button
+            onClick={() => mostrarModalDetalle(params.row)}
             variant="containded"
             sx={{
               backgroundColor: "blue",
@@ -308,6 +319,7 @@ export default function TablaLisaHistorico({
         pageSizeOptions={[5, 10]}
       />
       <ModalAjustado
+        renderizar={renderizar}
         CloroPh={prop2}
         idHistorico={idHistorico}
         idPool={idPool}
@@ -316,11 +328,17 @@ export default function TablaLisaHistorico({
       ></ModalAjustado>
 
       <ModalAjustar
+        renderizar={renderizar}
         idHistorico={idHistorico}
         CloroPh={DataPropModal}
         open={openModalAjustar}
         close={() => setOpenModalAjustar(false)}
       ></ModalAjustar>
+      <ModalDetalles
+        open={openModalDetalle}
+        close={() => setOpenModalDetalle(false)}
+        data={dataDetalle}
+      ></ModalDetalles>
     </div>
   );
 }

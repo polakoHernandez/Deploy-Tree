@@ -204,11 +204,11 @@ function AgregarInventario() {
     },
 
     uno: {
-      //   backgroundColor: "red",
+      // backgroundColor: "red",
       height: "100%",
       display: contador === 1 ? "flex" : "none",
       flexDirection: { xs: "column", sm: "column", md: "row" },
-      overflowY: "scroll",
+      overflow: "scroll", // Puedes cambiar "auto" por el valor que necesites: visible, hidden, scroll, etc.
     },
 
     dos: {

@@ -10,7 +10,14 @@ import { Close, Pool } from "@mui/icons-material";
 import InputGeneral from "../General/InputGeneral";
 import Alertas from "../General/Alertas";
 
-function ModalAjustado({ open, close, idPool, idHistorico, CloroPh }) {
+function ModalAjustado({
+  open,
+  close,
+  idPool,
+  idHistorico,
+  CloroPh,
+  renderizar,
+}) {
   const style = {
     position: "absolute",
     top: "50%",
@@ -77,6 +84,7 @@ function ModalAjustado({ open, close, idPool, idHistorico, CloroPh }) {
           setColor("success");
           setMensaje(respuesta.msg);
           close();
+          renderizar();
           break;
       }
     } else if (CloroPh.nombre === "Ph") {
@@ -110,6 +118,7 @@ function ModalAjustado({ open, close, idPool, idHistorico, CloroPh }) {
           setColor("success");
           setMensaje(respuesta.msg);
           close();
+          renderizar();
 
           break;
       }

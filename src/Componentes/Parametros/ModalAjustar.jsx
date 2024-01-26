@@ -30,6 +30,7 @@ export default function ModalAjustar({
   close,
   CloroPh,
   idHistorico,
+  renderizar,
 }) {
   const [nombreParametro, setNombreParametro] = useState(CloroPh?.nombre);
 
@@ -291,7 +292,7 @@ export default function ModalAjustar({
         // alert(JSON.stringify({ probandoRespuesa: respues }));
         close();
         historyChemicalProduct(respues._id);
-
+        renderizar();
         break;
 
       case 404:
