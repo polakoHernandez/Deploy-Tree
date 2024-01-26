@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.img-principal {
+  width: 400px;
+  height: 400px;
+}

@@ -1,0 +1,163 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.estilos-imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mensaje1 {
+  display: block;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 40px;
+  color: rgb(0, 164, 228);
+  /* background-color: red; */
+}
+
+.mensaje2 {
+  /* background-color: blue; */
+  display: block;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 20px;
+  margin-top: -50px;
+  color: rgb(0, 164, 228);
+}
+
+.estilos-imagen-tree {
+  width: 100px;
+  height: 70px;
+}
+
+.mensaje3 {
+  font-family: "Nunito Sans", sans-serif;
+  color: white;
+}
+
+.icon {
+  color: white;
+}
+
+.icon:hover {
+  color: gray;
+}
+
+.mv-logos {
+  transition: ease 4s;
+  transform: translateY(-900px);
+}
+
+.mv-icon-tree {
+  transition: ease 4s;
+  transform: translateY(-900px);
+}
+
+.mv-iniciar-sesion {
+  transition: ease 5s;
+  transform: translateY(-900px);
+}
+
+.mv-no-cuenta {
+  transition: ease 5s;
+  transform: translateY(-900px);
+}
+
+.mv-formulario {
+  transform: translateY(750px);
+}
+
+.mv-formulario-efecto {
+  transition: ease 4s;
+  transform: translateY(0px);
+}
+
+.estilos-propios {
+  margin-left: 10px;
+}
+
+.close-icon {
+}
+
+.close-icon:hover {
+  color: gray;
+  cursor: pointer;
+}
+
+.mensaje-bienvenida {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 30px;
+  display: block;
+}
+
+.logo-user {
+  width: 100px;
+  height: 100px;
+  margin-top: -25px;
+}
+
+.olvido {
+  font-family: "Nunito Sans", sans-serif;
+  color: rgb(0, 164, 228);
+  font-size: 15px;
+  display: block;
+  cursor: pointer;
+}
+
+.olvido:hover {
+  color: gray;
+}
+
+.msg-conoce {
+  font-family: "Nunito Sans", sans-serif;
+  display: block;
+}
+
+.icon-2 {
+  color: black;
+}
+
+@media (max-width: 600px) {
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  /* body {
+    overflow-y: scroll;
+    max-height: 10vh;
+    margin: 0 auto;
+  } */
+
+  .mensaje1 {
+    display: block;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 12px;
+    color: rgb(0, 164, 228);
+    order: 1;
+    margin-top: -45px;
+  }
+
+  .mensaje2 {
+    display: block;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 20px;
+    margin-top: -50px;
+    color: rgb(0, 164, 228);
+    order: 2;
+    padding-top: 34px;
+  }
+
+  .ocultar {
+    display: none;
+    transition: ease 4s;
+  }
+
+  .mostrar {
+    display: block;
+  }
+}
+
+.over {
+  overflow: "hidden";
+}

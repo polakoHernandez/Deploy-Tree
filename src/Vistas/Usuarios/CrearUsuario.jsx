@@ -1,0 +1,397 @@
+import React, { useState, useRef } from "react";
+import SearchAppBar from "../../Componentes/General/NavBar";
+import { Box, Typography, Grid, Button, CircularProgress } from "@mui/material";
+import InputGeneral from "../../Componentes/General/InputGeneral";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CoPresentIcon from "@mui/icons-material/CoPresent";
+import BadgeIcon from "@mui/icons-material/Badge";
+import PhoneAndroid from "@mui/icons-material/PhoneAndroid";
+import AttachEmailIcon from "@mui/icons-material/AttachEmail";
+import InputPassword from "../../Componentes/General/InputPassword";
+import InputSelect from "../../Componentes/General/InputSelect";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
+import Alertas from "../../Componentes/General/Alertas";
+import ModalGeneral from "../../Componentes/General/Modal";
+
+function CrearUsuario() {
+  document.body.style.overflow = "scroll";
+  const [openModal, setOpenModal] = useState(false);
+
+  const [mover, setMover] = useState(false); //MOvercon Piscina
+  const [moverUsuario, setMoverUsuarios] = useState(false);
+  const [moverParametros, setMoverParametros] = useState(false);
+  const [moverQuimicos, setMoverQuimicos] = useState(false);
+  const [moverPerfil, setMoverPerfil] = useState(false);
+
+  const moverTabla = () => {
+    setMover(!mover);
+    setMoverUsuarios(false);
+    setMoverParametros(false);
+    setMoverQuimicos(false);
+    setMoverPerfil(false);
+  };
+
+  const moverTablaUsuarios = () => {
+    setMover(false);
+    setMoverUsuarios(!moverUsuario);
+    setMoverParametros(false);
+    setMoverQuimicos(false);
+    setMoverPerfil(false);
+  };
+
+  const moverTablaParametros = () => {
+    setMover(false);
+    setMoverUsuarios(false);
+    setMoverParametros(!moverParametros); //
+    setMoverQuimicos(false);
+    setMoverPerfil(false);
+  };
+
+  const moverTablaQuimicos = () => {
+    setMover(false);
+    setMoverUsuarios(false);
+    setMoverParametros(false);
+    setMoverQuimicos(!moverQuimicos);
+    setMoverPerfil(false);
+  };
+
+  const moverTablaPerfil = () => {
+    setMover(false);
+    setMoverUsuarios(false);
+    setMoverParametros(false);
+    setMoverQuimicos(false);
+    setMoverPerfil(!moverPerfil);
+  };
+
+  const limpiar = (event) => {
+    setData({
+      cedula: "",
+      nombre: "",
+      apellidos: "",
+      celular: "",
+      rol: "",
+      password: "",
+      confirm: "",
+      email: "",
+    });
+  };
+
+  const [data, setData] = useState({
+    cedula: "",
+    nombre: "",
+    apellidos: "",
+    celular: "",
+    rol: "",
+    password: "",
+    confirm: "",
+    email: "",
+  });
+
+  const [open, setOpen] = useState("");
+  const [mensaje, setMensaje] = useState("");
+  const [severity, setSeverity] = useState("");
+
+  const [cargando, setCargando] = useState(false);
+
+  const seleccionarData = (name, value) => {
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    console.log(data);
+  };
+
+  const seleccionarRol = (event, value) => {
+    // Handle the change in the Autocomplete component
+    seleccionarData("rol", value.label);
+  };
+
+  const roles = [
+    {
+      label: "Gerente",
+    },
+    {
+      label: "Gestor",
+    },
+  ];
+
+  const validarContrasena = (contrasena) => {
+    // Al menos 7 caracteres, una mayúscula, una minúscula, un número y un carácter especial
+    const expresionRegular =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/;
+
+    return expresionRegular.test(contrasena);
+  };
+
+  const crearUsuario = async () => {
+    if (data.celular === "") {
+      setMensaje("El celular debe ser un número");
+      setOpen(true);
+      setSeverity("warning");
+      return;
+    } else if (
+      data.email === "" ||
+      data.nombre === "" ||
+      data.rol === "" ||
+      data.apellidos == "" ||
+      data.password === "" ||
+      data.confirm === "" ||
+      data.cedula === ""
+    ) {
+      setOpen(true);
+      setMensaje("Todos los campos son obligatorios");
+      setSeverity("warning");
+      return;
+    } else if (data.password !== data.confirm) {
+      setMensaje("Las contraseñas no coinciden");
+      setOpen(true);
+      setSeverity("error");
+      return;
+    }
+
+    setCargando(true);
+    try {
+      const response = await fetch(
+        "https://pool-api-treea.vercel.app/v1/user",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json", // Especificar el tipo de contenido como JSON
+            "x-token": localStorage.getItem("clave"),
+          },
+          body: JSON.stringify({
+            name: data.nombre,
+            lastName: data.apellidos,
+            ID: data.cedula,
+            cellPhone: data.celular,
+            email: data.email,
+            password: data.password,
+            role: data.rol.toUpperCase(),
+            state: true,
+          }),
+        }
+      );
+
+      switch (response.status) {
+        case 200:
+          const responeData = await response.json();
+          console.log(responeData.users);
+          setCargando(false);
+          setOpen(true);
+          setSeverity("success");
+          setMensaje("Creado con éxito");
+          limpiar();
+          break;
+
+        case 400:
+          setOpen(true);
+          setSeverity("error");
+          setMensaje(
+            "Minimo 7 caracteres, un numero, una minúscula, una mayúscula y un carácter especial para la contraseña"
+          );
+          setCargando(false);
+          break;
+
+        case 500:
+          setOpen(true);
+          setSeverity("error");
+          setMensaje("Error en el servidor");
+          setCargando(false);
+          setOpenModal(true);
+
+          break;
+      }
+
+      // Puedes hacer algo con la respuesta aquí
+    } catch (error) {
+      setOpen(true);
+      setSeverity("error");
+      setMensaje("Error en el servidor");
+      setCargando(false);
+    }
+    setCargando(false);
+  };
+
+  return (
+    <div
+      style={{ overflowX: "hidden", overflowY: "scroll", position: "relative" }}
+    >
+      <SearchAppBar
+        onClick={() => moverTabla()}
+        moverUsuario={moverTablaUsuarios}
+        moverParametros={moverTablaParametros}
+        moverQuimicos={moverTablaQuimicos} //
+        moverPerfil={moverTablaPerfil}
+      ></SearchAppBar>
+      <Typography
+        sx={{
+          position: "absolute",
+          backgroundColor: "rgb(0,164,228)",
+          top:
+            mover ||
+            // moverUsuarios ||
+            moverParametros ||
+            moverQuimicos ||
+            moverPerfil
+              ? "258px"
+              : " 128px",
+
+          right: { xs: "5%", sm: "5%" },
+          width: "150px",
+          height: "40px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "white",
+          borderRadius: "5px 0px 0 0",
+          fontFamily: "'Nunito Sans', sans-serif",
+
+          transition: "ease 0.1s",
+        }}
+      >
+        Crear usuario
+      </Typography>
+      <Box
+        sx={{
+          border: "1px solid black",
+          borderRadius: "5px",
+          boxShadow: "0px 5px 5px 0px black",
+          width: "90%",
+          height: "500px",
+          marginLeft: "5%",
+          marginTop: "190px",
+          marginBottom: "50px",
+          display: "flex",
+          justifyContent: "center",
+          overflowY: "scroll",
+          transition: "ease 0.8s",
+          transform:
+            mover ||
+            // moverUsuarios ||
+            moverParametros ||
+            moverQuimicos ||
+            moverPerfil
+              ? "translateY(30px)"
+              : "translatey(-100px)",
+          transition: "ease 0.1s",
+        }}
+      >
+        <Grid container>
+          <Grid item xs={12} sm={6}>
+            <InputGeneral
+              name="cedula"
+              type="text"
+              label="Cedula"
+              placeholder="Ingrese su cedula"
+              icon={<CoPresentIcon></CoPresentIcon>}
+              onChange={(e) => seleccionarData("cedula", e.target.value)}
+            ></InputGeneral>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <InputGeneral
+              name="nombre"
+              type="text"
+              label="Nombre"
+              placeholder="Ingrese su nombre"
+              icon={<AccountCircleIcon></AccountCircleIcon>}
+              onChange={(e) => seleccionarData("nombre", e.target.value)}
+            ></InputGeneral>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <InputGeneral
+              name="apellidos"
+              type="text"
+              label="Apellidos"
+              placeholder="Ingrese sus apellidos"
+              icon={<BadgeIcon></BadgeIcon>}
+              onChange={(e) => seleccionarData("apellidos", e.target.value)}
+            ></InputGeneral>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <InputGeneral
+              name="celular"
+              type="number"
+              label="Celular"
+              placeholder="Ingrese su celular"
+              icon={<PhoneAndroid></PhoneAndroid>}
+              onChange={(e) => seleccionarData("celular", e.target.value)}
+            ></InputGeneral>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <InputGeneral
+              name="email"
+              type="email"
+              label="Email"
+              placeholder="Ingrese su Email"
+              icon={<AttachEmailIcon></AttachEmailIcon>}
+              onChange={(e) => seleccionarData("email", e.target.value)}
+            ></InputGeneral>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <InputSelect
+              name="rol"
+              label="Rol"
+              placeholder="seleccione su rol"
+              icon={<HowToRegIcon></HowToRegIcon>}
+              options={roles}
+              onChange={seleccionarRol}
+            ></InputSelect>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <InputPassword
+              name="password"
+              placeholder="Ingrese su contraseña"
+              label="Contraseña"
+              onChange={(e) => seleccionarData("password", e.target.value)}
+            ></InputPassword>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <InputPassword
+              name="confirm"
+              placeholder="Ingrese su contraseña"
+              label="Confirmar contraseña"
+              onChange={(e) => seleccionarData("confirm", e.target.value)}
+            ></InputPassword>
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              disabled={cargando}
+              variant="contained"
+              sx={{
+                width: { xs: "90%", sm: "95%" },
+                marginTop: { xs: "10px", sm: "0px" },
+                marginBottom: { xs: "10px", sm: "0px" },
+                marginLeft: { xs: "5%", sm: "2.5%" },
+                backgroundColor: "rgb(0,164,228)",
+                "&:hover": {
+                  backgroundColor: "rgb(0,164,228)",
+                },
+              }}
+              onClick={() => crearUsuario()}
+            >
+              {cargando ? (
+                <CircularProgress size={24} color="inherit"></CircularProgress>
+              ) : (
+                "Guardar"
+              )}
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
+      <Alertas
+        severity={severity}
+        mensaje={mensaje}
+        open={open}
+        cerrar={() => setOpen(false)}
+      ></Alertas>
+      <ModalGeneral
+        open={openModal}
+        mensaje1="UPS!"
+        mensaje2="Su Sesión Ha Expirado"
+      ></ModalGeneral>
+    </div>
+  );
+}
+
+export default CrearUsuario;
