@@ -6,8 +6,9 @@ import Backdrop from "../../Componentes/General/BackDrop";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import SliderHorizontal from "../../Componentes/General/SliderHorizontal";
 import SliderVertical from "../../Componentes/General/SliderVertical";
-import { Girl } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
+import InputSelect from "../../Componentes/General/InputSelect";
+import { Pool } from "@mui/icons-material";
 
 function MisPiscinas() {
   const location = useLocation();
@@ -15,6 +16,7 @@ function MisPiscinas() {
   const [data, setData] = useState("");
   const [pool, setPool] = useState("");
   const [cargando, setCargando] = useState(false);
+  const [listaNombresPiscinas, setListaNombresPiscinas] = useState([]);
   //   Estados para mover el fromualrio
   const [mover, setMover] = useState(false); //MOvercon Piscina
   const [moverUsuario, setMoverUsuarios] = useState(false);
@@ -76,11 +78,12 @@ function MisPiscinas() {
   };
 
   const listaDeMisPiscinas = async () => {
+    const idUser = localStorage.getItem("id");
     setCargando(true);
     try {
       const tokenSend = localStorage.getItem("clave");
       const response = await fetch(
-        "https://treea-piscinas-api.vercel.app/v1/pool-by-user/656e4d4ffc0a8a2e68e1bc7e",
+        `https://treea-piscinas-api.vercel.app/v1/pool-by-user/${idUser}`,
         {
           method: "GET",
           headers: {
@@ -92,14 +95,20 @@ function MisPiscinas() {
 
       switch (response.status) {
         case 401:
-          //setCargando(false);
-          // setOpenModal(true);
           break;
 
         case 200:
-          // alert("OK");
           const responeData = await response.json();
-
+          console.log(responeData.poolCreatedByUser);
+          const nombrePiscinas = responeData.poolCreatedByUser.map(
+            (pisicina) =>( 
+              {
+                label: pisicina.name,
+              },
+            
+          ));
+          console.log({ aqui: nombrePiscinas });
+          setListaNombresPiscinas(nombrePiscinas);
           setData(responeData);
           setCargando(false);
 
@@ -111,6 +120,14 @@ function MisPiscinas() {
     setCargando(false);
   };
 
+  const obtenerIdPorNombre =(nombrePisicna)=>{
+  const respuesta = data.poolCreatedByUser.find(
+      (element) => element.name === nombrePisicna
+    );
+    setPool(respuesta);
+  
+  }
+
   const obetnerId = async (idPool) => {
     const respuesta = data.poolCreatedByUser.find(
       (element) => element._id === idPool
@@ -121,7 +138,7 @@ function MisPiscinas() {
   useEffect(() => {
     listaDeMisPiscinas();
 
-    // setReload(false); // Reset reload flag
+ 
   }, []);
 
   return (
@@ -183,39 +200,30 @@ function MisPiscinas() {
               <Grid item xs={12} sx={{ height: "15%" }}>
                 <Box
                   sx={{
-                    // backgroundColor: "cyan",
+                    // backgroundColor: "red",
                     height: "80px",
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "end",
-                    marginTop: { xs: "30px", sm: "200px", md: "0px" },
+                    justifyContent: "start",
+                    marginTop: { xs: "20px", sm: "200px", md: "0px" },
                   }}
                 >
                   <Box
                     sx={{
-                      marginRight: "73px",
+                      width: { xs: "100%", sm: "50%" },
+                      height: "100%",
+                      // backgroundColor: "cyan",
+                      // marginTop: { md: "-px" },
+                      marginRight: { md: "5%" },
                     }}
                   >
-                    <input
-                      className="input-buscar"
-                      placeholder="Buscar..."
-                    ></input>
-                    <IconButton
-                      sx={{
-                        color: "white",
-                        backgroundColor: "rgb(0,164,228)",
-                        borderRadius: "0px",
-                        marginTop: "-1px",
-                        marginLeft: "-2px",
-                        borderRadius: "0px 5px 5px 0px",
-                        height: "42px",
-                        "&:hover": {
-                          backgroundColor: "rgb(0,164,228)",
-                        },
-                      }}
-                    >
-                      <SearchIcon></SearchIcon>
-                    </IconButton>
+                    <InputSelect
+                      label="Buscar piscina"
+                      options={listaNombresPiscinas}
+                      icon={<Pool></Pool>}
+                      placeholder="Ingrese el nombre de una piscina"
+                      onChange={(e)=>obtenerIdPorNombre(e.target.textContent)}
+                    ></InputSelect>
                   </Box>
                 </Box>
               </Grid>
@@ -309,7 +317,7 @@ function MisPiscinas() {
                             marginBottom: "100px",
                           }}
                         >
-                          <img src={pool.photo} className="img-piscina"></img>
+                          <img src={pool?.photo} className="img-piscina"></img>
                         </Box>
                       </Grid>
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -318,7 +326,7 @@ function MisPiscinas() {
                         >
                           Nombre
                         </Typography>
-                        <Typography>{pool.name}</Typography>
+                        <Typography>{pool?.name}</Typography>
                       </Grid>
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
                         <Typography
@@ -326,7 +334,7 @@ function MisPiscinas() {
                         >
                           Departamento
                         </Typography>
-                        <Typography>{pool.department}</Typography>
+                        <Typography>{pool?.department}</Typography>
                       </Grid>
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
                         <Typography
@@ -334,7 +342,7 @@ function MisPiscinas() {
                         >
                           Ciudad/Municipio
                         </Typography>
-                        <Typography>{pool.city}</Typography>
+                        <Typography>{pool?.city}</Typography>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -343,7 +351,7 @@ function MisPiscinas() {
                         >
                           Uso
                         </Typography>
-                        <Typography>{pool.use}</Typography>
+                        <Typography>{pool?.use}</Typography>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -352,7 +360,7 @@ function MisPiscinas() {
                         >
                           Características
                         </Typography>
-                        <Typography>{pool.typePool}</Typography>
+                        <Typography>{pool?.typePool}</Typography>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -361,7 +369,7 @@ function MisPiscinas() {
                         >
                           Temperatura °C
                         </Typography>
-                        <Typography>{pool.temperature}°C</Typography>
+                        <Typography>{pool?.temperature}°C</Typography>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -370,7 +378,7 @@ function MisPiscinas() {
                         >
                           Temperatura externa °C
                         </Typography>
-                        <Typography>{pool.externalTemperature}°C</Typography>
+                        <Typography>{pool?.externalTemperature}°C</Typography>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -379,7 +387,7 @@ function MisPiscinas() {
                         >
                           Estructura
                         </Typography>
-                        <Typography>{pool.category}</Typography>
+                        <Typography>{pool?.category}</Typography>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -388,7 +396,7 @@ function MisPiscinas() {
                         >
                           Clase de istalación
                         </Typography>
-                        <Typography>{pool.typeInstallation}</Typography>
+                        <Typography>{pool?.typeInstallation}</Typography>
                       </Grid>
                     </Grid>
                   </Box>
@@ -420,7 +428,7 @@ function MisPiscinas() {
                         >
                           Forma
                         </Typography>
-                        <Typography>{pool.form}</Typography>
+                        <Typography>{pool?.form}</Typography>
                       </Grid>
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
                         <Typography
@@ -428,7 +436,7 @@ function MisPiscinas() {
                         >
                           Largo
                         </Typography>
-                        <Typography>{pool.height}</Typography>
+                        <Typography>{pool?.height}</Typography>
                       </Grid>
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
                         <Typography
@@ -436,7 +444,7 @@ function MisPiscinas() {
                         >
                           Ancho
                         </Typography>
-                        <Typography>{pool.width}</Typography>
+                        <Typography>{pool?.width}</Typography>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -446,8 +454,8 @@ function MisPiscinas() {
                           Profundidad A (m)
                         </Typography>
                         <Typography>
-                          {pool.depth && pool.depth.depthA !== undefined
-                            ? pool.depth.depthA
+                          {pool?.depth && pool?.depth?.depthA !== undefined
+                            ? pool?.depth?.depthA
                             : ""}
                         </Typography>
                       </Grid>
@@ -459,8 +467,8 @@ function MisPiscinas() {
                           Profundidad B (m)
                         </Typography>
                         <Typography>
-                          {pool.depth && pool.depth.depthB !== undefined
-                            ? pool.depth.depthB
+                          {pool?.depth && pool?.depth?.depthB !== undefined
+                            ? pool?.depth?.depthB
                             : ""}
                         </Typography>
                       </Grid>
@@ -472,8 +480,8 @@ function MisPiscinas() {
                           Profundidad C (m)
                         </Typography>
                         <Typography>
-                          {pool.depth && pool.depth.depthC !== undefined
-                            ? pool.depth.depthC
+                          {pool?.depth && pool?.depth.depthC !== undefined
+                            ? pool?.depth?.depthC
                             : ""}
                         </Typography>
                       </Grid>
@@ -485,7 +493,7 @@ function MisPiscinas() {
                           Proundidad máxima (m)
                         </Typography>
                         <Typography>
-                          {pool.maxDepth === undefined ? "" : pool.maxDepth}
+                          {pool?.maxDepth === undefined ? "" : pool?.maxDepth}
                         </Typography>
                       </Grid>
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -495,7 +503,7 @@ function MisPiscinas() {
                           Profundidad minima (m)
                         </Typography>
                         <Typography>
-                          {pool.minDepth === undefined ? "" : pool.minDepth}
+                          {pool?.minDepth === undefined ? "" : pool?.minDepth}
                         </Typography>
                       </Grid>
 
@@ -506,7 +514,7 @@ function MisPiscinas() {
                           Profundidad media (m)
                         </Typography>
                         <Typography>
-                          {pool.meanDepth === undefined ? "" : pool.meanDepth}
+                          {pool?.meanDepth === undefined ? "" : pool?.meanDepth}
                         </Typography>
                       </Grid>
                     </Grid>
@@ -539,7 +547,7 @@ function MisPiscinas() {
                         >
                           Sistema de operación
                         </Typography>
-                        <Typography>{pool.systemOperation}</Typography>
+                        <Typography>{pool?.systemOperation}</Typography>
                       </Grid>
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
                         <Typography
@@ -547,7 +555,7 @@ function MisPiscinas() {
                         >
                           Caudal
                         </Typography>
-                        <Typography>{pool.caudal}</Typography>
+                        <Typography>{pool?.caudal}</Typography>
                       </Grid>
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
                         <Typography
@@ -555,7 +563,7 @@ function MisPiscinas() {
                         >
                           Climatizado
                         </Typography>
-                        <Typography>{pool.airConditioned}</Typography>
+                        <Typography>{pool?.airConditioned}</Typography>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -564,7 +572,7 @@ function MisPiscinas() {
                         >
                           P. Recirculació mínimo
                         </Typography>
-                        <Typography>{pool.maxDepth}</Typography>
+                        <Typography>{pool?.maxDepth}</Typography>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -573,7 +581,7 @@ function MisPiscinas() {
                         >
                           P. Recirculació máximo
                         </Typography>
-                        <Typography>{pool.meanDepth}</Typography>
+                        <Typography>{pool?.meanDepth}</Typography>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -582,7 +590,7 @@ function MisPiscinas() {
                         >
                           Dosificación automática
                         </Typography>
-                        <Typography>{pool.autoDosing}</Typography>
+                        <Typography>{pool?.autoDosing}</Typography>
                       </Grid>
                     </Grid>
                   </Box>
@@ -616,7 +624,7 @@ function MisPiscinas() {
                         {pool === "" ? (
                           <Typography>No data</Typography>
                         ) : (
-                          pool.filters.map((elemento, index) => (
+                          pool?.filters.map((elemento, index) => (
                             <Grid
                               container
                               marginTop={1}
@@ -712,7 +720,7 @@ function MisPiscinas() {
                         {pool === "" ? (
                           <Typography></Typography>
                         ) : (
-                          pool.pumps.map((elemento, index) => (
+                          pool?.pumps?.map((elemento, index) => (
                             <Grid
                               key={index}
                               container
@@ -826,7 +834,7 @@ function MisPiscinas() {
                         <></>
                       ) : (
                         <>
-                          {pool.heaters.map((elemento, index) => (
+                          {pool?.heaters?.map((elemento, index) => (
                             <Grid container key={index}>
                               <Grid item xs={12}>
                                 <Typography
@@ -905,7 +913,7 @@ const styles = {
   generalContainer: {
     overflowX: "hidden",
     height: "100vh",
-    overflowY: { xs: "scroll", sm: "srcoll", md: "hidden", lg: "hidden" },
+    // overflowY: { xs: "scroll", sm: "srcoll", md: "hidden", lg: "hidden" },
     // backgroundColor: "red",
   },
 
