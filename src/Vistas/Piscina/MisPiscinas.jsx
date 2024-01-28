@@ -10,47 +10,6 @@ import { Girl } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
 
 function MisPiscinas() {
-  // Estado ara guardar los datos del formulario
-  // const [data, setData] = useState({
-  //   nombre: "",
-  //   departamento: "",
-  //   municipio: "",
-  //   direccion: "",
-  //   uso: "",
-  //   caracteristica: "",
-  //   temperatura: "",
-  //   temperaturaExterna: "",
-  //   estructura: "",
-  //   instalacion: "",
-  //   fotoPiscina: "",
-  //   forma: "",
-  //   largo: "",
-  //   ancho: "",
-  //   profundidad: "",
-  //   profundidadB: "",
-  //   profundidadC: "",
-  //   operacion: "",
-  //   caudal: "",
-  //   climatizado: "",
-  //   recirculacionMinimo: "",
-  //   recirculacionMaximo: "",
-  //   dosificacion: "",
-  //   filtro: "",
-  //   alturaFiltro: "",
-  //   cantidadFiltro: "",
-  //   caudalBomba: "",
-  //   cantidadBomba: "",
-  //   marcaBomba: "",
-  //   referenciaBomba: "",
-  //   cantidadCalentador: "",
-  //   referenciaCalentador: "",
-  //   marcaCalentador: "",
-  //   fotoPiscina: "",
-  //   fotoBomba: "",
-  //   fichaTecnica: "",
-  //   fichaTecnicaCalentador: "",
-  // });
-
   const location = useLocation();
   const idProp = new URLSearchParams(location.search).get("idProp");
   const [data, setData] = useState("");
@@ -141,7 +100,6 @@ function MisPiscinas() {
           // alert("OK");
           const responeData = await response.json();
 
-          console.log(responeData);
           setData(responeData);
           setCargando(false);
 
@@ -149,8 +107,6 @@ function MisPiscinas() {
       }
     } catch (error) {
       setCargando(false);
-      console.error("Error during data fetching:", error);
-      // setOpenModal(true);
     }
     setCargando(false);
   };
@@ -203,6 +159,7 @@ function MisPiscinas() {
             </Grid>
             <Grid item xs={12} sm={12} md={8}>
               <Grid
+                item
                 xs={12}
                 sx={{
                   width: "100%",
@@ -223,7 +180,7 @@ function MisPiscinas() {
                   ></SliderHorizontal>
                 )}
               </Grid>
-              <Grid xs={12} sx={{ height: "15%" }}>
+              <Grid item xs={12} sx={{ height: "15%" }}>
                 <Box
                   sx={{
                     // backgroundColor: "cyan",
@@ -262,11 +219,16 @@ function MisPiscinas() {
                   </Box>
                 </Box>
               </Grid>
-              <Grid xs={12} sx={{ height: "85%" }}>
+              <Grid item xs={12} sx={{ height: "85%" }}>
                 <Box
                   sx={{
-                    width: "95%",
-                    marginLeft: "2.5%",
+                    width: { xs: "95%", sm: "95%", md: "90%", lg: "90%" },
+                    marginLeft: {
+                      xs: "2.5%",
+                      sm: "2.5%",
+                      md: "2.5%",
+                      lg: "2.5%",
+                    },
                     // backgroundColor: "antiquewhite",
                     height: "45px",
                     display: "flex",
@@ -275,7 +237,6 @@ function MisPiscinas() {
                 >
                   <Typography
                     sx={{
-                      marginRight: "70px",
                       backgroundColor: "rgb(0,164,228)",
                       height: "100%",
                       width: "150px",
@@ -658,11 +619,11 @@ function MisPiscinas() {
                           pool.filters.map((elemento, index) => (
                             <Grid
                               container
-                              xs={12}
                               marginTop={1}
                               marginBottom={1}
+                              key={index}
                             >
-                              <Grid xs={12}>
+                              <Grid item xs={12}>
                                 <Typography
                                   sx={{
                                     ...styles.fontTypografy,
@@ -755,7 +716,7 @@ function MisPiscinas() {
                             <Grid
                               key={index}
                               container
-                              xs={12}
+
                               // sx={{ backgroundColor: "blue" }}
                             >
                               <Grid item xs={12}>
@@ -772,6 +733,7 @@ function MisPiscinas() {
                                 </Typography>
                               </Grid>
                               <Grid
+                                item
                                 xs={12}
                                 sx={{
                                   // backgroundColor: "pink",
@@ -788,7 +750,7 @@ function MisPiscinas() {
                                   }}
                                 ></img>
                               </Grid>
-                              <Grid xs={4}>
+                              <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
                                   Marca
                                 </Typography>
@@ -797,7 +759,7 @@ function MisPiscinas() {
                                 </Typography>
                               </Grid>
 
-                              <Grid xs={4}>
+                              <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
                                   Flujo
                                 </Typography>
@@ -806,7 +768,7 @@ function MisPiscinas() {
                                 </Typography>
                               </Grid>
 
-                              <Grid xs={4}>
+                              <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
                                   Referencia
                                 </Typography>
@@ -814,7 +776,7 @@ function MisPiscinas() {
                                   {elemento.referencePump}
                                 </Typography>
                               </Grid>
-                              <Grid xs={4}>
+                              <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
                                   DataSheet
                                 </Typography>
@@ -879,7 +841,7 @@ function MisPiscinas() {
                                   Calentador {index + 1}
                                 </Typography>
                               </Grid>
-                              <Grid xs={4}>
+                              <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
                                   Referencia
                                 </Typography>
@@ -887,7 +849,7 @@ function MisPiscinas() {
                                   {elemento.heaterReference}
                                 </Typography>
                               </Grid>
-                              <Grid xs={4}>
+                              <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
                                   Marca
                                 </Typography>
@@ -895,7 +857,7 @@ function MisPiscinas() {
                                   {elemento.heaterBrand}
                                 </Typography>
                               </Grid>
-                              <Grid xs={4}>
+                              <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
                                   DataSheet
                                 </Typography>
@@ -943,6 +905,7 @@ const styles = {
   generalContainer: {
     overflowX: "hidden",
     height: "100vh",
+    overflowY: { xs: "scroll", sm: "srcoll", md: "hidden", lg: "hidden" },
     // backgroundColor: "red",
   },
 

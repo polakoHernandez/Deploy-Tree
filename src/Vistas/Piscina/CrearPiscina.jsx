@@ -44,15 +44,15 @@ function CrearPiscina() {
     largo: 0,
     ancho: 0,
 
-    profundidad: "",
-    profundidadB: "",
-    profundidadC: "",
+    profundidad: 0,
+    profundidadB: 0,
+    profundidadC: 0,
 
     operacion: "",
     caudal: 0,
     climatizado: "",
-    recirculacionMaximo: "",
-    recirculacionMinimo: "",
+    recirculacionMaximo: 0,
+    recirculacionMinimo: 0,
 
     dosificacion: "",
     filtro: [
@@ -101,7 +101,6 @@ function CrearPiscina() {
         filtro: updatedFiltro,
       };
     });
-    console.log(data.filtro);
   };
 
   //*Estados para agregar los texfield de Bomba
@@ -129,7 +128,6 @@ function CrearPiscina() {
   };
 
   const catchDataBombas = (index, e) => {
-    console.log(e.target.name, e.target.value);
     setData((prevData) => {
       const updatedFiltro = [...prevData.bomba];
       updatedFiltro[index] = {
@@ -142,7 +140,6 @@ function CrearPiscina() {
         bomba: updatedFiltro,
       };
     });
-    console.log(data.bomba);
   };
 
   const catchDataBombasFiles = (index, event) => {
@@ -193,7 +190,6 @@ function CrearPiscina() {
         calentador: updatedFiltro,
       };
     });
-    console.log(data.calentador);
   };
 
   const catchDataCalentadoresFiles = (index, event) => {
@@ -218,7 +214,6 @@ function CrearPiscina() {
       ...prevData,
       [name]: value,
     }));
-    console.log(data);
   };
 
   //*Funcion para limpiar a data
@@ -520,7 +515,7 @@ function CrearPiscina() {
       label: "Arena carbon",
     },
     {
-      label: "ARENA ANTRECITA",
+      label: "Arena Antrecita",
     },
   ];
 
@@ -588,13 +583,10 @@ function CrearPiscina() {
       switch (response.status) {
         case 200:
           const respuesta = await response.json();
-          console.log(respuesta);
 
           break;
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const crearPiscina = async () => {
@@ -606,8 +598,6 @@ function CrearPiscina() {
         return; // At least one attribute is empty
       }
     }
-
-    console.log(data);
 
     setDeshabilitar(true);
 
@@ -632,31 +622,16 @@ function CrearPiscina() {
 
     formData.append("form", data.forma);
 
-    // Recirculation Period
-    // formData.append("recirculationPeriod[max]", data.recirculacionMaximo);
-    // formData.append("recirculationPeriod[min]", data.recirculacionMinimo);
-    // formData.append("recirculationPeriod[max]", data.recirculacionMaximo);
-    // console.log(formData.get("recirculationPeriod[min]"));
-    // console.log(formData.get("recirculationPeriod[max]"));
-
     formData.append("use", data.uso);
     formData.append("photo", data.fotoPiscina);
     formData.append("typePool", data.caracteristica);
     formData.append("temperature", data.temperatura);
-    // formData.append("minDepth", 1996);
-    // formData.append("maxDepth", 1996);
+
     formData.append("typeInstallation", data.instalacion);
     formData.append("systemOperation", data.operacion); // todo usar ChangeOperator data?.property
     formData.append("airConditioned", data.climatizado);
     formData.append("caudal", data.caudal);
     formData.append("autoDosing", data.dosificacion);
-
-    // formData.append("depth[depthA]", data.depth.depthA);
-    // formData.append("depth[depthB]", data.depth.depthB);
-    // formData.append("depth[depthC]", data.depth.depthC);
-
-    // formData.append("recirculationPeriod[min]", data.recirculationPeriod.min);
-    // formData.append("recirculationPeriod[max]", data.recirculationPeriod.max);
 
     data.filtro.forEach((elemento, index) => {
       formData.append(`filters[${index}][filter]`, elemento.filtro);
@@ -697,12 +672,9 @@ function CrearPiscina() {
         }
       );
 
-      console.log({ dedub: response });
-
       switch (response.status) {
         case 200:
           const result = await response.json();
-          console.log(result._id);
           const idPool = result._id;
           setOpen(true);
           setMensaje("Piscina Creada exitosamente!");
@@ -714,7 +686,6 @@ function CrearPiscina() {
           break;
 
         case 400:
-          console.log(await response.json());
           setOpen(true);
           setMensaje("Todos los campos son obligatorios");
           setColor("error");
@@ -723,22 +694,18 @@ function CrearPiscina() {
           break;
 
         case 500:
-          console.log(await response.json());
           setOpen(true);
           setMensaje("Error al crear la pisicina");
           setColor("error");
           setDeshabilitar(false);
           break;
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
     setDeshabilitar(false);
   };
 
   useEffect(() => {
     listarDepartamentos();
-    console.log(data.fotoPiscina);
   }, []);
 
   useEffect(() => {
@@ -758,7 +725,7 @@ function CrearPiscina() {
         <Box sx={styleAnimation.containerVentanas}>
           <Box
             sx={{
-              backgroundColor: "rgb(0,164,228)",
+              backgroundColor: "white",
               width: { xs: "30%", sm: "30%", md: "75%", lg: "70%" },
               display: { xs: "none", sm: "none", md: "flex", lg: "flex" },
               fontFamily: "'Nunito Sans', sans-serif",
@@ -1176,11 +1143,11 @@ function CrearPiscina() {
                 <Typography sx={styles.encabezadosEqupios}>
                   Sección de filtros
                 </Typography>
-                <Grid container xs={12}>
+                <Grid container>
                   <Grid item xs={12}>
                     {data.filtro.map((elemento, index) => (
                       <Grid container key={index}>
-                        <Grid xs={12}>
+                        <Grid item xs={12}>
                           <Box
                             sx={{
                               display: "flex",
@@ -1196,7 +1163,7 @@ function CrearPiscina() {
                             </IconButton>
                           </Box>
                         </Grid>
-                        <Grid xs={12} sm={12} md={4}>
+                        <Grid item xs={12} sm={12} md={4}>
                           <InputSelect
                             onChange={(e) =>
                               catchDataFiltros(
@@ -1211,7 +1178,7 @@ function CrearPiscina() {
                             options={filtros}
                           ></InputSelect>
                         </Grid>
-                        <Grid xs={12} sm={12} md={4}>
+                        <Grid item xs={12} sm={12} md={4}>
                           <InputGeneral
                             type="number"
                             name="altura"
@@ -1222,7 +1189,7 @@ function CrearPiscina() {
                             }
                           ></InputGeneral>
                         </Grid>
-                        <Grid xs={12} sm={12} md={4}>
+                        <Grid item xs={12} sm={12} md={4}>
                           <InputGeneral
                             onChange={(e) =>
                               catchDataFiltros(
@@ -1237,7 +1204,7 @@ function CrearPiscina() {
                             icon={<Pool></Pool>}
                           ></InputGeneral>
                         </Grid>
-                        <Grid xs={12} sm={12} md={4}>
+                        <Grid item xs={12} sm={12} md={4}>
                           <InputGeneral
                             onChange={(e) =>
                               catchDataFiltros(
@@ -1252,7 +1219,7 @@ function CrearPiscina() {
                             icon={<Pool></Pool>}
                           ></InputGeneral>
                         </Grid>
-                        <Grid xs={12} sm={12} md={4}>
+                        <Grid item xs={12} sm={12} md={4}>
                           <InputGeneral
                             onChange={(e) =>
                               catchDataFiltros(
@@ -1277,11 +1244,11 @@ function CrearPiscina() {
                   Sección de bombas
                 </Typography>
                 <Grid container>
-                  <Grid container xs={12}>
+                  <Grid container>
                     <Grid item xs={12} sx={{}}>
                       {data.bomba.map((elemento, index) => (
                         <Grid container key={index}>
-                          <Grid xs={12}>
+                          <Grid item xs={12}>
                             <Box
                               sx={{
                                 display: "flex",
@@ -1353,11 +1320,11 @@ function CrearPiscina() {
                   Sección de calentador
                 </Typography>
                 <Grid container>
-                  <Grid container xs={12}>
+                  <Grid container>
                     <Grid item xs={12} sx={{}}>
                       {data.calentador.map((elemeto, index) => (
                         <Grid container key={index}>
-                          <Grid xs={12}>
+                          <Grid item xs={12}>
                             <Box
                               sx={{
                                 display: "flex",
@@ -1406,7 +1373,7 @@ function CrearPiscina() {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid xs={12}>
+                <Grid item xs={12}>
                   <Button
                     disabled={deshabilitar}
                     onClick={() => crearPiscina()}
@@ -1489,7 +1456,7 @@ const styles = {
     justifyContent: "center",
     textAlign: "center",
     color: "white",
-    borderRadius: "5px 0px 0px 5px",
+    borderRadius: "5px 0px 0px 0px",
     marginRight: "5px",
   },
 

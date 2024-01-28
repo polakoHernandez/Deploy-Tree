@@ -46,7 +46,6 @@ function ListaDeUsuarios() {
         case 200:
           const responeData = await response.json();
 
-          console.log(responeData.users);
           setData(responeData.users);
           setCargando(false);
           break;

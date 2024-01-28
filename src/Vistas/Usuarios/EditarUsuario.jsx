@@ -20,7 +20,6 @@ function EditarUsuario() {
   const location = useLocation();
 
   const { _id, ID, name, lastName, email, cellPhone, role } = location.state;
-  console.log(role);
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -76,7 +75,7 @@ function EditarUsuario() {
       nombre: "",
       apellidos: "",
       celular: "",
-      rol: "",
+      rol: { label: "" },
       password: "",
       confirm: "",
       email: "",
@@ -88,13 +87,13 @@ function EditarUsuario() {
     nombre: name,
     apellidos: lastName,
     celular: cellPhone,
-    rol: { label: role },
+    rol: { label: role } || { label: "" },
     password: "",
     confirm: "",
     email: email,
   });
 
-  const [open, setOpen] = useState("");
+  const [open, setOpen] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [severity, setSeverity] = useState("");
 
@@ -105,20 +104,23 @@ function EditarUsuario() {
       ...prevData,
       [name]: value,
     }));
-    console.log(data);
   };
 
-  const seleccionarRol = (event, value) => {
+  const seleccionarRol = (rol, value) => {
     // Handle the change in the Autocomplete component
-    seleccionarData("rol", value.label);
+
+    setData((prevData) => ({
+      ...prevData,
+      [rol]: { label: value },
+    }));
   };
 
   const roles = [
     {
-      label: "Gerente",
+      label: "GERENTE",
     },
     {
-      label: "Gestor",
+      label: "GESTOR",
     },
   ];
 
@@ -144,7 +146,7 @@ function EditarUsuario() {
     setCargando(true);
     try {
       const response = await fetch(
-        `https://pool-api-treea.vercel.app/v1/user/${_id}`,
+        `https://treea-piscinas-api.vercel.app/v1/user/${_id}`,
         {
           method: "PUT",
           headers: {
@@ -166,7 +168,6 @@ function EditarUsuario() {
       switch (response.status) {
         case 200:
           const responeData = await response.json();
-          console.log(responeData.users);
           setCargando(false);
           setOpen(true);
           setSeverity("success");
@@ -182,7 +183,6 @@ function EditarUsuario() {
           break;
 
         case 500:
-          console.log(error);
           setOpen(true);
           setSeverity("error");
           setMensaje("Error en el servidor");
@@ -198,7 +198,6 @@ function EditarUsuario() {
       setSeverity("error");
       setMensaje("Error en el servidor");
       setCargando(false);
-      console.error(error);
     }
     setCargando(false);
   };
@@ -308,7 +307,7 @@ function EditarUsuario() {
               label="Celular"
               placeholder="Ingrese su celular"
               icon={<PhoneAndroid></PhoneAndroid>}
-              onChange={(e) => seleccionarData("celular", e.target.value)}
+              onChange={(e) => console.log(e.target.textContent)}
               value={data.celular}
             ></InputGeneral>
           </Grid>
@@ -330,7 +329,7 @@ function EditarUsuario() {
               placeholder="seleccione su rol"
               icon={<HowToRegIcon></HowToRegIcon>}
               options={roles}
-              onChange={seleccionarRol}
+              onChange={(e) => seleccionarRol("rol", e.target.textContent)}
               value={data.rol}
             ></InputSelect>
           </Grid>

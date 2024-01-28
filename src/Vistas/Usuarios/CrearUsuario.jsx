@@ -87,7 +87,7 @@ function CrearUsuario() {
     email: "",
   });
 
-  const [open, setOpen] = useState("");
+  const [open, setOpen] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [severity, setSeverity] = useState("");
 
@@ -98,7 +98,6 @@ function CrearUsuario() {
       ...prevData,
       [name]: value,
     }));
-    console.log(data);
   };
 
   const seleccionarRol = (event, value) => {
@@ -115,6 +114,7 @@ function CrearUsuario() {
     },
   ];
 
+  //!No esta en uso
   const validarContrasena = (contrasena) => {
     // Al menos 7 caracteres, una mayúscula, una minúscula, un número y un carácter especial
     const expresionRegular =
@@ -152,7 +152,7 @@ function CrearUsuario() {
     setCargando(true);
     try {
       const response = await fetch(
-        "https://pool-api-treea.vercel.app/v1/user",
+        "https://treea-piscinas-api.vercel.app/v1/user",
         {
           method: "POST",
           headers: {
@@ -176,7 +176,6 @@ function CrearUsuario() {
       switch (response.status) {
         case 200:
           const responeData = await response.json();
-          console.log(responeData.users);
           setCargando(false);
           setOpen(true);
           setSeverity("success");
@@ -185,8 +184,10 @@ function CrearUsuario() {
           break;
 
         case 400:
+          const response400 = await response.json();
           setOpen(true);
           setSeverity("error");
+
           setMensaje(
             "Minimo 7 caracteres, un numero, una minúscula, una mayúscula y un carácter especial para la contraseña"
           );

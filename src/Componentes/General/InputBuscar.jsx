@@ -8,9 +8,7 @@ function InputBuscar({ label, onChange, value, ref, name }) {
     setFile(event.target.files[0]);
   };
 
-  useEffect(() => {
-    console.log(file);
-  }, [file]);
+  useEffect(() => {}, [file]);
 
   return (
     <div>
