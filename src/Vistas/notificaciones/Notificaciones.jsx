@@ -133,7 +133,7 @@ const Notificaciones = () => {
     },
 
     insumosTypo: {
-      width: { xs: "100px", sm: "100px", md: "100px", lg: "150px" },
+      width: { xs: "50px", sm: "120px", md: "100px", lg: "150px" },
       border: contador === 1 ? "1px solid black" : "1px solid white",
       backgroundColor: contador === 1 ? "white" : "rgb(0,164,228)",
       color: contador === 1 ? "black" : "white",
@@ -151,7 +151,7 @@ const Notificaciones = () => {
     },
 
     parametrosTypo: {
-      width: { xs: "100px", sm: "100px", md: "100px", lg: "150px" },
+      width: { xs: "50px", sm: "140px", md: "100px", lg: "150px" },
       border: contador === 2 ? "1px solid black" : "1px solid white",
       backgroundColor: contador === 2 ? "white" : "rgb(0,164,228)",
       color: contador === 2 ? "black" : "white",
@@ -168,7 +168,7 @@ const Notificaciones = () => {
     },
 
     piscinasTypo: {
-      width: { xs: "100px", sm: "100px", md: "100px", lg: "150px" },
+      width: { xs: "50px", sm: "120px", md: "100px", lg: "150px" },
       border: contador === 3 ? "1px solid black" : "1px solid white",
       backgroundColor: contador === 3 ? "white" : "rgb(0,164,228)",
       color: contador === 3 ? "black" : "white",
@@ -345,7 +345,7 @@ const Notificaciones = () => {
                 sx={{ ...stylesAnimation.insumosTypo }}
                 onClick={() => setContador(1)}
               >
-                Insumos
+                <Box sx={{ display: { xs: "none", sm: "flex" } }}>Insumos</Box>
                 <Box>
                   <Badge color="error" badgeContent={contadorInsumo}>
                     <Notifications sx={{ color: "red" }}></Notifications>
@@ -356,7 +356,9 @@ const Notificaciones = () => {
                 sx={{ ...stylesAnimation.parametrosTypo }}
                 onClick={() => setContador(2)}
               >
-                Parámetros
+                <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+                  Parámetros
+                </Box>
                 <Box>
                   <Badge color="warning" badgeContent={contadorParametro}>
                     <Notifications sx={{ color: "orange" }}></Notifications>
@@ -367,7 +369,7 @@ const Notificaciones = () => {
                 sx={{ ...stylesAnimation.piscinasTypo }}
                 onClick={() => setContador(3)}
               >
-                Piscinas
+                <Box sx={{ display: { xs: "none", sm: "flex" } }}>Piscinas</Box>
                 <Badge color="success" badgeContent={contadorPiscina}>
                   <Notifications sx={{ color: "green" }}></Notifications>
                 </Badge>

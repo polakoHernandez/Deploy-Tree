@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,11 +10,12 @@ import "../../Estilos/General/navBar.css";
 import TemporaryDrawer from "./SideBar";
 import ListItemButton from "@mui/material/ListItemButton";
 import Collapse from "@mui/material/Collapse";
-import { ListItemText, Typography } from "@mui/material";
+import { ListItemText, Typography, Badge, Alert } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Notifications } from "@mui/icons-material";
 
 export default function SearchAppBar({
   onClick,
@@ -27,6 +28,8 @@ export default function SearchAppBar({
 
   // Estado para abrir el drawer
   const [abrirDrawer, setAbrirDrawer] = useState(false);
+
+  const [notificaciones, setNotificaciones] = useState(0);
 
   // Estados para abrir los menus
   const [menuPiscina, setMenuPiscina] = useState(false);
@@ -90,6 +93,45 @@ export default function SearchAppBar({
   const cerrarDrawer = () => {
     setAbrirDrawer(false);
   };
+
+  const listarNotificaciones = async () => {
+    try {
+      const tokenSend = localStorage.getItem("clave");
+      const respuesta = await fetch(
+        "https://treea-piscinas-api.vercel.app/v1/notifications-manager",
+        {
+          method: "GET",
+          headers: {
+            Accpet: "Application/json",
+            "x-token": tokenSend,
+          },
+        }
+      );
+
+      switch (respuesta.status) {
+        case 200:
+          const respo = await respuesta.json();
+          setNotificaciones(respo.notifications.length);
+
+          break;
+
+        case 401:
+          const response = await respuesta.json();
+          console.log(response);
+          break;
+
+        default:
+          break;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    listarNotificaciones();
+  }, []);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -705,6 +747,9 @@ export default function SearchAppBar({
                 }}
               >
                 {localStorage.getItem("user")}
+                <Badge badgeContent={notificaciones} color="error">
+                  <Notifications color="error"></Notifications>
+                </Badge>
               </Box>
               <AccountCircleIcon
                 sx={{
@@ -779,7 +824,10 @@ export default function SearchAppBar({
                         // },
                       }}
                     >
-                      Notificaciones
+                      Notificaciones{" "}
+                      <Badge badgeContent={notificaciones} color="error">
+                        <Notifications color="error"></Notifications>
+                      </Badge>
                     </Typography>
                   }
                 />

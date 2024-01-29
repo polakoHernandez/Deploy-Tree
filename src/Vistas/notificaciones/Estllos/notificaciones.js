@@ -6,10 +6,10 @@ const styles = {
   },
 
   container: {
-    //backgroundColor: "pink",
-    width: "80%",
+    // backgroundColor: "pink",
+    width: "90%",
     marginTop: "10px",
-    marginLeft: "10%",
+    marginLeft: "5%",
     height: "100%",
   },
 
@@ -34,7 +34,7 @@ const styles = {
 
   textoEncabezado: {
     backgroundColor: "rgb(0,164,228)",
-    width: "15%",
+    width: { xs: "40%", sm: "25%", md: "25%", lg: "15%" },
     height: "100%",
     display: "flex",
     justifyContent: "center",
