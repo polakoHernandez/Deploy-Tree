@@ -77,7 +77,6 @@ export default function ModalAjustar({
     switch (response.status) {
       case 200:
         const respuesta = await response.json();
-        console.log({ misProducto: respuesta });
         setDataCompleta(respuesta.searchChemicalProduct);
 
         const newArray = respuesta.searchChemicalProduct.map((elemento) => ({
@@ -85,13 +84,10 @@ export default function ModalAjustar({
         }));
 
         setRetornado(newArray);
-        console.warn("newArray");
-        console.log(respuesta.searchChemicalProduct);
         break;
 
       case 500:
         const respuesta2 = await response.json();
-        console.log({ error: respuesta2 });
         break;
     }
   };
@@ -144,19 +140,16 @@ export default function ModalAjustar({
           switch (response.status) {
             case 200:
               const respues = await response.json();
-              console.log({ EyAQUI: respues });
 
               break;
 
             case 404:
               const respues2 = await response.json();
-              console.log({ EyAqui2: respues2 });
 
               break;
 
             case 500:
               const respues3 = await response.json();
-              console.log({ dataRetornadaAqui: respues3 });
 
               break;
 
@@ -164,10 +157,6 @@ export default function ModalAjustar({
               break;
           }
         } else if (CloroPh.nombre === "Ph") {
-          // const updateProp = {
-          //   nameParam: CloroPh.nombre,
-          // };
-
           const response = await fetch(
             `https://treea-piscinas-api.vercel.app/v1/history-pool/${dataClorPh.historyPoolId._id}/${dataClorPh.historyPoolId.paramPh._id}`,
             {
@@ -187,19 +176,16 @@ export default function ModalAjustar({
           switch (response.status) {
             case 200:
               const respues = await respuesta.json();
-              console.log({ EyAQUI: respues });
 
               break;
 
             case 404:
               const respues2 = await respuesta.json();
-              console.log({ EyAqui2: respues2 });
 
               break;
 
             case 500:
               const respues3 = await respuesta.json();
-              console.log({ dataRetornadaAqui: respues3 });
 
               break;
 
@@ -212,8 +198,6 @@ export default function ModalAjustar({
 
       case 500:
         const response2 = await respuesta.json();
-        alert("NO FUCIONO");
-        console.log({ noseQuepasa: response2 });
 
         break;
     }
@@ -235,7 +219,6 @@ export default function ModalAjustar({
     switch (respuesta.status) {
       case 200:
         const respues = await respuesta.json();
-        console.log({ dataRetornadaAqui: respues });
         setDataClorPh(respues);
         setAjusteCloro(respues.historyPoolId.paramChlorine.isAdjustedChlorine);
         setAjustePh(respues.historyPoolId.paramPh.isAdjustedPh);
@@ -244,13 +227,11 @@ export default function ModalAjustar({
 
       case 404:
         const respues2 = await respuesta.json();
-        console.log({ dataRetornadaAqui: respues2 });
 
         break;
 
       case 500:
         const respues3 = await respuesta.json();
-        console.log({ dataRetornadaAqui: respues3 });
 
         break;
 
@@ -283,7 +264,6 @@ export default function ModalAjustar({
     switch (respuesta.status) {
       case 200:
         const respues = await respuesta.json();
-        console.log({ respuestaGuardar: respues });
         setRespuestaModal(respues);
         setAbrirAlerta2(true);
         setMensaje2(respues.message);
@@ -297,14 +277,12 @@ export default function ModalAjustar({
 
       case 404:
         const respues2 = await respuesta.json();
-        console.log({ respuestaGuardar2: respues2 });
         setActivarCalcular(false);
 
         break;
 
       case 500:
         const respues3 = await respuesta.json();
-        console.log({ respuestaGuardar3: respues3 });
         setActivarCalcular(false);
 
         break;

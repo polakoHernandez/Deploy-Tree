@@ -54,7 +54,6 @@ const columns = [
 ];
 
 export default function Tabla({ data, contador, nombrePiscina }) {
-  console.log(data || "");
   return (
     <div
       style={{

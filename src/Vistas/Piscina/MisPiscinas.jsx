@@ -221,7 +221,7 @@ function MisPiscinas() {
                       label="Buscar piscina"
                       options={listaNombresPiscinas}
                       icon={<Pool></Pool>}
-                      placeholder="Ingrese el nombre de una piscina"
+                      placeholder="Selecciones una piscina"
                       onChange={(e)=>obtenerIdPorNombre(e.target.textContent)}
                     ></InputSelect>
                   </Box>

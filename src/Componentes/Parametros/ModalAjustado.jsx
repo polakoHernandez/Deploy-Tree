@@ -73,11 +73,6 @@ function ModalAjustado({
       switch (response.status) {
         case 200:
           const respuesta = await response.json();
-          console.log(
-            "%cMi Data",
-            "color: green; font-weight: bold; font-size: 16px;"
-          );
-          console.log({ NUEVAPRUEBA: respuesta });
 
           setDesactivar(false);
           setAbrirAlerta(true);
@@ -107,12 +102,7 @@ function ModalAjustado({
       switch (response.status) {
         case 200:
           const respuesta = await response.json();
-          console.log(
-            "%cMi Data",
-            "color: green; font-weight: bold; font-size: 16px;"
-          );
 
-          console.log({ NUEVAPRUEBA: respuesta });
           setDesactivar(false);
           setAbrirAlerta(true);
           setColor("success");

@@ -15,9 +15,6 @@ export default function TablaLisaHistorico({
   idPool,
   renderizar,
 }) {
-  console.log({ dataTabla: data });
-  console.log(typeof renderizar);
-
   const [rowIdCounter, setRowIdCounter] = useState(1);
   const [openModalAjustar, setOpenModalAjustar] = useState(false);
   const [abrirModal, setAbrirModal] = useState(false);

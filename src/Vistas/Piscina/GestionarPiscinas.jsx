@@ -24,6 +24,8 @@ import SliderVertical from "../../Componentes/GestionarPisicnas/SliderVertical";
 import SliderHorizontal from "../../Componentes/GestionarPisicnas/SliderHorizontal";
 import TablaLisaHistorico from "../../Componentes/Parametros/TablaLisaHistorico";
 import ModalAjustar from "../../Componentes/Parametros/ModalAjustar";
+import InputSelect from "../../Componentes/General/InputSelect";
+import Pool from "@mui/icons-material/Pool";
 
 function GestionarPiscinas() {
   const [data, setData] = useState("");
@@ -46,6 +48,7 @@ function GestionarPiscinas() {
 
   document.body.style.overflow = "hidden";
 
+  const [nombresPiscinas, setNombresPiscinas] = useState([]);
   const [historicoId, setIdHistorico] = useState("");
 
   const [openModalAjustar, setOpenModalAjustar] = useState(false);
@@ -97,7 +100,6 @@ function GestionarPiscinas() {
       ...prevDatos,
       [name]: value,
     }));
-    // console.log(dataAforo);
   };
 
   const capTurarDatosParametros = (event) => {
@@ -106,7 +108,11 @@ function GestionarPiscinas() {
       ...prevDatos,
       [name]: value,
     }));
-    // console.log(dataParametro);
+  };
+
+  const obtenerIdPorNombre = (nombre) => {
+    const respuesta = data?.pools?.find((element) => element.name === nombre);
+    setPool(respuesta);
   };
 
   //Funciones para crear Parametros y aforo
@@ -148,7 +154,6 @@ function GestionarPiscinas() {
     switch (response.status) {
       case 200:
         const respuesta = response.json();
-        // console.log(respuesta);
         setOpenAlerta(true);
         setMensaje("Aforo creado correctamente");
         setColor("success");
@@ -188,8 +193,6 @@ function GestionarPiscinas() {
 
   //Funcion pra listar el aforo
   const listarAforo = async (idPool) => {
-    // console.log(idPool);
-
     const response = await fetch(
       // `https://pool-api-treea.vercel.app/v1/aforo/${idPool}`,
       `https://treea-piscinas-api.vercel.app/v1/aforo/${idPool}`,
@@ -204,9 +207,7 @@ function GestionarPiscinas() {
     switch (response.status) {
       case 200:
         const respuesta = await response.json();
-        // console.log(respuesta.aforoId);
         setRespuestaAforo(respuesta.aforoId);
-        // console.log(respuestaAforo); // Añadir este console.log
         break;
 
       case 404:
@@ -218,7 +219,6 @@ function GestionarPiscinas() {
         break;
 
       case 500:
-        // alert("Error en e servidor");
         break;
     }
   };
@@ -295,7 +295,7 @@ function GestionarPiscinas() {
     try {
       const tokenSend = localStorage.getItem("clave");
       const response = await fetch(
-        "https://pool-api-treea.vercel.app/v1/pools/",
+        "https://treea-piscinas-api.vercel.app/v1/pools/",
         {
           method: "GET",
           headers: {
@@ -307,29 +307,30 @@ function GestionarPiscinas() {
 
       switch (response.status) {
         case 401:
-          //setCargando(false);
-          // setOpenModal(true);
           break;
 
         case 200:
-          // alert("OK");
           const responeData = await response.json();
 
-          // console.log(responeData);
           setData(responeData);
           setCargando(false);
+          console.log(responeData.pools);
+          const nombrePiscinas = responeData?.pools?.map((piscina) => ({
+            label: piscina.name,
+          }));
+
+          setNombresPiscinas(nombrePiscinas);
+          console.log(nombrePiscinas);
           break;
       }
     } catch (error) {
       setCargando(false);
-      // alert("error");
-      // setOpenModal(true);
     }
     setCargando(false);
   };
 
   const obetnerId = (idPool) => {
-    const respuesta = data.pools.find((element) => element._id === idPool);
+    const respuesta = data?.pools?.find((element) => element?._id === idPool);
     setPool(respuesta);
   };
 
@@ -354,13 +355,10 @@ function GestionarPiscinas() {
       switch (response.status) {
         case 200:
           const respuesta = await response.json();
-          // console.log(respuesta);
 
           break;
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const enviarParametros = async () => {
@@ -395,7 +393,6 @@ function GestionarPiscinas() {
     switch (respuesta.status) {
       case 200:
         const response = await respuesta.json();
-        // console.log(response);
         setOpenAlerta(true);
         setMensaje("Parámetro creado con exito");
         setColor("success");
@@ -406,7 +403,6 @@ function GestionarPiscinas() {
 
       case 400:
         const responsess = await respuesta.json();
-        // console.log(responsess);
         setOpenAlerta(true);
         setMensaje("Error al el parametro");
         setColor("success");
@@ -417,7 +413,6 @@ function GestionarPiscinas() {
 
       case 500:
         const responsesss = await respuesta.json();
-        // console.log(responsesss);
         setOpenAlerta(true);
         setMensaje("Error al crear el parametro");
         setColor("success");
@@ -445,17 +440,15 @@ function GestionarPiscinas() {
     switch (respuesta.status) {
       case 200:
         const response = await respuesta.json();
-        console.warn("aqui");
-        console.log({ TomarHisroyAqui: response });
 
-        if (response.testTest[0].typeValidation === "Manual") {
+        if (response?.testTest[0]?.typeValidation === "Manual") {
           const minRange =
             response.testTest[0]?.parameters[1]?.minRange !== undefined
               ? response.testTest[0]?.parameters[1]?.minRange
               : 0;
 
           const maxRange =
-            response.testTest[0]?.parameters[1]?.maxRange !== undefined
+            response?.testTest[0]?.parameters[1]?.maxRange !== undefined
               ? response.testTest[0]?.parameters[1]?.maxRange
               : 0;
 
@@ -470,7 +463,6 @@ function GestionarPiscinas() {
             minRange: minRange,
             maxRange: maxRange,
           }));
-          // console.log({ rangos: dataRango });
         } else if (response.testTest[0].typeValidation === "Norma") {
           const maximo =
             response.testTest[0]?.normativityId?.parameter[0]
@@ -495,21 +487,17 @@ function GestionarPiscinas() {
             minRange: minRange,
             maxRange: maxRange,
           }));
-          // console.log({ rangos2: dataRango });
         }
 
         break;
       case 400:
         const response2 = await respuesta.json();
-        // console.log(response2);
         break;
       case 404:
         const response3 = await respuesta.json();
-        // console.log(response3);
         break;
       case 500:
         const response4 = await respuesta.json();
-        // console.log(response4);
         break;
 
       default:
@@ -535,31 +523,10 @@ function GestionarPiscinas() {
         const response = await respuesta.json();
         // setMiHistorico(response.historyPoolIdFormatted);
 
-        console.log({ ESTEESIDHISTORICO: response.historyPoolId[0]._id });
-        setIdHistoricoRetornado(response.historyPoolId[0]._id);
-        setIdHistorico(response.historyPoolId[0]._id);
+        setIdHistoricoRetornado(response?.historyPoolId[0]?._id);
+        setIdHistorico(response?.historyPoolId[0]?._id);
 
-        console.log({ AQUIDATAREAL: response.historyPoolIdFormatted });
-        // setRenderTabla(renderTabla + 1);
-
-        // const newArray = response.historyPoolIdFormatted.flatMap((elemento) =>
-        //   elemento.parameters.map((parametro, index) => ({
-        //     id: index * Math.random(),
-        //     fecha: elemento.date,
-        //     nombre: parametro.nameParam,
-        //     date: parametro.date,
-        //     ajustado:
-        //       elemento.nameParam === "Cloro"
-        //         ? parametro.isAdjustedChlorine
-        //         : parametro.isAdjustedPh,
-        //     maximo: parametro.max,
-        //     mensaje: parametro.message,
-        //     minimo: parametro.min,
-        //     real: parametro.real,
-        //   }))
-        // );
-
-        const newArray = response.historyPoolIdFormatted.flatMap((elemento) =>
+        const newArray = response?.historyPoolIdFormatted?.flatMap((elemento) =>
           elemento.parameters.map((parametro, index) => ({
             id: index * Math.random(),
             fecha: elemento.date,
@@ -578,25 +545,18 @@ function GestionarPiscinas() {
           }))
         );
 
-        console.warn("WEY");
-        console.log({ EYESTOYAQUI: newArray });
-
         setMiHistorico(newArray);
 
-        // console.log({ miHistorico: response });
-        // console.log({ miPrueba: newArray });
         break;
       case 400:
         const response2 = await respuesta.json();
-        // console.log(response2);
+
         break;
       case 404:
         const response3 = await respuesta.json();
-        // console.log(response3);
         break;
       case 500:
         const response4 = await respuesta.json();
-        // console.log(response4);
         break;
 
       default:
@@ -614,21 +574,29 @@ function GestionarPiscinas() {
       return; //
     }
 
-    listarAforo(pool._id);
+    listarAforo(pool?._id);
     listarHistorico();
     listarHistorico2();
-  }, [pool._id]);
+  }, [pool?._id]);
 
   useEffect(() => {
+    if (pool === "") {
+      return; //
+    }
+
     listarAforo(pool._id);
   }, [contadorAforo]);
 
   useEffect(() => {
+    if (pool === "") {
+      return; //
+    }
+
     listarHistorico2();
   }, [renderTabla]);
 
   return (
-    <Box sx={{ ...styles.generalContainer, overflow: "hidden" }}>
+    <Box sx={{ ...styles.generalContainer }}>
       <SearchAppBar
         onClick={() => moverTabla()}
         moverUsuario={moverTablaUsuarios}
@@ -685,35 +653,26 @@ function GestionarPiscinas() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "end",
-                    marginTop: { xs: "30px", sm: "200px", md: "0px" },
+                    marginTop: { xs: "0px", sm: "200px", md: "0px" },
+                    marginBottom: { xs: "0px", sm: "0px", md: "120px" },
                   }}
                 >
                   <Box
                     sx={{
-                      marginTop: { xs: "50px", sm: "0px" },
-                      marginRight: { xs: "2%", sm: "3%", md: "7%" },
+                      // backgroundColor: "red",
+                      width: { xs: "100%", sm: "50%" },
+                      marginTop: { xs: "50px", sm: "90px" },
+                      marginRight: { xs: "2%", sm: "1%", md: "7%", lg: "5%" },
+                      marginBottom: { xs: "0px", sm: "80px" },
                     }}
                   >
-                    <input
-                      className="input-buscar"
-                      placeholder="Buscar..."
-                    ></input>
-                    <IconButton
-                      sx={{
-                        color: "white",
-                        backgroundColor: "rgb(0,164,228)",
-                        borderRadius: "0px",
-                        marginTop: { xs: "-0.5%" },
-                        // marginLeft: "-2px",
-                        borderRadius: "0px 5px 5px 0px",
-                        height: "41.5px",
-                        "&:hover": {
-                          backgroundColor: "rgb(0,164,228)",
-                        },
-                      }}
-                    >
-                      <SearchIcon></SearchIcon>
-                    </IconButton>
+                    <InputSelect
+                      label="Buscar piscina"
+                      options={nombresPiscinas}
+                      icon={<Pool></Pool>}
+                      placeholder="Seleccione una piscina"
+                      onChange={(e) => obtenerIdPorNombre(e.target.textContent)}
+                    ></InputSelect>
                   </Box>
                 </Box>
               </Grid>
@@ -749,7 +708,12 @@ function GestionarPiscinas() {
                         borderRight: "1px solid white",
                         borderRadius: "5px 0px 0px 0px",
                         cursor: "pointer",
-                        display: { xs: "none", sm: "none", md: "flex" },
+                        display: {
+                          xs: "none",
+                          sm: "none",
+                          md: "none",
+                          lg: "flex",
+                        },
                         justifyContent: "center",
                         alignItems: "center",
                         "&:hover": {
@@ -774,7 +738,12 @@ function GestionarPiscinas() {
                         borderRight: "1px solid white",
 
                         cursor: "pointer",
-                        display: { xs: "none", sm: "none", md: "flex" },
+                        display: {
+                          xs: "none",
+                          sm: "none",
+                          md: "none",
+                          lg: "flex",
+                        },
                         justifyContent: "center",
                         alignItems: "center",
                         "&:hover": {
@@ -789,7 +758,6 @@ function GestionarPiscinas() {
                     <Typography
                       onClick={() => {
                         setContador(3);
-                        // console.log(contador);
                       }}
                       sx={{
                         backgroundColor:
@@ -802,7 +770,12 @@ function GestionarPiscinas() {
                         borderRight: "1px solid white",
                         borderRadius: "0px 0px 0px 0px",
                         cursor: "pointer",
-                        display: { xs: "none", sm: "none", md: "flex" },
+                        display: {
+                          xs: "none",
+                          sm: "none",
+                          md: "none",
+                          lg: "flex",
+                        },
                         justifyContent: "center",
                         alignItems: "center",
                         "&:hover": {
@@ -817,7 +790,6 @@ function GestionarPiscinas() {
                     <Typography
                       onClick={() => {
                         setContador(4);
-                        // console.log(contador);
                       }}
                       sx={{
                         backgroundColor:
@@ -828,7 +800,12 @@ function GestionarPiscinas() {
                         border: contador == 4 ? "1px solid rgb(0,164,228)" : "",
                         borderRadius: "0px 5px 0px 0px",
                         cursor: "pointer",
-                        display: { xs: "none", sm: "none", md: "flex" },
+                        display: {
+                          xs: "none",
+                          sm: "none",
+                          md: "none",
+                          lg: "flex",
+                        },
                         justifyContent: "center",
                         alignItems: "center",
                         "&:hover": {
@@ -847,7 +824,8 @@ function GestionarPiscinas() {
                     sx={{
                       backgroundColor: "rgb(0,164,228)",
                       height: "100%",
-                      width: "150px",
+                      width: { xs: "80%", sm: "30%", md: "20%" },
+                      marginRight: { xs: "-5%", sm: "-5%", md: "0%" },
                       borderRadius: "5px 0px 0px 0px",
                       color: "white",
                       display: "flex",
@@ -918,7 +896,7 @@ function GestionarPiscinas() {
                               }}
                             >
                               <img
-                                src={pool.photo}
+                                src={pool?.photo}
                                 className="img-piscina"
                               ></img>
                             </Box>
@@ -929,7 +907,7 @@ function GestionarPiscinas() {
                             >
                               Nombre
                             </Typography>
-                            <Typography>{pool.name}</Typography>
+                            <Typography>{pool?.name}</Typography>
                           </Grid>
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
                             <Typography
@@ -937,7 +915,7 @@ function GestionarPiscinas() {
                             >
                               Departamento
                             </Typography>
-                            <Typography>{pool.department}</Typography>
+                            <Typography>{pool?.department}</Typography>
                           </Grid>
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
                             <Typography
@@ -945,7 +923,7 @@ function GestionarPiscinas() {
                             >
                               Ciudad/Municipio
                             </Typography>
-                            <Typography>{pool.city}</Typography>
+                            <Typography>{pool?.city}</Typography>
                           </Grid>
 
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -954,7 +932,7 @@ function GestionarPiscinas() {
                             >
                               Uso
                             </Typography>
-                            <Typography>{pool.use}</Typography>
+                            <Typography>{pool?.use}</Typography>
                           </Grid>
 
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -963,7 +941,7 @@ function GestionarPiscinas() {
                             >
                               Características
                             </Typography>
-                            <Typography>{pool.typePool}</Typography>
+                            <Typography>{pool?.typePool}</Typography>
                           </Grid>
 
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -972,7 +950,7 @@ function GestionarPiscinas() {
                             >
                               Temperatura
                             </Typography>
-                            <Typography>{pool.temperature}</Typography>
+                            <Typography>{pool?.temperature}</Typography>
                           </Grid>
 
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -981,7 +959,7 @@ function GestionarPiscinas() {
                             >
                               Temperatura externa
                             </Typography>
-                            <Typography>{pool.externalTemperature}</Typography>
+                            <Typography>{pool?.externalTemperature}</Typography>
                           </Grid>
 
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -990,7 +968,7 @@ function GestionarPiscinas() {
                             >
                               Estructura
                             </Typography>
-                            <Typography>{pool.category}</Typography>
+                            <Typography>{pool?.category}</Typography>
                           </Grid>
 
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -999,7 +977,7 @@ function GestionarPiscinas() {
                             >
                               Clase de istalación
                             </Typography>
-                            <Typography>{pool.typeInstallation}</Typography>
+                            <Typography>{pool?.typeInstallation}</Typography>
                           </Grid>
                         </Grid>
                       </Box>
@@ -1031,7 +1009,7 @@ function GestionarPiscinas() {
                             >
                               Forma
                             </Typography>
-                            <Typography>{pool.form}</Typography>
+                            <Typography>{pool?.form}</Typography>
                           </Grid>
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
                             <Typography
@@ -1039,7 +1017,7 @@ function GestionarPiscinas() {
                             >
                               Largo (m)
                             </Typography>
-                            <Typography>{pool.height}</Typography>
+                            <Typography>{pool?.height}</Typography>
                           </Grid>
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
                             <Typography
@@ -1047,7 +1025,7 @@ function GestionarPiscinas() {
                             >
                               Ancho (m)
                             </Typography>
-                            <Typography>{pool.width}</Typography>
+                            <Typography>{pool?.width}</Typography>
                           </Grid>
 
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -1083,7 +1061,7 @@ function GestionarPiscinas() {
                             >
                               Proundidad máxima (m)
                             </Typography>
-                            <Typography>{pool.maxDepth}</Typography>
+                            <Typography>{pool?.maxDepth}</Typography>
                           </Grid>
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
                             <Typography
@@ -1091,7 +1069,7 @@ function GestionarPiscinas() {
                             >
                               Profundidad promedio (m)
                             </Typography>
-                            <Typography>{pool.minDepth}</Typography>
+                            <Typography>{pool?.minDepth}</Typography>
                           </Grid>
 
                           <Grid item xs={4} style={{ textAlign: "center" }}>
@@ -1100,7 +1078,7 @@ function GestionarPiscinas() {
                             >
                               Profundidad minima (m)
                             </Typography>
-                            <Typography>{pool.meanDepth}</Typography>
+                            <Typography>{pool?.meanDepth}</Typography>
                           </Grid>
                         </Grid>
                       </Box>
@@ -1132,7 +1110,7 @@ function GestionarPiscinas() {
                             >
                               Sistema de operación
                             </Typography>
-                            <Typography>{pool.systemOperation}</Typography>
+                            <Typography>{pool?.systemOperation}</Typography>
                           </Grid>
                           <Grid item xs={4} style={{ textAlign: "center" }}>
                             <Typography
@@ -1140,7 +1118,7 @@ function GestionarPiscinas() {
                             >
                               Caudal
                             </Typography>
-                            <Typography>{pool.caudal}</Typography>
+                            <Typography>{pool?.caudal}</Typography>
                           </Grid>
                           <Grid item xs={4} style={{ textAlign: "center" }}>
                             <Typography
@@ -1148,7 +1126,7 @@ function GestionarPiscinas() {
                             >
                               Climatizado
                             </Typography>
-                            <Typography>{pool.airConditioned}</Typography>
+                            <Typography>{pool?.airConditioned}</Typography>
                           </Grid>
 
                           <Grid item xs={4} style={{ textAlign: "center" }}>
@@ -1157,7 +1135,7 @@ function GestionarPiscinas() {
                             >
                               P. Recirculació mínimo
                             </Typography>
-                            <Typography>{pool.maxDepth}</Typography>
+                            <Typography>{pool?.maxDepth}</Typography>
                           </Grid>
 
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -1166,7 +1144,7 @@ function GestionarPiscinas() {
                             >
                               P. Recirculació máximo
                             </Typography>
-                            <Typography>{pool.meanDepth}</Typography>
+                            <Typography>{pool?.meanDepth}</Typography>
                           </Grid>
 
                           <Grid item xs={4} style={{ textAlign: "center" }}>
@@ -1175,7 +1153,7 @@ function GestionarPiscinas() {
                             >
                               Dosificación automática
                             </Typography>
-                            <Typography>{pool.autoDosing}</Typography>
+                            <Typography>{pool?.autoDosing}</Typography>
                           </Grid>
                         </Grid>
                       </Box>
@@ -1206,12 +1184,12 @@ function GestionarPiscinas() {
                           ) : (
                             pool?.filters?.map((elemento, index) => (
                               <Grid
+                                key={index}
                                 container
-                                xs={12}
                                 marginTop={1}
                                 marginBottom={1}
                               >
-                                <Grid xs={12}>
+                                <Grid item xs={12}>
                                   <Typography
                                     sx={{
                                       ...styles.fontTypografy,
@@ -1297,7 +1275,6 @@ function GestionarPiscinas() {
                               <Grid
                                 key={index}
                                 container
-                                xs={12}
                                 // sx={{ backgroundColor: "blue" }}
                               >
                                 <Grid item xs={12}>
@@ -1330,7 +1307,7 @@ function GestionarPiscinas() {
                                     }}
                                   ></img>
                                 </Grid>
-                                <Grid xs={4}>
+                                <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
                                     Marca
                                   </Typography>
@@ -1339,7 +1316,7 @@ function GestionarPiscinas() {
                                   </Typography>
                                 </Grid>
 
-                                <Grid xs={4}>
+                                <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
                                     Flujo
                                   </Typography>
@@ -1348,7 +1325,7 @@ function GestionarPiscinas() {
                                   </Typography>
                                 </Grid>
 
-                                <Grid xs={4}>
+                                <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
                                     Referencia
                                   </Typography>
@@ -1356,7 +1333,7 @@ function GestionarPiscinas() {
                                     {elemento.referencePump}
                                   </Typography>
                                 </Grid>
-                                <Grid xs={4}>
+                                <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
                                     DataSheet
                                   </Typography>
@@ -1420,7 +1397,7 @@ function GestionarPiscinas() {
                                       Calentador {index + 1}
                                     </Typography>
                                   </Grid>
-                                  <Grid xs={4}>
+                                  <Grid item xs={4}>
                                     <Typography
                                       sx={{ ...styles.fontTypografy }}
                                     >
@@ -1430,7 +1407,7 @@ function GestionarPiscinas() {
                                       {elemento.heaterReference}
                                     </Typography>
                                   </Grid>
-                                  <Grid xs={4}>
+                                  <Grid item xs={4}>
                                     <Typography
                                       sx={{ ...styles.fontTypografy }}
                                     >
@@ -1440,7 +1417,7 @@ function GestionarPiscinas() {
                                       {elemento.heaterBrand}
                                     </Typography>
                                   </Grid>
-                                  <Grid xs={4}>
+                                  <Grid item xs={4}>
                                     <Typography
                                       sx={{ ...styles.fontTypografy }}
                                     >
@@ -1480,7 +1457,24 @@ function GestionarPiscinas() {
 
                     <Box sx={{ display: contador == 1 ? "block" : "none" }}>
                       <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid item xs={12}>
+                          <Typography
+                            sx={{
+                              width: "90%",
+                              marginLeft: "5%",
+                              fontFamily: "'Nunito Sans', sans-serif",
+                              fontSize: "22px",
+                              borderBottom: "3px solid black",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              paddingTop: "30px",
+                            }}
+                          >
+                            Crear parámetro
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
                           <InputGeneal
                             name="fecha"
                             onChange={capTurarDatosParametros}
@@ -1489,7 +1483,7 @@ function GestionarPiscinas() {
                             icon={<PoolIcon></PoolIcon>}
                           ></InputGeneal>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                           <InputGeneal
                             value={dataParametro.PPMactualCloro}
                             name="PPMactualCloro"
@@ -1499,7 +1493,7 @@ function GestionarPiscinas() {
                             icon={<PoolIcon></PoolIcon>}
                           ></InputGeneal>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                           <InputGeneal
                             disabled
                             value={dataRango?.max}
@@ -1511,7 +1505,7 @@ function GestionarPiscinas() {
                           ></InputGeneal>
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                           <InputGeneal
                             value={dataParametro.PPMactualPh}
                             name="PPMactualPh"
@@ -1522,7 +1516,7 @@ function GestionarPiscinas() {
                           ></InputGeneal>
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                           <InputGeneal
                             disabled
                             value={dataRango.minRange}
@@ -1533,7 +1527,7 @@ function GestionarPiscinas() {
                             icon={<PoolIcon></PoolIcon>}
                           ></InputGeneal>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                           <InputGeneal
                             disabled
                             value={dataRango.maxRange}
@@ -1545,7 +1539,7 @@ function GestionarPiscinas() {
                           ></InputGeneal>
                         </Grid>
 
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sm={6}>
                           <Box
                             sx={{
                               width: "90%",
@@ -1681,7 +1675,7 @@ function GestionarPiscinas() {
                                 color="inherit"
                               ></CircularProgress>
                             ) : (
-                              "Guardar aqui"
+                              "Guardar"
                             )}
                           </Button>
                         </Grid>
@@ -1700,7 +1694,26 @@ function GestionarPiscinas() {
                       }}
                     >
                       <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid item xs={12}>
+                          <Typography
+                            sx={{
+                              width: "90%",
+                              marginLeft: "5%",
+                              fontFamily: "'Nunito Sans', sans-serif",
+                              fontSize: "22px",
+                              borderBottom: "3px solid black",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              paddingTop: "30px",
+                              marginTop: { xs: "70px", sm: "0px" },
+                            }}
+                          >
+                            Crear aforo
+                          </Typography>
+                        </Grid>
+
+                        <Grid item xs={12} sm={6}>
                           <InputGeneal
                             name="fechaInicio"
                             onChange={capTurarDatosAforo}
@@ -1710,7 +1723,7 @@ function GestionarPiscinas() {
                           ></InputGeneal>
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                           <InputGeneal
                             name="fechaFinal"
                             onChange={capTurarDatosAforo}
@@ -1720,7 +1733,7 @@ function GestionarPiscinas() {
                           ></InputGeneal>
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                           <InputGeneal
                             name="cantidadPersonas"
                             onChange={capTurarDatosAforo}
@@ -1730,7 +1743,7 @@ function GestionarPiscinas() {
                           ></InputGeneal>
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                           <InputGeneal
                             name="horasDeUso"
                             onChange={capTurarDatosAforo}
@@ -1747,7 +1760,10 @@ function GestionarPiscinas() {
                             sx={{
                               width: "95%",
                               marginLeft: "2.5%",
-                              backgroundColor: "rgb(0,164,228)",
+                              backgroundColor:
+                                peticion === true
+                                  ? "rgb( 210, 210, 210 )"
+                                  : "rgb(0,164,228)",
                               "&:hover": {
                                 backgroundColor: "rgb(0,164,228)",
                               },
@@ -1773,11 +1789,30 @@ function GestionarPiscinas() {
                     {respuestaAforo === "" ? (
                       ""
                     ) : (
-                      <Tabla
-                        data={respuestaAforo}
-                        contador={contador}
-                        nombrePiscina={pool.name}
-                      ></Tabla>
+                      <Box>
+                        <Grid item xs={12}>
+                          <Typography
+                            sx={{
+                              width: "90%",
+                              marginLeft: "5%",
+                              fontFamily: "'Nunito Sans', sans-serif",
+                              fontSize: "22px",
+                              borderBottom: "3px solid black",
+                              display: contador === 3 ? "flex" : "none",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              paddingTop: "30px",
+                            }}
+                          >
+                            Ver aforo
+                          </Typography>
+                        </Grid>
+                        <Tabla
+                          data={respuestaAforo}
+                          contador={contador}
+                          nombrePiscina={pool?.name}
+                        ></Tabla>
+                      </Box>
                     )}
 
                     <Box
@@ -1788,14 +1823,33 @@ function GestionarPiscinas() {
                         height: "100%",
                       }}
                     >
-                      <TablaLisaHistorico
-                        renderizar={() => setRenderTabla(renderTabla + 1)}
-                        idPool={pool._id}
-                        idHistorico={historicoId}
-                        // CloroPh={}
-                        data={miHistorico}
-                        contador={contador}
-                      ></TablaLisaHistorico>
+                      <Box>
+                        <Grid item xs={12}>
+                          <Typography
+                            sx={{
+                              width: "90%",
+                              marginLeft: "5%",
+                              fontFamily: "'Nunito Sans', sans-serif",
+                              fontSize: "22px",
+                              borderBottom: "3px solid black",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              paddingTop: "30px",
+                            }}
+                          >
+                            Ver histórico
+                          </Typography>
+                        </Grid>
+                        <TablaLisaHistorico
+                          renderizar={() => setRenderTabla(renderTabla + 1)}
+                          idPool={pool?._id}
+                          idHistorico={historicoId}
+                          // CloroPh={}
+                          data={miHistorico}
+                          contador={contador}
+                        ></TablaLisaHistorico>
+                      </Box>
                     </Box>
                   </Box>
 
