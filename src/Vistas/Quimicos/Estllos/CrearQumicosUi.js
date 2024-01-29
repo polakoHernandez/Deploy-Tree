@@ -6,7 +6,7 @@ const styles = {
   },
 
   container: {
-    //backgroundColor: "pink",
+    // backgroundColor: "pink",
     width: "80%",
     marginTop: "10px",
     marginLeft: "10%",
@@ -14,7 +14,7 @@ const styles = {
   },
 
   encabezado: {
-    //   backgroundColor: "cyan",
+    // backgroundColor: "cyan",
     height: "10%",
     display: "flex",
     justifyContent: "end",
@@ -34,7 +34,7 @@ const styles = {
 
   textoEncabezado: {
     backgroundColor: "rgb(0,164,228)",
-    width: "25%",
+    width: { xs: "40%", sm: "40%", md: "30%", lg: "20%" },
     height: "100%",
     display: "flex",
     justifyContent: "center",

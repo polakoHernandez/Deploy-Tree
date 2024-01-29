@@ -146,7 +146,7 @@ function EditarNorma() {
     try {
       const tokenSend = localStorage.getItem("clave");
       const response = await fetch(
-        `https://pool-api-treea.vercel.app/v1/normativity/${id}`,
+        `https://treea-piscinas-api.vercel.app/v1/normativity/${id}`,
         {
           method: "GET",
           headers: {
@@ -607,7 +607,7 @@ function EditarNorma() {
                               type="number"
                               name="minRange"
                               icon={<Pool></Pool>}
-                              label="Min Range"
+                              label="Rango mínimo"
                               value={elemento.minRange}
                               onChange={(e) =>
                                 catchDataParametros(
@@ -623,7 +623,7 @@ function EditarNorma() {
                               type="number"
                               name="maxRange"
                               icon={<Pool></Pool>}
-                              label="Max Range"
+                              label="Rango máximo"
                               value={elemento.maxRange}
                               onChange={(e) =>
                                 catchDataParametros(
@@ -679,6 +679,10 @@ function EditarNorma() {
                   <Button
                     sx={{
                       ...styles.guardar,
+                      backgroundColor:
+                        deshabilitar === true
+                          ? "rgb(210,210,210)"
+                          : "rgb(0,164,228)",
                     }}
                     onClick={() => crearNorma(data._id)}
                     variant="contained"

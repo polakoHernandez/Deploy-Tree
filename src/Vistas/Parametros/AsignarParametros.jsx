@@ -35,6 +35,7 @@ function AsignarParametros() {
   const [idNorma, setIdNorma] = useState("");
   const [optionsPiscinas, setOptionsPiscinas] = useState([]);
   const [valuPisicna, setValuPisicna] = useState([]);
+  const [cargando, setCargando] = useState(false);
 
   //*Estao para renderizar el front
   const [reload, setReload] = useState(false);
@@ -59,7 +60,6 @@ function AsignarParametros() {
       case 200:
         const response = await respuesta.json();
         setLisaParametros(response);
-        console.log(response.normativities);
 
         const newArray = response.normativities.map((elemento) => ({
           label: elemento.nameNormativity,
@@ -69,11 +69,9 @@ function AsignarParametros() {
         break;
 
       case 401:
-        console.log(await respuesta.json());
         break;
 
       case 500:
-        console.log(await respuesta.json());
         break;
     }
   };
@@ -95,7 +93,6 @@ function AsignarParametros() {
       case 200:
         const response = await respuesta.json();
         setListaPiscinas(response.pools);
-        console.log(response.pools);
 
         const newArray = response.pools.map((elemento) => ({
           label: elemento.name,
@@ -113,11 +110,9 @@ function AsignarParametros() {
         break;
 
       case 401:
-        console.log(await respuesta.json());
         break;
 
       case 500:
-        console.log(await respuesta.json());
         break;
     }
   };
@@ -137,6 +132,7 @@ function AsignarParametros() {
 
   const asignarNorma = async () => {
     setDeshabilitar(true);
+    setCargando(true);
 
     const response = await fetch(
       "https://treea-piscinas-api.vercel.app/v1/parameterization",
@@ -158,41 +154,42 @@ function AsignarParametros() {
     switch (response.status) {
       case 200:
         const result = await response.json();
-        console.log(result);
         setOpen(true);
         setMensaje("Norma Asignada exitosamente!");
         setColor("success");
         setDeshabilitar(false);
+        setCargando(false);
 
         break;
 
       case 400:
-        console.log(await response.json());
         setOpen(true);
         setMensaje("Todos los campos son obligatorios");
         setColor("error");
         setDeshabilitar(false);
+        setCargando(false);
 
         break;
 
       case 401:
-        console.log(await response.json());
         setOpen(true);
         setMensaje("Token no valido");
         setColor("error");
         setDeshabilitar(false);
+        setCargando(false);
 
         break;
     }
 
     try {
     } catch (error) {
-      console.log(error);
       setOpen(true);
       setMensaje("Error en el servidor");
       setColor("error");
       setDeshabilitar(false);
+      setCargando(false);
     }
+    setCargando(false);
   };
 
   //*ontaodor para mostrar las vistas
@@ -284,7 +281,6 @@ function AsignarParametros() {
     }
 
     setData(newData);
-    console.log(data);
   };
 
   const catchData = (e) => {
@@ -292,7 +288,6 @@ function AsignarParametros() {
       ...prevData,
       [e.target.name]: e.target.value,
     }));
-    console.log(data);
   };
 
   const catchDataSelect = (value) => {
@@ -429,7 +424,7 @@ function AsignarParametros() {
       color: contador === 2 ? "black" : "white",
       border: contador === 2 ? "1px solid black" : "1px solid white",
       width: "150px",
-      display: "flex",
+      display: { xs: "none", sm: "flex" },
       justifyContent: "center",
       alignItems: "center",
       fontFamily: "'Nunito Sans', sans-serif",
@@ -447,7 +442,7 @@ function AsignarParametros() {
       color: contador === 1 ? "black" : "white",
       border: contador === 1 ? "1px solid black" : "1px solid white",
       width: "150px",
-      display: "flex",
+      display: { xs: "none", sm: "flex" },
       justifyContent: "center",
       alignItems: "center",
       fontFamily: "'Nunito Sans', sans-serif",
@@ -498,6 +493,7 @@ function AsignarParametros() {
     vistaNormas: {
       display: contador === 2 ? "flex" : "none",
       height: "100%",
+      // backgroundColor: "red",
     },
 
     guardar: {
@@ -536,17 +532,14 @@ function AsignarParametros() {
     switch (response.status) {
       case 200:
         const result = await response.json();
-        console.log(result);
         setOpen(true);
         setMensaje("Parametros Asignados exitosamente!");
         setColor("success");
         setDeshabilitar(false);
-        alert("Estoy aqui");
 
         break;
 
       case 400:
-        console.log(await response.json());
         setOpen(true);
         setMensaje("Todos los campos son obligatorios");
         setColor("error");
@@ -556,7 +549,6 @@ function AsignarParametros() {
         break;
 
       case 401:
-        console.log(await response.json());
         setOpen(true);
         setMensaje("Token no valido");
         setColor("error");
@@ -568,7 +560,6 @@ function AsignarParametros() {
 
     try {
     } catch (error) {
-      console.log(error);
       setOpen(true);
       setMensaje("Error en el servidor");
       setColor("error");
@@ -614,12 +605,12 @@ function AsignarParametros() {
               sx={{ ...styles.normas }}
               onClick={() => setContador(1)}
             >
-              Normas
+              Norma
             </Typography>
           </Box>
           <Typography
             sx={{ ...styles.crearNorma }}
-            onClick={() => setContador(3)}
+            // onClick={() => setContador(3)}
           >
             Crear norma
           </Typography>
@@ -628,6 +619,23 @@ function AsignarParametros() {
           <Box sx={{ ...styles.containerGrid }}>
             <Box sx={{ ...styles.vistaFormulario }}>
               <Grid container spacing={2} style={{ paddingTop: "30px" }}>
+                <Grid item xs={12}>
+                  <Typography
+                    sx={{
+                      width: "90%",
+                      marginLeft: "5%",
+                      fontFamily: "'Nunito Sans', sans-serif",
+                      fontSize: "22px",
+                      borderBottom: "3px solid black",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      paddingTop: "30px",
+                    }}
+                  >
+                    Norma
+                  </Typography>
+                </Grid>
                 <Grid item xs={12}>
                   <InputSelect
                     onChange={(e) => obtenerIdNorma(e.target.textContent)}
@@ -650,19 +658,51 @@ function AsignarParametros() {
 
                 <Grid item xs={12}>
                   <Button
+                    disabled={cargando}
                     variant="contained"
-                    style={{ ...styles.guardar }}
+                    style={{
+                      ...styles.guardar,
+
+                      backgroundColor:
+                        cargando === true
+                          ? "rgb(210,210,210)"
+                          : "rgb(0,164,228)",
+                    }}
                     onClick={asignarNorma}
                   >
-                    Guardar
+                    {cargando === true ? (
+                      <CircularProgress
+                        color="inherit"
+                        size={24}
+                      ></CircularProgress>
+                    ) : (
+                      "Guardar"
+                    )}
                   </Button>
                 </Grid>
               </Grid>
             </Box>
           </Box>
           <Box sx={{ ...styles.vistaNormas }}>
-            <Box>
+            <Box sx={{ width: "100%" }}>
               <Grid container>
+                <Grid item xs={12}>
+                  <Typography
+                    sx={{
+                      width: "90%",
+                      marginLeft: "5%",
+                      fontFamily: "'Nunito Sans', sans-serif",
+                      fontSize: "22px",
+                      borderBottom: "3px solid black",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      paddingTop: "30px",
+                    }}
+                  >
+                    Manual
+                  </Typography>
+                </Grid>
                 <Grid item xs={12}>
                   <InputSelect
                     onChange={(e) => obtenerIdPiscina(e.target.textContent)}
@@ -672,27 +712,7 @@ function AsignarParametros() {
                     placeholder="Seleccione una norma"
                   ></InputSelect>
                 </Grid>
-                {/* {InfoGeneral.map((elemento, index) =>
-                  elemento.typo === "text" ? (
-                    <Grid item xs={12} sm={12} md={4} key={elemento.nombre}>
-                      <InputGeneral
-                        name={elemento.name}
-                        onChange={catchData}
-                        label={elemento.nombre}
-                        icon={<Pool></Pool>}
-                      ></InputGeneral>
-                    </Grid>
-                  ) : (
-                    <Grid item xs={12} sm={12} md={4} key={elemento.nombre}>
-                      <InputSelect
-                        onChange={(e) => catchDataSelect(e.target.textContent)}
-                        options={listaOpciones}
-                        label={elemento.nombre}
-                        icon={<Pool></Pool>}
-                      ></InputSelect>
-                    </Grid>
-                  )
-                )} */}
+
                 <Typography sx={{ ...styles.titulo }}>Parámetros</Typography>
                 <Box
                   sx={{
@@ -832,7 +852,7 @@ function AsignarParametros() {
                         size={24}
                       ></CircularProgress>
                     ) : (
-                      "Guardar"
+                      "Guardarr"
                     )}
                   </Button>
                 </Grid>

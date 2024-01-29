@@ -94,8 +94,6 @@ const CrearQuimico = () => {
       ...prevData,
       [e.target.name]: e.target.value,
     }));
-
-    console.log(data);
   };
 
   //*Funcion para capturar los files d elos inputBuscar
@@ -104,8 +102,6 @@ const CrearQuimico = () => {
       ...prevData,
       [e.target.name]: e.target.files[0],
     }));
-
-    console.log(data);
   };
 
   const catchSelect = (nombre, value) => {
@@ -113,8 +109,6 @@ const CrearQuimico = () => {
       ...prevData,
       [nombre]: value,
     }));
-
-    console.log(data);
   };
 
   const listaFunciones = [
@@ -236,13 +230,10 @@ const CrearQuimico = () => {
       switch (response.status) {
         case 200:
           const respuesta = await response.json();
-          console.log(respuesta);
 
           break;
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const crearFormulario = () => {
@@ -267,7 +258,6 @@ const CrearQuimico = () => {
   const crearrQuimico = async () => {
     setHabilitar(true);
     const body = crearFormulario();
-    console.log(body.get("units"));
 
     const response = await fetch(
       "https://treea-piscinas-api.vercel.app/v1/chemical-product",
@@ -295,8 +285,6 @@ const CrearQuimico = () => {
         break;
 
       case 400:
-        console.log("No ha ingresado los campos requeridos");
-        console.log(await response.json());
         setHabilitar(false);
         setOpenAlerta(true);
         setMensaje("Todos los campos son obligatorios");
@@ -304,15 +292,12 @@ const CrearQuimico = () => {
         break;
 
       case 401:
-        console.log("Token no valido");
         setHabilitar(false);
         setOpenAlerta(true);
-        setMensaje("Su token ha expirado");
         setColor("error");
         break;
 
       case 500:
-        console.log("Error en el servidor");
         setHabilitar(false);
         setOpenAlerta(true);
         setMensaje("Error en el sevidor");
@@ -336,7 +321,7 @@ const CrearQuimico = () => {
         <Box sx={{ ...styles.container }}>
           <Box sx={{ ...styles.encabezado }}>
             <Typography sx={{ ...styles.textoEncabezado }}>
-              Crear producto químico
+              Crear químico
             </Typography>
           </Box>
           <Box sx={{ ...styles.containerFormulario }}>

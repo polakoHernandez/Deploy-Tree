@@ -9,7 +9,6 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 
 function TablaInventarioLote(data) {
-  console.log({ Mydata: data });
   const columns = [
     {
       field: "lot",

@@ -24,6 +24,7 @@ export default function TablaPrevisualizacion({
   moverQuimicos,
   moverPerfil,
   reloadData,
+  contador,
 }) {
   const navigate = useNavigate("");
 
@@ -183,6 +184,7 @@ export default function TablaPrevisualizacion({
         width: "100%",
         marginTop: "0px",
         marginBottom: "0px",
+        display: contador === 2 ? "none" : "content",
       }}
     >
       <DataGrid

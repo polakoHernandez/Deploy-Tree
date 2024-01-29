@@ -63,8 +63,6 @@ function AgregarInventario() {
       ...prevData,
       [e.target.name]: e.target.value,
     }));
-
-    console.log(dataText);
   };
 
   //*Funcion para capturar los files d elos inputBuscar
@@ -73,8 +71,6 @@ function AgregarInventario() {
       ...prevData,
       [nombre]: value,
     }));
-
-    console.log(data);
   };
 
   //*Estado para el display de las vistas
@@ -257,7 +253,6 @@ function AgregarInventario() {
         const respuesta = await response.json();
         setData(respuesta);
         setNombresQuimicos([]);
-        console.log(respuesta);
 
         respuesta.chemicalProducts.forEach((element) => {
           setNombresQuimicos((prevNombres) => [
@@ -269,13 +264,9 @@ function AgregarInventario() {
         break;
 
       case 401:
-        console.log(await response.json());
-
         break;
 
       case 500:
-        console.log(await response.json());
-
         break;
     }
   };
@@ -285,11 +276,9 @@ function AgregarInventario() {
     // const respuesta = data.chemicalProducts.find(
     //   (element) => (element.name = nombresQuimico)
     // );
-    console.log(nombresQuimico);
     setQuimico(
       data.chemicalProducts.find((element) => element.name === nombresQuimico)
     );
-    console.log(quimico);
   };
 
   const agregarAInventario = async (idProductoQuimico) => {
@@ -316,7 +305,6 @@ function AgregarInventario() {
     switch (response.status) {
       case 200:
         setHabilitar(false);
-        console.log(await response.json());
         setOpenAlerta(true);
         setMensaje("Agregado con exíto");
         setColor("success");
@@ -324,7 +312,6 @@ function AgregarInventario() {
         break;
 
       case 401:
-        console.log(await response.json());
         setHabilitar(false);
         setOpenAlerta(true);
         setMensaje("No fue agregado");
@@ -332,7 +319,6 @@ function AgregarInventario() {
         break;
 
       case 500:
-        console.log(await response.json());
         setHabilitar(false);
         setOpenAlerta(true);
         setMensaje("Error en el servidor");
@@ -359,19 +345,14 @@ function AgregarInventario() {
       case 200:
         setinvenarioId(await response.json());
         setInventarioLote(inventarioId);
-        console.log({ cambiar: inventarioId.dataWithQuantity });
-        console.log({ InventarioId: inventarioId.inventoryByLot });
 
         break;
 
       case 401:
-        console.log(await response.json());
-
         break;
 
       case 500:
         setinvenarioId("");
-        console.log(await response.json());
 
         break;
     }
@@ -396,13 +377,10 @@ function AgregarInventario() {
         break;
 
       case 401:
-        console.log(await response.json());
-
         break;
 
       case 500:
         setinvenarioId("");
-        console.log(await response.json());
 
         break;
     }

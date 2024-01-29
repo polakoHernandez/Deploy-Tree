@@ -24,6 +24,7 @@ export default function DataGridDemo({
   moverQuimicos,
   moverPerfil,
   reloadData,
+  contador,
 }) {
   const navigate = useNavigate("");
 
@@ -57,7 +58,6 @@ export default function DataGridDemo({
 
       switch (respuesta.status) {
         case 200:
-          console.log(await respuesta.json());
           reloadData();
           setHabilitar(false);
           break;
@@ -68,12 +68,10 @@ export default function DataGridDemo({
           break;
 
         case 500:
-          alert("Error en el servidor");
 
         // Handle other status codes if needed
 
         default:
-          console.error("Unexpected status:", respuesta.status);
           setHabilitar(false);
       }
     } else if (state === false) {
@@ -90,7 +88,6 @@ export default function DataGridDemo({
 
       switch (respuesta.status) {
         case 200:
-          console.log(await respuesta.json());
           setHabilitar(false);
           reloadData();
           break;
@@ -102,13 +99,10 @@ export default function DataGridDemo({
         // Handle other status codes if needed
 
         default:
-          console.error("Unexpected status:", respuesta.status);
           setHabilitar(false);
       }
     }
 
-    // console.log(await respuesta.json());
-    // reloadData();
     setHabilitar(false);
   };
 

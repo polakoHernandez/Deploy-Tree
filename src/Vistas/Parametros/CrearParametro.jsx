@@ -13,7 +13,6 @@ import InputGeneral from "../../Componentes/General/InputGeneral";
 import InputSelect from "../../Componentes/General/InputSelect";
 import Tabla from "../../Componentes/Parametros/Tabla";
 import { Pool, Add, Delete } from "@mui/icons-material";
-import { json } from "react-router-dom";
 import TablaPrevisualizacion from "../../Componentes/Parametros/TablaPrevisualizacion";
 
 function CrearParametro() {
@@ -72,7 +71,6 @@ function CrearParametro() {
     }
 
     setData(newData);
-    console.log(data);
   };
 
   //*Funciones ara capturar la data de inforGeneral
@@ -81,7 +79,6 @@ function CrearParametro() {
       ...prevData,
       [e.target.name]: e.target.value,
     }));
-    console.log(data);
   };
 
   const catchDataSelect = (value) => {
@@ -154,15 +151,12 @@ function CrearParametro() {
       case 200:
         const response = await respuesta.json();
         setLisaParametros(response);
-        console.log(response);
         break;
 
       case 401:
-        console.log(await respuesta.json());
         break;
 
       case 500:
-        console.log(await respuesta.json());
         break;
     }
   };
@@ -191,7 +185,6 @@ function CrearParametro() {
     switch (response.status) {
       case 200:
         const result = await response.json();
-        console.log(result);
         setOpen(true);
         setMensaje("Norma Creada exitosamente!");
         setColor("success");
@@ -200,7 +193,6 @@ function CrearParametro() {
         break;
 
       case 400:
-        console.log(await response.json());
         setOpen(true);
         setMensaje("Todos los campos son obligatorios");
         setColor("error");
@@ -209,7 +201,6 @@ function CrearParametro() {
         break;
 
       case 401:
-        console.log(await response.json());
         setOpen(true);
         setMensaje("Token no valido");
         setColor("error");
@@ -220,7 +211,6 @@ function CrearParametro() {
 
     try {
     } catch (error) {
-      console.log(error);
       setOpen(true);
       setMensaje("Error en el servidor");
       setColor("error");
@@ -546,7 +536,7 @@ function CrearParametro() {
                               type="number"
                               name="minRange"
                               icon={<Pool></Pool>}
-                              label="Min Range"
+                              label="Rango mínimo"
                               value={elemento.minRange}
                               onChange={(e) =>
                                 catchDataParametros(
@@ -562,7 +552,7 @@ function CrearParametro() {
                               type="number"
                               name="maxRange"
                               icon={<Pool></Pool>}
-                              label="Max Range"
+                              label="Rango máximo"
                               value={elemento.maxRange}
                               onChange={(e) =>
                                 catchDataParametros(
@@ -578,6 +568,7 @@ function CrearParametro() {
                       {elemento.specification === "Valor maximo" && (
                         <Grid item xs={12} sm={6}>
                           <InputGeneral
+                            type="number"
                             value={elemento.maximo}
                             icon={<Pool></Pool>}
                             label="Máximo"
@@ -618,6 +609,10 @@ function CrearParametro() {
                   <Button
                     sx={{
                       ...styles.guardar,
+                      backgroundColor:
+                        deshabilitar === true
+                          ? "rgb(210,210,210)"
+                          : "rgb(0,164,228)",
                     }}
                     onClick={crearNorma}
                     variant="contained"
@@ -638,6 +633,7 @@ function CrearParametro() {
           </Box>
           <Box sx={{ ...styles.vistaNormas }}>
             <Tabla
+              contador={contador}
               reloadData={handleReloadData}
               data={
                 listaParametros.length === 0
@@ -649,6 +645,7 @@ function CrearParametro() {
           <Box>
             <Box>
               <TablaPrevisualizacion
+                contador={contador}
                 data={data.parameter}
               ></TablaPrevisualizacion>
             </Box>
