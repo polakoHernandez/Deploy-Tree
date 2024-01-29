@@ -590,14 +590,14 @@ function CrearPiscina() {
   };
 
   const crearPiscina = async () => {
-    for (const key in data) {
-      if (data.hasOwnProperty(key) && data[key] === "") {
-        setOpen(true);
-        setColor("error");
-        setMensaje("Todos los campos son obligatorios!");
-        return; // At least one attribute is empty
-      }
-    }
+    // for (const key in data) {
+    //    if (data.hasOwnProperty(key) && data[key] === "") {
+    //      setOpen(true);
+    //      setColor("error");
+    //      setMensaje("Todos los campos son obligatorios!");
+    //      return; // At least one attribute is empty
+    //    }
+    //  }
 
     setDeshabilitar(true);
 
@@ -658,52 +658,56 @@ function CrearPiscina() {
       formData.append(`heaters[${index}][dataSheetHeater]`, elemento.dataSheet);
     });
 
-    try {
-      const response = await fetch(
-        "https://treea-piscinas-api.vercel.app/v1/pool",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "x-token": localStorage.getItem("clave"),
-            // "content-type": "application/json",
-          },
-          body: formData,
-        }
-      );
-
-      switch (response.status) {
-        case 200:
-          const result = await response.json();
-          const idPool = result._id;
-          setOpen(true);
-          setMensaje("Piscina Creada exitosamente!");
-          setColor("success");
-          crearNotificacion(idPool);
-
-          setDeshabilitar(false);
-
-          break;
-
-        case 400:
-          setOpen(true);
-          setMensaje("Todos los campos son obligatorios");
-          setColor("error");
-          setDeshabilitar(false);
-
-          break;
-
-        case 500:
-          setOpen(true);
-          setMensaje("Error al crear la pisicina");
-          setColor("error");
-          setDeshabilitar(false);
-          console.log("ESTE ES EL ERRO");
-          console.log(error);
-          break;
+    const response = await fetch(
+      "https://treea-piscinas-api.vercel.app/v1/pool",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "x-token": localStorage.getItem("clave"),
+          // "content-type": "application/json",
+        },
+        body: formData,
       }
-    } catch (error) {}
-    setDeshabilitar(false);
+    );
+
+    switch (response.status) {
+      case 200:
+        const result = await response.json();
+        const idPool = result._id;
+        setOpen(true);
+        setMensaje("Piscina Creada exitosamente!");
+        setColor("success");
+        crearNotificacion(idPool);
+
+        setDeshabilitar(false);
+
+        break;
+
+      case 400:
+        const respuesta = await response.json();
+        const mensjae = respuesta.errors.map((item) => item.msg);
+        const mensajeMostrar = mensjae.join(",");
+        setOpen(true);
+        setMensaje(mensajeMostrar);
+        setColor("error");
+        setDeshabilitar(false);
+        console.log("MI RESPUESTA");
+        console.log(respuesta.errors);
+
+        break;
+
+      case 500:
+        const error = await response.json();
+        setOpen(true);
+        setMensaje("Error al crear la pisicina");
+        setColor("error");
+        setDeshabilitar(false);
+        console.log("ESTE ES EL ERROR");
+        console.log(error);
+        // alert(JSON.stringify(error));
+        break;
+    }
   };
 
   useEffect(() => {

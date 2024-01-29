@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import SearchAppBar from "../../Componentes/General/NavBar";
 import DataGridDemo from "../../Componentes/General/Tabla";
 import { Box, Typography } from "@mui/material";
-import "../../Estilos/Usuarios/ListaDeUsuarios.css";
+// import "../../Estilos/Usuarios/ListaDeUsuarios.css";
 import ModalGeneral from "../../Componentes/General/Modal";
 import TablaVerParametros from "../../Componentes/Parametros/TablaVerParametros";
 

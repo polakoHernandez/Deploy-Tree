@@ -1477,7 +1477,7 @@ function GestionarPiscinas() {
                             Crear parámetro
                           </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={12}>
                           <InputGeneal
                             name="fecha"
                             onChange={capTurarDatosParametros}
@@ -1508,7 +1508,7 @@ function GestionarPiscinas() {
                           ></InputGeneal>
                         </Grid>
 
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={4}>
                           <InputGeneal
                             value={dataParametro.PPMactualPh}
                             name="PPMactualPh"
@@ -1519,7 +1519,7 @@ function GestionarPiscinas() {
                           ></InputGeneal>
                         </Grid>
 
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={4}>
                           <InputGeneal
                             disabled
                             value={dataRango.minRange}
@@ -1530,7 +1530,7 @@ function GestionarPiscinas() {
                             icon={<PoolIcon></PoolIcon>}
                           ></InputGeneal>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={4}>
                           <InputGeneal
                             disabled
                             value={dataRango.maxRange}
