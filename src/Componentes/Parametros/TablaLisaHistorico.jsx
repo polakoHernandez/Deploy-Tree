@@ -290,7 +290,7 @@ export default function TablaLisaHistorico({
       style={{
         height: 400,
         width: "100%",
-        display: contador === 4 ? "block" : "none",
+        display: contador === 2 ? "block" : "none",
       }}
     >
       <DataGrid

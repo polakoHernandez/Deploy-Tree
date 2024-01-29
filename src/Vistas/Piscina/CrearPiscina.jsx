@@ -698,6 +698,8 @@ function CrearPiscina() {
           setMensaje("Error al crear la pisicina");
           setColor("error");
           setDeshabilitar(false);
+          console.log("ESTE ES EL ERRO");
+          console.log(error);
           break;
       }
     } catch (error) {}
@@ -891,6 +893,7 @@ function CrearPiscina() {
                   </Grid>
                   <Grid item xs={12} sm={12} md={4} sx={{ height: "90px" }}>
                     <InputGeneral
+                      type="number"
                       value={data.temperatura}
                       label="Temperatura *C"
                       placeholder="*C"
@@ -1378,7 +1381,10 @@ function CrearPiscina() {
                     disabled={deshabilitar}
                     onClick={() => crearPiscina()}
                     sx={{
-                      backgroundColor: "rgb(0,164,228)",
+                      backgroundColor:
+                        deshabilitar === true
+                          ? "rgb(210,210,210)"
+                          : "rgb(0,164,228)",
                       color: "white",
                       width: "95%",
                       marginTop: "10px",

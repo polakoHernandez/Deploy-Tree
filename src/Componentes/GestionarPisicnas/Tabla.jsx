@@ -59,7 +59,7 @@ export default function Tabla({ data, contador, nombrePiscina }) {
       style={{
         height: 400,
         width: "100%",
-        display: contador === 3 ? "block" : "none",
+        display: contador === 4 ? "block" : "none",
       }}
     >
       <DataGrid

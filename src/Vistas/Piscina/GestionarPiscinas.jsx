@@ -725,14 +725,47 @@ function GestionarPiscinas() {
                     >
                       Parámetro
                     </Typography>
+
                     <Typography
-                      onClick={() => setContador(2)}
+                      onClick={() => {
+                        setContador(2);
+                      }}
                       sx={{
                         backgroundColor:
                           contador === 2 ? "white" : "rgb(0,164,228)",
                         fontFamily: "'Nunito Sans', sans-serif",
                         color: contador === 2 ? "black" : "white",
-                        border: contador == 2 ? "1px solid rgb(0,164,228)" : "",
+                        width: "120px",
+                        border:
+                          contador == 2 ? "1px solid rgb(0,164,228)" : "white",
+                        borderRight: "1px solid white",
+                        cursor: "pointer",
+                        display: {
+                          xs: "none",
+                          sm: "none",
+                          md: "none",
+                          lg: "flex",
+                        },
+                        justifyContent: "center",
+                        alignItems: "center",
+                        "&:hover": {
+                          color: "black",
+                          backgroundColor: "white",
+                          border: "1px solid rgb(0,164,228)",
+                        },
+                      }}
+                    >
+                      Histórico
+                    </Typography>
+
+                    <Typography
+                      onClick={() => setContador(3)}
+                      sx={{
+                        backgroundColor:
+                          contador === 3 ? "white" : "rgb(0,164,228)",
+                        fontFamily: "'Nunito Sans', sans-serif",
+                        color: contador === 3 ? "black" : "white",
+                        border: contador == 3 ? "1px solid rgb(0,164,228)" : "",
                         width: "150px",
 
                         borderRight: "1px solid white",
@@ -757,38 +790,6 @@ function GestionarPiscinas() {
                     </Typography>
                     <Typography
                       onClick={() => {
-                        setContador(3);
-                      }}
-                      sx={{
-                        backgroundColor:
-                          contador === 3 ? "white" : "rgb(0,164,228)",
-                        fontFamily: "'Nunito Sans', sans-serif",
-                        color: contador === 3 ? "black" : "white",
-                        width: "120px",
-
-                        border: contador == 3 ? "1px solid rgb(0,164,228)" : "",
-                        borderRight: "1px solid white",
-                        borderRadius: "0px 0px 0px 0px",
-                        cursor: "pointer",
-                        display: {
-                          xs: "none",
-                          sm: "none",
-                          md: "none",
-                          lg: "flex",
-                        },
-                        justifyContent: "center",
-                        alignItems: "center",
-                        "&:hover": {
-                          color: "black",
-                          backgroundColor: "white",
-                          border: "1px solid rgb(0,164,228)",
-                        },
-                      }}
-                    >
-                      Ver aforo
-                    </Typography>
-                    <Typography
-                      onClick={() => {
                         setContador(4);
                       }}
                       sx={{
@@ -797,7 +798,9 @@ function GestionarPiscinas() {
                         fontFamily: "'Nunito Sans', sans-serif",
                         color: contador === 4 ? "black" : "white",
                         width: "120px",
+
                         border: contador == 4 ? "1px solid rgb(0,164,228)" : "",
+                        // borderRight: "1px solid white",
                         borderRadius: "0px 5px 0px 0px",
                         cursor: "pointer",
                         display: {
@@ -815,7 +818,7 @@ function GestionarPiscinas() {
                         },
                       }}
                     >
-                      Histórico
+                      Ver aforo
                     </Typography>
                   </Box>
 
@@ -1685,7 +1688,7 @@ function GestionarPiscinas() {
                     {/* Seccion de cerar Aforo */}
                     <Box
                       sx={{
-                        display: contador == 2 ? "flex" : "none",
+                        display: contador == 3 ? "flex" : "none",
                         // display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -1798,7 +1801,7 @@ function GestionarPiscinas() {
                               fontFamily: "'Nunito Sans', sans-serif",
                               fontSize: "22px",
                               borderBottom: "3px solid black",
-                              display: contador === 3 ? "flex" : "none",
+                              display: contador === 4 ? "flex" : "none",
                               justifyContent: "center",
                               alignItems: "center",
                               paddingTop: "30px",
@@ -1817,7 +1820,7 @@ function GestionarPiscinas() {
 
                     <Box
                       sx={{
-                        display: contador === 4 ? "content" : "none",
+                        display: contador === 2 ? "content" : "none",
                         // backgroundColor: "red",
                         width: "100&",
                         height: "100%",
