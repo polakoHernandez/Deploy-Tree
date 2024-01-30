@@ -117,21 +117,21 @@ export default function TablaPrevisualizacion({
     {
       field: "name",
       headerName: "Parametro",
-      width: 300,
+      width: 200,
       headerAlign: "center",
       editable: true,
     },
     {
       field: "specification",
       headerName: "Especificación",
-      width: 300,
+      width: 200,
       headerAlign: "center",
       editable: true,
     },
     {
       field: "minRange",
       headerName: "Mínimo",
-      width: 300,
+      width: 120,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -140,7 +140,7 @@ export default function TablaPrevisualizacion({
     {
       field: "maxRange",
       headerName: "Máximo",
-      width: 300,
+      width: 120,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -149,7 +149,7 @@ export default function TablaPrevisualizacion({
     {
       field: "maxValueSpecification",
       headerName: "Valor máximo",
-      width: 300,
+      width: 150,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -158,7 +158,7 @@ export default function TablaPrevisualizacion({
     {
       field: "tal vez",
       headerName: "Analisis y reporte",
-      width: 300,
+      width: 190,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -181,9 +181,10 @@ export default function TablaPrevisualizacion({
     <Box
       sx={{
         height: 360,
-        width: "100%",
+        width: "85%",
+        marginLeft: "7.5%",
         marginTop: "0px",
-        marginBottom: "0px",
+        marginBottom: "30px",
         display: contador === 2 ? "none" : "content",
       }}
     >

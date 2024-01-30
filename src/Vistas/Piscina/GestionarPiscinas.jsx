@@ -439,7 +439,7 @@ function GestionarPiscinas() {
       case 200:
         const response = await respuesta.json();
         console.log("AQUI");
-        console.log(response);
+        console.log(response.testTest);
 
         if (response?.testTest[0]?.typeValidation === "Manual") {
           const minRange =
@@ -488,6 +488,8 @@ function GestionarPiscinas() {
             maxRange: maxRange,
           }));
         }
+
+        //! se procede a hacer un nuevo mapeo para asignar Cloro y Ph en los inputs en la vista parametrso
 
         break;
       case 400:
