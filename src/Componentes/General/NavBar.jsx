@@ -231,7 +231,7 @@ export default function SearchAppBar({
                       // },
                     }}
                   >
-                    Crear Piscina
+                    Crear piscina
                   </Typography>
                 }
               />
@@ -302,7 +302,7 @@ export default function SearchAppBar({
                       // },
                     }}
                   >
-                    Mis Piscinas
+                    Mis piscinas
                   </Typography>
                 }
               />
@@ -330,7 +330,7 @@ export default function SearchAppBar({
                       // },
                     }}
                   >
-                    Gestionar Mis Piscinas
+                    Gestionar mis piscinas
                   </Typography>
                 }
               />
@@ -396,7 +396,7 @@ export default function SearchAppBar({
                         // },
                       }}
                     >
-                      Crear Usuario
+                      Crear usuario
                     </Typography>
                   }
                 />
@@ -424,7 +424,7 @@ export default function SearchAppBar({
                         // },
                       }}
                     >
-                      Lista de Usuarios
+                      Lista de usuarios
                     </Typography>
                   }
                 />
@@ -491,7 +491,7 @@ export default function SearchAppBar({
                         // },
                       }}
                     >
-                      Crear Parámetros
+                      Crear norma
                     </Typography>
                   }
                 />
@@ -520,7 +520,7 @@ export default function SearchAppBar({
                         // },
                       }}
                     >
-                      Ver Paramerización
+                      Ver paramerización
                     </Typography>
                   }
                 />
@@ -547,7 +547,7 @@ export default function SearchAppBar({
                         // },
                       }}
                     >
-                      Asignar Parámetros
+                      Asignar norma
                     </Typography>
                   }
                 />
@@ -614,7 +614,7 @@ export default function SearchAppBar({
                         // },
                       }}
                     >
-                      Crear Productos
+                      Crear productos
                     </Typography>
                   }
                 />
@@ -643,61 +643,7 @@ export default function SearchAppBar({
                         // },
                       }}
                     >
-                      Agrear a Inventario
-                    </Typography>
-                  }
-                />
-                <ChevronRightIcon></ChevronRightIcon>
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  pl: 4,
-                  borderBottom: "1px solid white",
-
-                  // "&:hover": {
-                  //   backgroundColor: "white",
-                  // },
-                }}
-              >
-                <ListItemText
-                  primary={
-                    <Typography
-                      sx={{
-                        fontFamily: "'Nunito Sans', sans-serif",
-                        color: "white",
-                        width: "100%",
-                        // "&:hover": {
-                        //   color: "rgb(0,164,228)",
-                        // },
-                      }}
-                    >
                       Inventario
-                    </Typography>
-                  }
-                />
-                <ChevronRightIcon></ChevronRightIcon>
-              </ListItemButton>
-              <ListItemButton
-                sx={{
-                  pl: 4,
-                  // "&:hover": {
-                  //   backgroundColor: "white",
-                  // },
-                }}
-              >
-                <ListItemText
-                  primary={
-                    <Typography
-                      sx={{
-                        fontFamily: "'Nunito Sans', sans-serif",
-                        color: "white",
-                        width: "100%",
-                        // "&:hover": {
-                        //   color: "rgb(0,164,228)",
-                        // },
-                      }}
-                    >
-                      Lote
                     </Typography>
                   }
                 />

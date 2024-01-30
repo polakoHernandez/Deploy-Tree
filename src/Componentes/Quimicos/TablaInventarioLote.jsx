@@ -13,26 +13,26 @@ function TablaInventarioLote(data) {
     {
       field: "lot",
       headerName: "Lote",
-      width: 300,
+      width: 200,
       headerAlign: "center",
     },
 
     {
       field: "nameChemicalProduct",
       headerName: "Nombre",
-      width: 300,
+      width: 250,
       headerAlign: "center",
     },
     {
       field: "quantityByLot",
       headerName: "Cantidad",
-      width: 300,
+      width: 200,
       headerAlign: "center",
     },
     {
       field: "quantityByLot",
       headerName: "Unidad",
-      width: 300,
+      width: 200,
       headerAlign: "center",
     },
   ];
@@ -44,12 +44,10 @@ function TablaInventarioLote(data) {
   return (
     <Box
       sx={{
-        height: 380,
-        width: "95%",
-        marginLeft: "2.5%",
+        width: { xs: "90%", sm: "90%", md: "70%" },
+        marginLeft: { xs: "5%", sm: "5%", md: "15%" },
         marginTop: "5px",
         marginBottom: "60px",
-        height: "300px",
       }}
     >
       <DataGrid
@@ -58,6 +56,12 @@ function TablaInventarioLote(data) {
           ...col,
           headerClassName: "custom-header",
         }))}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
+        pageSizeOptions={[5, 10]}
         // loading={cargando}
         getRowId={() => generateUniqueId()}
         getRowClassName={

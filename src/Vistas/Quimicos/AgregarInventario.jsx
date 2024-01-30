@@ -548,18 +548,26 @@ function AgregarInventario() {
               </Box>
               {/* Vista Lote */}
               <Box sx={{ ...stylesAnimation.tres }}>
-                <Grid item xs={12}>
-                  <InputSelect
-                    options={
-                      nombresQuimicos === ""
-                        ? [{ label: "No hay opciones" }]
-                        : nombresQuimicos
-                    }
-                    label="Lista de quimicos"
-                    icon={<Pool></Pool>}
-                    onChange={(e) => obtenerProducto(e.target.textContent)}
-                  ></InputSelect>
-                </Grid>
+                <Box
+                  sx={{
+                    // backgroundColor: "blue",
+                    width: { xs: "100%", md: "78%" },
+                    marginLeft: { xs: "0%", md: "11%" },
+                  }}
+                >
+                  <Grid item xs={12}>
+                    <InputSelect
+                      options={
+                        nombresQuimicos === ""
+                          ? [{ label: "No hay opciones" }]
+                          : nombresQuimicos
+                      }
+                      label="Lista de quimicos"
+                      icon={<Pool></Pool>}
+                      onChange={(e) => obtenerProducto(e.target.textContent)}
+                    ></InputSelect>
+                  </Grid>
+                </Box>
                 <TablaInventarioLote
                   data={inventarioId?.inventoryByLot || "no data"}
                 ></TablaInventarioLote>

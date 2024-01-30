@@ -13,7 +13,7 @@ function TablaInventarioId(data) {
     {
       field: "fecha",
       headerName: "Fecha",
-      width: 200,
+      width: 100,
       headerAlign: "center",
       valueFormatter: (params) =>
         new Date(
@@ -28,44 +28,44 @@ function TablaInventarioId(data) {
     {
       field: "responsable",
       headerName: "Responsable",
-      width: 200,
+      width: 150,
       headerAlign: "center",
     },
 
     {
       field: "productoQuimico",
       headerName: "Nombre",
-      width: 200,
+      width: 150,
       headerAlign: "center",
     },
     {
       field: "lote",
       headerName: "Lote",
-      width: 200,
+      width: 150,
       headerAlign: "center",
     },
     {
       field: "entrada",
       headerName: "Entrada",
-      width: 200,
+      width: 100,
       headerAlign: "center",
     },
     {
       field: "cantidadDosificada",
       headerName: "Cantidad dosificada",
-      width: 200,
+      width: 150,
       headerAlign: "center",
     },
     {
       field: "availableQuantity",
       headerName: "Saldo",
-      width: 200,
+      width: 150,
       headerAlign: "center",
     },
     {
       field: "tipo",
       headerName: "Tipo",
-      width: 200,
+      width: 150,
       headerAlign: "center",
     },
   ];
@@ -77,12 +77,10 @@ function TablaInventarioId(data) {
   return (
     <Box
       sx={{
-        height: 380,
-        width: "98%",
-        marginLeft: "1%",
+        width: "90%",
+        marginLeft: "5%",
         marginTop: "5px",
         marginBottom: "60px",
-        height: "300px",
       }}
     >
       <DataGrid
@@ -92,6 +90,12 @@ function TablaInventarioId(data) {
           headerClassName: "custom-header",
         }))}
         // loading={cargando}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
+        pageSizeOptions={[5, 10]}
         getRowId={() => generateUniqueId()}
         getRowClassName={
           (params) =>
