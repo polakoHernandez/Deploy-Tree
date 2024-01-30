@@ -227,7 +227,6 @@ export default function TablaVerParametros({
   return (
     <Box
       sx={{
-        height: 500,
         width: "100%",
         marginTop: "-130px",
         marginBottom: "60px",
@@ -248,6 +247,12 @@ export default function TablaVerParametros({
           ...col,
           headerClassName: "custom-header",
         }))}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
+        pageSizeOptions={[5, 10]}
         loading={cargando}
         getRowId={(data) => data._id}
         getRowClassName={
