@@ -180,7 +180,6 @@ export default function TablaPrevisualizacion({
   return (
     <Box
       sx={{
-        height: 360,
         width: "85%",
         marginLeft: "7.5%",
         marginTop: "0px",
@@ -195,6 +194,12 @@ export default function TablaPrevisualizacion({
           headerClassName: "custom-header",
         }))}
         loading={cargando}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
+        pageSizeOptions={[5, 10]}
         getRowId={(data) => data.name}
         getRowClassName={
           (params) =>
