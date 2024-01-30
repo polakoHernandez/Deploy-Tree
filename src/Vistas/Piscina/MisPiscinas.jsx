@@ -786,7 +786,7 @@ function MisPiscinas() {
                               </Grid>
                               <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
-                                  DataSheet
+                                  Hoja de datos
                                 </Typography>
                                 <Box
                                   sx={{
@@ -867,7 +867,7 @@ function MisPiscinas() {
                               </Grid>
                               <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
-                                  DataSheet
+                                  Hoja de datos
                                 </Typography>
                                 <Typography>
                                   <Box

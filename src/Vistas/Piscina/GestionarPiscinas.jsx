@@ -314,13 +314,11 @@ function GestionarPiscinas() {
 
           setData(responeData);
           setCargando(false);
-          console.log(responeData.pools);
           const nombrePiscinas = responeData?.pools?.map((piscina) => ({
             label: piscina.name,
           }));
 
           setNombresPiscinas(nombrePiscinas);
-          console.log(nombrePiscinas);
           break;
       }
     } catch (error) {
@@ -440,6 +438,8 @@ function GestionarPiscinas() {
     switch (respuesta.status) {
       case 200:
         const response = await respuesta.json();
+        console.log("AQUI");
+        console.log(response);
 
         if (response?.testTest[0]?.typeValidation === "Manual") {
           const minRange =
@@ -463,7 +463,7 @@ function GestionarPiscinas() {
             minRange: minRange,
             maxRange: maxRange,
           }));
-        } else if (response.testTest[0].typeValidation === "Norma") {
+        } else if (response?.testTest[0]?.typeValidation === "Norma") {
           const maximo =
             response.testTest[0]?.normativityId?.parameter[0]
               .maxValueSpecification !== undefined
@@ -1338,7 +1338,7 @@ function GestionarPiscinas() {
                                 </Grid>
                                 <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
-                                    DataSheet
+                                    Hoja de datos
                                   </Typography>
                                   <Box
                                     sx={{
@@ -1424,7 +1424,7 @@ function GestionarPiscinas() {
                                     <Typography
                                       sx={{ ...styles.fontTypografy }}
                                     >
-                                      DataSheet
+                                      Hoja de datos
                                     </Typography>
                                     <Typography>
                                       <Box

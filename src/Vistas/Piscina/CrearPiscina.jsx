@@ -1301,7 +1301,7 @@ function CrearPiscina() {
 
                           <Grid item xs={12} sm={12} md={4}>
                             <InputBuscar
-                              label="Datasheet"
+                              label="Hoja de datos"
                               name="dataSheet"
                               icon={<Pool></Pool>}
                               onChange={(e) => catchDataBombasFiles(index, e)}
@@ -1367,7 +1367,7 @@ function CrearPiscina() {
                           </Grid>
                           <Grid item xs={12} sm={12} md={4}>
                             <InputBuscar
-                              label="DataSheet"
+                              label="Hoja de datos"
                               name="dataSheet"
                               icon={<Pool></Pool>}
                               onChange={(e) =>
