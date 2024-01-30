@@ -650,7 +650,7 @@ function GestionarPiscinas() {
               <Grid item xs={12} sx={{ height: "15%" }}>
                 <Box
                   sx={{
-                    // backgroundColor: "cyan",
+                    //backgroundColor: "cyan",
                     height: "80px",
                     display: "flex",
                     alignItems: "center",
@@ -661,7 +661,8 @@ function GestionarPiscinas() {
                 >
                   <Box
                     sx={{
-                      // backgroundColor: "red",
+                      //backgroundColor: "red",
+                      height: "100px",
                       width: { xs: "100%", sm: "50%" },
                       marginTop: { xs: "50px", sm: "90px" },
                       marginRight: { xs: "2%", sm: "1%", md: "7%", lg: "5%" },
@@ -681,8 +682,8 @@ function GestionarPiscinas() {
               <Grid item xs={12} sx={{ height: "85%" }}>
                 <Box
                   sx={{
-                    width: "90%",
-                    marginLeft: "2.5%",
+                    width: "100%",
+                    marginLeft: { xs: "-8%", md: "-5%", lg: "-5%" },
                     // backgroundColor: "antiquewhite",
                     height: "45px",
                     display: "flex",
@@ -691,8 +692,9 @@ function GestionarPiscinas() {
                 >
                   <Box
                     sx={{
-                      // backgroundColor: "cyan",
                       marginLeft: "1%",
+                      marginTop: "5px",
+                      height: "40px",
                       width: "500px",
                       display: "flex",
                       justifyContent: "space-between",
@@ -828,7 +830,8 @@ function GestionarPiscinas() {
                     onClick={() => setContador(0)}
                     sx={{
                       backgroundColor: "rgb(0,164,228)",
-                      height: "100%",
+                      height: "40px",
+                      marginTop: "5px",
                       width: { xs: "80%", sm: "30%", md: "20%" },
                       marginRight: { xs: "-5%", sm: "-5%", md: "0%" },
                       borderRadius: "5px 0px 0px 0px",
@@ -853,11 +856,11 @@ function GestionarPiscinas() {
                   sx={{
                     overflowY: "scroll",
                     // backgroundColor: "red",
-                    height: { xs: "62vh", sm: "70vh", md: "63vh" },
-                    width: { xs: "95%", sm: "95%", md: "90%" },
-                    marginLeft: "2.5%",
+                    height: { xs: "62vh", sm: "70vh", md: "62vh" },
+                    width: { xs: "95%", sm: "95%", md: "90%", lg: "100%" },
+                    marginLeft: { xs: "2.5%", sm: "2.5%", md: "5%", lg: "-5%" },
                     borderRadius: "5px",
-
+                    // backgroundColor: "cyan",
                     boxShadow: "0px 5px 5px 0px black",
                     border: "1px solid black",
                   }}
@@ -1915,7 +1918,7 @@ export default GestionarPiscinas;
 const styles = {
   generalContainer: {
     overflowX: "hidden",
-    height: "100vh",
+    height: "100%",
     // backgroundColor: "red",
   },
   fontTypografy: {

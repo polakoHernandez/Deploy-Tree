@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import SearchAppBar from "../../Componentes/General/NavBar";
 import DataGridDemo from "../../Componentes/General/Tabla";
 import { Box, Typography } from "@mui/material";
-// import "../../Estilos/Usuarios/ListaDeUsuarios.css";
 import ModalGeneral from "../../Componentes/General/Modal";
 
 function ListaDeUsuarios() {
@@ -103,6 +102,18 @@ function ListaDeUsuarios() {
     setReload(true);
   };
 
+  const animationStyles = {
+    mainBox: {
+      //backgroundColor: "pink",
+      height: "87%",
+      transition: "ease 0.3s",
+      transform:
+        mover || moverUsuario || moverParametros || moverQuimicos || moverPerfil
+          ? "translateY( 190px)"
+          : "translateY(0px)",
+    },
+  };
+
   useEffect(() => {
     listarUsuarios();
 
@@ -110,7 +121,7 @@ function ListaDeUsuarios() {
   }, [reload]);
 
   return (
-    <div style={{ overflowX: "hidden" }}>
+    <Box sx={{ overflowX: "hidden", height: "100%" }}>
       <SearchAppBar
         onClick={() => moverTabla()}
         moverUsuario={moverTablaUsuarios}
@@ -120,15 +131,24 @@ function ListaDeUsuarios() {
       ></SearchAppBar>
       <Box
         sx={{
-          // backgroundColor: "red",
-          width: "95%",
-          marginLeft: "2.5%",
-          marginTop: "600px",
-          position: "relative",
-          // backgroundColor: "red",
+          overflowX: "hidden",
+          height: "100%",
+          ...animationStyles.mainBox,
         }}
       >
-        <Typography
+        <DataGridDemo
+          data={data || ""}
+          cargando={cargando}
+          mover={mover}
+          moverUsuarios={moverUsuario}
+          moverParametros={moverParametros}
+          moverQuimicos={moverQuimicos}
+          moverPerfil={moverPerfil}
+          reloadData={handleReloadData}
+        ></DataGridDemo>
+      </Box>
+
+      {/* <Typography
           sx={{
             display: "flex",
             alignItems: "center",
@@ -142,7 +162,7 @@ function ListaDeUsuarios() {
             fontFamily: "'Nunito Sans', sans-serif",
             width: "150px",
             height: "40px",
-            borderRadius: "15px 0px 0px 0px",
+            borderRadius: "5px 0px 0px 0px",
             transition: "ease 0.6s",
             transform:
               mover ||
@@ -155,25 +175,14 @@ function ListaDeUsuarios() {
           }}
         >
           Lista de usuarios
-        </Typography>
+        </Typography> */}
 
-        <DataGridDemo
-          data={data || ""}
-          cargando={cargando}
-          mover={mover}
-          moverUsuarios={moverUsuario}
-          moverParametros={moverParametros}
-          moverQuimicos={moverQuimicos}
-          moverPerfil={moverPerfil}
-          reloadData={handleReloadData}
-        ></DataGridDemo>
-      </Box>
       <ModalGeneral
         open={openModal}
         mensaje1="UPS!"
         mensaje2="Su Sesión Ha Expirado"
       ></ModalGeneral>
-    </div>
+    </Box>
   );
 }
 

@@ -60,6 +60,7 @@ function InputSelect({
                 marginLeft: "5%",
                 marginTop: "30px",
                 borderRadius: "20px",
+                // height: "10px",
               }}
               InputProps={{
                 ...params.InputProps,

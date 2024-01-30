@@ -67,7 +67,7 @@ function MisPiscinas() {
 
   const animationStyles = {
     mainBox: {
-      // backgroundColor: "pink",
+      //backgroundColor: "pink",
       height: "87%",
       transition: "ease 0.3s",
       transform:
@@ -230,12 +230,12 @@ function MisPiscinas() {
               <Grid item xs={12} sx={{ height: "85%" }}>
                 <Box
                   sx={{
-                    width: { xs: "95%", sm: "95%", md: "90%", lg: "90%" },
+                    width: { xs: "95%", sm: "95%", md: "90%", lg: "100%" },
                     marginLeft: {
                       xs: "2.5%",
                       sm: "2.5%",
-                      md: "2.5%",
-                      lg: "2.5%",
+                      md: "5%",
+                      lg: "-5%",
                     },
                     // backgroundColor: "antiquewhite",
                     height: "45px",
@@ -246,7 +246,7 @@ function MisPiscinas() {
                   <Typography
                     sx={{
                       backgroundColor: "rgb(0,164,228)",
-                      height: "100%",
+                      height: "40px",
                       width: "150px",
                       borderRadius: "5px 0px 0px 0px",
                       color: "white",
@@ -255,6 +255,7 @@ function MisPiscinas() {
                       alignItems: "center",
                       justifyContent: "center",
                       fontFamily: "'Nunito Sans', sans-serif",
+                      marginTop:"5px"
                     }}
                   >
                     Mis piscinas
@@ -265,10 +266,10 @@ function MisPiscinas() {
                     overflowY: "scroll",
                     backgroundColor: "white",
                     height: { xs: "62vh", sm: "70vh", md: "63vh" },
-                    width: { xs: "95%", sm: "95%", md: "90%" },
-                    marginLeft: "2.5%",
+                    width: { xs: "95%", sm: "95%", md: "90%", lg:"100%" },
+                    marginLeft: {xs:"2.5%", sm:"2.5%", md:"5%", lg:"-5%"},
                     borderRadius: "5px",
-
+                    // backgroundColor:"red",
                     boxShadow: "0px 5px 5px 0px black",
                     border: "1px solid black",
                   }}
@@ -912,7 +913,7 @@ export default MisPiscinas;
 const styles = {
   generalContainer: {
     overflowX: "hidden",
-    height: "100vh",
+    height: "100%",
     // overflowY: { xs: "scroll", sm: "srcoll", md: "hidden", lg: "hidden" },
     // backgroundColor: "red",
   },

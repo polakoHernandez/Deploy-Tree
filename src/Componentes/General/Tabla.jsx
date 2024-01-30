@@ -230,23 +230,7 @@ export default function DataGridDemo({
   };
 
   return (
-    <Box
-      sx={{
-        height: 500,
-        width: "100%",
-        marginTop: "-130px",
-        marginBottom: "60px",
-        transform:
-          mover ||
-          moverUsuarios ||
-          moverParametros ||
-          moverQuimicos ||
-          moverPerfil
-            ? "translateY(-250px)"
-            : "translatey(-420px)",
-        transition: "ease 0.6s",
-      }}
-    >
+    <Box sx={{ width: "90%", marginLeft: "5%" }}>
       <DataGrid
         rows={data}
         columns={columns.map((col) => ({
@@ -255,6 +239,12 @@ export default function DataGridDemo({
         }))}
         loading={cargando}
         getRowId={(data) => data.ID}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
+        pageSizeOptions={[5, 10]}
         getRowClassName={
           (params) =>
             params.indexRelativeToCurrentPage % 2 === 0

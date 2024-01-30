@@ -4,9 +4,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styled from "@emotion/styled";
-import { Grid } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import InputGeneral from "../General/InputGeneral";
-import { Poll, Pool } from "@mui/icons-material";
+import { Close, Poll, Pool } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 import InputSelect from "../General/InputSelect";
 
@@ -45,7 +45,6 @@ export default function ModalUpdateParametros({ data, open, close }) {
     <div>
       <Modal
         open={open}
-        onClose={close}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -55,7 +54,15 @@ export default function ModalUpdateParametros({ data, open, close }) {
               height: "100%",
             }}
           >
-            <Typography sx={estilos.titulo}>Datos del usuarios</Typography>
+            <Box sx={{ display: "flex", justifyContent: "end" }}>
+              <Grid>
+                <IconButton onClick={() => close()}>
+                  <Close></Close>
+                </IconButton>
+              </Grid>
+            </Box>
+
+            <Typography sx={estilos.titulo}>Actualizar </Typography>
             <Box
               sx={{
                 // backgroundColor: "gray",

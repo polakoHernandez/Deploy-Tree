@@ -4,7 +4,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styled from "@emotion/styled";
-import { Grid } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
+import { Close } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -25,7 +26,6 @@ export default function ModalData({ data, open, close }) {
     <div>
       <Modal
         open={open}
-        onClose={close}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -35,10 +35,16 @@ export default function ModalData({ data, open, close }) {
               height: "100%",
             }}
           >
+            <Grid sx={{ display: "flex", justifyContent: "end" }}>
+              <IconButton onClick={() => close()}>
+                <Close></Close>
+              </IconButton>
+            </Grid>
             <Typography sx={estilos.titulo}>Datos del usuarios</Typography>
+
             <Box
               sx={{
-                // backgroundColor: "gray",
+                //backgroundColor: "gray",
                 height: "93%",
                 overflowY: "scroll",
               }}
