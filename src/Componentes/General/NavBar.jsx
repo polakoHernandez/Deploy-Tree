@@ -273,7 +273,7 @@ export default function SearchAppBar({
                       // },
                     }}
                   >
-                    Crear Piscina
+                    Crear piscina
                   </Typography>
                 }
               />
@@ -520,7 +520,7 @@ export default function SearchAppBar({
                         // },
                       }}
                     >
-                      Ver paramerización
+                      Ver parametrización
                     </Typography>
                   }
                 />
