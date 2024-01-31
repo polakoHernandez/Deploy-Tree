@@ -110,13 +110,13 @@ export default function DataGridDemo({
     {
       field: "nameNormativity",
       headerName: "Nombre",
-      width: 300,
+      width: 250,
       headerAlign: "center",
     },
     {
       field: "typeOfWater",
       headerName: "Tipo de agua",
-      width: 300,
+      width: 150,
       headerAlign: "center",
     },
 
@@ -147,7 +147,7 @@ export default function DataGridDemo({
     {
       field: "accion",
       headerName: "ADMINISTRAR",
-      width: 300,
+      width: 277,
       headerAlign: "center",
       renderCell: (params) => (
         <Box
@@ -197,8 +197,9 @@ export default function DataGridDemo({
     <Box
       sx={{
         height: 360,
-        width: "100%",
-        marginTop: "0px",
+        width: "85%",
+        marginLeft: "7.5%",
+        marginTop: "15px",
         marginBottom: "0px",
       }}
     >

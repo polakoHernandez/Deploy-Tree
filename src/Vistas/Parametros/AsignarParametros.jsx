@@ -858,7 +858,7 @@ function AsignarParametros() {
                         size={24}
                       ></CircularProgress>
                     ) : (
-                      "Guardarr"
+                      "Guardar"
                     )}
                   </Button>
                 </Grid>

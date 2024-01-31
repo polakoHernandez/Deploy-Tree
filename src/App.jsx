@@ -17,6 +17,7 @@ import AsignarParametros from "./Vistas/Parametros/AsignarParametros";
 import VerParamtrosPiscinas from "./Vistas/Parametros/VerParamtrosPiscinas";
 import Notificaciones from "./Vistas/notificaciones/Notificaciones";
 import NormasVigentes from "./Vistas/Parametros/NormasVigentes";
+import VerDataParametro from "./Vistas/Parametros/VerDataParametro";
 function App() {
   return (
     <>
@@ -85,6 +86,10 @@ function App() {
           <Route
             path="verNormasVigentes"
             element={<NormasVigentes></NormasVigentes>}
+          ></Route>
+          <Route
+            path="verDataParametro"
+            element={<VerDataParametro></VerDataParametro>}
           ></Route>
         </Routes>
       </BrowserRouter>

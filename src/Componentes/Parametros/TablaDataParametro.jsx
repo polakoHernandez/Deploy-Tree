@@ -5,19 +5,18 @@ import {
   Typography,
   Tooltip,
   CircularProgress,
+  Button,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import "../../Estilos/General/tabla.css";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import ModalData from "./ModalData";
 import { useNavigate } from "react-router-dom";
 import PersonOffIcon from "@mui/icons-material/PersonOff";
 import PersonIcon from "@mui/icons-material/Person";
-import ModalDataParametros from "../../Componentes/Parametros/ModalDataParametros";
-import ModalUpdateParametros from "../../Componentes/Parametros/ModalUpdateParametros";
+import ModalData from "../Parametros/ModalData";
 
-export default function TablaVerParametros({
+export default function TablaDataParametro({
   data,
   cargando,
   mover,
@@ -26,17 +25,17 @@ export default function TablaVerParametros({
   moverQuimicos,
   moverPerfil,
   reloadData,
+  contador,
 }) {
   const navigate = useNavigate("");
 
   const [habilitar, setHabilitar] = useState(false);
+  const [datosRow, setDatosRows] = useState("");
 
   //Datos para mostrar en la modal
-  const [datosRow, setDatosRows] = useState("");
 
   //Estaod para abrir la modal
   const [open, setOpen] = useState(false);
-  const [openUpdate, setopenUpdate] = useState(false);
 
   // Funcion para cerrar la modal
   const close = () => {
@@ -48,7 +47,7 @@ export default function TablaVerParametros({
 
     if (state === true) {
       const respuesta = await fetch(
-        `https://treea-piscinas-api.vercel.app/v1/deactivate-paramete/${idUsuario}`,
+        `https://pool-api-treea.vercel.app/v1/deactivate-normativity/${idUsuario}`,
         {
           method: "PUT",
           headers: {
@@ -81,7 +80,7 @@ export default function TablaVerParametros({
       }
     } else if (state === false) {
       const respuesta = await fetch(
-        `https://treea-piscinas-api.vercel.app/v1/activate-paramete/${idUsuario}`,
+        `https://pool-api-treea.vercel.app/v1/activate-normativity/${idUsuario}`,
         {
           method: "PUT",
           headers: {
@@ -94,8 +93,8 @@ export default function TablaVerParametros({
       switch (respuesta.status) {
         case 200:
           console.log(await respuesta.json());
-          reloadData();
           setHabilitar(false);
+          reloadData();
           break;
 
         case 500:
@@ -112,112 +111,127 @@ export default function TablaVerParametros({
 
     // console.log(await respuesta.json());
     // reloadData();
+    setHabilitar(false);
   };
 
   const columns = [
     {
-      field: "normativityId",
-      headerName: "Nombre",
+      field: "validacion",
+      headerName: "Nombre de la norma",
       width: 200,
       headerAlign: "center",
-      renderCell: (params) => {
-        return params.value === null ? "Manual" : params.value.nameNormativity;
-      },
+      editable: true,
     },
-
     {
-      field: "modifiedBy",
+      field: "nombre",
       headerName: "Responsable",
       width: 200,
       headerAlign: "center",
       renderCell: (params) => {
-        return params?.value?.name || "No name";
+        params.row.nombre + "" + params.row.apellido;
       },
     },
 
     {
-      field: "poolId",
-      headerName: "Piscina",
-      width: 300,
+      field: "fecha",
+      headerName: "Fecha",
+      width: 200,
       headerAlign: "center",
       renderCell: (params) => {
-        return params.value && params.value.length > 0
-          ? params.value[0].name
-          : "";
+        // Obtén la fecha del modelo de la fila
+        const fecha = params.value;
+
+        // Formatea la fecha usando Date
+        const formattedDate = new Date(fecha).toLocaleDateString();
+
+        return <div>{formattedDate}</div>;
+      },
+    },
+    {
+      field: "nameParam" || "name",
+      headerName: "Nombre del parametro",
+      width: 200,
+      headerAlign: "center",
+      renderCell: (params) => {
+        return params.row.name || params.row.nameParam;
       },
     },
 
     {
-      field: "state",
+      field: "specification",
+      headerName: "Especificación",
+      width: 200,
+      headerAlign: "center",
+      editable: true,
+    },
+    {
+      field: "minRange",
+      headerName: "Mínimo",
+      width: 120,
+      headerAlign: "center",
+      editable: true,
+      renderCell: (params) =>
+        params.value === null || params.value === undefined ? 0 : params.value,
+    },
+    {
+      field: "maxRange",
+      headerName: "Máximo",
+      width: 120,
+      headerAlign: "center",
+      editable: true,
+      renderCell: (params) =>
+        params.value === null || params.value === undefined ? 0 : params.value,
+    },
+    {
+      field: "maxValueSpecification",
+      headerName: "Valor máximo",
+      width: 150,
+      headerAlign: "center",
+      editable: true,
+      renderCell: (params) =>
+        params.value === null || params.value === undefined ? 0 : params.value,
+    },
+    {
+      field: "tal vez",
+      headerName: "Analisis y reporte",
+      width: 190,
+      headerAlign: "center",
+      editable: true,
+      renderCell: (params) =>
+        params.value === null || params.value === undefined
+          ? "********"
+          : params.value,
+    },
+
+    {
+      field: "piscina",
+      headerName: "Piscina",
+      width: 200,
+      headerAlign: "center",
+    },
+
+    {
+      field: "estado",
       headerName: "Estado",
       width: 200,
-      align: "center",
-      headerAlign: "center",
-      // valueFormatter: (params) => (params.value ? "ACTIVO" : "INACTIVO"),
-      renderCell: (params) => (
-        <Typography
-          sx={{
-            width: "60%",
-            textAlign: "center",
-            color: params.value ? "green" : "red",
-            fontFamily: "'Nunito Sans', sans-serif",
-            border: "1px solid black",
-            borderRadius: "5px",
-            borderColor: params.value ? "green" : "red",
-          }}
-        >
-          {params.value ? "ACTIVO" : "INACTIVO"}
-        </Typography>
-      ),
-    },
-    {
-      field: "createAt",
-      headerName: "Fecha cración",
-      width: 200,
-      headerAlign: "center",
-      valueFormatter: (params) => new Date(params.value).toLocaleDateString(),
-    },
-    {
-      field: "accion",
-      headerName: "Administrar",
-      width: 200,
       headerAlign: "center",
       renderCell: (params) => (
-        <Box
-          sx={{ display: "flex", justifyContent: "space-around", width: "90%" }}
-        >
-          <Tooltip title="Editar">
-            <IconButton onClick={() => editarPersona(params.row)}>
-              <EditIcon sx={{ color: "green" }}></EditIcon>
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Visualizar">
-            <IconButton
-              onClick={() =>
-                navigate(
-                  `/verDataParametro?id=${params.row._id}?nombre=${params.row.modifiedBy.name}`
-                )
-              }
-            >
-              <VisibilityIcon sx={{ color: "blue" }}></VisibilityIcon>
-            </IconButton>
-          </Tooltip>
-          <Tooltip title={params.row.state ? "Inhablilitar" : "Habilitar"}>
-            <IconButton
-              onClick={() =>
-                inhabilitarUsuario(params.row._id, params.row.state)
-              }
-              disabled={habilitar}
-            >
-              {habilitar ? (
-                <CircularProgress size={25}></CircularProgress>
-              ) : params.row.state ? (
-                <PersonOffIcon sx={{ color: "red" }}></PersonOffIcon>
-              ) : (
-                <PersonIcon sx={{ color: "green" }}></PersonIcon>
-              )}
-            </IconButton>
-          </Tooltip>
+        <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <Typography
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              width: "50%",
+              border:
+                params.value === true ? "2px solid green" : "1px solid red",
+              color: params.value === true ? "green" : "red",
+              fontFamily: "'Nunito Sans', sans-serif",
+
+              borderRadius: "5px",
+            }}
+          >
+            {params.value === true ? "ACTIVO" : "INACTIVO"}
+          </Typography>
         </Box>
       ),
     },
@@ -228,26 +242,33 @@ export default function TablaVerParametros({
     setOpen(true);
   };
 
-  const editarPersona = (data) => {
-    setDatosRows(data);
-    setopenUpdate(true);
+  const editarNorma = (id) => {
+    navigate(`/editarNorma?Id=${id}`);
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        width: "90%",
+        marginLeft: "5%",
+        marginTop: "40px",
+        marginBottom: "30px",
+        display: contador === 2 ? "none" : "content",
+      }}
+    >
       <DataGrid
-        rows={data}
+        rows={data || ""}
         columns={columns.map((col) => ({
           ...col,
           headerClassName: "custom-header",
         }))}
+        loading={cargando}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 7 },
+            paginationModel: { page: 0, pageSize: 5 },
           },
         }}
-        // pageSizeOptions={[5, 6]}
-        loading={cargando}
+        pageSizeOptions={[5, 10]}
         getRowId={(data) => data._id}
         getRowClassName={
           (params) =>
@@ -257,17 +278,7 @@ export default function TablaVerParametros({
         }
         getCellClassName={(params) => "cell"}
       />
-      <ModalDataParametros
-        data={datosRow}
-        open={open}
-        close={close}
-      ></ModalDataParametros>
-
-      <ModalUpdateParametros
-        data={datosRow}
-        open={openUpdate}
-        close={() => setopenUpdate(false)}
-      ></ModalUpdateParametros>
+      <ModalData data={datosRow} open={open} close={close}></ModalData>
     </Box>
   );
 }

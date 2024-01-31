@@ -1,18 +1,10 @@
-// import React from "react";
-
-// function VerParamtrosPiscinas() {
-//   return <div>VerParamtrosPiscinas</div>;
-// }
-
-// export default VerParamtrosPiscinas;
-
 import React, { useEffect, useState } from "react";
 import SearchAppBar from "../../Componentes/General/NavBar";
 import DataGridDemo from "../../Componentes/General/Tabla";
 import { Box, Typography } from "@mui/material";
-// import "../../Estilos/Usuarios/ListaDeUsuarios.css";
 import ModalGeneral from "../../Componentes/General/Modal";
 import TablaVerParametros from "../../Componentes/Parametros/TablaVerParametros";
+import { useNavigate } from "react-router-dom";
 
 function VerParamtrosPiscinas() {
   document.body.style.overflow = "scroll";
@@ -27,6 +19,8 @@ function VerParamtrosPiscinas() {
   const [data, setData] = useState([]);
   const [cargando, setCargando] = useState(false);
   // Funcion para listar todos los usuarios
+
+  const navigate = useNavigate();
 
   // Estados para recargar los datos
   const [reload, setReload] = useState(false);
@@ -145,7 +139,7 @@ function VerParamtrosPiscinas() {
   }, [reload]);
 
   return (
-    <div style={{ overflowX: "hidden" }}>
+    <Box sx={{ overflowX: "hidden" }}>
       <SearchAppBar
         onClick={() => moverTabla()}
         moverUsuario={moverTablaUsuarios}
@@ -157,10 +151,18 @@ function VerParamtrosPiscinas() {
         sx={{
           // backgroundColor: "red",
           width: "95%",
+          height: "510px",
           marginLeft: "2.5%",
-          marginTop: "600px",
           position: "relative",
-          // backgroundColor: "red",
+          transition: "ease 0.6s",
+          transform:
+            mover ||
+            moverUsuario ||
+            moverParametros ||
+            moverQuimicos ||
+            moverPerfil
+              ? "translateY(190px)"
+              : "translateY(45px)",
         }}
       >
         <Typography
@@ -178,15 +180,6 @@ function VerParamtrosPiscinas() {
             width: "150px",
             height: "40px",
             borderRadius: "5px 0px 0px 0px",
-            transition: "ease 0.6s",
-            transform:
-              mover ||
-              moverUsuario ||
-              moverParametros ||
-              moverQuimicos ||
-              moverPerfil
-                ? "translateY(-250px)"
-                : "translateY(-420px)",
           }}
         >
           Parámetros
@@ -203,13 +196,7 @@ function VerParamtrosPiscinas() {
           reloadData={handleReloadData}
         ></TablaVerParametros>
       </Box>
-
-      {/* <ModalGeneral
-        open={openModal}
-        mensaje1="UPS!"
-        mensaje2="Su Sesión Ha Expirado"
-      ></ModalGeneral> */}
-    </div>
+    </Box>
   );
 }
 

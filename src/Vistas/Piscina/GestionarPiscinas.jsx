@@ -1596,12 +1596,13 @@ function GestionarPiscinas() {
                             dataParametro.PPMactualPh < dataRango.maxRange ? ( */}
                             <Typography
                               sx={{
-                                width: "100%",
+                                width: "800px",
                                 display:
                                   dataParametro.PPMactualPh >=
                                     dataRango.minRange &&
                                   dataParametro.PPMactualPh <=
-                                    dataRango.maxRange
+                                    dataRango.maxRange &&
+                                  dataParametro.PPMactualPh > 0
                                     ? "flex"
                                     : "none",
                                 justifyContent: "center",
@@ -1630,7 +1631,7 @@ function GestionarPiscinas() {
                                 justifyContent: "center",
                                 alignItems: "center",
                                 borderRadius: "5px",
-                                width: "100%",
+                                width: "800px",
                                 height: "50px",
                                 justifyContent: "center",
                                 backgroundColor: "rgb( 253, 94, 94 )",
