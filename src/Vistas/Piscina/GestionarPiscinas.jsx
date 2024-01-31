@@ -439,55 +439,96 @@ function GestionarPiscinas() {
       case 200:
         const response = await respuesta.json();
         console.log("AQUI");
-        console.log(response.testTest);
+        // console.log(response?.testTest[0].normativityId.parameter);
 
-        if (response?.testTest[0]?.typeValidation === "Manual") {
-          const minRange =
-            response.testTest[0]?.parameters[1]?.minRange !== undefined
-              ? response.testTest[0]?.parameters[1]?.minRange
-              : 0;
+        //*
 
-          const maxRange =
-            response?.testTest[0]?.parameters[1]?.maxRange !== undefined
-              ? response.testTest[0]?.parameters[1]?.maxRange
-              : 0;
+        const typeValidation = response?.testTest[0]?.typeValidation;
 
-          const maximo =
-            response.testTest[0]?.parameters[0]?.maxValueSpecification !==
-            undefined
-              ? response.testTest[0]?.parameters[0]?.maxValueSpecification
-              : 0;
+        if (typeValidation == "Manual") {
+          const ph = response.testTest[0].parameters.find(
+            (elemento) => elemento.minRange
+          );
+
+          const cloro = response.testTest[0].parameters.find(
+            (elemento) => elemento.maxValueSpecification
+          );
 
           setRango((prevDatos) => ({
-            max: maximo,
-            minRange: minRange,
-            maxRange: maxRange,
+            max: cloro?.maxValueSpecification,
+            minRange: ph?.minRange,
+            maxRange: ph?.maxRange,
           }));
-        } else if (response?.testTest[0]?.typeValidation === "Norma") {
-          const maximo =
-            response.testTest[0]?.normativityId?.parameter[0]
-              .maxValueSpecification !== undefined
-              ? response.testTest[0]?.normativityId?.parameter[0]
-                  .maxValueSpecification
-              : 0;
 
-          const minRange =
-            response.testTest[0]?.normativityId?.parameter[1].minRange !==
-            undefined
-              ? response.testTest[0]?.normativityId?.parameter[1].minRange
-              : 0;
-          const maxRange =
-            response.testTest[0]?.normativityId?.parameter[1].maxRange !==
-            undefined
-              ? response.testTest[0]?.normativityId?.parameter[1].maxRange
-              : 0;
+          console.log({ PhManual: phManul, Cloro: cloro });
+        } else if (typeValidation == "Norma") {
+          const normativityId = response?.testTest[0].normativityId.parameter;
+
+          const ph = normativityId?.find((elemento) => elemento.minRange);
+
+          const cloro = normativityId?.find(
+            (elemento) => elemento.maxValueSpecification
+          );
+          console.log({ PhNorma: ph, CloroNorma: cloro });
 
           setRango((prevDatos) => ({
-            max: maximo,
-            minRange: minRange,
-            maxRange: maxRange,
+            max: cloro?.maxValueSpecification,
+            minRange: ph?.minRange,
+            maxRange: ph?.maxRange,
           }));
         }
+
+        //*
+
+        // if (response?.testTest[0]?.typeValidation === "Manual") {
+        //   //*Ph
+        //   const minRange =
+        //     response.testTest[0]?.parameters[1]?.minRange !== undefined
+        //       ? response.testTest[0]?.parameters[1]?.minRange
+        //       : 0;
+
+        //   const maxRange =
+        //     response?.testTest[0]?.parameters[1]?.maxRange !== undefined
+        //       ? response.testTest[0]?.parameters[1]?.maxRange
+        //       : 0;
+
+        //   //*Cloro
+        //   const maximo =
+        //     response.testTest[0]?.parameters[0]?.maxValueSpecification !==
+        //     undefined
+        //       ? response.testTest[0]?.parameters[0]?.maxValueSpecification
+        //       : 0;
+
+        //   setRango((prevDatos) => ({
+        //     max: maximo,
+        //     minRange: minRange,
+        //     maxRange: maxRange,
+        //   }));
+        // } else if (response?.testTest[0]?.typeValidation === "Norma") {
+        //   const maximo =
+        //     response.testTest[0]?.normativityId?.parameter[0]
+        //       .maxValueSpecification !== undefined
+        //       ? response.testTest[0]?.normativityId?.parameter[0]
+        //           .maxValueSpecification
+        //       : 0;
+
+        //   const minRange =
+        //     response.testTest[0]?.normativityId?.parameter[1].minRange !==
+        //     undefined
+        //       ? response.testTest[0]?.normativityId?.parameter[1].minRange
+        //       : 0;
+        //   const maxRange =
+        //     response.testTest[0]?.normativityId?.parameter[1].maxRange !==
+        //     undefined
+        //       ? response.testTest[0]?.normativityId?.parameter[1].maxRange
+        //       : 0;
+
+        //   setRango((prevDatos) => ({
+        //     max: maximo,
+        //     minRange: minRange,
+        //     maxRange: maxRange,
+        //   }));
+        // }
 
         //! se procede a hacer un nuevo mapeo para asignar Cloro y Ph en los inputs en la vista parametrso
 
