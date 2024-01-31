@@ -152,7 +152,7 @@ function VerParamtrosPiscinas() {
             fontFamily: "'Nunito Sans', sans-serif",
             width: "150px",
             height: "40px",
-            borderRadius: "15px 0px 0px 0px",
+            borderRadius: "5px 0px 0px 0px",
             transition: "ease 0.6s",
             transform:
               mover ||

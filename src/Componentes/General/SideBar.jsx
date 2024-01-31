@@ -125,7 +125,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
                           },
                         }}
                       >
-                        Crear Piscina
+                        Crear piscina
                       </Typography>
                     }
                   />
@@ -154,7 +154,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
                           },
                         }}
                       >
-                        Mis Piscinas
+                        Mis piscinas
                       </Typography>
                     }
                   />
@@ -183,7 +183,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
                           },
                         }}
                       >
-                        Gestionar Piscinas
+                        Gestionar piscinas
                       </Typography>
                     }
                   />
@@ -242,7 +242,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
                           },
                         }}
                       >
-                        Crear Usuario
+                        Crear usuario
                       </Typography>
                     }
                   />
@@ -271,7 +271,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
                           },
                         }}
                       >
-                        Lista de Usuarios
+                        Lista de usuarios
                       </Typography>
                     }
                   />
@@ -330,7 +330,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
                           },
                         }}
                       >
-                        Crear Parámetro
+                        Crear norma
                       </Typography>
                     }
                   />
@@ -388,7 +388,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
                           },
                         }}
                       >
-                        Asignar Parámetros
+                        Asignar norma
                       </Typography>
                     }
                   />
@@ -446,7 +446,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
                           },
                         }}
                       >
-                        Crear Producto
+                        Crear producto
                       </Typography>
                     }
                   />
@@ -475,34 +475,6 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
                           },
                         }}
                       >
-                        Agregar a Inventario
-                      </Typography>
-                    }
-                  />
-                </ListItemButton>
-              </List>
-            </Collapse>
-            <Collapse in={openQuimicos} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <ListItemButton
-                  sx={{
-                    pl: 4,
-                    "&:hover": {
-                      backgroundColor: "white",
-                    },
-                  }}
-                >
-                  <ListItemText
-                    primary={
-                      <Typography
-                        sx={{
-                          fontFamily: "'Nunito Sans', sans-serif",
-                          color: "white",
-                          "&:hover": {
-                            color: "rgb(0,164,228)",
-                          },
-                        }}
-                      >
                         Inventario
                       </Typography>
                     }
@@ -510,34 +482,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
                 </ListItemButton>
               </List>
             </Collapse>
-            <Collapse in={openQuimicos} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <ListItemButton
-                  sx={{
-                    pl: 4,
-                    "&:hover": {
-                      backgroundColor: "white",
-                    },
-                  }}
-                >
-                  <ListItemText
-                    primary={
-                      <Typography
-                        sx={{
-                          fontFamily: "'Nunito Sans', sans-serif",
-                          color: "white",
-                          "&:hover": {
-                            color: "rgb(0,164,228)",
-                          },
-                        }}
-                      >
-                        Lote
-                      </Typography>
-                    }
-                  />
-                </ListItemButton>
-              </List>
-            </Collapse>
+
             {/* Quinto item */}
             <ListItemButton
               onClick={() => abrirPerfil()}

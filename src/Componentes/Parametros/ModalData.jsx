@@ -4,8 +4,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styled from "@emotion/styled";
-import { Grid } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { Close } from "@mui/icons-material";
 
 function ModalData({ data, open, close }) {
   const style = {
@@ -13,8 +14,8 @@ function ModalData({ data, open, close }) {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: { xs: "80%", md: "90%", lg: "90%" },
-    height: { xs: "500px", sm: "500px", md: "520px" },
+    width: { xs: "80%", md: "50%", lg: "50%" },
+    height: { xs: "500px", sm: "500px", md: "500px", lg: "400px" },
     bgcolor: "background.paper",
     //   border: "2px solid #000",
     boxShadow: 24,
@@ -42,19 +43,19 @@ function ModalData({ data, open, close }) {
     {
       field: "name",
       headerName: "NOMBRE",
-      width: 300,
+      width: 150,
       headerAlign: "center",
     },
     {
       field: "specification",
       headerName: "Especificación",
-      width: 300,
+      width: 200,
       headerAlign: "center",
     },
     {
       field: "minRange",
       headerName: "Rango minímo",
-      width: 300,
+      width: 150,
       headerAlign: "center",
       type: "number",
       renderCell: (params) =>
@@ -63,7 +64,7 @@ function ModalData({ data, open, close }) {
     {
       field: "maxRange",
       headerName: "Ramgo máximo",
-      width: 300,
+      width: 150,
       headerAlign: "center",
       type: "number",
       renderCell: (params) =>
@@ -72,7 +73,7 @@ function ModalData({ data, open, close }) {
     {
       field: "maxValueSpecification",
       headerName: "Valor máximo",
-      width: 300,
+      width: 150,
       headerAlign: "center",
       type: "number",
       renderCell: (params) =>
@@ -84,7 +85,6 @@ function ModalData({ data, open, close }) {
     <div>
       <Modal
         open={open}
-        onClose={close}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -94,6 +94,13 @@ function ModalData({ data, open, close }) {
               height: "100%",
             }}
           >
+            <Grid xs={12}>
+              <Box sx={{ display: "flex", justifyContent: "end" }}>
+                <IconButton onClick={() => close()}>
+                  <Close></Close>
+                </IconButton>
+              </Box>
+            </Grid>
             <Typography sx={estilos.titulo}>Datos de la norma</Typography>
             <Box
               sx={{

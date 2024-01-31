@@ -35,13 +35,14 @@ const styles = {
   textoEncabezado: {
     backgroundColor: "rgb(0,164,228)",
     width: { xs: "40%", sm: "40%", md: "30%", lg: "20%" },
-    height: "100%",
+    height: "40px",
+    marginTop: "10.5px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     fontFamily: "'Nunito Sans', sans-serif",
     color: "white",
-    borderRadius: "15px 0px 0px 0px",
+    borderRadius: "5px 0px 0px 0px",
   },
 
   boxFormulario: {

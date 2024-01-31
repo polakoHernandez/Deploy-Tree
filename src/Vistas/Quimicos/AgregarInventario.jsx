@@ -148,6 +148,8 @@ function AgregarInventario() {
       border: contador === 1 ? "1px solid black" : "",
       fontFamily: "'Nunito Sans', sans-serif",
       display: "flex",
+      height: "40px",
+      marginTop: "10.5px",
       justifyContent: "center",
       alignItems: "center",
       width: { xs: "30%", sm: "30%", md: "35%" },
@@ -168,6 +170,8 @@ function AgregarInventario() {
 
       fontFamily: "'Nunito Sans', sans-serif",
       display: "flex",
+      height: "40px",
+      marginTop: "10.5px",
       justifyContent: "center",
       alignItems: "center",
       width: { xs: "30%", sm: "40%", md: "35%" },
@@ -187,6 +191,8 @@ function AgregarInventario() {
 
       fontFamily: "'Nunito Sans', sans-serif",
       display: "flex",
+      height: "40px",
+      marginTop: "10.5px",
       justifyContent: "center",
       alignItems: "center",
       width: { xs: "40%", sm: "30%", md: "35%" },
