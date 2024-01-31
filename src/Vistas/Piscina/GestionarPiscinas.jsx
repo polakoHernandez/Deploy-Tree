@@ -438,8 +438,6 @@ function GestionarPiscinas() {
     switch (respuesta.status) {
       case 200:
         const response = await respuesta.json();
-        console.log("AQUI");
-        // console.log(response?.testTest[0].normativityId.parameter);
 
         //*
 
@@ -459,8 +457,6 @@ function GestionarPiscinas() {
             minRange: ph?.minRange,
             maxRange: ph?.maxRange,
           }));
-
-          console.log({ PhManual: phManul, Cloro: cloro });
         } else if (typeValidation == "Norma") {
           const normativityId = response?.testTest[0].normativityId.parameter;
 
@@ -469,7 +465,6 @@ function GestionarPiscinas() {
           const cloro = normativityId?.find(
             (elemento) => elemento.maxValueSpecification
           );
-          console.log({ PhNorma: ph, CloroNorma: cloro });
 
           setRango((prevDatos) => ({
             max: cloro?.maxValueSpecification,

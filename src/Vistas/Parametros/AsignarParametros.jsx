@@ -24,7 +24,8 @@ function AsignarParametros() {
     description: "",
     typeOfWater: "",
     name: "",
-    parameter: [{ name: "", specification: "" }],
+    parameter: [{ nameParam: "", specification: "" }], //*Manera Correcta
+    //! cambio porque el backend espera nameParam y no name parameter: [{ name: "", specification: "" }],
   });
   const [deshabilitar, setDeshabilitar] = useState(false);
   const [open, setOpen] = useState(false);
@@ -522,7 +523,6 @@ function AsignarParametros() {
         },
         body: JSON.stringify({
           typeValidation: "Manual",
-          // normativityId: idNorma,
           parameters: data.parameter,
           poolId: valuPisicna,
         }),
@@ -742,7 +742,7 @@ function AsignarParametros() {
                           icon={<Pool></Pool>}
                           label="Parámetro"
                           value={elemento.parameter}
-                          name="name"
+                          name="nameParam"
                           onChange={(e) =>
                             catchDataParametros(
                               index,
