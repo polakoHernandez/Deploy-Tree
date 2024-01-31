@@ -121,7 +121,7 @@ function ListaDeUsuarios() {
   }, [reload]);
 
   return (
-    <Box sx={{ overflowX: "hidden", height: "600px" }}>
+    <Box sx={{ overflowX: "hidden", height: "100%" }}>
       <SearchAppBar
         onClick={() => moverTabla()}
         moverUsuario={moverTablaUsuarios}
