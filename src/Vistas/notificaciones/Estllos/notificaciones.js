@@ -36,6 +36,8 @@ const styles = {
     backgroundColor: "rgb(0,164,228)",
     width: { xs: "40%", sm: "25%", md: "25%", lg: "15%" },
     height: "100%",
+    height: "40px",
+    marginTop: "11px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
