@@ -104,8 +104,8 @@ function ListaDeUsuarios() {
 
   const animationStyles = {
     mainBox: {
-      //backgroundColor: "pink",
-      height: "87%",
+      // backgroundColor: "pink",
+      // height: "100vh",
       transition: "ease 0.3s",
       transform:
         mover || moverUsuario || moverParametros || moverQuimicos || moverPerfil
@@ -121,7 +121,7 @@ function ListaDeUsuarios() {
   }, [reload]);
 
   return (
-    <Box sx={{ overflowX: "hidden", height: "100%" }}>
+    <Box sx={{ overflowX: "hidden", height: "600px" }}>
       <SearchAppBar
         onClick={() => moverTabla()}
         moverUsuario={moverTablaUsuarios}
@@ -134,8 +134,34 @@ function ListaDeUsuarios() {
           overflowX: "hidden",
           height: "100%",
           ...animationStyles.mainBox,
+          // backgroundColor: "red",
+          marginTop: "10px",
         }}
       >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "end",
+            width: "90%",
+            marginLeft: "5%",
+          }}
+        >
+          <Typography
+            sx={{
+              backgroundColor: "rgb(0,164,228)",
+              width: { xs: "35%", sm: "25%", md: "20%", lg: "15%" },
+              height: "40px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: "5px 0px 0px 0px",
+              color: "rgb(255,255,255)",
+              fontFamily: "'Nunito Sans', sans-serif",
+            }}
+          >
+            Lista de usuarios
+          </Typography>
+        </Box>
         <DataGridDemo
           data={data || ""}
           cargando={cargando}
@@ -147,35 +173,6 @@ function ListaDeUsuarios() {
           reloadData={handleReloadData}
         ></DataGridDemo>
       </Box>
-
-      {/* <Typography
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-
-            backgroundColor: "rgb(0,164,228)",
-            color: "white",
-            position: "absolute",
-            top: "-40px",
-            right: "0px",
-            fontFamily: "'Nunito Sans', sans-serif",
-            width: "150px",
-            height: "40px",
-            borderRadius: "5px 0px 0px 0px",
-            transition: "ease 0.6s",
-            transform:
-              mover ||
-              moverUsuario ||
-              moverParametros ||
-              moverQuimicos ||
-              moverPerfil
-                ? "translateY(-250px)"
-                : "translateY(-420px)",
-          }}
-        >
-          Lista de usuarios
-        </Typography> */}
 
       <ModalGeneral
         open={openModal}
