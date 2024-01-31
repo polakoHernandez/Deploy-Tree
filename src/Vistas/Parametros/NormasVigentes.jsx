@@ -13,8 +13,9 @@ import { Box, Typography } from "@mui/material";
 // import "../../Estilos/Usuarios/ListaDeUsuarios.css";
 import ModalGeneral from "../../Componentes/General/Modal";
 import TablaVerParametros from "../../Componentes/Parametros/TablaVerParametros";
+import TablaNormasVigentes from "../../Componentes/Parametros/TablaNormasVigentes";
 
-function VerParamtrosPiscinas() {
+function NormasVigentes() {
   document.body.style.overflow = "scroll";
   const [mover, setMover] = useState(false); //MOvercon Piscina
   const [moverUsuario, setMoverUsuarios] = useState(false);
@@ -36,7 +37,7 @@ function VerParamtrosPiscinas() {
     try {
       const tokenSend = localStorage.getItem("clave");
       const response = await fetch(
-        "https://treea-piscinas-api.vercel.app/v1/parameterizations",
+        "https://pool-api-treea.vercel.app/v1/normativities",
         {
           method: "GET",
           headers: {
@@ -50,44 +51,19 @@ function VerParamtrosPiscinas() {
         case 401:
           setCargando(false);
           setOpenModal(true);
-          console.log(await response.json());
           break;
 
         case 200:
           const responeData = await response.json();
 
-          const parametros = responeData?.parameterizations?.map(
-            (elemento) => elemento.parameters
-          );
-          const registro = responeData?.parameterizations?.map((elemento) => ({
-            id: elemento._id,
-            estado: elemento.state,
-            validacion: elemento.typeValidation,
-            fecha: elemento.createAt,
-          }));
-
-          // const piscina = responeData?.parameterizations?.poolId[0];
-          // const registro = {
-          //   id: responeData?.parameterizations?._id,
-          //   validacion: responeData?.parameterizations?.typeValidation,
-          //   estado: responeData?.parameterizations?.estado,
-          //   fecha: responeData?.parameterizations?.createAt,
-          // };
-
-          console.log({ NUEVOREGISTRO: registro });
-          console.log({ PARAMETROS: parametros });
-          // console.log(piscina);
-          // console.log(registro);
-
-          console.log(responeData.parameterizations);
-          setData(responeData.parameterizations);
+          console.log(responeData.normativities);
+          setData(responeData?.normativities);
           setCargando(false);
           break;
       }
     } catch (error) {
       setCargando(false);
       setOpenModal(true);
-      console.log(error);
     }
     setCargando(false);
   };
@@ -160,7 +136,7 @@ function VerParamtrosPiscinas() {
           marginLeft: "2.5%",
           marginTop: "600px",
           position: "relative",
-          // backgroundColor: "red",
+          //backgroundColor: "red",
         }}
       >
         <Typography
@@ -173,7 +149,7 @@ function VerParamtrosPiscinas() {
             color: "white",
             position: "absolute",
             top: "-40px",
-            right: "0px",
+            right: { xs: "17.5%", sm: "17.5%", md: "17.5%", lg: "17.5%" },
             fontFamily: "'Nunito Sans', sans-serif",
             width: "150px",
             height: "40px",
@@ -192,7 +168,7 @@ function VerParamtrosPiscinas() {
           Parámetros
         </Typography>
 
-        <TablaVerParametros
+        <TablaNormasVigentes
           data={data || ""}
           cargando={cargando}
           mover={mover}
@@ -201,16 +177,16 @@ function VerParamtrosPiscinas() {
           moverQuimicos={moverQuimicos}
           moverPerfil={moverPerfil}
           reloadData={handleReloadData}
-        ></TablaVerParametros>
+        ></TablaNormasVigentes>
       </Box>
 
-      {/* <ModalGeneral
+      <ModalGeneral
         open={openModal}
         mensaje1="UPS!"
         mensaje2="Su Sesión Ha Expirado"
-      ></ModalGeneral> */}
+      ></ModalGeneral>
     </div>
   );
 }
 
-export default VerParamtrosPiscinas;
+export default NormasVigentes;

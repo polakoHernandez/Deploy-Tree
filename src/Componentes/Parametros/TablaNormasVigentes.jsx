@@ -17,7 +17,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ModalDataParametros from "../../Componentes/Parametros/ModalDataParametros";
 import ModalUpdateParametros from "../../Componentes/Parametros/ModalUpdateParametros";
 
-export default function TablaVerParametros({
+export default function TablaNormasVigentes({
   data,
   cargando,
   mover,
@@ -28,6 +28,7 @@ export default function TablaVerParametros({
   reloadData,
 }) {
   const navigate = useNavigate("");
+  console.log({ dataTaba: data });
 
   const [habilitar, setHabilitar] = useState(false);
 
@@ -116,40 +117,25 @@ export default function TablaVerParametros({
 
   const columns = [
     {
-      field: "normativityId",
+      field: "nameNormativity",
       headerName: "Nombre",
       width: 200,
       headerAlign: "center",
-      renderCell: (params) => {
-        return params.value === null ? "Manual" : params.value.nameNormativity;
-      },
+      //   renderCell: (params) => {
+      //     return params?.value === null ? "Manual" : params.value.nameNormativity;
+      //   },
     },
 
     {
-      field: "modifiedBy",
-      headerName: "Responsable",
+      field: "typeOfWater",
+      headerName: "Tipo de agua",
       width: 200,
       headerAlign: "center",
-      renderCell: (params) => {
-        return params?.value?.name || "No name";
-      },
-    },
-
-    {
-      field: "poolId",
-      headerName: "Piscina",
-      width: 300,
-      headerAlign: "center",
-      renderCell: (params) => {
-        return params.value && params.value.length > 0
-          ? params.value[0].name
-          : "";
-      },
     },
 
     {
       field: "state",
-      headerName: "Estado",
+      headerName: "ESTADO",
       width: 200,
       align: "center",
       headerAlign: "center",
@@ -170,16 +156,10 @@ export default function TablaVerParametros({
         </Typography>
       ),
     },
-    {
-      field: "createAt",
-      headerName: "Fecha cración",
-      width: 200,
-      headerAlign: "center",
-      valueFormatter: (params) => new Date(params.value).toLocaleDateString(),
-    },
+
     {
       field: "accion",
-      headerName: "Administrar",
+      headerName: "ADMINISTRAR",
       width: 200,
       headerAlign: "center",
       renderCell: (params) => (
@@ -230,9 +210,10 @@ export default function TablaVerParametros({
   return (
     <Box
       sx={{
-        width: "100%",
+        width: "65%",
         marginTop: "-130px",
         marginBottom: "60px",
+        marginLeft: "17.5%",
         transform:
           mover ||
           moverUsuarios ||
