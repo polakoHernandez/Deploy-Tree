@@ -425,7 +425,7 @@ function GestionarPiscinas() {
   const listarHistorico = async () => {
     const tokenSend = localStorage.getItem("clave");
     const respuesta = await fetch(
-      `https://treea-piscinas-api.vercel.app/v1/pool/${pool._id}`,
+      `https://treea-piscinas-api.vercel.app/v1/pool/${pool?._id}`,
       {
         method: "GET",
         headers: {
@@ -546,7 +546,7 @@ function GestionarPiscinas() {
   const listarHistorico2 = async () => {
     const tokenSend = localStorage.getItem("clave");
     const respuesta = await fetch(
-      `https://treea-piscinas-api.vercel.app/v1/history-pool/${pool._id}`,
+      `https://treea-piscinas-api.vercel.app/v1/history-pool/${pool?._id}`,
       {
         method: "GET",
         headers: {
@@ -622,7 +622,7 @@ function GestionarPiscinas() {
       return; //
     }
 
-    listarAforo(pool._id);
+    listarAforo(pool?._id);
   }, [contadorAforo]);
 
   useEffect(() => {
@@ -657,6 +657,7 @@ function GestionarPiscinas() {
                 // backgroundColor: "red",
                 height: "100%",
                 display: { xs: "none", sm: "none", md: "block" },
+                overflowY: "scroll",
               }}
             >
               {data && (
@@ -697,12 +698,18 @@ function GestionarPiscinas() {
                 >
                   <Box
                     sx={{
-                      //backgroundColor: "red",
+                      // backgroundColor: "blue",
                       height: "100px",
                       width: { xs: "100%", sm: "50%" },
-                      marginTop: { xs: "50px", sm: "90px" },
+                      marginTop: {
+                        xs: "20px",
+                        sm: "50px",
+                        md: "0px",
+                        lg: "20px",
+                        xl: "90px",
+                      },
                       marginRight: { xs: "2%", sm: "1%", md: "7%", lg: "5%" },
-                      marginBottom: { xs: "0px", sm: "80px" },
+                      marginBottom: { xs: "0px", sm: "80px", md: "0px" },
                     }}
                   >
                     <InputSelect
@@ -719,6 +726,7 @@ function GestionarPiscinas() {
                 <Box
                   sx={{
                     width: "100%",
+                    // backgroundColor: "blue",
                     marginLeft: { xs: "-8%", md: "-5%", lg: "-5%" },
                     // backgroundColor: "antiquewhite",
                     height: "45px",
@@ -729,7 +737,7 @@ function GestionarPiscinas() {
                   <Box
                     sx={{
                       marginLeft: "1%",
-                      marginTop: "5px",
+                      marginTop: { xs: "-9.4%", xl: "-14.4%" },
                       height: "40px",
                       width: "500px",
                       display: "flex",
@@ -867,7 +875,7 @@ function GestionarPiscinas() {
                     sx={{
                       backgroundColor: "rgb(0,164,228)",
                       height: "40px",
-                      marginTop: "5px",
+                      marginTop: { xs: "-9.4%", xl: "-14.5%" },
                       width: { xs: "80%", sm: "30%", md: "20%" },
                       marginRight: { xs: "-5%", sm: "-5%", md: "0%" },
                       borderRadius: "5px 0px 0px 0px",
@@ -896,6 +904,13 @@ function GestionarPiscinas() {
                     width: { xs: "95%", sm: "95%", md: "90%", lg: "100%" },
                     marginLeft: { xs: "2.5%", sm: "2.5%", md: "5%", lg: "-5%" },
                     borderRadius: "5px",
+                    marginTop: {
+                      xs: "-10%",
+                      sm: "-10%",
+                      md: "-10%",
+                      lg: "-10%",
+                      xl: "-15%",
+                    },
                     // backgroundColor: "cyan",
                     boxShadow: "0px 5px 5px 0px black",
                     border: "1px solid black",
@@ -1596,7 +1611,8 @@ function GestionarPiscinas() {
                             dataParametro.PPMactualPh < dataRango.maxRange ? ( */}
                             <Typography
                               sx={{
-                                width: "800px",
+                                width: "900px",
+                                marginLeft: "5%",
                                 display:
                                   dataParametro.PPMactualPh >=
                                     dataRango.minRange &&

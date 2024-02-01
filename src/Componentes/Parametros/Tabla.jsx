@@ -197,8 +197,14 @@ export default function DataGridDemo({
     <Box
       sx={{
         height: 360,
-        width: "85%",
-        marginLeft: "7.5%",
+        width: { xs: "85%", sm: "85%", md: "85%", lg: "85%", xl: "71%" },
+        marginLeft: {
+          xs: "7.5%",
+          sm: "7.5%",
+          md: "7.5%",
+          lg: "7.5%",
+          xl: "14.5%",
+        },
         marginTop: "15px",
         marginBottom: "0px",
       }}

@@ -15,7 +15,7 @@ const styles = {
 
   encabezado: {
     // backgroundColor: "cyan",
-    height: "10%",
+    height: "40px",
     display: "flex",
     justifyContent: "end",
     aligItems: "center",
@@ -35,8 +35,7 @@ const styles = {
   textoEncabezado: {
     backgroundColor: "rgb(0,164,228)",
     width: { xs: "40%", sm: "40%", md: "30%", lg: "20%" },
-    height: "40px",
-    marginTop: "10.5px",
+
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

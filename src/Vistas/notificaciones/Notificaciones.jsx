@@ -141,8 +141,7 @@ const Notificaciones = () => {
       fontFamily: "'Nunito Sans', sans-serif",
       display: "flex",
       justifyContent: "center",
-      height: "40px",
-      marginTop: "10px",
+
       alignItems: "center",
       cursor: "pointer",
       "&:hover": {
@@ -159,8 +158,7 @@ const Notificaciones = () => {
       color: contador === 2 ? "black" : "white",
       fontFamily: "'Nunito Sans', sans-serif",
       display: "flex",
-      height: "40px",
-      marginTop: "10px",
+
       justifyContent: "center",
       alignItems: "center",
       cursor: "pointer",
@@ -179,8 +177,7 @@ const Notificaciones = () => {
       borderRadius: "0px 10px 0px 0px",
       fontFamily: "'Nunito Sans', sans-serif",
       display: "flex",
-      height: "40px",
-      marginTop: "10px",
+
       justifyContent: "center",
       alignItems: "center",
       cursor: "pointer",

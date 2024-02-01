@@ -137,10 +137,10 @@ const CrearQuimico = () => {
 
   const listaNombres = [
     {
-      label: "Hiploclorito de calcio 67%",
+      label: "Hipoclorito de calcio 67%",
     },
     {
-      label: "Hiploclorito de sodio 12%",
+      label: "Hipoclorito de sodio 12%",
     },
     {
       label: "Tricloro 90%",
@@ -152,7 +152,7 @@ const CrearQuimico = () => {
       label: "Dicloro hidratado 54%",
     },
     {
-      label: "Tiosufalto de sodio",
+      label: "Tiosulfato de sodio",
     },
     {
       label: "Sulfito de sodio",
@@ -167,13 +167,13 @@ const CrearQuimico = () => {
       label: "Acido muriatico 31%",
     },
     {
-      label: "Bisufalto de sodio",
+      label: "Bisulfato de sodio",
     },
     {
       label: "Cloruro de calcio (100%)",
     },
     {
-      label: "Cloruro de calcio (77%)",
+      label: "Cloruro de calcio 77%",
     },
   ];
 
@@ -298,6 +298,7 @@ const CrearQuimico = () => {
         break;
 
       case 500:
+        console.log(await response.json());
         setHabilitar(false);
         setOpenAlerta(true);
         setMensaje("Error en el sevidor");
@@ -368,7 +369,7 @@ const CrearQuimico = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputBuscar
-                    label="Hoja de segurida"
+                    label="Hoja de seguridad"
                     onChange={catchFiles}
                     name="hojaSeguridad"
                   ></InputBuscar>

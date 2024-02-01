@@ -290,6 +290,8 @@ function CrearParametro() {
       height: "10%",
       display: "flex",
       justifyContent: "space-between",
+      // backgroundColor: "red",
+      height: "40px",
     },
 
     containerFormulario: {
@@ -308,8 +310,6 @@ function CrearParametro() {
       border: contador === 2 ? "1px solid black" : "",
       width: "150px",
       display: "flex",
-      height: "40px",
-      marginTop: "10.5px",
       justifyContent: "center",
       alignItems: "center",
       fontFamily: "'Nunito Sans', sans-serif",
@@ -327,8 +327,6 @@ function CrearParametro() {
       color: contador === 1 ? "black" : "white",
       border: contador === 1 ? "1px solid black" : "",
       width: "150px",
-      height: "40px",
-      marginTop: "10.5px",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",

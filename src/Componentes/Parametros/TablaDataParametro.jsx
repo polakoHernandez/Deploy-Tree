@@ -249,7 +249,7 @@ export default function TablaDataParametro({
   return (
     <Box
       sx={{
-        width: "90%",
+        width: { xs: "90%", sm: "90%", md: "90%", lg: "90%", xl: "50%" },
         marginLeft: "5%",
         marginTop: "40px",
         marginBottom: "30px",
