@@ -408,6 +408,8 @@ function AsignarParametros() {
       height: "10%",
       display: "flex",
       justifyContent: "space-between",
+      // backgroundColor: "red",
+      height: "40px",
     },
 
     containerFormulario: {
@@ -425,8 +427,6 @@ function AsignarParametros() {
       color: contador === 2 ? "black" : "white",
       border: contador === 2 ? "1px solid black" : "1px solid white",
       width: "150px",
-      height: "40px",
-      marginTop: "10px",
       display: { xs: "none", sm: "flex" },
       justifyContent: "center",
       alignItems: "center",
@@ -445,8 +445,7 @@ function AsignarParametros() {
       color: contador === 1 ? "black" : "white",
       border: contador === 1 ? "1px solid black" : "1px solid white",
       width: "150px",
-      height: "40px",
-      marginTop: "10px",
+
       display: { xs: "none", sm: "flex" },
       justifyContent: "center",
       alignItems: "center",
@@ -465,8 +464,7 @@ function AsignarParametros() {
       color: "white",
       // border: contador === 1 ? "1px solid black" : "",
       width: "150px",
-      height: "40px",
-      marginTop: "10.5px",
+
       display: "flex",
       justifyContent: "center",
       alignItems: "center",

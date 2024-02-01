@@ -17,7 +17,8 @@ const styles = {
 
   encabezado: {
     // backgroundColor: "gray",
-    height: "10%",
+    height: "40px",
+
     display: "flex",
     justifyContent: "space-between",
   },
@@ -27,6 +28,7 @@ const styles = {
     width: { xs: "70%", sm: "50%", md: "30%" },
     display: "flex",
     justifyContent: "space-between",
+    marginTop: "-10px",
   },
 
   actual: {
@@ -34,7 +36,6 @@ const styles = {
     width: { xs: "20%", sm: "20%", md: "10%" },
     display: "flex",
     height: "40px",
-    marginTop: "10.5px",
     justifyContent: "center",
     alignItems: "center",
     color: "white",

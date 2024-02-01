@@ -167,7 +167,6 @@ function AgregarInventario() {
       backgroundColor: contador === 2 ? "white" : "rgb(0,164,228)",
       color: contador === 2 ? "black" : "white",
       border: contador === 2 ? "1px solid black" : "",
-
       fontFamily: "'Nunito Sans', sans-serif",
       display: "flex",
       height: "40px",
@@ -351,6 +350,7 @@ function AgregarInventario() {
       case 200:
         setinvenarioId(await response.json());
         setInventarioLote(inventarioId);
+        console.log(inventarioId);
 
         break;
 

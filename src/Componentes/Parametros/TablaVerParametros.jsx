@@ -234,8 +234,14 @@ export default function TablaVerParametros({
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        width: { xs: "90%", sm: "90%", md: "90%", lg: "90%", xl: "90.5%" },
+        marginLeft: { xs: "5%", sm: "5%", md: "5%", lg: "5%", xl: "2.5%" },
+      }}
+    >
       <DataGrid
+        // sx={{ backgroundColor: "red" }}
         rows={data}
         columns={columns.map((col) => ({
           ...col,

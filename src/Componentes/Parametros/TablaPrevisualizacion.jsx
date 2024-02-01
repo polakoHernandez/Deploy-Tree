@@ -180,8 +180,14 @@ export default function TablaPrevisualizacion({
   return (
     <Box
       sx={{
-        width: "85%",
-        marginLeft: "7.5%",
+        width: { xs: "85%", sm: "85%", md: "85%", lg: "85%", xl: "70%" },
+        marginLeft: {
+          xs: "7.5%",
+          sm: "7.5%",
+          md: "7.5%",
+          lg: "7.5%",
+          xl: "15%",
+        },
         marginTop: "0px",
         marginBottom: "30px",
         display: contador === 2 ? "none" : "content",

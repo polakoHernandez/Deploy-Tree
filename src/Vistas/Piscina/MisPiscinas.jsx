@@ -99,8 +99,8 @@ function MisPiscinas() {
 
         case 200:
           const responeData = await response.json();
-          console.log(responeData.poolCreatedByUser);
-          const nombrePiscinas = responeData.poolCreatedByUser.map(
+          console.log(responeData?.poolCreatedByUser);
+          const nombrePiscinas = responeData?.poolCreatedByUser?.map(
             (pisicina) =>( 
               {
                 label: pisicina.name,
@@ -121,7 +121,7 @@ function MisPiscinas() {
   };
 
   const obtenerIdPorNombre =(nombrePisicna)=>{
-  const respuesta = data.poolCreatedByUser.find(
+  const respuesta = data?.poolCreatedByUser?.find(
       (element) => element.name === nombrePisicna
     );
     setPool(respuesta);
@@ -129,8 +129,8 @@ function MisPiscinas() {
   }
 
   const obetnerId = async (idPool) => {
-    const respuesta = data.poolCreatedByUser.find(
-      (element) => element._id === idPool
+    const respuesta = data?.poolCreatedByUser?.find(
+      (element) => element?._id === idPool
     );
     setPool(respuesta);
   };
