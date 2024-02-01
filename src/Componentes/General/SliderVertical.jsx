@@ -66,10 +66,12 @@ function SliderVertical({ data, obtenerId }) {
 
   const styles = {
     slyderContainer: {
-      //   backgroundColor: "red",
-      width: "100%",
+      position: "absolute",
+      // backgroundColor: "blue",
+      width: "35%",
       height: "100%",
       paddingTop: "20vh",
+      left: "-2%",
     },
 
     cardStyle: {

@@ -67,8 +67,9 @@ function MisPiscinas() {
 
   const animationStyles = {
     mainBox: {
-      //backgroundColor: "pink",
-      height: "87%",
+      // backgroundColor: "pink",
+      overflowY: {xs:"scroll", sm:"scroll", md:"scroll", lg:"hidden", xl:"hidden"},
+      height: "90vh",
       transition: "ease 0.3s",
       transform:
         mover || moverUsuario || moverParametros || moverQuimicos || moverPerfil
@@ -164,6 +165,7 @@ function MisPiscinas() {
               sx={{
                 height: "100%",
                 display: { xs: "none", sm: "none", md: "flex" },
+                // backgroundColor:"red"
               }}
             >
               {data && (
@@ -265,7 +267,7 @@ function MisPiscinas() {
                   sx={{
                     overflowY: "scroll",
                     backgroundColor: "white",
-                    height: { xs: "62vh", sm: "70vh", md: "63vh" },
+                    height: { xs: "62vh", sm: "70vh", md: "63vh", lg:"73vh", xl:"60vh" },
                     width: { xs: "95%", sm: "95%", md: "90%", lg:"100%" },
                     marginLeft: {xs:"2.5%", sm:"2.5%", md:"5%", lg:"-5%"},
                     borderRadius: "5px",
@@ -276,17 +278,7 @@ function MisPiscinas() {
                 >
                   {/* Seccion de informacion general */}
                   <Box>
-                    {/* foto
-                    Nombre
-                    departamento
-                    ciudad/Muicipio
-                    Direccion
-                    Uso
-                    Caracterisicas
-                    Temperatura
-                    Tempertaura Externa
-                    Estructura
-                    Clase de instalacion */}
+                
 
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
