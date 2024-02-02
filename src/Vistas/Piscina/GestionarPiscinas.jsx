@@ -744,7 +744,7 @@ function GestionarPiscinas() {
                 >
                   <Box
                     sx={{
-                      backgroundColor: "green",
+                      // backgroundColor: "green",
                       marginLeft: "1%",
                       marginTop: {
                         xs: "-9.4%",
@@ -1102,6 +1102,7 @@ function GestionarPiscinas() {
                                 position: "relative",
                               }}
                             >
+                              <span>{pool?.height}</span>
                               {pool?.form === "RECTANGULAR" ? (
                                 <img
                                   src={rectangular}
@@ -1112,7 +1113,7 @@ function GestionarPiscinas() {
                                   src={circular}
                                   className="img_rectangurlar"
                                 ></img>
-                              ) : pool?.form === "CIRCULAR" ? (
+                              ) : pool?.form === "OVALADA" ? (
                                 <img
                                   src={ovalada}
                                   className="img_rectangurlar"
