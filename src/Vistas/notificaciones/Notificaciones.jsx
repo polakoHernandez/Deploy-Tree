@@ -255,7 +255,7 @@ const Notificaciones = () => {
   const eliminarNotificacionId = async (id) => {
     try {
       const response = await fetch(
-        `https://pool-api-treea.vercel.app/v1/notify-manager/${id}`,
+        `https://treea-piscinas-api.vercel.app/v1/notify-manager/${id}`,
         {
           method: "DELETE",
           headers: {

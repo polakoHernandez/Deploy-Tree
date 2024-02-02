@@ -47,7 +47,7 @@ export default function TablaDataParametro({
 
     if (state === true) {
       const respuesta = await fetch(
-        `https://pool-api-treea.vercel.app/v1/deactivate-normativity/${idUsuario}`,
+        `https://treea-piscinas-api.vercel.app/v1/deactivate-normativity/${idUsuario}`,
         {
           method: "PUT",
           headers: {
@@ -80,7 +80,7 @@ export default function TablaDataParametro({
       }
     } else if (state === false) {
       const respuesta = await fetch(
-        `https://pool-api-treea.vercel.app/v1/activate-normativity/${idUsuario}`,
+        `https://treea-piscinas-api.vercel.app/v1/activate-normativity/${idUsuario}`,
         {
           method: "PUT",
           headers: {

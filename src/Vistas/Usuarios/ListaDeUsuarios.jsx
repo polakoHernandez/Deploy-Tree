@@ -26,7 +26,7 @@ function ListaDeUsuarios() {
     try {
       const tokenSend = localStorage.getItem("clave");
       const response = await fetch(
-        "https://pool-api-treea.vercel.app/v1/users",
+        "https://treea-piscinas-api.vercel.app/v1/users",
         {
           method: "GET",
           headers: {

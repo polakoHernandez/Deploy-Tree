@@ -135,21 +135,24 @@ function GestionarPiscinas() {
     setPeticion(true);
 
     //!! Cambiar la url del enpoin a la nueva
-    const response = await fetch("https://pool-api-treea.vercel.app/v1/aforo", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json", // Especificar el tipo de contenido como JSON
-        "x-token": localStorage.getItem("clave"),
-      },
-      body: JSON.stringify({
-        poolId: pool._id,
-        startDate: dataAforo.fechaInicio,
-        endDate: dataAforo.fechaFinal,
-        timeUse: dataAforo.horasDeUso,
-        quantityPerson: dataAforo.cantidadPersonas,
-      }),
-    });
+    const response = await fetch(
+      "https://treea-piscinas-api.vercel.app/v1/aforo",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json", // Especificar el tipo de contenido como JSON
+          "x-token": localStorage.getItem("clave"),
+        },
+        body: JSON.stringify({
+          poolId: pool._id,
+          startDate: dataAforo.fechaInicio,
+          endDate: dataAforo.fechaFinal,
+          timeUse: dataAforo.horasDeUso,
+          quantityPerson: dataAforo.cantidadPersonas,
+        }),
+      }
+    );
 
     switch (response.status) {
       case 200:
@@ -194,7 +197,7 @@ function GestionarPiscinas() {
   //Funcion pra listar el aforo
   const listarAforo = async (idPool) => {
     const response = await fetch(
-      // `https://pool-api-treea.vercel.app/v1/aforo/${idPool}`,
+      // `https://treea-piscinas-api.vercel.app/v1/aforo/${idPool}`,
       `https://treea-piscinas-api.vercel.app/v1/aforo/${idPool}`,
       {
         method: "GET",

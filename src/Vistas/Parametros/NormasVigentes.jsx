@@ -37,7 +37,7 @@ function NormasVigentes() {
     try {
       const tokenSend = localStorage.getItem("clave");
       const response = await fetch(
-        "https://pool-api-treea.vercel.app/v1/normativities",
+        "https://treea-piscinas-api.vercel.app/v1/normativities",
         {
           method: "GET",
           headers: {

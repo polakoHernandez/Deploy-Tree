@@ -45,7 +45,7 @@ export default function DataGridDemo({
 
     if (state === true) {
       const respuesta = await fetch(
-        `https://pool-api-treea.vercel.app/v1/user/${idUsuario}`,
+        `https://treea-piscinas-api.vercel.app/v1/user/${idUsuario}`,
         {
           method: "DELETE",
           headers: {
@@ -77,7 +77,7 @@ export default function DataGridDemo({
       }
     } else if (state === false) {
       const respuesta = await fetch(
-        `https://pool-api-treea.vercel.app/v1/activate-user/${idUsuario}`,
+        `https://treea-piscinas-api.vercel.app/v1/activate-user/${idUsuario}`,
         {
           method: "PUT",
           headers: {
