@@ -345,7 +345,7 @@ const CrearQuimico = () => {
                   <InputSelect
                     options={listaFunciones}
                     icon={<Pool></Pool>}
-                    label="Funcion"
+                    label="Función"
                     onChange={(e) => {
                       catchSelect("funcion", e.target.textContent);
                     }}
@@ -362,7 +362,7 @@ const CrearQuimico = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputBuscar
-                    label="Ficha Tecnica"
+                    label="Ficha técnica"
                     onChange={catchFiles}
                     name="fichaTecnica"
                   ></InputBuscar>

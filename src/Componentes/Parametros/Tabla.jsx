@@ -122,7 +122,7 @@ export default function DataGridDemo({
 
     {
       field: "state",
-      headerName: "ESTADO",
+      headerName: "Estado",
       width: 300,
       align: "center",
       headerAlign: "center",
@@ -146,7 +146,7 @@ export default function DataGridDemo({
 
     {
       field: "accion",
-      headerName: "ADMINISTRAR",
+      headerName: "Administrar",
       width: 277,
       headerAlign: "center",
       renderCell: (params) => (
@@ -197,19 +197,17 @@ export default function DataGridDemo({
     <Box
       sx={{
         height: 360,
-        width: { xs: "85%", sm: "85%", md: "85%", lg: "85%", xl: "71%" },
-        marginLeft: {
-          xs: "7.5%",
-          sm: "7.5%",
-          md: "7.5%",
-          lg: "7.5%",
-          xl: "14.5%",
-        },
-        marginTop: "15px",
-        marginBottom: "0px",
+        // backgroundColor: "red",
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "10px",
       }}
     >
       <DataGrid
+        sx={{ width: { xs: "95%", sm: "95%", md: "978px" } }}
         rows={data || ""}
         columns={columns.map((col) => ({
           ...col,

@@ -139,7 +139,12 @@ function VerParamtrosPiscinas() {
   }, [reload]);
 
   return (
-    <Box sx={{ overflowX: "hidden" }}>
+    <Box
+      sx={{
+        overflowX: { xs: "scroll", sm: "scroll", md: "hidden" },
+        height: "100vh",
+      }}
+    >
       <SearchAppBar
         onClick={() => moverTabla()}
         moverUsuario={moverTablaUsuarios}
@@ -150,8 +155,9 @@ function VerParamtrosPiscinas() {
       <Box
         sx={{
           // backgroundColor: "red",
+          paddingBottom: "50px",
           width: "95%",
-          height: "510px",
+          height: "500px",
           marginLeft: "2.5%",
           position: "relative",
           transition: "ease 0.6s",

@@ -899,7 +899,7 @@ function CrearPiscina() {
                     <InputGeneral
                       type="number"
                       value={data.temperatura}
-                      label="Temperatura *C"
+                      label="Temperatura °C"
                       placeholder="*C"
                       icon={<PoolIcon></PoolIcon>}
                       name="temperatura"
@@ -912,7 +912,7 @@ function CrearPiscina() {
                     <InputGeneral
                       type="number"
                       value={data.temperaturaExterna}
-                      label="Temperatura Extena"
+                      label="Temperatura externa °C"
                       placeholder="Seleccione"
                       icon={<PoolIcon></PoolIcon>}
                       name="temperaturaExterna"
@@ -1090,7 +1090,7 @@ function CrearPiscina() {
                     <InputSelect
                       options={si_no}
                       label="Climatizado"
-                      placeholder="Selccione"
+                      placeholder="Seleccione"
                       icon={<PoolIcon></PoolIcon>}
                       onChange={(e) =>
                         seleccionarData("climatizado", e.target.textContent)

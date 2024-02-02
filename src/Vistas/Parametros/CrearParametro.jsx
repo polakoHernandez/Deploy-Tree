@@ -383,7 +383,7 @@ function CrearParametro() {
     },
 
     {
-      nombre: "Descripcion",
+      nombre: "Descripción",
       typo: "text",
       name: "description",
       value: data.description,
@@ -459,7 +459,7 @@ function CrearParametro() {
         <Box sx={{ ...styles.containerFormulario }}>
           <Box sx={{ ...styles.containerGrid }}>
             <Box sx={{ ...styles.vistaFormulario }}>
-              <Box sx={{ ...styles.titulo }}>Informacion geenral</Box>
+              <Box sx={{ ...styles.titulo }}>Información general</Box>
               <Grid container>
                 {InfoGeneral.map((elemento, index) =>
                   elemento.typo === "text" ? (
@@ -645,12 +645,10 @@ function CrearParametro() {
             ></Tabla>
           </Box>
           <Box>
-            <Box>
-              <TablaPrevisualizacion
-                contador={contador}
-                data={data.parameter}
-              ></TablaPrevisualizacion>
-            </Box>
+            <TablaPrevisualizacion
+              contador={contador}
+              data={data.parameter}
+            ></TablaPrevisualizacion>
           </Box>
         </Box>
       </Box>

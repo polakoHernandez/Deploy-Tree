@@ -487,8 +487,12 @@ const Notificaciones = () => {
                               } creo un historico paara la  piscina  ${
                               elemento?.historyPoolId?.poolId?.name
                             } el dia ${new Date(
-                              elemento?.historyPoolId?.date
-                            ).toLocaleDateString()} el sistema genero los siguientes mensajes:                        
+                              new Date(elemento?.historyPoolId?.date).setDate(
+                                new Date(
+                                  elemento?.historyPoolId?.date
+                                ).getDate() + 1
+                              )
+                            ).toLocaleDateString()}el sistema genero los siguientes mensajes:                        
                                                         
                             `}
                             <Typography sx={{ color: "black" }}>

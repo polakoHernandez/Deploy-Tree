@@ -394,7 +394,7 @@ function VerDataParametro() {
       border: "",
       width: "150px",
       height: "40px",
-      marginTop: "10.5px",
+      marginTop: { xs: "3.4vh" },
       display: "flex",
       justifyContent: "center",
       alignItems: "center",

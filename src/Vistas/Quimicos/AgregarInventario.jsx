@@ -436,7 +436,9 @@ function AgregarInventario() {
                 Lote
               </Typography>
             </Box>
-            <Typography sx={{ ...styles.actual }}>Inventario</Typography>
+            <Typography sx={{ ...styles.actual }}>
+              Control de inventario
+            </Typography>
           </Box>
           <Box sx={{ ...styles.formulario }}>
             <Box sx={{ ...styles.containerDatos }}>
@@ -451,7 +453,7 @@ function AgregarInventario() {
                             ? [{ label: "No hay opciones" }]
                             : nombresQuimicos
                         }
-                        label="Lista de quimicos"
+                        label="Lista de químicos"
                         icon={<Pool></Pool>}
                         onChange={(e) => obtenerProducto(e.target.textContent)}
                       ></InputSelect>
@@ -543,7 +545,7 @@ function AgregarInventario() {
                         ? [{ label: "No hay opciones" }]
                         : nombresQuimicos
                     }
-                    label="Lista de quimicos"
+                    label="Lista de químicos"
                     icon={<Pool></Pool>}
                     onChange={(e) => obtenerProducto(e.target.textContent)}
                   ></InputSelect>
@@ -568,7 +570,7 @@ function AgregarInventario() {
                           ? [{ label: "No hay opciones" }]
                           : nombresQuimicos
                       }
-                      label="Lista de quimicos"
+                      label="Lista de químicos"
                       icon={<Pool></Pool>}
                       onChange={(e) => obtenerProducto(e.target.textContent)}
                     ></InputSelect>

@@ -69,7 +69,7 @@ function MisPiscinas() {
     mainBox: {
       // backgroundColor: "pink",
       overflowY: {xs:"scroll", sm:"scroll", md:"scroll", lg:"hidden", xl:"hidden"},
-      height: "90vh",
+      height: "100vh",
       transition: "ease 0.3s",
       transform:
         mover || moverUsuario || moverParametros || moverQuimicos || moverPerfil
@@ -387,7 +387,7 @@ function MisPiscinas() {
                         <Typography
                           sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                         >
-                          Clase de istalación
+                          Clase de instalación
                         </Typography>
                         <Typography>{pool?.typeInstallation}</Typography>
                       </Grid>
@@ -483,7 +483,7 @@ function MisPiscinas() {
                         <Typography
                           sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                         >
-                          Proundidad máxima (m)
+                          Profundidad máxima (m)
                         </Typography>
                         <Typography>
                           {pool?.maxDepth === undefined ? "" : pool?.maxDepth}
@@ -493,7 +493,7 @@ function MisPiscinas() {
                         <Typography
                           sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                         >
-                          Profundidad minima (m)
+                          Profundidad mínima (m)
                         </Typography>
                         <Typography>
                           {pool?.minDepth === undefined ? "" : pool?.minDepth}
@@ -563,7 +563,7 @@ function MisPiscinas() {
                         <Typography
                           sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                         >
-                          P. Recirculació mínimo
+                          P. Recirculación mínimao
                         </Typography>
                         <Typography>{pool?.maxDepth}</Typography>
                       </Grid>
@@ -572,7 +572,7 @@ function MisPiscinas() {
                         <Typography
                           sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                         >
-                          P. Recirculació máximo
+                          P. Recirculación máximo
                         </Typography>
                         <Typography>{pool?.meanDepth}</Typography>
                       </Grid>
@@ -648,7 +648,7 @@ function MisPiscinas() {
 
                               <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
-                                  Altua del filtro
+                                  Altura del filtro
                                 </Typography>
                                 <Typography sx={{ ...styles.fontTexto }}>
                                   {elemento.filterBedHeight}
@@ -666,7 +666,7 @@ function MisPiscinas() {
 
                               <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
-                                  Diametro del filtro
+                                  Diámetro del filtro
                                 </Typography>
                                 <Typography sx={{ ...styles.fontTexto }}>
                                   {elemento.filterDiameter}
@@ -675,7 +675,7 @@ function MisPiscinas() {
 
                               <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
-                                  Filter Height
+                                  Altura del lecho filtrante
                                 </Typography>
                                 <Typography sx={{ ...styles.fontTexto }}>
                                   {elemento.filterHeight}
@@ -905,7 +905,8 @@ export default MisPiscinas;
 const styles = {
   generalContainer: {
     overflowX: "hidden",
-    height: "100%",
+    height: "100vh",
+    // backgroundColor: "red",
     // overflowY: { xs: "scroll", sm: "srcoll", md: "hidden", lg: "hidden" },
     // backgroundColor: "red",
   },

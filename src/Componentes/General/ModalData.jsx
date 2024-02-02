@@ -70,11 +70,13 @@ export default function ModalData({ data, open, close }) {
                   <Typography>{data.lastName}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography sx={estilos.subtitle}>Email</Typography>
+                  <Typography sx={estilos.subtitle}>
+                    Correo electónico
+                  </Typography>
                   <Typography>{data.email}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Typography sx={estilos.subtitle}>Celular</Typography>
+                  <Typography sx={estilos.subtitle}>Teléfono</Typography>
                   <Typography>{data.cellPhone}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>

@@ -105,42 +105,42 @@ export default function DataGridDemo({
   };
 
   const columns = [
-    { field: "ID", headerName: "ID", width: 200, headerAlign: "center" },
+    { field: "ID", headerName: "Id", width: 200, headerAlign: "center" },
 
     {
       field: "name",
-      headerName: "NOMBRE",
+      headerName: "Nombre",
       width: 200,
       headerAlign: "center",
     },
     {
       field: "lastName",
-      headerName: "APELLIDO",
+      headerName: "Apellido",
       width: 200,
       headerAlign: "center",
     },
     {
       field: "email",
-      headerName: "EMAIL",
+      headerName: "Correo electónico",
       width: 300,
       headerAlign: "center",
     },
     {
       field: "cellPhone",
-      headerName: "TELEFONO",
+      headerName: "Teléfono",
       width: 150,
       headerAlign: "center",
     },
     {
       field: "role",
-      headerName: "ROL",
+      headerName: "Rol",
       width: 200,
       headerAlign: "center",
     },
 
     {
       field: "state",
-      headerName: "ESTADO",
+      headerName: "Estado",
       width: 200,
       align: "center",
       headerAlign: "center",
@@ -163,14 +163,14 @@ export default function DataGridDemo({
     },
     {
       field: "createAt",
-      headerName: "FECHA CREACION",
+      headerName: "Fecha creación",
       width: 200,
       headerAlign: "center",
       valueFormatter: (params) => new Date(params.value).toLocaleDateString(),
     },
     {
       field: "accion",
-      headerName: "ADMINISTRAR",
+      headerName: "Administrar",
       width: 200,
       headerAlign: "center",
       renderCell: (params) => (
@@ -229,14 +229,24 @@ export default function DataGridDemo({
     });
   };
 
+  const handleColumnWidthChange = (params) => {
+    // Puedes realizar acciones adicionales aquí si es necesario
+    console.log(
+      "Nueva anchura de la columna:",
+      params.colDef.field,
+      params.width
+    );
+  };
+
   return (
-    <Box sx={{ width: "90%", marginLeft: "5%" }}>
+    <Box sx={{ width: "90%", marginLeft: "5%", height: "80vh" }}>
       <DataGrid
         rows={data}
         columns={columns.map((col) => ({
           ...col,
           headerClassName: "custom-header",
         }))}
+        onColumnWidthChange={handleColumnWidthChange} // Agrega esta línea para manejar el cambio de tamaño de columna
         loading={cargando}
         getRowId={(data) => data.ID}
         initialState={{

@@ -84,7 +84,7 @@ export default function TablaLisaHistorico({
     {
       field: "mensaje",
       headerName: "Estado",
-      width: 200,
+      width: 150,
       headerAlign: "center",
       renderCell: (paramas) => (
         <Box
@@ -94,82 +94,6 @@ export default function TablaLisaHistorico({
             justifyContent: "center",
           }}
         >
-          {/* <Button
-            onClick={() =>
-              paramas.row.ajustado === true
-                ? abrirModalAjustado(paramas.row)
-                : ""
-            }
-            // disabled={
-            //   paramas.row.nombre === "Cloro"
-            //     ? localStorage.getItem("AjusteCloro") === "true"
-            //       ? true
-            //       : false
-            //     : paramas.row.nombre === "Ph"
-            //     ? localStorage.getItem("AjustePh") === "true"
-            //       ? true
-            //       : false
-            //     : ""
-            // }
-            variant="contained"
-            sx={{
-              width: "60%",
-              backgroundColor:
-                paramas.row.ajustado === true
-                  ? "orange"
-                  : paramas.value === "good"
-                  ? "green"
-                  : "red",
-              textAlign: "center",
-              color: "white",
-              fontFamily: "'Nunito Sans', sans-serif",
-              border: "1px solid black",
-              borderRadius: "5px",
-              borderColor:
-                paramas.row.ajustado === true
-                  ? "orange"
-                  : paramas.value === "good"
-                  ? "green"
-                  : "red",
-              "&:hover": {
-                backgroundColor:
-                  paramas.row.ajustado === true
-                    ? "orange"
-                    : paramas.value === "good"
-                    ? "green"
-                    : "red",
-                textAlign: "center",
-                color: "white",
-                fontFamily: "'Nunito Sans', sans-serif",
-                border: "1px solid black",
-                borderRadius: "5px",
-                borderColor:
-                  paramas.row.ajustado === true
-                    ? "orange"
-                    : paramas.value === "good"
-                    ? "green"
-                    : "red",
-              },
-            }}
-          >
-            {paramas.row.nombre === "Cloro"
-              ? localStorage.getItem("AjusteCloro") === "true"
-                ? "Ajustado 2"
-                : paramas.row.ajustado === true
-                ? "Ajustado  " + `${paramas.row.ajustado}`
-                : paramas.value === "good"
-                ? "Cumple"
-                : "No cumple"
-              : //Desde aui tood lo d eph
-              paramas.row.nombre === "Ph"
-              ? paramas.row.ajustado === true
-                ? "Ajustado ***" + `${paramas.row.ajustado}`
-                : paramas.value === "good"
-                ? "Cumple tl vez"
-                : "No cumple"
-              : ""}
-          </Button> */}
-
           {paramas.row.nombre === "Cloro" && paramas.value === "good" ? (
             <Button color="success" variant="contained">
               {paramas.row.ajustado === true ? "Ajustado" : "cumple"}
@@ -211,7 +135,7 @@ export default function TablaLisaHistorico({
       //*Is
       field: "ajustado",
       headerName: "Ajustado",
-      width: 200,
+      width: 180,
       headerAlign: "center",
       renderCell: (params) => {
         return params.value === false ? (
@@ -257,7 +181,7 @@ export default function TablaLisaHistorico({
     {
       field: "detalle",
       headerName: "Detalle",
-      width: 100,
+      width: 172,
       headerAlign: "center",
       renderCell: (params) => (
         <Box
@@ -286,15 +210,14 @@ export default function TablaLisaHistorico({
     },
   ];
   return (
-    <div
-      style={{
-        height: 400,
-        width: "100%",
-        display: contador === 2 ? "block" : "none",
-      }}
-    >
+    <div>
       <DataGrid
-        sx={{ marginTop: "10px", width: "98%", marginLeft: "1%" }}
+        sx={{
+          marginTop: "10px",
+          width: "98%",
+          marginLeft: "1%",
+          height: "50vh",
+        }}
         rows={dataWithIds || ""}
         columns={columns.map((col) => ({
           ...col,

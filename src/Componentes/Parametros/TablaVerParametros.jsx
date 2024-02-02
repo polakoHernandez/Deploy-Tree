@@ -172,7 +172,7 @@ export default function TablaVerParametros({
     },
     {
       field: "createAt",
-      headerName: "Fecha cración",
+      headerName: "Fecha creación",
       width: 200,
       headerAlign: "center",
       valueFormatter: (params) => new Date(params.value).toLocaleDateString(),
@@ -180,7 +180,7 @@ export default function TablaVerParametros({
     {
       field: "accion",
       headerName: "Administrar",
-      width: 200,
+      width: 219,
       headerAlign: "center",
       renderCell: (params) => (
         <Box
@@ -237,11 +237,12 @@ export default function TablaVerParametros({
     <Box
       sx={{
         width: { xs: "90%", sm: "90%", md: "90%", lg: "90%", xl: "90.5%" },
-        marginLeft: { xs: "5%", sm: "5%", md: "5%", lg: "5%", xl: "2.5%" },
+        marginLeft: { xs: "5%", sm: "5%", md: "5%", lg: "5%", xl: "4.75%" },
+        height: 500,
       }}
     >
       <DataGrid
-        // sx={{ backgroundColor: "red" }}
+        // sx={{ height}}
         rows={data}
         columns={columns.map((col) => ({
           ...col,

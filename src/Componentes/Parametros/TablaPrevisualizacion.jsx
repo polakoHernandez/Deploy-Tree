@@ -116,7 +116,7 @@ export default function TablaPrevisualizacion({
   const columns = [
     {
       field: "name",
-      headerName: "Parametro",
+      headerName: "Parámetro",
       width: 200,
       headerAlign: "center",
       editable: true,
@@ -157,8 +157,8 @@ export default function TablaPrevisualizacion({
     },
     {
       field: "tal vez",
-      headerName: "Analisis y reporte",
-      width: 190,
+      headerName: "Análisis y reporte",
+      width: 175,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -180,20 +180,18 @@ export default function TablaPrevisualizacion({
   return (
     <Box
       sx={{
-        width: { xs: "85%", sm: "85%", md: "85%", lg: "85%", xl: "70%" },
-        marginLeft: {
-          xs: "7.5%",
-          sm: "7.5%",
-          md: "7.5%",
-          lg: "7.5%",
-          xl: "15%",
-        },
-        marginTop: "0px",
+        width: "100%",
+        height: "50vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
         marginBottom: "30px",
-        display: contador === 2 ? "none" : "content",
+        display: contador === 2 ? "none" : "flex",
       }}
     >
       <DataGrid
+        sx={{ width: { xs: "95%", sm: "95%", md: "967px" } }}
         rows={data || ""}
         columns={columns.map((col) => ({
           ...col,

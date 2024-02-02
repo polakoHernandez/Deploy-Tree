@@ -706,7 +706,7 @@ function GestionarPiscinas() {
                         sm: "50px",
                         md: "0px",
                         lg: "20px",
-                        xl: "50px",
+                        xl: "15px",
                       },
                       marginRight: { xs: "2%", sm: "1%", md: "7%", lg: "5%" },
                       marginBottom: { xs: "0px", sm: "80px", md: "0px" },
@@ -884,11 +884,12 @@ function GestionarPiscinas() {
                       height: "40px",
                       marginTop: {
                         xs: "-9%",
-                        sm: "-9%",
+                        sm: "0.5%",
                         md: "0.6%",
                         lg: "0.5%",
-                        xl: "0.4%",
+                        xs: "0.5%",
                       },
+                      // marginTop: { xs: "-9.4%", xl: "-14.5%" },
                       width: { xs: "80%", sm: "30%", md: "20%" },
                       marginRight: { xs: "-5%", sm: "-5%", md: "0%" },
                       borderRadius: "5px 0px 0px 0px",
@@ -912,18 +913,18 @@ function GestionarPiscinas() {
                 <Box
                   sx={{
                     overflowY: "scroll",
-                    height: { xs: "62vh", sm: "70vh", md: "62vh" },
+                    backgroundColor: "white",
+                    height: {
+                      xs: "62vh",
+                      sm: "70vh",
+                      md: "63vh",
+                      lg: "73vh",
+                      xl: "60vh",
+                    },
                     width: { xs: "95%", sm: "95%", md: "90%", lg: "100%" },
                     marginLeft: { xs: "2.5%", sm: "2.5%", md: "5%", lg: "-5%" },
                     borderRadius: "5px",
-                    marginTop: {
-                      xs: "-10%",
-                      sm: "-10%",
-                      md: "0%",
-                      lg: "0%",
-                      xl: "0%",
-                    },
-                    // backgroundColor: "cyan",
+                    // backgroundColor:"red",
                     boxShadow: "0px 5px 5px 0px black",
                     border: "1px solid black",
                   }}
@@ -1052,7 +1053,7 @@ function GestionarPiscinas() {
                             <Typography
                               sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                             >
-                              Clase de istalación
+                              Clase de instalación
                             </Typography>
                             <Typography>{pool?.typeInstallation}</Typography>
                           </Grid>
@@ -1136,7 +1137,7 @@ function GestionarPiscinas() {
                             <Typography
                               sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                             >
-                              Proundidad máxima (m)
+                              Profundidad máxima (m)
                             </Typography>
                             <Typography>{pool?.maxDepth}</Typography>
                           </Grid>
@@ -1153,7 +1154,7 @@ function GestionarPiscinas() {
                             <Typography
                               sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                             >
-                              Profundidad minima (m)
+                              Profundidad mínima (m)
                             </Typography>
                             <Typography>{pool?.meanDepth}</Typography>
                           </Grid>
@@ -1210,7 +1211,7 @@ function GestionarPiscinas() {
                             <Typography
                               sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                             >
-                              P. Recirculació mínimo
+                              P. Recirculación mínimo
                             </Typography>
                             <Typography>{pool?.maxDepth}</Typography>
                           </Grid>
@@ -1219,7 +1220,7 @@ function GestionarPiscinas() {
                             <Typography
                               sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                             >
-                              P. Recirculació máximo
+                              P. Recirculación máximo
                             </Typography>
                             <Typography>{pool?.meanDepth}</Typography>
                           </Grid>
@@ -1257,7 +1258,16 @@ function GestionarPiscinas() {
                           </Grid>
 
                           {pool === "" ? (
-                            <Typography>No data</Typography>
+                            <Typography
+                              sx={{
+                                width: "90%",
+                                marginLeft: "5%",
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              No data
+                            </Typography>
                           ) : (
                             pool?.filters?.map((elemento, index) => (
                               <Grid
@@ -1290,7 +1300,7 @@ function GestionarPiscinas() {
 
                                 <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
-                                    Altua del filtro
+                                    Altura del filtro
                                   </Typography>
                                   <Typography sx={{ ...styles.fontTexto }}>
                                     {elemento.filterBedHeight}
@@ -1308,7 +1318,7 @@ function GestionarPiscinas() {
 
                                 <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
-                                    Diametro del filtro
+                                    Diámetro del filtro
                                   </Typography>
                                   <Typography sx={{ ...styles.fontTexto }}>
                                     {elemento.filterDiameter}
@@ -1317,7 +1327,7 @@ function GestionarPiscinas() {
 
                                 <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
-                                    Filter Height
+                                    Altura del lecho filtrante
                                   </Typography>
                                   <Typography sx={{ ...styles.fontTexto }}>
                                     {elemento.filterHeight}
@@ -1616,66 +1626,54 @@ function GestionarPiscinas() {
                           ></InputGeneal>
                         </Grid>
 
-                        <Grid item xs={12} sm={6}>
-                          <Box
+                        <Grid item xs={12}>
+                          <Typography
                             sx={{
-                              width: "90%",
                               marginLeft: "5%",
-                              // backgroundColor: "red",
-                              paddingTop: "10px",
+                              display:
+                                dataParametro.PPMactualPh >=
+                                  dataRango.minRange &&
+                                dataParametro.PPMactualPh <=
+                                  dataRango.maxRange &&
+                                dataParametro.PPMactualPh > 0
+                                  ? "flex"
+                                  : "none",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              width: "90%",
+                              height: "50px",
+                              backgroundColor: "rgb( 178, 252, 126 )",
+                              color: "white",
+                              fontFamily: "'Nunito Sans', sans-serif",
+                              borderRadius: "5px",
                             }}
                           >
-                            {/* {dataParametro.PPMactualPh > dataRango.minRange &&
-                            dataParametro.PPMactualPh < dataRango.maxRange ? ( */}
-                            <Typography
-                              sx={{
-                                width: "900px",
-                                marginLeft: "5%",
-                                display:
-                                  dataParametro.PPMactualPh >=
-                                    dataRango.minRange &&
-                                  dataParametro.PPMactualPh <=
-                                    dataRango.maxRange &&
-                                  dataParametro.PPMactualPh > 0
-                                    ? "flex"
-                                    : "none",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                height: "50px",
-                                backgroundColor: "rgb( 178, 252, 126 )",
-                                color: "white",
-                                fontFamily: "'Nunito Sans', sans-serif",
-                                borderRadius: "5px",
-                              }}
-                            >
-                              Ph en el rango permitido
-                            </Typography>
+                            Ph en el rango permitido
+                          </Typography>
 
-                            <Typography
-                              sx={{
-                                fontWeight: "bold",
-
-                                display:
-                                  (dataParametro.PPMactualPh > 0 &&
-                                    dataParametro.PPMactualPh <
-                                      dataRango.minRange) ||
-                                  dataParametro.PPMactualPh > dataRango.maxRange
-                                    ? "flex"
-                                    : "none",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                borderRadius: "5px",
-                                width: "800px",
-                                height: "50px",
-                                justifyContent: "center",
-                                backgroundColor: "rgb( 253, 94, 94 )",
-                                color: "white",
-                              }}
-                            >
-                              Ph esta fuera del rango permitido
-                            </Typography>
-                            {/* )} */}
-                          </Box>
+                          <Typography
+                            sx={{
+                              fontWeight: "bold",
+                              marginLeft: "5%",
+                              display:
+                                (dataParametro.PPMactualPh > 0 &&
+                                  dataParametro.PPMactualPh <
+                                    dataRango.minRange) ||
+                                dataParametro.PPMactualPh > dataRango.maxRange
+                                  ? "flex"
+                                  : "none",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              borderRadius: "5px",
+                              width: "90%",
+                              height: "50px",
+                              justifyContent: "center",
+                              backgroundColor: "rgb( 253, 94, 94 )",
+                              color: "white",
+                            }}
+                          >
+                            Ph está fuera del rango permitido
+                          </Typography>
                         </Grid>
                         {/* Validacion cloro */}
                         <Grid item xs={12}>
@@ -1715,7 +1713,7 @@ function GestionarPiscinas() {
                               sx={{
                                 display:
                                   dataParametro.PPMactualCloro > 0 &&
-                                  dataParametro.PPMactualCloro < dataRango.max
+                                  dataParametro.PPMactualCloro <= dataRango.max
                                     ? "flex"
                                     : "none",
                                 justifyContent: "center",
@@ -1886,11 +1884,24 @@ function GestionarPiscinas() {
                             Ver aforo
                           </Typography>
                         </Grid>
-                        <Tabla
-                          data={respuestaAforo}
-                          contador={contador}
-                          nombrePiscina={pool?.name}
-                        ></Tabla>
+                        <Box
+                          sx={{
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            // backgroundColor: "blue",
+                            height: "50vh",
+                            display: contador === 4 ? "flex" : "none",
+                          }}
+                        >
+                          <Tabla
+                            data={respuestaAforo}
+                            contador={contador}
+                            nombrePiscina={pool?.name}
+                          ></Tabla>
+                        </Box>
                       </Box>
                     )}
 
@@ -1920,6 +1931,7 @@ function GestionarPiscinas() {
                             Ver histórico
                           </Typography>
                         </Grid>
+
                         <TablaLisaHistorico
                           renderizar={() => setRenderTabla(renderTabla + 1)}
                           idPool={pool?._id}
@@ -1989,7 +2001,8 @@ export default GestionarPiscinas;
 const styles = {
   generalContainer: {
     overflowX: "hidden",
-    height: "100%",
+    height: "97vh",
+    overflowY: "scroll",
     // backgroundColor: "red",
   },
   fontTypografy: {

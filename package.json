@@ -18,6 +18,7 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.7",
     "@mui/x-data-grid": "^6.18.4",
     "@reduxjs/toolkit": "^2.0.1",
+    "datejs": "^1.0.0-rc3",
     "push.js": "^1.0.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

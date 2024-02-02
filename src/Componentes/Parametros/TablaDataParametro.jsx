@@ -249,11 +249,12 @@ export default function TablaDataParametro({
   return (
     <Box
       sx={{
-        width: { xs: "90%", sm: "90%", md: "90%", lg: "90%", xl: "50%" },
-        marginLeft: "5%",
+        width: { xs: "90%", sm: "90%", md: "90%", lg: "90%", xl: "95%" },
+        marginLeft: { xs: "5%", xl: "2.5%" },
         marginTop: "40px",
         marginBottom: "30px",
         display: contador === 2 ? "none" : "content",
+        height: "50vh",
       }}
     >
       <DataGrid

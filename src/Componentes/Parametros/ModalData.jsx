@@ -14,8 +14,8 @@ function ModalData({ data, open, close }) {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: { xs: "80%", md: "50%", lg: "50%" },
-    height: { xs: "500px", sm: "500px", md: "500px", lg: "400px" },
+    width: { xs: "80%", md: "50%", lg: "50%", xl: "50%" },
+    height: { xs: "500px", sm: "500px", md: "500px", lg: "400px", xl: "500px" },
     bgcolor: "background.paper",
     //   border: "2px solid #000",
     boxShadow: 24,
@@ -134,8 +134,28 @@ function ModalData({ data, open, close }) {
                 </Grid>
               </Grid>
             </Box>
-            <Box>
+            <Box
+              sx={{
+                // backgroundColor: "red",
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "50vh",
+                marginBottom: "10px",
+              }}
+            >
               <DataGrid
+                sx={{
+                  width: {
+                    xs: "100%",
+                    sm: "100%",
+                    md: "100%",
+                    lg: "100%",
+                    xl: "800px",
+                  },
+                }}
                 rows={data.parameter}
                 columns={columns.map((col) => ({
                   ...col,

@@ -216,7 +216,13 @@ function CrearUsuario() {
 
   return (
     <div
-      style={{ overflowX: "hidden", overflowY: "scroll", position: "relative" }}
+      style={{
+        overflowX: "hidden",
+        overflowY: "scroll",
+        position: "relative",
+        // backgroundColor: "blue",
+        height: "100vh",
+      }}
     >
       <SearchAppBar
         onClick={() => moverTabla()}
@@ -234,9 +240,10 @@ function CrearUsuario() {
             // moverUsuarios ||
             moverParametros ||
             moverQuimicos ||
-            moverPerfil
+            moverPerfil ||
+            moverUsuario
               ? "258px"
-              : " 128px",
+              : " 97px",
 
           right: { xs: "5%", sm: "5%" },
           width: "150px",
@@ -262,7 +269,7 @@ function CrearUsuario() {
           height: "500px",
           marginLeft: "5%",
           marginTop: "190px",
-          marginBottom: "50px",
+          // marginBottom: "50px",
           display: "flex",
           justifyContent: "center",
           overflowY: "scroll",
@@ -272,9 +279,10 @@ function CrearUsuario() {
             // moverUsuarios ||
             moverParametros ||
             moverQuimicos ||
-            moverPerfil
+            moverPerfil ||
+            moverUsuario
               ? "translateY(30px)"
-              : "translatey(-100px)",
+              : "translatey(-130px)",
           transition: "ease 0.1s",
         }}
       >
@@ -323,7 +331,7 @@ function CrearUsuario() {
             <InputGeneral
               name="email"
               type="email"
-              label="Email"
+              label="Correo electrónico"
               placeholder="Ingrese su Email"
               icon={<AttachEmailIcon></AttachEmailIcon>}
               onChange={(e) => seleccionarData("email", e.target.value)}

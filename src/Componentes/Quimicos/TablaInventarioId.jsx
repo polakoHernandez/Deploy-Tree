@@ -65,7 +65,7 @@ function TablaInventarioId(data) {
     {
       field: "tipo",
       headerName: "Tipo",
-      width: 150,
+      width: 151,
       headerAlign: "center",
     },
   ];
@@ -77,13 +77,27 @@ function TablaInventarioId(data) {
   return (
     <Box
       sx={{
-        width: "90%",
-        marginLeft: "5%",
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+
         marginTop: "5px",
         marginBottom: "60px",
+        height: "50vh",
       }}
     >
       <DataGrid
+        sx={{
+          width: {
+            xs: "95%",
+            sm: "95%",
+            md: "97.3%",
+            lg: "1102px",
+            xl: "1102px",
+          },
+        }}
         rows={data.data || ""}
         columns={columns.map((col) => ({
           ...col,

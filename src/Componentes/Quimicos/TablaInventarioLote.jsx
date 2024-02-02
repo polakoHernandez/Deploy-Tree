@@ -11,6 +11,12 @@ import { DataGrid } from "@mui/x-data-grid";
 function TablaInventarioLote(data) {
   const columns = [
     {
+      field: "nameChemicalProduct",
+      headerName: "Nombre",
+      width: 250,
+      headerAlign: "center",
+    },
+    {
       field: "lot",
       headerName: "Lote",
       width: 200,
@@ -18,21 +24,9 @@ function TablaInventarioLote(data) {
     },
 
     {
-      field: "nameChemicalProduct",
-      headerName: "Nombre",
-      width: 250,
-      headerAlign: "center",
-    },
-    {
       field: "quantityByLot",
-      headerName: "Cantidad",
-      width: 200,
-      headerAlign: "center",
-    },
-    {
-      field: "quantityByLot",
-      headerName: "Unidad",
-      width: 200,
+      headerName: "Saldo",
+      width: 202,
       headerAlign: "center",
     },
   ];
@@ -44,13 +38,19 @@ function TablaInventarioLote(data) {
   return (
     <Box
       sx={{
-        width: { xs: "90%", sm: "90%", md: "70%" },
-        marginLeft: { xs: "5%", sm: "5%", md: "15%" },
+        // backgroundColor: "red",
+        width: "100%",
         marginTop: "5px",
         marginBottom: "60px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "50vh",
       }}
     >
       <DataGrid
+        sx={{ width: { xs: "95%", sm: "95%", md: "653px" } }}
         rows={data.data || ""}
         columns={columns.map((col) => ({
           ...col,

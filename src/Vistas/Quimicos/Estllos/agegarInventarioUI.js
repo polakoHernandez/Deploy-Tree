@@ -33,7 +33,7 @@ const styles = {
 
   actual: {
     backgroundColor: "rgb(0, 164, 228)",
-    width: { xs: "20%", sm: "20%", md: "10%" },
+    width: { xs: "30%", sm: "30%", md: "15%" },
     display: "flex",
     height: "40px",
     justifyContent: "center",
