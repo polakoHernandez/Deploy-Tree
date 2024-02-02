@@ -42,7 +42,7 @@ const styles = {
     alignItems: "center",
     fontFamily: "'Nunito Sans', sans-serif",
     color: "white",
-    borderRadius: "15px 0px 0px 0px",
+    borderRadius: "5px 0px 0px 0px",
   },
 
   boxFormulario: {

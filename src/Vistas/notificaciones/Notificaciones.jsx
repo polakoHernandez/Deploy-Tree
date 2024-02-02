@@ -484,15 +484,15 @@ const Notificaciones = () => {
                               ${elemento.userId && elemento.userId.lastName}
                               con rol ${
                                 elemento.userId && elemento.userId.role
-                              } creo un historico paara la  piscina  ${
+                              } creó un histórico para la ${
                               elemento?.historyPoolId?.poolId?.name
-                            } el dia ${new Date(
+                            } el día ${new Date(
                               new Date(elemento?.historyPoolId?.date).setDate(
                                 new Date(
                                   elemento?.historyPoolId?.date
                                 ).getDate() + 1
                               )
-                            ).toLocaleDateString()}el sistema genero los siguientes mensajes:                        
+                            ).toLocaleDateString()}, el sistema generó los siguientes mensajes:                        
                                                         
                             `}
                             <Typography sx={{ color: "black" }}>
@@ -551,9 +551,9 @@ const Notificaciones = () => {
                              ${elemento.userId && elemento.userId.lastName}
                             con rol ${
                               elemento.userId && elemento.userId.role
-                            } creo una piscina con el nombre  ${
+                            } creó una piscina con el nombre  ${
                                     elemento.poolId && elemento.poolId.name
-                                  } el dia ${
+                                  } el día ${
                                     elemento.poolId &&
                                     new Date(
                                       elemento.poolId.createAt
