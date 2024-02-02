@@ -26,6 +26,10 @@ import TablaLisaHistorico from "../../Componentes/Parametros/TablaLisaHistorico"
 import ModalAjustar from "../../Componentes/Parametros/ModalAjustar";
 import InputSelect from "../../Componentes/General/InputSelect";
 import Pool from "@mui/icons-material/Pool";
+import circular from "../../assets/imagePool/PiscinaCircular.png";
+import rectangular from "../../assets/imagePool/PiscinaRectangular.png";
+import ovalada from "../../assets/imagePool/PiscinaOvalada.png";
+import "../../Estilos/Piscina/misPiscinas.css";
 
 function GestionarPiscinas() {
   const [data, setData] = useState("");
@@ -284,6 +288,7 @@ function GestionarPiscinas() {
 
   const animationStyles = {
     mainBox: {
+      // backgroundColor: "red",
       height: "87%",
       transition: "ease 0.3s",
       transform:
@@ -690,7 +695,7 @@ function GestionarPiscinas() {
               <Grid item xs={12} sx={{ height: "15%" }}>
                 <Box
                   sx={{
-                    //backgroundColor: "cyan",
+                    // backgroundColor: "pink",
                     height: "80px",
                     display: "flex",
                     alignItems: "center",
@@ -725,11 +730,11 @@ function GestionarPiscinas() {
                   </Box>
                 </Box>
               </Grid>
-              <Grid item xs={12} sx={{ height: "85%" }}>
+              <Grid item xs={12}>
                 <Box
                   sx={{
                     width: "100%",
-                    // backgroundColor: "blue",
+                    //backgroundColor: "blue",
                     marginLeft: { xs: "-8%", md: "-5%", lg: "-5%" },
                     // backgroundColor: "antiquewhite",
                     height: "45px",
@@ -739,7 +744,7 @@ function GestionarPiscinas() {
                 >
                   <Box
                     sx={{
-                      // backgroundColor: "cyan",
+                      backgroundColor: "green",
                       marginLeft: "1%",
                       marginTop: {
                         xs: "-9.4%",
@@ -921,13 +926,13 @@ function GestionarPiscinas() {
                       xs: "62vh",
                       sm: "70vh",
                       md: "63vh",
-                      lg: "73vh",
+                      lg: "60vh",
                       xl: "60vh",
                     },
                     width: { xs: "95%", sm: "95%", md: "90%", lg: "100%" },
                     marginLeft: { xs: "2.5%", sm: "2.5%", md: "5%", lg: "-5%" },
                     borderRadius: "5px",
-                    // backgroundColor:"red",
+                    // backgroundColor: "red",
                     boxShadow: "0px 5px 5px 0px black",
                     border: "1px solid black",
                   }}
@@ -1082,6 +1087,40 @@ function GestionarPiscinas() {
                             >
                               Medidas
                             </Typography>
+                          </Grid>
+
+                          <Grid xs={12}>
+                            <Box
+                              sx={{
+                                width: "90%",
+                                marginLeft: "5%",
+                                height: "400px",
+                                // backgroundColor: "cyan",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                position: "relative",
+                              }}
+                            >
+                              {pool?.form === "RECTANGULAR" ? (
+                                <img
+                                  src={rectangular}
+                                  className="img_rectangurlar"
+                                ></img>
+                              ) : pool?.form === "CIRCULAR" ? (
+                                <img
+                                  src={circular}
+                                  className="img_rectangurlar"
+                                ></img>
+                              ) : pool?.form === "CIRCULAR" ? (
+                                <img
+                                  src={ovalada}
+                                  className="img_rectangurlar"
+                                ></img>
+                              ) : (
+                                ""
+                              )}
+                            </Box>
                           </Grid>
 
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -2004,9 +2043,9 @@ export default GestionarPiscinas;
 const styles = {
   generalContainer: {
     overflowX: "hidden",
-    height: "97vh",
-    overflowY: "scroll",
-    // backgroundColor: "red",
+    height: "98vh",
+    overflowY: { xs: "scroll", ms: "scroll", md: "scroll", lg: "scroll" },
+    // backgroundColor: "cyan",
   },
   fontTypografy: {
     fontFamily: "'Nunito Sans', sans-serif",

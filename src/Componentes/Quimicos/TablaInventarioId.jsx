@@ -57,7 +57,7 @@ function TablaInventarioId(data) {
       headerAlign: "center",
     },
     {
-      field: "saldo",
+      field: "availableQuantity",
       headerName: "Saldo",
       width: 150,
       headerAlign: "center",

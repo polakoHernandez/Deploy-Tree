@@ -9,6 +9,10 @@ import SliderVertical from "../../Componentes/General/SliderVertical";
 import { useLocation } from "react-router-dom";
 import InputSelect from "../../Componentes/General/InputSelect";
 import { Pool } from "@mui/icons-material";
+import circular from "../../assets/imagePool/PiscinaCircular.png"
+import rectangular from "../../assets/imagePool/PiscinaRectangular.png"
+import ovalada from "../../assets/imagePool/PiscinaOvalada.png"
+import "../../Estilos/Piscina/misPiscinas.css"
 
 function MisPiscinas() {
   const location = useLocation();
@@ -267,7 +271,7 @@ function MisPiscinas() {
                   sx={{
                     overflowY: "scroll",
                     backgroundColor: "white",
-                    height: { xs: "62vh", sm: "70vh", md: "63vh", lg:"73vh", xl:"60vh" },
+                    height: { xs: "62vh", sm: "70vh", md: "63vh", lg:"60vh", xl:"60vh" },
                     width: { xs: "95%", sm: "95%", md: "90%", lg:"100%" },
                     marginLeft: {xs:"2.5%", sm:"2.5%", md:"5%", lg:"-5%"},
                     borderRadius: "5px",
@@ -413,6 +417,28 @@ function MisPiscinas() {
                         >
                           Medidas
                         </Typography>
+                      </Grid>
+
+                      <Grid xs={12}>
+                        <Box sx={{
+                          width:"90%",
+                          marginLeft:"5%",
+                          height:"400px",
+                          // backgroundColor: "cyan",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center"
+                        }}>
+                          {pool?.form ==="RECTANGULAR" ?
+                          <img src={rectangular} className="img_rectangurlar"></img>:
+                          pool?.form ==="CIRCULAR"?
+                          <img src={circular} className="img_rectangurlar"></img>
+                          :
+                          pool?.form ==="CIRCULAR"? 
+                          <img src={ovalada} className="img_rectangurlar"></img>
+                          :""
+                          }
+                        </Box>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -907,7 +933,7 @@ const styles = {
     overflowX: "hidden",
     height: "100vh",
     // backgroundColor: "red",
-    // overflowY: { xs: "scroll", sm: "srcoll", md: "hidden", lg: "hidden" },
+    overflowY: { xs: "scroll", sm: "scroll", md: "scroll", lg: "scroll" },
     // backgroundColor: "red",
   },
 
