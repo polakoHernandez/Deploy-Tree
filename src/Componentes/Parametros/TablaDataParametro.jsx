@@ -135,7 +135,7 @@ export default function TablaDataParametro({
     {
       field: "fecha",
       headerName: "Fecha",
-      width: 200,
+      width: 100,
       headerAlign: "center",
       renderCell: (params) => {
         // Obtén la fecha del modelo de la fila
@@ -149,8 +149,8 @@ export default function TablaDataParametro({
     },
     {
       field: "nameParam" || "name",
-      headerName: "Nombre del parametro",
-      width: 200,
+      headerName: "Nombre del parámetro",
+      width: 170,
       headerAlign: "center",
       renderCell: (params) => {
         return params.row.name || params.row.nameParam;
@@ -160,14 +160,14 @@ export default function TablaDataParametro({
     {
       field: "specification",
       headerName: "Especificación",
-      width: 200,
+      width: 150,
       headerAlign: "center",
       editable: true,
     },
     {
       field: "minRange",
       headerName: "Mínimo",
-      width: 120,
+      width: 90,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -176,7 +176,7 @@ export default function TablaDataParametro({
     {
       field: "maxRange",
       headerName: "Máximo",
-      width: 120,
+      width: 90,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -185,7 +185,7 @@ export default function TablaDataParametro({
     {
       field: "maxValueSpecification",
       headerName: "Valor máximo",
-      width: 150,
+      width: 120,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -194,7 +194,7 @@ export default function TablaDataParametro({
     {
       field: "tal vez",
       headerName: "Analisis y reporte",
-      width: 190,
+      width: 150,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -206,14 +206,14 @@ export default function TablaDataParametro({
     {
       field: "piscina",
       headerName: "Piscina",
-      width: 200,
+      width: 250,
       headerAlign: "center",
     },
 
     {
       field: "estado",
       headerName: "Estado",
-      width: 200,
+      width: 150,
       headerAlign: "center",
       renderCell: (params) => (
         <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
@@ -230,7 +230,7 @@ export default function TablaDataParametro({
               borderRadius: "5px",
             }}
           >
-            {params.value === true ? "ACTIVO" : "INACTIVO"}
+            {params.value === true ? "Activo" : "Inactivo"}
           </Typography>
         </Box>
       ),

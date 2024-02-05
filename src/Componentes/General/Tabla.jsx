@@ -136,6 +136,17 @@ export default function DataGridDemo({
       headerName: "Rol",
       width: 200,
       headerAlign: "center",
+      renderCell: (params) => {
+        return (
+          <Typography>
+            {params.value === "GERENTE"
+              ? "Gerente"
+              : params.value === "GESTOR"
+              ? "Gestor"
+              : ""}
+          </Typography>
+        );
+      },
     },
 
     {
@@ -157,7 +168,7 @@ export default function DataGridDemo({
             borderColor: params.value ? "green" : "red",
           }}
         >
-          {params.value ? "ACTIVO" : "INACTIVO"}
+          {params.value ? "Activo" : "Inactivo"}
         </Typography>
       ),
     },
