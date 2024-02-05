@@ -1103,17 +1103,17 @@ function GestionarPiscinas() {
                               }}
                             >
                               <span>{pool?.height}</span>
-                              {pool?.form === "RECTANGULAR" ? (
+                              {pool?.form === "Rectangular" ? (
                                 <img
                                   src={rectangular}
                                   className="img_rectangurlar"
                                 ></img>
-                              ) : pool?.form === "CIRCULAR" ? (
+                              ) : pool?.form === "Circular" ? (
                                 <img
                                   src={circular}
                                   className="img_rectangurlar"
                                 ></img>
-                              ) : pool?.form === "OVALADA" ? (
+                              ) : pool?.form === "Ovalada" ? (
                                 <img
                                   src={ovalada}
                                   className="img_rectangurlar"
@@ -1827,6 +1827,7 @@ function GestionarPiscinas() {
                               width: "95%",
                               marginLeft: "2.5%",
                               marginTop: "10px",
+                              marginBottom: "10px",
                               backgroundColor: "rgb(0,164,228)",
                               "&:hover": {
                                 backgroundColor: "rgb(0,164,228)",

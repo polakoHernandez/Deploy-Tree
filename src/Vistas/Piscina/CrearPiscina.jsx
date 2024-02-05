@@ -454,7 +454,7 @@ function CrearPiscina() {
       label: "Piscina de recreo",
     },
     {
-      label: "Piscina de aprendizaje",
+      label: "Piscina de aterrizaje",
     },
     {
       label: "Piscina de olas",
@@ -491,7 +491,7 @@ function CrearPiscina() {
       label: "Renovacion continua",
     },
     {
-      label: "Desalojo completo e intermintente",
+      label: "Desalojo completo e intermitente",
     },
   ];
 
@@ -515,7 +515,7 @@ function CrearPiscina() {
       label: "Arena carbon",
     },
     {
-      label: "Arena Antrecita",
+      label: "Arena antrecita",
     },
   ];
 
