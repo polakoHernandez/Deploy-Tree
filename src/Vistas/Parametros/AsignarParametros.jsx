@@ -664,8 +664,9 @@ function AsignarParametros() {
                   <Button
                     disabled={cargando}
                     variant="contained"
-                    style={{
-                      ...styles.guardar,
+                    sx={{
+                      width: { xs: "90%" },
+                      marginLeft: { xs: "5%" },
 
                       backgroundColor:
                         cargando === true
