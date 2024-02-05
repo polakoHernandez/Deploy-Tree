@@ -1617,60 +1617,100 @@ function GestionarPiscinas() {
                             icon={<PoolIcon></PoolIcon>}
                           ></InputGeneal>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                          <InputGeneal
-                            value={dataParametro.PPMactualCloro}
-                            name="PPMactualCloro"
-                            onChange={capTurarDatosParametros}
-                            label="PPM actual | cloro"
-                            type="number"
-                            icon={<PoolIcon></PoolIcon>}
-                          ></InputGeneal>
+                        <Grid item xs={12} sm={12} md={6}>
+                          <Box
+                            sx={{
+                              // backgroundColor: "blue",
+                              width: { xs: "100%", sm: "100%", md: "90%" },
+                              marginLeft: { xs: "0%", sm: "0%", md: "6%" },
+                            }}
+                          >
+                            <InputGeneal
+                              value={dataParametro.PPMactualCloro}
+                              name="PPMactualCloro"
+                              onChange={capTurarDatosParametros}
+                              label="PPM actual | cloro"
+                              type="number"
+                              icon={<PoolIcon></PoolIcon>}
+                            ></InputGeneal>
+                          </Box>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                          <InputGeneal
-                            disabled
-                            value={dataRango?.max}
-                            name="PPMdeseadoMaximo"
-                            onChange={capTurarDatosParametros}
-                            label="PPM deseado máximo | cloro"
-                            type="number"
-                            icon={<PoolIcon></PoolIcon>}
-                          ></InputGeneal>
+                        <Grid item xs={12} sm={12} md={6}>
+                          <Box
+                            sx={{
+                              // backgroundColor: "red",
+                              width: { xs: "100%", sm: "100%", md: "90%" },
+                              marginLeft: { xs: "0%", sm: "0%", md: "5%" },
+                            }}
+                          >
+                            <InputGeneal
+                              disabled
+                              value={dataRango?.max}
+                              name="PPMdeseadoMaximo"
+                              onChange={capTurarDatosParametros}
+                              label="PPM deseado máximo | cloro"
+                              type="number"
+                              icon={<PoolIcon></PoolIcon>}
+                            ></InputGeneal>
+                          </Box>
                         </Grid>
 
-                        <Grid item xs={12} sm={4}>
-                          <InputGeneal
-                            value={dataParametro.PPMactualPh}
-                            name="PPMactualPh"
-                            onChange={capTurarDatosParametros}
-                            label="PPM actual | ph"
-                            type="number"
-                            icon={<PoolIcon></PoolIcon>}
-                          ></InputGeneal>
+                        <Grid item xs={12} sm={12} md={4}>
+                          <Box
+                            sx={{
+                              // backgroundColor: "blue",
+                              width: { xs: "100%", sm: "100%", md: "90%" },
+                              marginLeft: { xs: "0%", sm: "0%", md: "12%" },
+                            }}
+                          >
+                            <InputGeneal
+                              value={dataParametro.PPMactualPh}
+                              name="PPMactualPh"
+                              onChange={capTurarDatosParametros}
+                              label="PPM actual | ph"
+                              type="number"
+                              icon={<PoolIcon></PoolIcon>}
+                            ></InputGeneal>
+                          </Box>
                         </Grid>
 
-                        <Grid item xs={12} sm={4}>
-                          <InputGeneal
-                            disabled
-                            value={dataRango.minRange}
-                            name="PPMdeseado"
-                            onChange={capTurarDatosParametros}
-                            label="PPM deseado minímo | ph"
-                            type="number"
-                            icon={<PoolIcon></PoolIcon>}
-                          ></InputGeneal>
+                        <Grid item xs={12} sm={12} md={4}>
+                          <Box
+                            sx={
+                              {
+                                // backgroundColor: "cyan",
+                              }
+                            }
+                          >
+                            <InputGeneal
+                              disabled
+                              value={dataRango.minRange}
+                              name="PPMdeseado"
+                              onChange={capTurarDatosParametros}
+                              label="PPM deseado minímo | ph"
+                              type="number"
+                              icon={<PoolIcon></PoolIcon>}
+                            ></InputGeneal>
+                          </Box>
                         </Grid>
-                        <Grid item xs={12} sm={4}>
-                          <InputGeneal
-                            disabled
-                            value={dataRango.maxRange}
-                            name="PPMdeseado2"
-                            onChange={capTurarDatosParametros}
-                            label="PPM deseado máximo | ph"
-                            type="number"
-                            icon={<PoolIcon></PoolIcon>}
-                          ></InputGeneal>
+                        <Grid item xs={12} sm={12} md={4}>
+                          <Box
+                            sx={{
+                              // backgroundColor: "blue",
+                              width: { xs: "100%", sm: "100%", md: "90%" },
+                              marginRight: { xs: "0%", sm: "0%", md: "16%" },
+                            }}
+                          >
+                            <InputGeneal
+                              disabled
+                              value={dataRango.maxRange}
+                              name="PPMdeseado2"
+                              onChange={capTurarDatosParametros}
+                              label="PPM deseado máximo | ph"
+                              type="number"
+                              icon={<PoolIcon></PoolIcon>}
+                            ></InputGeneal>
+                          </Box>
                         </Grid>
 
                         <Grid item xs={12}>
