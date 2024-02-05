@@ -28,6 +28,7 @@ function CrearParametro() {
   const [open, setOpen] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [color, setColor] = useState("");
+  const [renderNorma, setRenderNorma] = useState(0);
 
   //*Estao para renderizar el front
   const [reload, setReload] = useState(false);
@@ -189,6 +190,7 @@ function CrearParametro() {
         setMensaje("Norma Creada exitosamente!");
         setColor("success");
         setDeshabilitar(false);
+        setRenderNorma(renderNorma + 1);
 
         break;
 
@@ -425,12 +427,11 @@ function CrearParametro() {
 
   useEffect(() => {
     listarParametros();
-  }, []);
+  }, [renderNorma]);
 
-  useEffect(() => {
-    listarParametros();
-    setReload(false);
-  }, [reload]);
+  // useEffect(() => {
+  //   listarParametros();
+  // }, [renderNorma]);
 
   return (
     <Box sx={{ ...styles.generalContainer }}>

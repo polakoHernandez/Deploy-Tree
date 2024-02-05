@@ -346,9 +346,10 @@ function EditarNorma() {
 
     containerEncabezado: {
       //! para cambiar el color backgroundColor: "red",
-      height: "10%",
+      height: "7%",
       display: "flex",
       justifyContent: "end",
+      // backgroundColor: "red",
     },
 
     containerFormulario: {
@@ -382,6 +383,7 @@ function EditarNorma() {
     crearNorma: {
       backgroundColor: contador === 1 ? "rgb(0,164,228)" : "rgb(0,164,228)",
       color: contador === 1 ? "white" : "white",
+      height: {},
       // border: contador === 1 ? "1px solid black" : "",
       width: "150px",
       display: "flex",
@@ -509,12 +511,6 @@ function EditarNorma() {
       ></SearchAppBar>
       <Box sx={{ ...styles.mainBox }}>
         <Box sx={{ ...styles.containerEncabezado }}>
-          {/* <Typography
-            sx={{ ...styles.listaNormas }}
-            onClick={() => setContador(2)}
-          >
-            lista de normas
-          </Typography> */}
           <Typography
             sx={{ ...styles.crearNorma }}
             onClick={() => setContador(1)}
