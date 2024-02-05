@@ -12,8 +12,8 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: { xs: "70%", md: "70%", lg: "70%" },
-  height: { xs: "500px", sm: "500px", md: "400px", lg: "400px" },
+  width: { xs: "70%", md: "900px", lg: "900px" },
+  height: { xs: "500px", sm: "500px", md: "00px", lg: "400px" },
   bgcolor: "background.paper",
   //   border: "2px solid #000",
   boxShadow: 24,
@@ -27,7 +27,6 @@ export default function ModalDetalles({ data, open, close }) {
     <div>
       <Modal
         open={open}
-        onClose={close}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -57,7 +56,7 @@ export default function ModalDetalles({ data, open, close }) {
               }}
             >
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={12} md={3}>
+                <Grid item xs={12} sm={12} md={3} mb={5}>
                   <Typography sx={estilos.subtitle}>Fecha</Typography>
                   <Typography>
                     {new Date(data.fecha).toLocaleDateString()}
@@ -86,7 +85,7 @@ export default function ModalDetalles({ data, open, close }) {
                   </Typography>
                   <Typography>{data.nombre}</Typography>
                 </Grid>
-                <Grid item xs={12} sm={12} md={3}>
+                <Grid item xs={12} sm={12} md={3} mb={5}>
                   <Typography sx={estilos.subtitle}>
                     Medicion deseada mínimo
                   </Typography>

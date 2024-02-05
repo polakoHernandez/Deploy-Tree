@@ -410,8 +410,8 @@ function GestionarPiscinas() {
       case 400:
         const responsess = await respuesta.json();
         setOpenAlerta(true);
-        setMensaje("Error al el parametro");
-        setColor("success");
+        setMensaje("Campos obligatorios vacios");
+        setColor("error");
 
         setDeshabilitar(false);
 

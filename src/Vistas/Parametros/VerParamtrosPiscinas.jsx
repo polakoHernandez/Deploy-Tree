@@ -181,7 +181,7 @@ function VerParamtrosPiscinas() {
             color: "white",
             position: "absolute",
             top: "-40px",
-            right: { xs: "5%", sm: "5%", md: "5%", lg: "5%", xl: "5%" },
+            right: { xs: "5%", sm: "5%", md: "5%", lg: "2%", xl: "10%" },
             fontFamily: "'Nunito Sans', sans-serif",
             width: "150px",
             height: "40px",

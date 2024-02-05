@@ -150,7 +150,7 @@ export default function TablaVerParametros({
     {
       field: "state",
       headerName: "Estado",
-      width: 200,
+      width: 130,
       align: "center",
       headerAlign: "center",
       // valueFormatter: (params) => (params.value ? "ACTIVO" : "INACTIVO"),
@@ -166,14 +166,14 @@ export default function TablaVerParametros({
             borderColor: params.value ? "green" : "red",
           }}
         >
-          {params.value ? "ACTIVO" : "INACTIVO"}
+          {params.value ? "Activo" : "Inactivo"}
         </Typography>
       ),
     },
     {
       field: "createAt",
       headerName: "Fecha creación",
-      width: 200,
+      width: 120,
       headerAlign: "center",
       valueFormatter: (params) => new Date(params.value).toLocaleDateString(),
     },
@@ -236,13 +236,19 @@ export default function TablaVerParametros({
   return (
     <Box
       sx={{
-        width: { xs: "90%", sm: "90%", md: "90%", lg: "90%", xl: "90.5%" },
-        marginLeft: { xs: "5%", sm: "5%", md: "5%", lg: "5%", xl: "4.75%" },
+        // width: { xs: "90%", sm: "90%", md: "90%", lg: "1250px" },
+        // marginLeft: { xs: "5%", sm: "5%", md: "5%", lg: "5%", xl: "4.75%" },
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
         height: 500,
       }}
     >
       <DataGrid
-        // sx={{ height}}
+        sx={{
+          width: { xs: "90%", sm: "90%", md: "90%", lg: "1170px" },
+        }}
         rows={data}
         columns={columns.map((col) => ({
           ...col,
