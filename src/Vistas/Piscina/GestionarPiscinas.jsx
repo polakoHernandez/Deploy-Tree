@@ -1090,38 +1090,192 @@ function GestionarPiscinas() {
                           </Grid>
 
                           <Grid xs={12}>
-                            <Box
-                              sx={{
-                                width: "90%",
-                                marginLeft: "5%",
-                                height: "400px",
-                                // backgroundColor: "cyan",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                position: "relative",
-                              }}
-                            >
-                              <span>{pool?.height}</span>
-                              {pool?.form === "Rectangular" ? (
+                            {pool?.form === "Rectangular" ? (
+                              <Box
+                                sx={{
+                                  width: "90%",
+                                  marginLeft: "5%",
+                                  height: "400px",
+                                  // backgroundColor: "cyan",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  position: "relative",
+                                }}
+                              >
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "110px",
+                                    left: "40%",
+                                    transform: "rotate(-30deg)",
+                                  }}
+                                >
+                                  {pool?.height} m
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "200px",
+                                    left: "45%",
+                                  }}
+                                >
+                                  {pool?.width} m
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "320px",
+                                    left: "55%",
+                                  }}
+                                >
+                                  A. {pool?.depth?.depthA} m
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "280px",
+                                    left: "65%",
+                                  }}
+                                >
+                                  B. {pool?.depth?.depthB} m
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "230px",
+                                    left: "75%",
+                                  }}
+                                >
+                                  C. {pool?.depth?.depthC} m
+                                </Typography>
                                 <img
                                   src={rectangular}
                                   className="img_rectangurlar"
                                 ></img>
-                              ) : pool?.form === "Circular" ? (
+                              </Box>
+                            ) : pool?.form === "Circular" ? (
+                              <Box
+                                sx={{
+                                  width: "90%",
+                                  marginLeft: "5%",
+                                  height: "400px",
+                                  // backgroundColor: "cyan",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  position: "relative",
+                                }}
+                              >
+                                {/* <Typography sx={{position:"absolute", top:"110px", left:"35%"}}>{pool?.height} m</Typography> */}
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "180px",
+                                    left: "50%",
+                                  }}
+                                >
+                                  {pool?.width} m
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "270px",
+                                    left: "25%",
+                                  }}
+                                >
+                                  A. {pool?.depth?.depthA} m
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "190px",
+                                    left: "25%",
+                                  }}
+                                >
+                                  B. {pool?.depth?.depthB} m
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "120px",
+                                    left: "25%",
+                                  }}
+                                >
+                                  C. {pool?.depth?.depthC} m
+                                </Typography>{" "}
                                 <img
                                   src={circular}
                                   className="img_rectangurlar"
                                 ></img>
-                              ) : pool?.form === "Ovalada" ? (
+                              </Box>
+                            ) : pool?.form === "Ovalada" ? (
+                              <Box
+                                sx={{
+                                  width: "90%",
+                                  marginLeft: "5%",
+                                  height: "400px",
+                                  // backgroundColor: "cyan",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  position: "relative",
+                                }}
+                              >
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "110px",
+                                    left: "40%",
+                                    transform: "rotate(-30deg)",
+                                  }}
+                                >
+                                  {pool?.height} m
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "180px",
+                                    left: "46%",
+                                  }}
+                                >
+                                  {pool?.width} m
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "320px",
+                                    left: "55%",
+                                  }}
+                                >
+                                  A. {pool?.depth?.depthA} m
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "250px",
+                                    left: "62%",
+                                  }}
+                                >
+                                  B. {pool?.depth?.depthB} m
+                                </Typography>
+                                <Typography
+                                  sx={{
+                                    position: "absolute",
+                                    top: "200px",
+                                    left: "68%",
+                                  }}
+                                >
+                                  C. {pool?.depth?.depthC} m
+                                </Typography>
                                 <img
                                   src={ovalada}
                                   className="img_rectangurlar"
                                 ></img>
-                              ) : (
-                                ""
-                              )}
-                            </Box>
+                              </Box>
+                            ) : (
+                              ""
+                            )}
                           </Grid>
 
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
