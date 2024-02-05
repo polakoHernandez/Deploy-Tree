@@ -14,7 +14,7 @@ function ModalData({ data, open, close }) {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: { xs: "80%", md: "50%", lg: "50%", xl: "50%" },
+    width: { xs: "80%", md: "50%", lg: "50%", xl: "60%" },
     height: { xs: "500px", sm: "500px", md: "500px", lg: "400px", xl: "500px" },
     bgcolor: "background.paper",
     //   border: "2px solid #000",
@@ -55,7 +55,7 @@ function ModalData({ data, open, close }) {
     {
       field: "minRange",
       headerName: "Rango minímo",
-      width: 150,
+      width: 120,
       headerAlign: "center",
       type: "number",
       renderCell: (params) =>
@@ -63,8 +63,8 @@ function ModalData({ data, open, close }) {
     },
     {
       field: "maxRange",
-      headerName: "Ramgo máximo",
-      width: 150,
+      headerName: "Rango máximo",
+      width: 120,
       headerAlign: "center",
       type: "number",
       renderCell: (params) =>
@@ -73,7 +73,7 @@ function ModalData({ data, open, close }) {
     {
       field: "maxValueSpecification",
       headerName: "Valor máximo",
-      width: 150,
+      width: 120,
       headerAlign: "center",
       type: "number",
       renderCell: (params) =>
@@ -153,7 +153,7 @@ function ModalData({ data, open, close }) {
                     sm: "100%",
                     md: "100%",
                     lg: "100%",
-                    xl: "800px",
+                    xl: "711px",
                   },
                 }}
                 rows={data.parameter}
