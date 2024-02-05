@@ -460,13 +460,13 @@ function CrearPiscina() {
       label: "Piscina de olas",
     },
     {
-      label: "Atraccion acuatica interactiva",
+      label: "Atracciones acuaticas interactivas",
     },
     {
-      label: "Especial terapeutica",
+      label: "Especial terapeuticas",
     },
     {
-      label: "Especial termales",
+      label: "Especial termales",
     },
   ];
 

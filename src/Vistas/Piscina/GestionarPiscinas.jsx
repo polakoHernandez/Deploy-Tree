@@ -1256,7 +1256,9 @@ function GestionarPiscinas() {
                             >
                               P. Recirculación mínimo
                             </Typography>
-                            <Typography>{pool?.maxDepth}</Typography>
+                            <Typography>
+                              {pool?.recirculationPeriod?.min}
+                            </Typography>
                           </Grid>
 
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -1265,7 +1267,9 @@ function GestionarPiscinas() {
                             >
                               P. Recirculación máximo
                             </Typography>
-                            <Typography>{pool?.meanDepth}</Typography>
+                            <Typography>
+                              {pool?.recirculationPeriod?.max}
+                            </Typography>
                           </Grid>
 
                           <Grid item xs={4} style={{ textAlign: "center" }}>

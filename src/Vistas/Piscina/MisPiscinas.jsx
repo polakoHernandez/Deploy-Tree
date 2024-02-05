@@ -629,7 +629,7 @@ function MisPiscinas() {
                         >
                           P. Recirculación mínima
                         </Typography>
-                        <Typography>{pool?.maxDepth}</Typography>
+                        <Typography>{pool?.recirculationPeriod?.min}</Typography>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
@@ -638,7 +638,7 @@ function MisPiscinas() {
                         >
                           P. Recirculación máximo
                         </Typography>
-                        <Typography>{pool?.meanDepth}</Typography>
+                        <Typography>{pool?.recirculationPeriod?.max}</Typography>
                       </Grid>
 
                       <Grid item xs={4} sx={{ textAlign: "center" }}>
