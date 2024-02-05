@@ -502,8 +502,8 @@ function AsignarParametros() {
     },
 
     guardar: {
-      width: "89%",
-      marginLeft: "6.2%",
+      width: { xs: "91%", sm: "91%", md: "91%", lg: "91%" },
+      marginLeft: { xs: "4%", md: "4.2%", lg: "4.5%" },
       marginTop: "20px",
       marginBottom: "20px",
       backgroundColor: "rgb(0, 164, 228)",
@@ -731,6 +731,9 @@ function AsignarParametros() {
                           sx={{
                             display: "flex",
                             justifyContent: "space-between",
+                            height: "100%",
+                            width: "90%",
+                            marginLeft: "5%",
                           }}
                         >
                           <IconButton onClick={() => quitar(index)}>
@@ -741,31 +744,47 @@ function AsignarParametros() {
                           </IconButton>
                         </Box>
                       </Grid>
+
                       <Grid item xs={12} sm={12} md={6}>
-                        <InputGeneral
-                          icon={<Pool></Pool>}
-                          label="Parámetro"
-                          value={elemento.parameter}
-                          name="nameParam"
-                          onChange={(e) =>
-                            catchDataParametros(
-                              index,
-                              e.target.name,
-                              e.target.value
-                            )
-                          }
-                        />
+                        <Box
+                          sx={{
+                            width: { xs: "100%", sm: "100%", md: "90%" },
+                            marginLeft: { xs: "0%", sm: "0%", md: "5%" },
+                          }}
+                        >
+                          <InputGeneral
+                            icon={<Pool></Pool>}
+                            label="Parámetro"
+                            value={elemento.parameter}
+                            name="nameParam"
+                            onChange={(e) =>
+                              catchDataParametros(
+                                index,
+                                e.target.name,
+                                e.target.value
+                              )
+                            }
+                          />
+                        </Box>
                       </Grid>
                       <Grid item xs={12} sm={12} md={6}>
-                        <InputSelect
-                          icon={<Pool></Pool>}
-                          label="Especificación"
-                          options={listaEspecificaciones}
-                          onChange={(e) =>
-                            catchEspecificacion(e.target.textContent, index)
-                          }
-                        />
+                        <Box
+                          sx={{
+                            width: { xs: "100%", sm: "100%", md: "90%" },
+                            marginLeft: { xs: "0%", sm: "0%", md: "5%" },
+                          }}
+                        >
+                          <InputSelect
+                            icon={<Pool></Pool>}
+                            label="Especificación"
+                            options={listaEspecificaciones}
+                            onChange={(e) =>
+                              catchEspecificacion(e.target.textContent, index)
+                            }
+                          />
+                        </Box>
                       </Grid>
+
                       {elemento.specification === "Rango" && (
                         <>
                           <Grid item xs={12} sm={6}>
