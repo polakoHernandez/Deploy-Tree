@@ -788,56 +788,78 @@ function AsignarParametros() {
 
                       {elemento.specification === "Rango" && (
                         <>
-                          <Grid item xs={12} sm={6}>
-                            <InputGeneral
-                              type="number"
-                              name="minRange"
-                              icon={<Pool></Pool>}
-                              label="Min Range"
-                              value={elemento.minRange}
-                              onChange={(e) =>
-                                catchDataParametros(
-                                  index,
-                                  e.target.name,
-                                  e.target.value
-                                )
-                              }
-                            />
+                          <Grid item xs={12} sm={12} md={6}>
+                            <Box
+                              sx={{
+                                width: { xs: "100%", sm: "100%", md: "90%" },
+                                marginLeft: { xs: "0%", sm: "0%", md: "5%" },
+                              }}
+                            >
+                              <InputGeneral
+                                type="number"
+                                name="minRange"
+                                icon={<Pool></Pool>}
+                                label="Rango mínimo"
+                                value={elemento.minRange}
+                                onChange={(e) =>
+                                  catchDataParametros(
+                                    index,
+                                    e.target.name,
+                                    e.target.value
+                                  )
+                                }
+                              />
+                            </Box>
                           </Grid>
-                          <Grid item xs={12} sm={6}>
-                            <InputGeneral
-                              type="number"
-                              name="maxRange"
-                              icon={<Pool></Pool>}
-                              label="Max Range"
-                              value={elemento.maxRange}
-                              onChange={(e) =>
-                                catchDataParametros(
-                                  index,
-                                  e.target.name,
-                                  e.target.value
-                                )
-                              }
-                            />
+                          <Grid item xs={12} sm={12} md={6}>
+                            <Box
+                              sx={{
+                                width: { xs: "100%", sm: "100%", md: "90%" },
+                                marginLeft: { xs: "0%", sm: "0%", md: "5%" },
+                              }}
+                            >
+                              <InputGeneral
+                                type="number"
+                                name="maxRange"
+                                icon={<Pool></Pool>}
+                                label="Rango máximo"
+                                value={elemento.maxRange}
+                                onChange={(e) =>
+                                  catchDataParametros(
+                                    index,
+                                    e.target.name,
+                                    e.target.value
+                                  )
+                                }
+                              />
+                            </Box>
                           </Grid>
                         </>
                       )}
                       {elemento.specification === "Valor Maximo" && (
-                        <Grid item xs={12} sm={6}>
-                          <InputGeneral
-                            value={elemento.maximo}
-                            icon={<Pool></Pool>}
-                            label="Máximo"
-                            name="maxValueSpecification"
-                            // value={elemento.maximo}
-                            onChange={(e) =>
-                              catchDataParametros(
-                                index,
-                                e.target.name,
-                                e.target.value
-                              )
-                            }
-                          />
+                        <Grid item xs={12} sm={12} md={6}>
+                          <Box
+                            sx={{
+                              // backgroundColor: "red",
+                              width: { xs: "100%", sm: "100%", md: "90%" },
+                              marginLeft: { xs: "0%", sm: "0%", md: "5%" },
+                            }}
+                          >
+                            <InputGeneral
+                              value={elemento.maximo}
+                              icon={<Pool></Pool>}
+                              label="Máximo"
+                              name="maxValueSpecification"
+                              // value={elemento.maximo}
+                              onChange={(e) =>
+                                catchDataParametros(
+                                  index,
+                                  e.target.name,
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </Box>
                         </Grid>
                       )}
                       {elemento.specification === "Analisis y reporte" && (
