@@ -73,7 +73,7 @@ function VerParamtrosPiscinas() {
           // console.log(piscina);
           // console.log(registro);
 
-          console.log(responeData.parameterizations);
+          console.log({ EstoEnvio: responeData.parameterizations });
           setData(responeData.parameterizations);
           setCargando(false);
           break;

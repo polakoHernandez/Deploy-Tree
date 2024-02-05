@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styled from "@emotion/styled";
-import { Grid, IconButton } from "@mui/material";
+import { Grid, IconButton, Input } from "@mui/material";
 import InputGeneral from "../General/InputGeneral";
 import { Close, Poll, Pool } from "@mui/icons-material";
 import { useState, useEffect } from "react";
@@ -41,6 +41,8 @@ export default function ModalUpdateParametros({ data, open, close }) {
     });
   }, [data]);
 
+  console.log(data.typeValidation);
+
   return (
     <div>
       <Modal
@@ -70,38 +72,34 @@ export default function ModalUpdateParametros({ data, open, close }) {
                 overflowY: "scroll",
               }}
             >
-              <Grid container spacing={2} sx={{ height: "100%" }}>
-                <Grid item xs={12} sm={6}>
-                  <InputGeneral
-                    value={dataUpdata.nombre}
-                    label="Nombre"
-                    icon={<Pool></Pool>}
-                  ></InputGeneral>
-                  <Typography></Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <InputGeneral
-                    value={dataUpdata.responsable}
-                    label="Responsable"
-                    icon={<Pool></Pool>}
-                  ></InputGeneral>
-
-                  <Typography>{data?.name}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <InputGeneral
-                    value={dataUpdata.piscina}
-                    label="Piscina"
-                    icon={<Pool></Pool>}
-                  ></InputGeneral>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Button variant="contained" fullWidth>
-                    Guardar
-                  </Button>
-                </Grid>
-              </Grid>
+              {data?.typeValidation === "Norma"
+                ? data.normativityId.parameter.map((parametro) =>
+                    parametro.name === "Cloro" ? (
+                      <Grid container spacing={2} sx={{ height: "100%" }}>
+                        <Grid xs={6}>
+                          <InputGeneral
+                            icon={<Pool></Pool>}
+                            value={parametro?.name}
+                          ></InputGeneral>
+                        </Grid>
+                        <Grid xs={6}>
+                          <InputGeneral
+                            icon={<Pool></Pool>}
+                            value={parametro?.specification}
+                          ></InputGeneral>
+                        </Grid>
+                        <Grid xs={6}>
+                          <InputGeneral
+                            icon={<Pool></Pool>}
+                            value={parametro?.maxValueSpecification}
+                          ></InputGeneral>
+                        </Grid>
+                      </Grid>
+                    ) : (
+                      ""
+                    )
+                  )
+                : ""}
             </Box>
           </Box>
         </Box>
