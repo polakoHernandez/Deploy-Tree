@@ -39,22 +39,18 @@ function Principal() {
       switch (respuesta.status) {
         case 200:
           const respo = await respuesta.json();
-          console.log(respo.notifications);
           notificacion();
 
           break;
 
         case 401:
           const response = await respuesta.json();
-          console.log(response);
           break;
 
         default:
           break;
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

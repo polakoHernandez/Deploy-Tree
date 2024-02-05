@@ -627,7 +627,7 @@ function MisPiscinas() {
                         <Typography
                           sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                         >
-                          P. Recirculación mínimao
+                          P. Recirculación mínima
                         </Typography>
                         <Typography>{pool?.maxDepth}</Typography>
                       </Grid>

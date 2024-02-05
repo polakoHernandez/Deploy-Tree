@@ -420,19 +420,19 @@ function CrearPiscina() {
   // Listaod de opciones para los inputs
   const usos = [
     {
-      label: "PRIVADA",
+      label: "Privada",
     },
     {
-      label: "PUBLICA",
+      label: "Publica",
     },
   ];
 
   const caracteristicas = [
     {
-      label: "CUBIERTA",
+      label: "Cubierta",
     },
     {
-      label: "DESCUBIERTA",
+      label: "Descubierta",
     },
   ];
 
@@ -460,10 +460,10 @@ function CrearPiscina() {
       label: "Piscina de olas",
     },
     {
-      label: "Atracción acuatica interactiva",
+      label: "Atraccion acuatica interactiva",
     },
     {
-      label: "Especial terapéutica",
+      label: "Especial terapeutica",
     },
     {
       label: "Especial termales",
@@ -472,14 +472,14 @@ function CrearPiscina() {
 
   const forma = [
     {
-      label: "RECTANGULAR",
+      label: "Rectangular",
     },
 
     {
-      label: "CIRCULAR",
+      label: "Circular",
     },
     {
-      label: "OVALADA",
+      label: "Ovalada",
     },
   ];
 
@@ -491,7 +491,7 @@ function CrearPiscina() {
       label: "Renovacion continua",
     },
     {
-      label: "desalojo completo e intermintente",
+      label: "Desalojo completo e intermintente",
     },
   ];
 

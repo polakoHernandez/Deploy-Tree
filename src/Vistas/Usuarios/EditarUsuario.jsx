@@ -117,10 +117,10 @@ function EditarUsuario() {
 
   const roles = [
     {
-      label: "GERENTE",
+      label: "Gerente",
     },
     {
-      label: "GESTOR",
+      label: "Gestor",
     },
   ];
 

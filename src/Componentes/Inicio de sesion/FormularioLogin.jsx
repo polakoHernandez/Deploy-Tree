@@ -81,10 +81,33 @@ function FormularioLogin({ estilo }) {
         }
       );
 
+      let respuesta = "";
+
       switch (response.status) {
         case 400:
+          respuesta = await response.json();
           setOpen(true);
-          setMensaje("Credenciales Invalidas");
+          setMensaje(respuesta.msg);
+          setColor("error");
+          setCargando(false);
+
+          break;
+
+        case 404:
+          respuesta = await response.json();
+
+          setOpen(true);
+          setMensaje(respuesta.msg);
+          setColor("error");
+          setCargando(false);
+
+          break;
+
+        case 403:
+          respuesta = await response.json();
+
+          setOpen(true);
+          setMensaje(respuesta.msg);
           setColor("error");
           setCargando(false);
 
@@ -93,13 +116,11 @@ function FormularioLogin({ estilo }) {
         case 200:
           const responseData = await response.json();
           const { user, token } = responseData;
-          console.log(token);
           setCargando(false);
           localStorage.setItem("clave", token);
           localStorage.setItem("user", user.name);
           localStorage.setItem("id", user._id);
           localStorage.setItem("rol", user.role);
-          // console.log(responseData);
           navigate(`/principal?data=${responseData}`, {
             state: {
               user,

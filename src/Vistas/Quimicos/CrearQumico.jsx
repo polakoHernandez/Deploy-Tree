@@ -7,7 +7,7 @@ import InputBuscar from "../../Componentes/General/InputBuscar";
 import InputGeneral from "../../Componentes/General/InputGeneral";
 import InputSelect from "../../Componentes/General/InputSelect";
 import Alertas from "../../Componentes/General/Alertas";
-
+import axios from "axios";
 const CrearQuimico = () => {
   //   Estados para mover el fromualrio
   const [mover, setMover] = useState(false); //MOvercon Piscina
@@ -270,10 +270,10 @@ const CrearQuimico = () => {
         body: body,
       }
     );
-
+    let respuesta = "";
     switch (response.status) {
       case 200:
-        const respuesta = await response.json();
+        respuesta = await response.json();
         setOpenAlerta(true);
         setMensaje("producto creado con exíto");
         setColor("success");
@@ -282,27 +282,37 @@ const CrearQuimico = () => {
         }
 
         setHabilitar(false);
+        console.log(respuesta);
+
         break;
 
       case 400:
+        respuesta = await response.json();
+
         setHabilitar(false);
         setOpenAlerta(true);
-        setMensaje("Todos los campos son obligatorios");
+        setMensaje(respuesta?.errors[0]?.msg);
         setColor("error");
+        console.log(respuesta);
         break;
 
       case 401:
+        respuesta = await response.json();
+
         setHabilitar(false);
         setOpenAlerta(true);
         setColor("error");
+        console.log(respuesta);
         break;
 
       case 500:
-        console.log(await response.json());
+        respuesta = await response.json();
+
         setHabilitar(false);
         setOpenAlerta(true);
         setMensaje("Error en el sevidor");
         setColor("error");
+        console.log(respuesta);
         break;
     }
     setHabilitar(false);
