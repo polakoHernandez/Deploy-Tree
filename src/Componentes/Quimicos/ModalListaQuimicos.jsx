@@ -160,8 +160,13 @@ export default function ModalListaQuimicos({ data, open, close }) {
                 position: "absolute",
                 width: "300px",
                 height: "300px",
-                top: "-160px",
-                left: "-170px",
+                top: { xs: "-190px", sm: "-190px", md: "-160px", lg: "-160px" },
+                left: {
+                  xs: "-190px",
+                  sm: "-190px",
+                  md: "-170px",
+                  lg: "-170px",
+                },
                 backgroundColor:
                   data?.chemicalFunction === "Desinfectante"
                     ? "red"
@@ -385,7 +390,10 @@ export default function ModalListaQuimicos({ data, open, close }) {
                     Fecha de vencimiento
                   </Typography>
                   <Typography>
-                    {new Date(data?.expirationDate).toLocaleDateString()}
+                    {new Date(
+                      new Date(data?.expirationDate).getTime() +
+                        24 * 60 * 60 * 1000
+                    ).toLocaleDateString()}
                   </Typography>
                 </Grid>
                 <Grid xs={12} sm={12} md={12} lg={3}>

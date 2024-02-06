@@ -23,6 +23,7 @@ function InputBuscar({ label, onChange, value, ref, name }) {
         {label}
       </label>
       <input
+        value={value}
         name={name}
         ref={ref}
         // value={value}

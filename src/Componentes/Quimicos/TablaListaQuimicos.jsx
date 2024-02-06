@@ -1,21 +1,13 @@
 import React, { useState } from "react";
-import {
-  Box,
-  IconButton,
-  Typography,
-  Tooltip,
-  CircularProgress,
-} from "@mui/material";
+import { Box, IconButton, Tooltip, CircularProgress } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import "../../Estilos/General/tabla.css";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-// import ModalData from "./ModalData";
 import { useNavigate } from "react-router-dom";
 import PersonOffIcon from "@mui/icons-material/PersonOff";
 import PersonIcon from "@mui/icons-material/Person";
-import ModalDataParametros from "../../Componentes/Parametros/ModalDataParametros";
-import ModalUpdateParametros from "../../Componentes/Parametros/ModalUpdateParametros";
+
 import ModalListaQuimicos from "./ModalListaQuimicos";
 
 export default function TablaListaQuimicos({
@@ -171,7 +163,7 @@ export default function TablaListaQuimicos({
           <Tooltip title="Editar">
             <IconButton
               onClick={() => {
-                editarPersona(params.row);
+                navigate(`/actualizarQuimico?id=${params?.row?._id}`);
               }}
             >
               <EditIcon sx={{ color: "green" }}></EditIcon>
@@ -259,12 +251,6 @@ export default function TablaListaQuimicos({
         open={open}
         close={close}
       ></ModalListaQuimicos>
-
-      <ModalUpdateParametros
-        data={datosRow}
-        open={openUpdate}
-        close={() => setopenUpdate(false)}
-      ></ModalUpdateParametros>
     </Box>
   );
 }
