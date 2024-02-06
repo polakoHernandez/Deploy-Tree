@@ -396,18 +396,6 @@ export default function ModalListaQuimicos({ data, open, close }) {
                     ).toLocaleDateString()}
                   </Typography>
                 </Grid>
-                <Grid xs={12} sm={12} md={12} lg={3}>
-                  <Typography
-                    sx={{
-                      width: "90%",
-                      fontFamily: "'Nunito Sans', sans-serif",
-                      borderBottom: "3px solid rgb(0,164,228)",
-                    }}
-                  >
-                    Unidad
-                  </Typography>
-                  <Typography>{data?.units}</Typography>
-                </Grid>
               </Grid>
             </Box>
           </Box>

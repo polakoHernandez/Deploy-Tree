@@ -154,7 +154,7 @@ export default function TablaListaQuimicos({
     {
       field: "accion",
       headerName: "Administrar",
-      width: 219,
+      width: 120,
       headerAlign: "center",
       renderCell: (params) => (
         <Box
@@ -176,22 +176,6 @@ export default function TablaListaQuimicos({
               }}
             >
               <VisibilityIcon sx={{ color: "blue" }}></VisibilityIcon>
-            </IconButton>
-          </Tooltip>
-          <Tooltip title={params.row.state ? "Inhablilitar" : "Habilitar"}>
-            <IconButton
-              onClick={() =>
-                inhabilitarUsuario(params.row._id, params.row.state)
-              }
-              disabled={habilitar}
-            >
-              {habilitar ? (
-                <CircularProgress size={25}></CircularProgress>
-              ) : params.row.state ? (
-                <PersonOffIcon sx={{ color: "red" }}></PersonOffIcon>
-              ) : (
-                <PersonIcon sx={{ color: "green" }}></PersonIcon>
-              )}
             </IconButton>
           </Tooltip>
         </Box>
@@ -223,7 +207,7 @@ export default function TablaListaQuimicos({
     >
       <DataGrid
         sx={{
-          width: { xs: "90%", sm: "90%", md: "90%", lg: "1050px" },
+          width: { xs: "90%", sm: "90%", md: "80%", lg: "952px" },
         }}
         rows={data}
         columns={columns.map((col) => ({

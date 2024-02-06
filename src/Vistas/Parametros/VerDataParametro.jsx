@@ -353,9 +353,10 @@ function VerDataParametro() {
 
     containerEncabezado: {
       //! para cambiar el color backgroundColor: "red",
-      height: "10%",
+      height: "8%",
       display: "flex",
       justifyContent: "end",
+      // backgroundColor: "red",
     },
 
     containerFormulario: {
@@ -392,9 +393,8 @@ function VerDataParametro() {
       backgroundColor: "rgb(0,164,228)",
       color: "white",
       border: "",
+      height: "100%",
       width: "150px",
-      height: "40px",
-      marginTop: { xs: "3.4vh" },
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -511,12 +511,6 @@ function VerDataParametro() {
       ></SearchAppBar>
       <Box sx={{ ...styles.mainBox }}>
         <Box sx={{ ...styles.containerEncabezado }}>
-          {/* <Typography
-            sx={{ ...styles.listaNormas }}
-            onClick={() => setContador(2)}
-          >
-            lista de normas
-          </Typography> */}
           <Typography
             sx={{ ...styles.crearNorma }}
             onClick={() => setContador(1)}
