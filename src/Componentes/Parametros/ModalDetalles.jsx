@@ -87,19 +87,19 @@ export default function ModalDetalles({ data, open, close }) {
                 </Grid>
                 <Grid item xs={12} sm={12} md={3} mb={5}>
                   <Typography sx={estilos.subtitle}>
-                    Medicion deseada mínimo
+                    Medición deseada mínimo
                   </Typography>
                   <Typography>{data.minimo}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={3}>
                   <Typography sx={estilos.subtitle}>
-                    Medicion deseada maxíma
+                    Medición deseada maxíma
                   </Typography>
                   <Typography>{data.maximo}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={3}>
                   <Typography sx={estilos.subtitle}>
-                    Medicion inicial
+                    Medición inicial
                   </Typography>
                   <Typography>{data.real}</Typography>
                 </Grid>
@@ -139,6 +139,7 @@ const estilos = {
     justifyContent: "center",
     fontFamily: "'Nunito Sans', sans-serif",
     fontSize: "25px",
+    marginBottom: "30px",
   },
 
   subtitle: {

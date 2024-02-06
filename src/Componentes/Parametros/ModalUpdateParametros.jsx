@@ -9,6 +9,7 @@ import InputGeneral from "../General/InputGeneral";
 import { Add, Close, Delete, Poll, Pool } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 import InputSelect from "../General/InputSelect";
+import Alertas from "../../Componentes/General/Alertas";
 
 const style = {
   position: "absolute",
@@ -29,6 +30,10 @@ export default function ModalUpdateParametros({ data, open, close }) {
     parameter: [{ nameParam: "", specification: "" }],
   });
 
+  const [habilitar, setHabilitar] = useState(false);
+  const [openAlerta, setOpenAlerta] = useState(false);
+  const [mensaje, setMensaje] = useState("");
+  const [color, setColor] = useState("");
   console.log(data.typeValidation);
 
   const listaOpciones = [
@@ -117,6 +122,81 @@ export default function ModalUpdateParametros({ data, open, close }) {
     });
   };
 
+  const capturarValores = (name, value, index) => {
+    setDataParameter((prevData) => {
+      const updatedParameters = [...prevData.parameter];
+      updatedParameters[index] = {
+        ...updatedParameters[index],
+        [name]: value,
+      };
+      return { ...prevData, parameter: updatedParameters };
+    });
+
+    console.log(dataParameter.parameter);
+  };
+
+  const actualizarParametros = async () => {
+    setHabilitar(true);
+
+    const response = await fetch(
+      `https://treea-piscinas-api.vercel.app/v1/parameterization/${data._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "x-token": localStorage.getItem("clave"),
+        },
+        body: JSON.stringify({
+          parameters: dataParameter.parameter,
+        }),
+      }
+    );
+    let respuesta = "";
+    switch (response.status) {
+      case 200:
+        respuesta = await response.json();
+        setOpenAlerta(true);
+        setMensaje("Parametro acualizado con exíto");
+        setColor("success");
+
+        setHabilitar(false);
+        console.log(respuesta);
+
+        break;
+
+      case 400:
+        respuesta = await response.json();
+
+        setHabilitar(false);
+        setOpenAlerta(true);
+        setMensaje(respuesta?.errors[0]?.msg);
+        setColor("error");
+        console.log(respuesta);
+        break;
+
+      case 401:
+        respuesta = await response.json();
+
+        setHabilitar(false);
+        setOpenAlerta(true);
+        setColor("error");
+        console.log(respuesta);
+        break;
+
+      case 500:
+        respuesta = await response.json();
+
+        setHabilitar(false);
+        setOpenAlerta(true);
+        setMensaje("Error en el sevidor");
+        setColor("error");
+        console.log(respuesta);
+        break;
+    }
+    setHabilitar(false);
+  };
+
   useEffect(() => {
     setDataParameter({
       parameter: data?.parameters || [{ name: "", specification: "" }],
@@ -154,42 +234,25 @@ export default function ModalUpdateParametros({ data, open, close }) {
             >
               {dataParameter?.parameter?.map((parametro, index) => (
                 <Grid container key={index}>
-                  {/* Seccion de botones para agrega    */}
-                  <Grid xs={12}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <IconButton onClick={() => eliminarParametro(index)}>
-                        <Delete></Delete>
-                      </IconButton>
-                      <IconButton onClick={agregarParametro}>
-                        <Add></Add>
-                      </IconButton>
-                    </Box>
-                  </Grid>
                   {/* Seccion de inut de parametro y especificación */}
                   <Grid item xs={6}>
-                    <InputSelect
+                    <InputGeneral
+                      disabled={true}
                       options={listaOpciones}
                       icon={<Pool></Pool>}
                       label="Parámetro"
-                      value={{
-                        label: dataParameter?.parameter[index]?.nameParam || "",
-                      }}
+                      value={dataParameter?.parameter[index]?.nameParam || ""}
                       onChange={(e) =>
                         seleccionarOpcion(e.target.textContent, index)
                       }
-                    ></InputSelect>
+                    ></InputGeneral>
                   </Grid>
                   <Grid item xs={6}>
-                    <InputSelect
-                      // disabled={true}
-                      value={{
-                        label: dataParameter?.parameter[index]?.specification,
-                      }}
+                    <InputGeneral
+                      disabled={true}
+                      value={
+                        dataParameter?.parameter[index]?.specification || ""
+                      }
                       options={[{ label: "No data" }]}
                       icon={<Pool></Pool>}
                       label="Especificación"
@@ -199,7 +262,7 @@ export default function ModalUpdateParametros({ data, open, close }) {
                           e.target.textContent
                         )
                       }
-                    ></InputSelect>
+                    ></InputGeneral>
                   </Grid>
                   {/* Seccion de Inuts rango minimo, maximo y valor maximo */}
                   {dataParameter?.parameter[index]?.specification ===
@@ -214,6 +277,13 @@ export default function ModalUpdateParametros({ data, open, close }) {
                           label="Valor maximo"
                           icon={<Pool></Pool>}
                           type="number"
+                          onChange={(e) =>
+                            capturarValores(
+                              "maxValueSpecification",
+                              e.target.value,
+                              index
+                            )
+                          }
                         ></InputGeneral>
                       </Grid>
                     </Box>
@@ -226,6 +296,9 @@ export default function ModalUpdateParametros({ data, open, close }) {
                           label="Rango mínimo"
                           icon={<Pool></Pool>}
                           type="number"
+                          onChange={(e) =>
+                            capturarValores("minRange", e.target.value, index)
+                          }
                         ></InputGeneral>
                       </Grid>
                       <Grid xs={12}>
@@ -234,6 +307,9 @@ export default function ModalUpdateParametros({ data, open, close }) {
                           label="Rango máximo"
                           icon={<Pool></Pool>}
                           type="number"
+                          onChange={(e) =>
+                            capturarValores("maxRange", e.target.value, index)
+                          }
                         ></InputGeneral>
                       </Grid>
                     </Box>
@@ -245,6 +321,8 @@ export default function ModalUpdateParametros({ data, open, close }) {
 
               <Grid item xs={12}>
                 <Button
+                  disabled={habilitar}
+                  onClick={() => actualizarParametros()}
                   variant="contained"
                   sx={{
                     width: "90%",
@@ -264,6 +342,12 @@ export default function ModalUpdateParametros({ data, open, close }) {
           </Box>
         </Box>
       </Modal>
+      <Alertas
+        open={openAlerta}
+        mensaje={mensaje}
+        severity={color}
+        cerrar={() => setOpenAlerta(false)}
+      ></Alertas>
     </div>
   );
 }
