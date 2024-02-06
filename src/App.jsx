@@ -18,6 +18,7 @@ import VerParamtrosPiscinas from "./Vistas/Parametros/VerParamtrosPiscinas";
 import Notificaciones from "./Vistas/notificaciones/Notificaciones";
 import NormasVigentes from "./Vistas/Parametros/NormasVigentes";
 import VerDataParametro from "./Vistas/Parametros/VerDataParametro";
+import ListaQuimicos from "./Vistas/Quimicos/ListaQuimicos";
 function App() {
   return (
     <>
@@ -84,12 +85,17 @@ function App() {
             element={<Notificaciones></Notificaciones>}
           ></Route>
           <Route
-            path="verNormasVigentes"
+            path="/verNormasVigentes"
             element={<NormasVigentes></NormasVigentes>}
           ></Route>
           <Route
-            path="verDataParametro"
+            path="/verDataParametro"
             element={<VerDataParametro></VerDataParametro>}
+          ></Route>
+
+          <Route
+            path="/listaQuimicos"
+            element={<ListaQuimicos></ListaQuimicos>}
           ></Route>
         </Routes>
       </BrowserRouter>
