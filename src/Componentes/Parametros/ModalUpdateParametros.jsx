@@ -110,10 +110,24 @@ export default function ModalUpdateParametros({ data, open, close }) {
     }));
   };
 
+  //*Esta funcion agregar parametros cuando presionamos click en boton add
   const agregarParametro = () => {
     setDataParameter((prevData) => {
       const arrayTemp = [...prevData.parameter];
       arrayTemp.push({ name: "", specification: "" });
+
+      return { ...prevData, parameter: arrayTemp };
+    });
+  };
+
+  const eliminarParametro = (indice) => {
+    if (dataParameter.parameter.length === 1) {
+      return;
+    }
+
+    setDataParameter((prevData) => {
+      const arrayTemp = [...prevData.parameter];
+      arrayTemp.splice(indice, 1);
 
       return { ...prevData, parameter: arrayTemp };
     });
@@ -158,7 +172,7 @@ export default function ModalUpdateParametros({ data, open, close }) {
                         justifyContent: "space-between",
                       }}
                     >
-                      <IconButton>
+                      <IconButton onClick={() => eliminarParametro(index)}>
                         <Delete></Delete>
                       </IconButton>
                       <IconButton onClick={agregarParametro}>
@@ -172,6 +186,9 @@ export default function ModalUpdateParametros({ data, open, close }) {
                       options={listaOpciones}
                       icon={<Pool></Pool>}
                       label="Parámetro"
+                      value={{
+                        label: dataParameter.parameter[index].name,
+                      }}
                       onChange={(e) =>
                         seleccionarOpcion(e.target.textContent, index)
                       }
@@ -194,40 +211,41 @@ export default function ModalUpdateParametros({ data, open, close }) {
                       }
                     ></InputSelect>
                   </Grid>
+                  {/* Seccion de Inuts rango minimo, maximo y valor maximo */}
+                  {dataParameter.parameter[index].specification ===
+                  "Valor maximo" ? (
+                    <Box>
+                      <Grid xs={12}>
+                        <InputGeneral
+                          label="Valor maximo"
+                          icon={<Pool></Pool>}
+                          type="number"
+                        ></InputGeneral>
+                      </Grid>
+                    </Box>
+                  ) : dataParameter.parameter[index].specification ===
+                    "Rango" ? (
+                    <Box>
+                      <Grid xs={12}>
+                        <InputGeneral
+                          label="Rango mínimo"
+                          icon={<Pool></Pool>}
+                          type="number"
+                        ></InputGeneral>
+                      </Grid>
+                      <Grid xs={12}>
+                        <InputGeneral
+                          label="Rango máximo"
+                          icon={<Pool></Pool>}
+                          type="number"
+                        ></InputGeneral>
+                      </Grid>
+                    </Box>
+                  ) : (
+                    ""
+                  )}
                 </Grid>
               ))}
-
-              {/* Seccion de Inuts rango minimo, maximo y valor maximo */}
-              {dataParameter.parameter[0].specification === "Valor maximo" ? (
-                <Box>
-                  <Grid xs={12}>
-                    <InputGeneral
-                      label="Valor maximo"
-                      icon={<Pool></Pool>}
-                      type="number"
-                    ></InputGeneral>
-                  </Grid>
-                </Box>
-              ) : dataParameter.parameter[0].specification === "Rango" ? (
-                <Box>
-                  <Grid xs={12}>
-                    <InputGeneral
-                      label="Rango mínimo"
-                      icon={<Pool></Pool>}
-                      type="number"
-                    ></InputGeneral>
-                  </Grid>
-                  <Grid xs={12}>
-                    <InputGeneral
-                      label="Rango máximo"
-                      icon={<Pool></Pool>}
-                      type="number"
-                    ></InputGeneral>
-                  </Grid>
-                </Box>
-              ) : (
-                ""
-              )}
             </Box>
           </Box>
         </Box>
