@@ -6,7 +6,7 @@ import Modal from "@mui/material/Modal";
 import styled from "@emotion/styled";
 import { Grid, IconButton, Input } from "@mui/material";
 import InputGeneral from "../General/InputGeneral";
-import { Close, Poll, Pool } from "@mui/icons-material";
+import { Add, Close, Delete, Poll, Pool } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 import InputSelect from "../General/InputSelect";
 
@@ -31,6 +31,10 @@ export default function ModalUpdateParametros({ data, open, close }) {
     piscina: data?.poolId?.[0]?.name,
   });
 
+  const [dataParameter, setDataParameter] = useState({
+    parameter: [{ name: "", specification: "" }],
+  });
+
   useEffect(() => {
     // Actualizar el estado cuando las props (data) cambien
     setDataUpdate({
@@ -42,6 +46,78 @@ export default function ModalUpdateParametros({ data, open, close }) {
   }, [data]);
 
   console.log(data.typeValidation);
+
+  const listaOpciones = [
+    {
+      label: "Cloro",
+    },
+
+    {
+      label: "Ph",
+    },
+  ];
+
+  //*Funcion para seleccionar prametro y mostrar valor maximo o rango minimo y maximo
+  const seleccionarOpcion = (parametro, index) => {
+    if (parametro === "Cloro") {
+      setDataParameter((prevData) => {
+        const temArray = [...prevData.parameter];
+        if (temArray[index]) {
+          temArray[index] = {
+            name: parametro,
+            specification: "Valor maximo",
+            maxValueSpecification:
+              dataParameter.parameter[index].maxValueSpecification,
+          };
+        }
+
+        return { ...prevData, parameter: temArray };
+      });
+    } else if (parametro === "") {
+      setDataParameter((prevData) => {
+        const temArray = [...prevData.parameter];
+        if (temArray[index]) {
+          temArray[index] = {
+            name: parametro,
+            specification: "",
+          };
+        }
+
+        return { ...prevData, parameter: temArray };
+      });
+    } else if (parametro === "Ph") {
+      setDataParameter((prevData) => {
+        const temArray = [...prevData.parameter];
+        if (temArray[index]) {
+          temArray[index] = {
+            name: parametro,
+            specification: "Rango",
+            minRange: "",
+            maxRange: "",
+          };
+        }
+
+        return { ...prevData, parameter: temArray };
+      });
+    }
+  };
+
+  //*Funcion para capturar el valor d elos inputs rango minimo  maximo y Vamor maximo
+  const catchDataParametro = (value, name) => {
+    setDataParameter((prevData) => ({
+      ...prevData,
+      parameter: [{ ...prevData.parameter[0], [name]: value }],
+    }));
+  };
+
+  const agregarParametro = () => {
+    setDataParameter((prevData) => {
+      const arrayTemp = [...prevData.parameter];
+      arrayTemp.push({ name: "", specification: "" });
+
+      return { ...prevData, parameter: arrayTemp };
+    });
+  };
 
   return (
     <div>
@@ -67,39 +143,91 @@ export default function ModalUpdateParametros({ data, open, close }) {
             <Typography sx={estilos.titulo}>Actualizar </Typography>
             <Box
               sx={{
-                // backgroundColor: "gray",
+                //backgroundColor: "gray",
                 height: "93%",
                 overflowY: "scroll",
               }}
             >
-              {data?.typeValidation === "Norma"
-                ? data.normativityId.parameter.map((parametro) =>
-                    parametro.name === "Cloro" ? (
-                      <Grid container spacing={2} sx={{ height: "100%" }}>
-                        <Grid xs={6}>
-                          <InputGeneral
-                            icon={<Pool></Pool>}
-                            value={parametro?.name}
-                          ></InputGeneral>
-                        </Grid>
-                        <Grid xs={6}>
-                          <InputGeneral
-                            icon={<Pool></Pool>}
-                            value={parametro?.specification}
-                          ></InputGeneral>
-                        </Grid>
-                        <Grid xs={6}>
-                          <InputGeneral
-                            icon={<Pool></Pool>}
-                            value={parametro?.maxValueSpecification}
-                          ></InputGeneral>
-                        </Grid>
-                      </Grid>
-                    ) : (
-                      ""
-                    )
-                  )
-                : ""}
+              {dataParameter.parameter.map((parametro, index) => (
+                <Grid container key={index}>
+                  {/* Seccion de botones para agrega    */}
+                  <Grid xs={12}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <IconButton>
+                        <Delete></Delete>
+                      </IconButton>
+                      <IconButton onClick={agregarParametro}>
+                        <Add></Add>
+                      </IconButton>
+                    </Box>
+                  </Grid>
+                  {/* Seccion de inut de parametro y especificación */}
+                  <Grid item xs={6}>
+                    <InputSelect
+                      options={listaOpciones}
+                      icon={<Pool></Pool>}
+                      label="Parámetro"
+                      onChange={(e) =>
+                        seleccionarOpcion(e.target.textContent, index)
+                      }
+                    ></InputSelect>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <InputSelect
+                      disabled={true}
+                      value={{
+                        label: dataParameter.parameter[index].specification,
+                      }}
+                      options={[{ label: "No data" }]}
+                      icon={<Pool></Pool>}
+                      label="Especificación"
+                      onChange={(e) =>
+                        catchDataParametro(
+                          "specification",
+                          e.target.textContent
+                        )
+                      }
+                    ></InputSelect>
+                  </Grid>
+                </Grid>
+              ))}
+
+              {/* Seccion de Inuts rango minimo, maximo y valor maximo */}
+              {dataParameter.parameter[0].specification === "Valor maximo" ? (
+                <Box>
+                  <Grid xs={12}>
+                    <InputGeneral
+                      label="Valor maximo"
+                      icon={<Pool></Pool>}
+                      type="number"
+                    ></InputGeneral>
+                  </Grid>
+                </Box>
+              ) : dataParameter.parameter[0].specification === "Rango" ? (
+                <Box>
+                  <Grid xs={12}>
+                    <InputGeneral
+                      label="Rango mínimo"
+                      icon={<Pool></Pool>}
+                      type="number"
+                    ></InputGeneral>
+                  </Grid>
+                  <Grid xs={12}>
+                    <InputGeneral
+                      label="Rango máximo"
+                      icon={<Pool></Pool>}
+                      type="number"
+                    ></InputGeneral>
+                  </Grid>
+                </Box>
+              ) : (
+                ""
+              )}
             </Box>
           </Box>
         </Box>

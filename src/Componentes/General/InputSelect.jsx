@@ -15,6 +15,7 @@ function InputSelect({
   options,
   value,
   inputRef,
+  disabled,
 }) {
   const [see, setSee] = useState(false);
   const theme = createTheme({
@@ -40,6 +41,7 @@ function InputSelect({
           {label}
         </InputLabel>
         <Autocomplete
+          disabled={disabled}
           name={name}
           options={options}
           getOptionLabel={(option) => option.label}
