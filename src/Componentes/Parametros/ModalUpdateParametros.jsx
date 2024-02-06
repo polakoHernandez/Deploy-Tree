@@ -26,7 +26,7 @@ const style = {
 
 export default function ModalUpdateParametros({ data, open, close }) {
   const [dataParameter, setDataParameter] = useState({
-    parameter: [{ name: "", specification: "" }],
+    parameter: [{ nameParam: "", specification: "" }],
   });
 
   console.log(data.typeValidation);
@@ -48,8 +48,8 @@ export default function ModalUpdateParametros({ data, open, close }) {
         const temArray = [...prevData?.parameter];
         if (temArray[index]) {
           temArray[index] = {
-            name: parametro,
-            specification: "Valor maximo",
+            nameParam: parametro,
+            specification: "Valor Maximo",
             maxValueSpecification:
               dataParameter?.parameter[index].maxValueSpecification,
           };
@@ -62,7 +62,7 @@ export default function ModalUpdateParametros({ data, open, close }) {
         const temArray = [...prevData?.parameter];
         if (temArray[index]) {
           temArray[index] = {
-            name: parametro,
+            nameParam: parametro,
             specification: "",
           };
         }
@@ -74,7 +74,7 @@ export default function ModalUpdateParametros({ data, open, close }) {
         const temArray = [...prevData.parameter];
         if (temArray[index]) {
           temArray[index] = {
-            name: parametro,
+            nameParam: parametro,
             specification: "Rango",
             minRange: "",
             maxRange: "",
@@ -177,7 +177,7 @@ export default function ModalUpdateParametros({ data, open, close }) {
                       icon={<Pool></Pool>}
                       label="Parámetro"
                       value={{
-                        label: dataParameter?.parameter[index]?.nameParam,
+                        label: dataParameter?.parameter[index]?.nameParam || "",
                       }}
                       onChange={(e) =>
                         seleccionarOpcion(e.target.textContent, index)
