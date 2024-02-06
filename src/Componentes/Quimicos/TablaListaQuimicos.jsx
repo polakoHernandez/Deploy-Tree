@@ -16,6 +16,7 @@ import PersonOffIcon from "@mui/icons-material/PersonOff";
 import PersonIcon from "@mui/icons-material/Person";
 import ModalDataParametros from "../../Componentes/Parametros/ModalDataParametros";
 import ModalUpdateParametros from "../../Componentes/Parametros/ModalUpdateParametros";
+import ModalListaQuimicos from "./ModalListaQuimicos";
 
 export default function TablaListaQuimicos({
   data,
@@ -168,17 +169,19 @@ export default function TablaListaQuimicos({
           sx={{ display: "flex", justifyContent: "space-around", width: "90%" }}
         >
           <Tooltip title="Editar">
-            <IconButton onClick={() => editarPersona(params.row)}>
+            <IconButton
+              onClick={() => {
+                editarPersona(params.row);
+              }}
+            >
               <EditIcon sx={{ color: "green" }}></EditIcon>
             </IconButton>
           </Tooltip>
           <Tooltip title="Visualizar">
             <IconButton
-              onClick={() =>
-                navigate(
-                  `/verDataParametro?id=${params.row._id}?nombre=${params.row.modifiedBy.name}`
-                )
-              }
+              onClick={() => {
+                setOpen(true), setDatosRows(params.row);
+              }}
             >
               <VisibilityIcon sx={{ color: "blue" }}></VisibilityIcon>
             </IconButton>
@@ -251,11 +254,11 @@ export default function TablaListaQuimicos({
         }
         getCellClassName={(params) => "cell"}
       />
-      <ModalDataParametros
+      <ModalListaQuimicos
         data={datosRow}
         open={open}
         close={close}
-      ></ModalDataParametros>
+      ></ModalListaQuimicos>
 
       <ModalUpdateParametros
         data={datosRow}
