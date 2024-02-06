@@ -242,6 +242,24 @@ export default function ModalUpdateParametros({ data, open, close }) {
                   )}
                 </Grid>
               ))}
+
+              <Grid item xs={12}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: "90%",
+                    marginTop: "10px",
+                    marginLeft: "5%",
+                    marginBottom: "20px",
+                    backgroundColor: "rgb(0,164,228)",
+                    "&:hover": {
+                      backgroundColor: "rgb(0,164,228)",
+                    },
+                  }}
+                >
+                  Guardar
+                </Button>
+              </Grid>
             </Box>
           </Box>
         </Box>

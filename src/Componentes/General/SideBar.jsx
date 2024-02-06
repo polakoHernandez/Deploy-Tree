@@ -483,6 +483,36 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
               </List>
             </Collapse>
 
+            <Collapse in={openQuimicos} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton
+                  onClick={() => navigate("/listaQuimicos")}
+                  sx={{
+                    pl: 4,
+                    "&:hover": {
+                      backgroundColor: "white",
+                    },
+                  }}
+                >
+                  <ListItemText
+                    primary={
+                      <Typography
+                        sx={{
+                          fontFamily: "'Nunito Sans', sans-serif",
+                          color: "white",
+                          "&:hover": {
+                            color: "rgb(0,164,228)",
+                          },
+                        }}
+                      >
+                        Químicos
+                      </Typography>
+                    }
+                  />
+                </ListItemButton>
+              </List>
+            </Collapse>
+
             {/* Quinto item */}
             <ListItemButton
               onClick={() => abrirPerfil()}

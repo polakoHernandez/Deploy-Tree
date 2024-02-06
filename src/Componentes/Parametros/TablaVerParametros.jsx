@@ -229,6 +229,11 @@ export default function TablaVerParametros({
   };
 
   const editarPersona = (data) => {
+    if (data.typeValidation === "Norma") {
+      alert("No se puede actulizar una norma ");
+      return;
+    }
+
     setDatosRows(data);
     setopenUpdate(true);
   };

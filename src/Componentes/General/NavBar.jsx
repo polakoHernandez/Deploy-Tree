@@ -649,6 +649,35 @@ export default function SearchAppBar({
                 />
                 <ChevronRightIcon></ChevronRightIcon>
               </ListItemButton>
+              <ListItemButton
+                onClick={() => navigate("/listaQuimicos")}
+                sx={{
+                  pl: 4,
+                  borderBottom: "1px solid white",
+
+                  // "&:hover": {
+                  //   backgroundColor: "white",
+                  // },
+                }}
+              >
+                <ListItemText
+                  primary={
+                    <Typography
+                      sx={{
+                        fontFamily: "'Nunito Sans', sans-serif",
+                        color: "white",
+                        width: "100%",
+                        // "&:hover": {
+                        //   color: "rgb(0,164,228)",
+                        // },
+                      }}
+                    >
+                      Químicos
+                    </Typography>
+                  }
+                />
+                <ChevronRightIcon></ChevronRightIcon>
+              </ListItemButton>
             </Collapse>
           </ListItemButton>
           <ListItemButton
