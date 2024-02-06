@@ -25,25 +25,9 @@ const style = {
 };
 
 export default function ModalUpdateParametros({ data, open, close }) {
-  const [dataUpdata, setDataUpdate] = useState({
-    nombre: data?.normativityId?.nameNormativity,
-    responsable: data?.name,
-    piscina: data?.poolId?.[0]?.name,
-  });
-
   const [dataParameter, setDataParameter] = useState({
     parameter: [{ name: "", specification: "" }],
   });
-
-  useEffect(() => {
-    // Actualizar el estado cuando las props (data) cambien
-    setDataUpdate({
-      nombre: data?.normativityId?.nameNormativity,
-      responsable: data?.name,
-      piscina: data?.poolId?.[0]?.name,
-      fecha: data?.createAt,
-    });
-  }, [data]);
 
   console.log(data.typeValidation);
 
@@ -61,13 +45,13 @@ export default function ModalUpdateParametros({ data, open, close }) {
   const seleccionarOpcion = (parametro, index) => {
     if (parametro === "Cloro") {
       setDataParameter((prevData) => {
-        const temArray = [...prevData.parameter];
+        const temArray = [...prevData?.parameter];
         if (temArray[index]) {
           temArray[index] = {
             name: parametro,
             specification: "Valor maximo",
             maxValueSpecification:
-              dataParameter.parameter[index].maxValueSpecification,
+              dataParameter?.parameter[index].maxValueSpecification,
           };
         }
 
@@ -75,7 +59,7 @@ export default function ModalUpdateParametros({ data, open, close }) {
       });
     } else if (parametro === "") {
       setDataParameter((prevData) => {
-        const temArray = [...prevData.parameter];
+        const temArray = [...prevData?.parameter];
         if (temArray[index]) {
           temArray[index] = {
             name: parametro,
@@ -133,6 +117,12 @@ export default function ModalUpdateParametros({ data, open, close }) {
     });
   };
 
+  useEffect(() => {
+    setDataParameter({
+      parameter: data?.parameters || [{ name: "", specification: "" }],
+    });
+  }, [data?.parameters]);
+
   return (
     <div>
       <Modal
@@ -157,12 +147,12 @@ export default function ModalUpdateParametros({ data, open, close }) {
             <Typography sx={estilos.titulo}>Actualizar </Typography>
             <Box
               sx={{
-                //backgroundColor: "gray",
-                height: "93%",
+                // backgroundColor: "gray",
+                height: "85%",
                 overflowY: "scroll",
               }}
             >
-              {dataParameter.parameter.map((parametro, index) => (
+              {dataParameter?.parameter?.map((parametro, index) => (
                 <Grid container key={index}>
                   {/* Seccion de botones para agrega    */}
                   <Grid xs={12}>
@@ -187,7 +177,7 @@ export default function ModalUpdateParametros({ data, open, close }) {
                       icon={<Pool></Pool>}
                       label="Parámetro"
                       value={{
-                        label: dataParameter.parameter[index].name,
+                        label: dataParameter?.parameter[index]?.nameParam,
                       }}
                       onChange={(e) =>
                         seleccionarOpcion(e.target.textContent, index)
@@ -196,9 +186,9 @@ export default function ModalUpdateParametros({ data, open, close }) {
                   </Grid>
                   <Grid item xs={6}>
                     <InputSelect
-                      disabled={true}
+                      // disabled={true}
                       value={{
-                        label: dataParameter.parameter[index].specification,
+                        label: dataParameter?.parameter[index]?.specification,
                       }}
                       options={[{ label: "No data" }]}
                       icon={<Pool></Pool>}
@@ -212,22 +202,27 @@ export default function ModalUpdateParametros({ data, open, close }) {
                     ></InputSelect>
                   </Grid>
                   {/* Seccion de Inuts rango minimo, maximo y valor maximo */}
-                  {dataParameter.parameter[index].specification ===
-                  "Valor maximo" ? (
+                  {dataParameter?.parameter[index]?.specification ===
+                  "Valor Maximo" ? (
                     <Box>
                       <Grid xs={12}>
                         <InputGeneral
+                          value={
+                            dataParameter?.parameter[index]
+                              ?.maxValueSpecification
+                          }
                           label="Valor maximo"
                           icon={<Pool></Pool>}
                           type="number"
                         ></InputGeneral>
                       </Grid>
                     </Box>
-                  ) : dataParameter.parameter[index].specification ===
+                  ) : dataParameter?.parameter[index]?.specification ===
                     "Rango" ? (
                     <Box>
                       <Grid xs={12}>
                         <InputGeneral
+                          value={dataParameter?.parameter[index]?.minRange}
                           label="Rango mínimo"
                           icon={<Pool></Pool>}
                           type="number"
@@ -235,6 +230,7 @@ export default function ModalUpdateParametros({ data, open, close }) {
                       </Grid>
                       <Grid xs={12}>
                         <InputGeneral
+                          value={dataParameter?.parameter[index]?.maxRange}
                           label="Rango máximo"
                           icon={<Pool></Pool>}
                           type="number"
