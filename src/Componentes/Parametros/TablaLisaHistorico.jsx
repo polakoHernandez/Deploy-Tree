@@ -15,6 +15,7 @@ export default function TablaLisaHistorico({
   idPool,
   renderizar,
 }) {
+  console.log({ ESTE: data });
   const [rowIdCounter, setRowIdCounter] = useState(1);
   const [openModalAjustar, setOpenModalAjustar] = useState(false);
   const [abrirModal, setAbrirModal] = useState(false);
@@ -94,6 +95,13 @@ export default function TablaLisaHistorico({
             justifyContent: "center",
           }}
         >
+          {/**
+           
+           param.chlorine.message  == paramas.value 
+           nameParam= paramas.row.nombre
+
+           
+           */}
           {paramas.row.nombre === "Cloro" && paramas.value === "good" ? (
             <Button color="success" variant="contained">
               {paramas.row.ajustado === true ? "Ajustado" : "cumple"}
@@ -121,16 +129,18 @@ export default function TablaLisaHistorico({
               {paramas.row.ajustado === true ? "Ajustado" : "cumple"}
             </Button>
           ) : (
-            <Button color="primary">
-              {localStorage.getItem("AjustePh") === "true"
-                ? "Ajustado"
-                : "No cumple"}
+            <Button color="error" variant="contained">
+              {
+                // localStorage.getItem("AjustePh") === "true"
+                paramas.row.ajustado === true ? "Ajustado" : "No cumple"
+              }
             </Button>
           )}
         </Box>
       ),
     },
 
+    //*SEGUNDO BTON
     {
       //*Is
       field: "ajustado",

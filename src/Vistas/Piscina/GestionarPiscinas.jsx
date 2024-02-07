@@ -30,6 +30,7 @@ import circular from "../../assets/imagePool/PiscinaCircular.png";
 import rectangular from "../../assets/imagePool/PiscinaRectangular.png";
 import ovalada from "../../assets/imagePool/PiscinaOvalada.png";
 import "../../Estilos/Piscina/misPiscinas.css";
+import { useLocation } from "react-router-dom";
 
 function GestionarPiscinas() {
   const [data, setData] = useState("");
@@ -51,10 +52,10 @@ function GestionarPiscinas() {
   });
 
   document.body.style.overflow = "hidden";
-
+  const [idProp, setIdProp] = useState("");
   const [nombresPiscinas, setNombresPiscinas] = useState([]);
   const [historicoId, setIdHistorico] = useState("");
-
+  const [myCount, setMyCount] = useState(0);
   const [openModalAjustar, setOpenModalAjustar] = useState(false);
   const [renderTabla, setRenderTabla] = useState(0);
 
@@ -81,6 +82,8 @@ function GestionarPiscinas() {
   const [openAlerta, setOpenAlerta] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [color, setColor] = useState("");
+
+  const location = useLocation();
 
   // Estado para controlar las alertas
   const [peticion, setPeticion] = useState(false);
@@ -327,7 +330,10 @@ function GestionarPiscinas() {
           }));
 
           setNombresPiscinas(nombrePiscinas);
-          break;
+          const queryParams = new URLSearchParams(location.search);
+          const id = queryParams.get("id");
+
+          setIdProp(id);
       }
     } catch (error) {
       setCargando(false);
@@ -338,6 +344,16 @@ function GestionarPiscinas() {
   const obetnerId = (idPool) => {
     const respuesta = data?.pools?.find((element) => element?._id === idPool);
     setPool(respuesta);
+  };
+
+  const obtenerIdProp = (idPool) => {
+    if (idPool === null || idPool === "") {
+      return;
+    } else {
+      const respuesta = data?.pools?.find((element) => element?._id === idPool);
+      setPool(respuesta);
+      setContador(2);
+    }
   };
 
   const crearNotificacion = async (id) => {
@@ -568,6 +584,7 @@ function GestionarPiscinas() {
       case 200:
         const response = await respuesta.json();
         // setMiHistorico(response.historyPoolIdFormatted);
+        console.log({ NEIDER: response });
 
         setIdHistoricoRetornado(response?.historyPoolId[0]?._id);
         setIdHistorico(response?.historyPoolId[0]?._id);
@@ -612,8 +629,10 @@ function GestionarPiscinas() {
 
   useEffect(() => {
     listaDeMisPiscinas();
+    obtenerIdProp(idProp);
+
     // setReload(false); // Reset reload flag
-  }, []);
+  }, [idProp]);
 
   useEffect(() => {
     if (pool === "") {

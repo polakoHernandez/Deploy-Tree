@@ -42,6 +42,23 @@ const Notificaciones = () => {
   const [contadorInsumo, setContadorInsumo] = useState(0);
   const [refrescar, setRefrescar] = useState(0);
 
+  const [dataQuimico, setDataQuimico] = useState({
+    nombre: "",
+    funcion: "",
+    imagenProducto: "",
+    fichaTecnica: "",
+    hojaSeguridad: "",
+    concentracion: "",
+    densidad: "",
+    proveedor: "",
+    unidades: "",
+    cantidadMinima: "",
+    ingreso: "",
+    lote: "",
+    fecha: "",
+    disponible: "",
+  });
+
   const incrementar = () => {
     if (contador === 3) {
       return;
@@ -408,11 +425,12 @@ const Notificaciones = () => {
                                   sx={{ marginTop: "8px" }}
                                 />
                               }
-                              onClick={() =>
-                                mostrarPiscina(
-                                  elemento.poolId && elemento.poolId._id
-                                )
-                              }
+                              onClick={() => {
+                                // eliminarNotificacionId(elemento._id);
+                                navigate(
+                                  `/actualizarQuimico?id=${elemento.chemicalProductId._id}`
+                                );
+                              }}
                             >
                               <Typography
                                 sx={{
@@ -466,6 +484,12 @@ const Notificaciones = () => {
                             variant="filled"
                             severity="warning"
                             icon={<ErrorOutline fontSize="inherit" />}
+                            onClick={() => {
+                              eliminarNotificacionId(elemento._id);
+                              navigate(
+                                `/gestionarPiscinas?id=${elemento?.historyPoolId?.poolId?._id}`
+                              );
+                            }}
                             action={
                               <IconButton
                                 color="inherit"
@@ -532,11 +556,12 @@ const Notificaciones = () => {
                                   sx={{ marginTop: "8px" }}
                                 />
                               }
-                              onClick={() =>
+                              onClick={() => {
+                                eliminarNotificacionId(elemento._id);
                                 mostrarPiscina(
                                   elemento.poolId && elemento.poolId._id
-                                )
-                              }
+                                );
+                              }}
                             >
                               <Box
                                 sx={{
