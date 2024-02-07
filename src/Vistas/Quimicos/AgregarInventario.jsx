@@ -552,7 +552,6 @@ function AgregarInventario() {
                       {quimico?.units || "No data"}
                     </Typography>
                   </Box>
-                  <Box sx={{ ...styles.dibujo }}>dibujo</Box>
                 </Box>
               </Box>
               {/* Vista Inventario */}

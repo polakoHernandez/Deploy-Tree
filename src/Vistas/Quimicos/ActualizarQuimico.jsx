@@ -30,6 +30,7 @@ const ActualizarQuimico = () => {
     ingreso: "",
     lote: "",
     fecha: "",
+    disponible: "",
   });
   const [habilitar, setHabilitar] = useState(false);
   const [openAlerta, setOpenAlerta] = useState(false);
@@ -126,9 +127,9 @@ const ActualizarQuimico = () => {
       proveedor: data?.supplier,
       unidades: data?.units,
       cantidadMinima: data?.minQuantity,
-      ingreso: "",
       lote: data?.lot,
       fecha: data?.expirationDate,
+      disponible: data?.availableQuantity,
     }));
   };
 
@@ -269,7 +270,7 @@ const ActualizarQuimico = () => {
     formData.append("supplier", data.proveedor);
     formData.append("units", data.unidades);
     formData.append("minQuantity", data.cantidadMinima);
-    formData.append("availableQuantity", data.ingreso);
+    formData.append("availableQuantity", data.disponible);
     formData.append("lot", data.lote);
     formData.append("expirationDate", data.fecha);
 
@@ -504,12 +505,22 @@ const ActualizarQuimico = () => {
 
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
-                    value={data.fecha}
+                    value={data?.fecha}
                     onChange={catchData}
                     icon={<Pool></Pool>}
                     type="date"
                     label="Fecha de vencimiento"
                     name="fecha"
+                  ></InputGeneral>
+                </Grid>
+                <Grid item xs={12} sm={12} md={4}>
+                  <InputGeneral
+                    value={data?.disponible}
+                    onChange={catchData}
+                    icon={<Pool></Pool>}
+                    type="number"
+                    label="Cantidad disponible"
+                    name="disponible"
                   ></InputGeneral>
                 </Grid>
                 <Grid item xs={12}>

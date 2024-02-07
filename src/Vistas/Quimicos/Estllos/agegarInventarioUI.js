@@ -84,7 +84,7 @@ const styles = {
     display: { xs: "none", sm: "none", md: "block" },
     marginTop: { xs: "50px", sm: "50px", md: "0px" },
     width: { xs: "100%", sm: "100%", md: "50%" },
-    height: { xs: "30%", sm: "10%" },
+    height: { xs: "100%" },
     // backgroundColor: "pink",
   },
 
@@ -100,7 +100,7 @@ const styles = {
   azul: {
     backgroundColor: "rgb(0,164,228)",
     width: "90%",
-    height: { xs: "100px", sm: "100px", md: "200px", lg: "200px" },
+    height: { xs: "90%", sm: "100px", md: "90%", lg: "90%" },
     borderRadius: "15px",
     marginTop: "5px",
     marginLeft: "5%",
@@ -113,6 +113,7 @@ const styles = {
 
   tittle: {
     fontFamily: "'Nunito Sans', sans-serif",
+    fontSize: "30px",
   },
 
   dibujo: {
