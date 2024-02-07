@@ -187,8 +187,16 @@ export default function TablaVerParametros({
           sx={{ display: "flex", justifyContent: "space-around", width: "90%" }}
         >
           <Tooltip title="Editar">
-            <IconButton onClick={() => editarPersona(params.row)}>
-              <EditIcon sx={{ color: "green" }}></EditIcon>
+            <IconButton
+              onClick={() => editarPersona(params.row)}
+              disabled={params.row.typeValidation === "Norma" ? true : false}
+            >
+              <EditIcon
+                sx={{
+                  color:
+                    params.row.typeValidation === "Norma" ? "gray" : "green",
+                }}
+              ></EditIcon>
             </IconButton>
           </Tooltip>
           <Tooltip title="Visualizar">
