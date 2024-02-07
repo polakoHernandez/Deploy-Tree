@@ -312,13 +312,12 @@ function AgregarInventario() {
 
     switch (response.status) {
       case 200:
-        setHabilitar(false);
-        setOpenAlerta(true);
         setMensaje("Agregado con exíto");
         setColor("success");
         setRender(render + 1);
-        obtenerProducto(nombreRender);
 
+        setOpenAlerta(true);
+        setHabilitar(false);
         break;
 
       case 401:
@@ -398,12 +397,12 @@ function AgregarInventario() {
   };
 
   useEffect(() => {
-    obtenerProducto(nombreRender);
+    listarProductosQuimicos();
   }, [render]);
 
   useEffect(() => {
-    listarProductosQuimicos();
-  }, [render]);
+    obtenerProducto(nombreRender);
+  });
 
   useEffect(() => {
     listarinventarioId(quimico?._id);
