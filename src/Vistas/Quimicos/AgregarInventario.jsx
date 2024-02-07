@@ -58,6 +58,7 @@ function AgregarInventario() {
   });
 
   const [render, setRender] = useState(0);
+  const [nombreRender, setNombreRender] = useState("");
 
   //*Funcion para capturar los datos de los texFields
   const catchDataText = (e) => {
@@ -284,7 +285,7 @@ function AgregarInventario() {
     //   (element) => (element.name = nombresQuimico)
     // );
     setQuimico(
-      data.chemicalProducts.find((element) => element.name === nombresQuimico)
+      data?.chemicalProducts?.find((element) => element.name === nombresQuimico)
     );
   };
 
@@ -316,6 +317,7 @@ function AgregarInventario() {
         setMensaje("Agregado con exíto");
         setColor("success");
         setRender(render + 1);
+        obtenerProducto(nombreRender);
 
         break;
 
@@ -396,8 +398,12 @@ function AgregarInventario() {
   };
 
   useEffect(() => {
+    obtenerProducto(nombreRender);
+  }, [render]);
+
+  useEffect(() => {
     listarProductosQuimicos();
-  }, []);
+  }, [render]);
 
   useEffect(() => {
     listarinventarioId(quimico?._id);
@@ -466,7 +472,10 @@ function AgregarInventario() {
                         }
                         label="Lista de químicos"
                         icon={<Pool></Pool>}
-                        onChange={(e) => obtenerProducto(e.target.textContent)}
+                        onChange={(e) => {
+                          obtenerProducto(e.target.textContent);
+                          setNombreRender(e.target.textContent);
+                        }}
                       ></InputSelect>
                     </Grid>
 
