@@ -267,8 +267,8 @@ export default function ModalUpdateParametros({ data, open, close }) {
                   {/* Seccion de Inuts rango minimo, maximo y valor maximo */}
                   {dataParameter?.parameter[index]?.specification ===
                   "Valor Maximo" ? (
-                    <Box>
-                      <Grid xs={12}>
+                    <Grid container>
+                      <Grid xs={12} sm={12} md={6}>
                         <InputGeneral
                           value={
                             dataParameter?.parameter[index]
@@ -286,11 +286,11 @@ export default function ModalUpdateParametros({ data, open, close }) {
                           }
                         ></InputGeneral>
                       </Grid>
-                    </Box>
+                    </Grid>
                   ) : dataParameter?.parameter[index]?.specification ===
                     "Rango" ? (
-                    <Box>
-                      <Grid xs={12}>
+                    <Grid container>
+                      <Grid item xs={12} sm={12} md={6}>
                         <InputGeneral
                           value={dataParameter?.parameter[index]?.minRange}
                           label="Rango mínimo"
@@ -301,7 +301,7 @@ export default function ModalUpdateParametros({ data, open, close }) {
                           }
                         ></InputGeneral>
                       </Grid>
-                      <Grid xs={12}>
+                      <Grid item xs={12} sm={12} md={6}>
                         <InputGeneral
                           value={dataParameter?.parameter[index]?.maxRange}
                           label="Rango máximo"
@@ -312,31 +312,33 @@ export default function ModalUpdateParametros({ data, open, close }) {
                           }
                         ></InputGeneral>
                       </Grid>
-                    </Box>
+                    </Grid>
                   ) : (
                     ""
                   )}
                 </Grid>
               ))}
 
-              <Grid item xs={12}>
-                <Button
-                  disabled={habilitar}
-                  onClick={() => actualizarParametros()}
-                  variant="contained"
-                  sx={{
-                    width: "90%",
-                    marginTop: "10px",
-                    marginLeft: "5%",
-                    marginBottom: "20px",
-                    backgroundColor: "rgb(0,164,228)",
-                    "&:hover": {
+              <Grid container>
+                <Grid item xs={12}>
+                  <Button
+                    disabled={habilitar}
+                    onClick={() => actualizarParametros()}
+                    variant="contained"
+                    sx={{
+                      width: "95%",
+                      marginTop: "10px",
+                      marginLeft: "2.5%",
+                      marginBottom: "20px",
                       backgroundColor: "rgb(0,164,228)",
-                    },
-                  }}
-                >
-                  Guardar
-                </Button>
+                      "&:hover": {
+                        backgroundColor: "rgb(0,164,228)",
+                      },
+                    }}
+                  >
+                    Guardar
+                  </Button>
+                </Grid>
               </Grid>
             </Box>
           </Box>
