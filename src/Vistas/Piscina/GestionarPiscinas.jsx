@@ -1106,7 +1106,7 @@ function GestionarPiscinas() {
                                 <Typography
                                   sx={{
                                     position: "absolute",
-                                    top: "110px",
+                                    top: "100px",
                                     left: "40%",
                                     transform: "rotate(-30deg)",
                                   }}
@@ -1181,7 +1181,7 @@ function GestionarPiscinas() {
                                   sx={{
                                     position: "absolute",
                                     top: "270px",
-                                    left: "25%",
+                                    left: "20%",
                                   }}
                                 >
                                   A. {pool?.depth?.depthA} m
@@ -1190,7 +1190,7 @@ function GestionarPiscinas() {
                                   sx={{
                                     position: "absolute",
                                     top: "190px",
-                                    left: "25%",
+                                    left: "20%",
                                   }}
                                 >
                                   B. {pool?.depth?.depthB} m
@@ -1199,11 +1199,11 @@ function GestionarPiscinas() {
                                   sx={{
                                     position: "absolute",
                                     top: "120px",
-                                    left: "25%",
+                                    left: "20%",
                                   }}
                                 >
                                   C. {pool?.depth?.depthC} m
-                                </Typography>{" "}
+                                </Typography>
                                 <img
                                   src={circular}
                                   className="img_rectangurlar"
@@ -1225,7 +1225,7 @@ function GestionarPiscinas() {
                                 <Typography
                                   sx={{
                                     position: "absolute",
-                                    top: "110px",
+                                    top: "100px",
                                     left: "40%",
                                     transform: "rotate(-30deg)",
                                   }}
@@ -1253,8 +1253,8 @@ function GestionarPiscinas() {
                                 <Typography
                                   sx={{
                                     position: "absolute",
-                                    top: "250px",
-                                    left: "62%",
+                                    top: "260px",
+                                    left: "63%",
                                   }}
                                 >
                                   B. {pool?.depth?.depthB} m
