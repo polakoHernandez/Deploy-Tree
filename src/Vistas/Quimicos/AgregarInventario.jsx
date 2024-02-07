@@ -57,6 +57,8 @@ function AgregarInventario() {
     fecha: "",
   });
 
+  const [render, setRender] = useState(0);
+
   //*Funcion para capturar los datos de los texFields
   const catchDataText = (e) => {
     setDataText((prevData) => ({
@@ -313,6 +315,7 @@ function AgregarInventario() {
         setOpenAlerta(true);
         setMensaje("Agregado con exíto");
         setColor("success");
+        setRender(render + 1);
 
         break;
 
@@ -403,6 +406,14 @@ function AgregarInventario() {
   useEffect(() => {
     listarInventarioLote(quimico?._id);
   }, [quimico]);
+
+  useEffect(() => {
+    listarinventarioId(quimico?._id);
+  }, [render]);
+
+  useEffect(() => {
+    listarInventarioLote(quimico?._id);
+  }, [render]);
 
   return (
     <Box sx={{ ...styles.generalContainer }}>
