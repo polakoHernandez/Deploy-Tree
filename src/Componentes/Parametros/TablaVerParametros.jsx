@@ -26,6 +26,7 @@ export default function TablaVerParametros({
   moverQuimicos,
   moverPerfil,
   reloadData,
+  render,
 }) {
   const navigate = useNavigate("");
 
@@ -290,6 +291,7 @@ export default function TablaVerParametros({
       ></ModalDataParametros>
 
       <ModalUpdateParametros
+        render={render}
         data={datosRow}
         open={openUpdate}
         close={() => setopenUpdate(false)}

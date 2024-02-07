@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styled from "@emotion/styled";
-import { Grid, IconButton, Input } from "@mui/material";
+import { Grid, IconButton, Input, CircularProgress } from "@mui/material";
 import InputGeneral from "../General/InputGeneral";
 import { Add, Close, Delete, Poll, Pool } from "@mui/icons-material";
 import { useState, useEffect } from "react";
@@ -25,7 +25,7 @@ const style = {
   borderRadius: "10px",
 };
 
-export default function ModalUpdateParametros({ data, open, close }) {
+export default function ModalUpdateParametros({ data, open, close, render }) {
   const [dataParameter, setDataParameter] = useState({
     parameter: [{ nameParam: "", specification: "" }],
   });
@@ -159,7 +159,7 @@ export default function ModalUpdateParametros({ data, open, close }) {
         setOpenAlerta(true);
         setMensaje("Parametro acualizado con exíto");
         setColor("success");
-
+        render();
         setHabilitar(false);
         console.log(respuesta);
 
@@ -336,20 +336,27 @@ export default function ModalUpdateParametros({ data, open, close }) {
                       },
                     }}
                   >
-                    Guardar
+                    {habilitar ? (
+                      <CircularProgress
+                        size={24}
+                        color="inherit"
+                      ></CircularProgress>
+                    ) : (
+                      "Guardar"
+                    )}
                   </Button>
                 </Grid>
               </Grid>
             </Box>
           </Box>
+          <Alertas
+            open={openAlerta}
+            mensaje={mensaje}
+            severity={color}
+            cerrar={() => setOpenAlerta(false)}
+          ></Alertas>
         </Box>
       </Modal>
-      <Alertas
-        open={openAlerta}
-        mensaje={mensaje}
-        severity={color}
-        cerrar={() => setOpenAlerta(false)}
-      ></Alertas>
     </div>
   );
 }

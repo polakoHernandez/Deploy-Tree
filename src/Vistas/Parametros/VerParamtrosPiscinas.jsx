@@ -20,6 +20,8 @@ function VerParamtrosPiscinas() {
   const [cargando, setCargando] = useState(false);
   // Funcion para listar todos los usuarios
 
+  const [render, setRender] = useState(0);
+
   const navigate = useNavigate();
 
   // Estados para recargar los datos
@@ -138,6 +140,10 @@ function VerParamtrosPiscinas() {
     setReload(false); // Reset reload flag
   }, [reload]);
 
+  useEffect(() => {
+    listarUsuarios();
+  }, [render]);
+
   return (
     <Box
       sx={{
@@ -192,6 +198,7 @@ function VerParamtrosPiscinas() {
         </Typography>
 
         <TablaVerParametros
+          render={setRender}
           data={data || ""}
           cargando={cargando}
           mover={mover}
