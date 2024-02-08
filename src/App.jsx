@@ -20,6 +20,8 @@ import NormasVigentes from "./Vistas/Parametros/NormasVigentes";
 import VerDataParametro from "./Vistas/Parametros/VerDataParametro";
 import ListaQuimicos from "./Vistas/Quimicos/ListaQuimicos";
 import ActualizarQuimico from "./Vistas/Quimicos/ActualizarQuimico";
+import AdministrarInventario from "./Vistas/Quimicos/AdministrarInventario";
+
 function App() {
   return (
     <>
@@ -102,6 +104,11 @@ function App() {
           <Route
             path="/actualizarQuimico"
             element={<ActualizarQuimico></ActualizarQuimico>}
+          ></Route>
+
+          <Route
+            path="/administrarInventario"
+            element={<AdministrarInventario></AdministrarInventario>}
           ></Route>
         </Routes>
       </BrowserRouter>
