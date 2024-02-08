@@ -428,7 +428,7 @@ const Notificaciones = () => {
                               onClick={() => {
                                 // eliminarNotificacionId(elemento._id);
                                 navigate(
-                                  `/agregarInventario?id=${elemento.chemicalProductId.name}`
+                                  `/administrarInventario?id=${elemento.chemicalProductId._id}`
                                 );
                               }}
                             >

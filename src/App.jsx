@@ -61,7 +61,7 @@ function App() {
 
           <Route
             path="/agregarInventario"
-            element={<AgregarInventario></AgregarInventario>}
+            element={<AdministrarInventario></AdministrarInventario>}
           ></Route>
 
           <Route

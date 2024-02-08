@@ -44,6 +44,8 @@ function AdministrarInventario() {
     fecha: "",
   });
 
+  const location = useLocation();
+
   //*Estados para abrir la alerta
   const [open, setOpen] = useState(false);
   const [mensaje, setMensaje] = useState("");
@@ -331,8 +333,6 @@ function AdministrarInventario() {
       return;
     }
 
-    console.log({ INDICE: idIndice });
-
     listarHistoricoProducto(idIndice).then((res) => {
       const array = res.dataWithQuantity;
       const ultimoItem = array[array.length - 1];
@@ -343,6 +343,27 @@ function AdministrarInventario() {
       });
     });
   }, [render]);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const id = queryParams.get("id");
+    setIdIndice(id);
+    console.log({ IDPROP: id });
+
+    if (id === "" || id === null || id === undefined) {
+      return;
+    }
+
+    listarHistoricoProducto(id).then((res) => {
+      const array = res.dataWithQuantity;
+      const ultimoItem = array[array.length - 1];
+      setDataIndice({
+        nombre: ultimoItem.productoQuimico,
+        saldo: ultimoItem.cantidadDisponible,
+        id: id,
+      });
+    });
+  }, []);
 
   return (
     <Box sx={{ ...styles.generalContainer }}>
