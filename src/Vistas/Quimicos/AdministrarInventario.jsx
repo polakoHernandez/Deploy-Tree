@@ -80,6 +80,10 @@ function AdministrarInventario() {
 
   //*Estado para capturar el id por indice
   const [idIndice, setIdIndice] = useState("");
+
+  //*Estado para inhabilitar el boton
+  const [habilitar, setHabilitar] = useState(false);
+
   //*Funcion para manejar el contador
   const incrementar = () => {
     if (contador === 3) {
@@ -282,6 +286,7 @@ function AdministrarInventario() {
   };
 
   const enviarPeticion = (id, data) => {
+    setHabilitar(true);
     agregarAInventario(id, data).then((res) => {
       console.log({
         status: res.state,
@@ -294,12 +299,28 @@ function AdministrarInventario() {
           setMensaje("Agregado a inventario");
           setSeverity("success");
           setRender(render + 1);
-          break;
+          setHabilitar(false);
 
-        default:
+          break;
+        case 401:
+          setOpen(true);
+          setMensaje("No se agrego al inventario");
+          setSeverity("error");
+          setRender(render + 1);
+          setHabilitar(false);
+
+          break;
+        case 2500:
+          setOpen(true);
+          setMensaje("Error en el sevidor");
+          setSeverity("error");
+          setRender(render + 1);
+          setHabilitar(false);
+
           break;
       }
     });
+    setHabilitar(false);
   };
 
   useEffect(() => {
@@ -465,11 +486,19 @@ function AdministrarInventario() {
                     </Grid>
                     <Grid item xs={12}>
                       <Button
+                        disabled={habilitar}
                         variant="contained"
                         sx={{ ...styles.button }}
                         onClick={() => enviarPeticion(dataIndice.id, data)}
                       >
-                        Guardar
+                        {habilitar ? (
+                          <CircularProgress
+                            size={24}
+                            color="inherit"
+                          ></CircularProgress>
+                        ) : (
+                          "Guardar"
+                        )}
                       </Button>
                     </Grid>
                   </Grid>

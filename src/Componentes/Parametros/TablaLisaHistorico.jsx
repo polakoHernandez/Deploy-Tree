@@ -158,6 +158,7 @@ export default function TablaLisaHistorico({
           >
             {params.row.mensaje !== "good" ? (
               <Button
+                disabled={params.value ?? true}
                 variant="contained"
                 onClick={() => {
                   abirModalAjusta(params.row);
@@ -177,13 +178,13 @@ export default function TablaLisaHistorico({
               justifyContent: "center",
             }}
           >
-            <Button
+            <Typography
               variant="contained"
               disabled
               onClick={() => abirModalAjusta(params.row)}
             >
-              Ajustar
-            </Button>
+              ***
+            </Typography>
           </Box>
         );
       },
