@@ -83,11 +83,11 @@ export default function TablaLisaHistorico({
       headerAlign: "center",
     },
     {
-      field: "mensaje",
+      field: "estado",
       headerName: "Estado",
       width: 150,
       headerAlign: "center",
-      renderCell: (paramas) => (
+      renderCell: (params) => (
         <Box
           sx={{
             width: "100%",
@@ -95,99 +95,67 @@ export default function TablaLisaHistorico({
             justifyContent: "center",
           }}
         >
-          {/**
-           
-           param.chlorine.message  == paramas.value 
-           nameParam= paramas.row.nombre
-
-           
-           */}
-          {paramas.row.nombre === "Cloro" && paramas.value === "good" ? (
+          {params.row.mensaje === "good" ? (
             <Button color="success" variant="contained">
-              {paramas.row.ajustado === true ? "Ajustado" : "cumple"}
-            </Button>
-          ) : paramas.row.ajustado === true ? (
-            <Button
-              onClick={() =>
-                paramas.row.ajustado === true
-                  ? abrirModalAjustado(paramas.row)
-                  : ""
-              }
-              sx={{
-                backgroundColor:
-                  localStorage.getItem("AjusteCloro") === "true"
-                    ? "orange"
-                    : "red",
-              }}
-            >
-              {localStorage.getItem("AjusteCloro") === "true"
-                ? "Ajustado"
-                : "No cumple"}
-            </Button>
-          ) : paramas.row.nombre === "Ph" && paramas.value === "good" ? (
-            <Button color="success" variant="contained">
-              {paramas.row.ajustado === true ? "Ajustado" : "cumple"}
+              {params.row.ajustado ? "Ajustado" : "Cumple"}
             </Button>
           ) : (
-            <Button color="error" variant="contained">
-              {
-                // localStorage.getItem("AjustePh") === "true"
-                paramas.row.ajustado === true ? "Ajustado" : "No cumple"
+            <Button
+              onClick={() =>
+                params.row.ajustado && abrirModalAjustado(params.row)
               }
+              sx={{
+                backgroundColor: params.row.ajustado ? "orange" : "red",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: params.row.ajustado ? "orange" : "red",
+                  color: "white",
+                },
+              }}
+              // disabled={!params.row.ajustado}
+            >
+              {params.row.ajustado ? "Ajustado" : "No cumple"}
             </Button>
           )}
         </Box>
       ),
     },
 
+    // Columna Ajustado
+
     //*SEGUNDO BTON
     {
-      //*Is
       field: "ajustado",
-      headerName: "Ajustado",
+      headerName: "Ajustes",
       width: 180,
       headerAlign: "center",
-      renderCell: (params) => {
-        return params.value === false ? (
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            {params.row.mensaje !== "good" ? (
-              <Button
-                disabled={params.value ?? true}
-                variant="contained"
-                onClick={() => {
-                  abirModalAjusta(params.row);
-                }}
-              >
-                Ajustar
-              </Button>
-            ) : (
-              <Typography>****</Typography>
-            )}
-          </Box>
-        ) : (
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Typography
+      renderCell: (params) => (
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {(params.row.mensaje !== "good" && params.row.ajustado) ||
+          params.row.mensaje !== "good" ? (
+            <Button
+              disabled={
+                params.row.mensaje !== "good" && params.row.ajustado
+                  ? true
+                  : false
+              }
+              color="primary"
               variant="contained"
-              disabled
               onClick={() => abirModalAjusta(params.row)}
             >
-              ***
-            </Typography>
-          </Box>
-        );
-      },
+              Ajustar
+            </Button>
+          ) : (
+            <Typography>****</Typography>
+          )}
+        </Box>
+      ),
     },
     {
       field: "detalle",
