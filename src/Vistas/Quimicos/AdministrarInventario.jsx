@@ -24,8 +24,10 @@ import {
   listarProductosQuimicos,
   listarHistoricoProducto,
   listarHistoricoLote,
+  agregarAInventario,
 } from "../../services/quimicos/services";
 import { opcionesInputs, obtenerId } from "../../utils/quimicos/utils";
+import AgregarInventario from "./AgregarInventario";
 
 function AdministrarInventario() {
   const [mover, setMover] = useState(false); //MOvercon Piscina
@@ -33,6 +35,22 @@ function AdministrarInventario() {
   const [moverParametros, setMoverParametros] = useState(false);
   const [moverQuimicos, setMoverQuimicos] = useState(false);
   const [moverPerfil, setMoverPerfil] = useState(false);
+
+  //*Estado para capturar informacion de los inputs
+  const [data, setData] = useState({
+    cantidad: "",
+    unidades: "",
+    lote: "",
+    fecha: "",
+  });
+
+  //*Estados para abrir la alerta
+  const [open, setOpen] = useState(false);
+  const [mensaje, setMensaje] = useState("");
+  const [severity, setSeverity] = useState("");
+
+  //*Eestado para el render de las tabla
+  const [render, setRender] = useState(0);
 
   //*Estado para el display de las vistas
   const [contador, setContador] = useState(1);
@@ -52,6 +70,14 @@ function AdministrarInventario() {
   //*Estado para guardar la informaciondel indice
   const [dataIndice, setDataIndice] = useState("");
 
+  //*Estado para capturar el id por hisotrico
+  const [idHistorico, setIdHistorico] = useState("");
+
+  //*Estado para capturar el id por lote
+  const [idHistoricoLote, setIdHistoricoLot] = useState("");
+
+  //*Estado para capturar el id por indice
+  const [idIndice, setIdIndice] = useState("");
   //*Funcion para manejar el contador
   const incrementar = () => {
     if (contador === 3) {
@@ -216,20 +242,30 @@ function AdministrarInventario() {
     },
   ];
 
+  const obtenerDataInputs = (name, value) => {
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const obtenerInfoIndice = (array, nombre) => {
     const id = obtenerId(array, nombre);
+    setIdIndice(id);
     listarHistoricoProducto(id).then((res) => {
       const array = res.dataWithQuantity;
       const ultimoItem = array[array.length - 1];
       setDataIndice({
         nombre: ultimoItem.productoQuimico,
         saldo: ultimoItem.cantidadDisponible,
+        id: id,
       });
     });
   };
 
   const listarInventarioId = (array, nombre) => {
     const id = obtenerId(array, nombre);
+    setIdHistorico(id);
     listarHistoricoProducto(id).then((res) => {
       setHistoricoId(res.dataWithQuantity);
     });
@@ -237,8 +273,30 @@ function AdministrarInventario() {
 
   const listarInventarioLote = (array, nombre) => {
     const id = obtenerId(array, nombre);
+    setIdHistoricoLot(id);
     listarHistoricoLote(id).then((res) => {
       setHistoricoLote(res.inventoryByLot);
+    });
+  };
+
+  const enviarPeticion = (id, data) => {
+    agregarAInventario(id, data).then((res) => {
+      console.log({
+        status: res.state,
+        response: res.respuesta,
+      });
+
+      switch (res.state) {
+        case 200:
+          setOpen(true);
+          setMensaje("Agregado a inventario");
+          setSeverity("success");
+          setRender(render + 1);
+          break;
+
+        default:
+          break;
+      }
     });
   };
 
@@ -248,7 +306,43 @@ function AdministrarInventario() {
       const opciones = opcionesInputs(res.chemicalProducts);
       setOpcionesInputs(opciones);
     });
-  }, []);
+  }, [render]);
+
+  useEffect(() => {
+    if (idHistorico === "") {
+      return;
+    }
+    listarHistoricoProducto(idHistorico).then((res) => {
+      setHistoricoId(res.dataWithQuantity);
+    });
+  }, [render]);
+
+  useEffect(() => {
+    if (idHistoricoLote === "") {
+      return;
+    }
+    listarHistoricoLote(idHistoricoLote).then((res) => {
+      setHistoricoLote(res.inventoryByLot);
+    });
+  }, [render]);
+
+  useEffect(() => {
+    if (idIndice === "") {
+      return;
+    }
+
+    console.log({ INDICE: idIndice });
+
+    listarHistoricoProducto(idIndice).then((res) => {
+      const array = res.dataWithQuantity;
+      const ultimoItem = array[array.length - 1];
+      setDataIndice({
+        nombre: ultimoItem.productoQuimico,
+        saldo: ultimoItem.cantidadDisponible,
+        id: idIndice,
+      });
+    });
+  }, [render]);
 
   return (
     <Box sx={{ ...styles.generalContainer }}>
@@ -309,6 +403,9 @@ function AdministrarInventario() {
                         label="Cantidad"
                         icon={<Pool></Pool>}
                         name="cantidad"
+                        onChange={(e) =>
+                          obtenerDataInputs("cantidad", e.target.value)
+                        }
                       ></InputGeneral>
                     </Grid>
                     <Grid item xs={6}>
@@ -317,6 +414,9 @@ function AdministrarInventario() {
                         label="Unidades"
                         icon={<Pool></Pool>}
                         name="unidades"
+                        onChange={(e) =>
+                          obtenerDataInputs("unidades", e.target.textContent)
+                        }
                       ></InputSelect>
                     </Grid>
 
@@ -325,6 +425,9 @@ function AdministrarInventario() {
                         label="Lote"
                         icon={<Pool></Pool>}
                         name="lote"
+                        onChange={(e) =>
+                          obtenerDataInputs("lote", e.target.value)
+                        }
                       ></InputGeneral>
                     </Grid>
 
@@ -334,10 +437,17 @@ function AdministrarInventario() {
                         type="date"
                         icon={<Pool></Pool>}
                         name="fecha"
+                        onChange={(e) =>
+                          obtenerDataInputs("fecha", e.target.value)
+                        }
                       ></InputGeneral>
                     </Grid>
                     <Grid item xs={12}>
-                      <Button variant="contained" sx={{ ...styles.button }}>
+                      <Button
+                        variant="contained"
+                        sx={{ ...styles.button }}
+                        onClick={() => enviarPeticion(dataIndice.id, data)}
+                      >
                         Guardar
                       </Button>
                     </Grid>
@@ -412,12 +522,12 @@ function AdministrarInventario() {
           </Box>
         </Box>
       </Box>
-      {/* <Alertas
-        open={openAlerta}
-        severity={color}
+      <Alertas
+        open={open}
+        severity={severity}
         mensaje={mensaje}
-        cerrar={() => setOpenAlerta(false)}
-      ></Alertas> */}
+        cerrar={() => setOpen(false)}
+      ></Alertas>
     </Box>
   );
 }

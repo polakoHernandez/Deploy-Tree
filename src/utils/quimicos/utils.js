@@ -10,3 +10,10 @@ export const obtenerId = (array, nombre) => {
   const item = array.find((item) => item.name === nombre);
   return item._id;
 };
+
+export const obtenerDataInputs = (name, value, state) => {
+  setState((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
