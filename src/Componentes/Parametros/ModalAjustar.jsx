@@ -444,9 +444,11 @@ export default function ModalAjustar({
         color="succes"
       ></Alertas>
       <AlertaCalcular
+        render={renderizar}
         adicionar={() => {
           setAbrirAlerta2(false);
           setAbriModalSucces(true);
+          renderizar();
           close();
         }}
         open={abrirAlerta2}

@@ -2,7 +2,14 @@ import React from "react";
 import { Button, Snackbar, Typography, Box } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 
-function AlertaCalcular({ open, severity, mensaje, cerrar, adicionar }) {
+function AlertaCalcular({
+  open,
+  severity,
+  mensaje,
+  cerrar,
+  adicionar,
+  render,
+}) {
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
