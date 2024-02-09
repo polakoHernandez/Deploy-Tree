@@ -588,9 +588,12 @@ function GestionarPiscinas() {
 
         setIdHistoricoRetornado(response?.historyPoolId[0]?._id);
         setIdHistorico(response?.historyPoolId[0]?._id);
+        console.log(response?.historyPoolId[0]?.paramPh._id);
 
         const newArray = response?.historyPoolIdFormatted?.flatMap((elemento) =>
           elemento.parameters.map((parametro, index) => ({
+            idPh: parametro?.phId,
+            idCloro: parametro?.chlorineId,
             id: index * Math.random(),
             fecha: elemento.date,
             nombre: parametro.nameParam, // Corregir aquí
@@ -607,6 +610,8 @@ function GestionarPiscinas() {
             apellido: elemento.modifiedBy.lastName || "",
           }))
         );
+
+        console.log({ TENGOID: newArray });
 
         setMiHistorico(newArray);
 

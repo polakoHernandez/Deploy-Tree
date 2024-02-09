@@ -48,6 +48,13 @@ export default function TablaLisaHistorico({
 
   const columns = [
     {
+      field: "id",
+      headerName: "Id",
+      width: 100,
+      headerAlign: "center",
+    },
+
+    {
       field: "nombre",
       headerName: "Parámetro",
       width: 100,

@@ -80,6 +80,46 @@ function ModalAjustado({
           setMensaje(respuesta.msg);
           close();
           renderizar();
+          const responseNuevo = await fetch(
+            `https://treea-piscinas-api.vercel.app/v1/update-property-isadjusted`,
+            {
+              method: "PUT",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json", // Especificar el tipo de contenido como JSON
+                "x-token": localStorage.getItem("clave"),
+              },
+
+              body: JSON.stringify({
+                nameParam: CloroPh.nombre,
+                paramId: CloroPh.idCloro,
+              }),
+            }
+          );
+
+          let nuevaRespuesta = "";
+
+          switch (responseNuevo.status) {
+            case 200:
+              nuevaRespuesta = await responseNuevo.json();
+              console.log({ Ready: nuevaRespuesta });
+
+              break;
+
+            case 500:
+              nuevaRespuesta = await responseNuevo.json();
+              console.log({ Fail: nuevaRespuesta });
+
+              break;
+          }
+
+          // const ppmActual = data.valor;
+          // const valorMaximo = CloroPh?.maximo;
+
+          // ppmActual >= valorMaximo?
+          // CloroPh.ajustado===false
+          // :""
+
           break;
       }
     } else if (CloroPh.nombre === "Ph") {
@@ -108,7 +148,40 @@ function ModalAjustado({
           setColor("success");
           setMensaje(respuesta.msg);
           close();
-          renderizar();
+
+          const responseNuevo = await fetch(
+            `https://treea-piscinas-api.vercel.app/v1/update-property-isadjusted`,
+            {
+              method: "PUT",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json", // Especificar el tipo de contenido como JSON
+                "x-token": localStorage.getItem("clave"),
+              },
+
+              body: JSON.stringify({
+                nameParam: CloroPh.nombre,
+                paramId: CloroPh.idPh,
+              }),
+            }
+          );
+
+          let nuevaRespuesta = "";
+
+          switch (responseNuevo.status) {
+            case 200:
+              nuevaRespuesta = await responseNuevo.json();
+              console.log({ Ready: nuevaRespuesta });
+              renderizar();
+
+              break;
+
+            case 500:
+              nuevaRespuesta = await responseNuevo.json();
+              console.log({ Fail: nuevaRespuesta });
+
+              break;
+          }
 
           break;
       }
