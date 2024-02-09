@@ -51,40 +51,40 @@ function AdministrarInventario() {
   const [mensaje, setMensaje] = useState("");
   const [severity, setSeverity] = useState("");
 
-  //*Eestado para el render de las tabla
+  //Eestado para el render de las tabla
   const [render, setRender] = useState(0);
 
-  //*Estado para el display de las vistas
+  //Estado para el display de las vistas
   const [contador, setContador] = useState(1);
 
-  //*Estado para almacenar el listado de productos uimicos
+  //Estado para almacenar el listado de productos quimicos
   const [listaQuimicos, setListaQuimicos] = useState("");
 
-  //*Estado para guarar las opciones de los inputs
+  //Estado para guarar las opciones de los inputs
   const [opcionesInpts, setOpcionesInputs] = useState("");
 
-  //*Estado para guardar el historio por Id
+  //Estado para guardar el historio por Id
   const [historicoId, setHistoricoId] = useState("");
 
-  //*Estado para guardar el historico por lote
+  //Estado para guardar el historico por lote
   const [historicoLote, setHistoricoLote] = useState("");
 
-  //*Estado para guardar la informaciondel indice
+  //Estado para guardar la informaciondel indice
   const [dataIndice, setDataIndice] = useState("");
 
-  //*Estado para capturar el id por hisotrico
+  //Estado para capturar el id por hisotrico
   const [idHistorico, setIdHistorico] = useState("");
 
-  //*Estado para capturar el id por lote
+  //Estado para capturar el id por lote
   const [idHistoricoLote, setIdHistoricoLot] = useState("");
 
-  //*Estado para capturar el id por indice
+  //Estado para capturar el id por indice
   const [idIndice, setIdIndice] = useState("");
 
-  //*Estado para inhabilitar el boton
+  //Estado para inhabilitar el boton
   const [habilitar, setHabilitar] = useState(false);
 
-  //*Funcion para manejar el contador
+  //Funcion para manejar el contador
   const incrementar = () => {
     if (contador === 3) {
       return;
@@ -287,12 +287,8 @@ function AdministrarInventario() {
 
   const enviarPeticion = (id, data) => {
     setHabilitar(true);
-    agregarAInventario(id, data).then((res) => {
-      console.log({
-        status: res.state,
-        response: res.respuesta,
-      });
 
+    agregarAInventario(id, data).then((res) => {
       switch (res.state) {
         case 200:
           setOpen(true);
@@ -310,7 +306,15 @@ function AdministrarInventario() {
           setHabilitar(false);
 
           break;
-        case 2500:
+        case 400:
+          setOpen(true);
+          setMensaje(res.respuesta);
+          setSeverity("error");
+          setRender(render + 1);
+          setHabilitar(false);
+
+          break;
+        case 500:
           setOpen(true);
           setMensaje("Error en el sevidor");
           setSeverity("error");
@@ -320,13 +324,12 @@ function AdministrarInventario() {
           break;
       }
     });
-    setHabilitar(false);
   };
 
   useEffect(() => {
     listarProductosQuimicos().then((res) => {
-      setListaQuimicos(res.chemicalProducts);
-      const opciones = opcionesInputs(res.chemicalProducts);
+      setListaQuimicos(res?.chemicalProducts);
+      const opciones = opcionesInputs(res?.chemicalProducts);
       setOpcionesInputs(opciones);
     });
   }, [render]);
@@ -350,12 +353,12 @@ function AdministrarInventario() {
   }, [render]);
 
   useEffect(() => {
-    if (idIndice === "") {
+    if (idIndice === "" || idIndice === null || idIndice === undefined) {
       return;
     }
 
     listarHistoricoProducto(idIndice).then((res) => {
-      const array = res.dataWithQuantity;
+      const array = res?.dataWithQuantity;
       const ultimoItem = array[array.length - 1];
       setDataIndice({
         nombre: ultimoItem.productoQuimico,
@@ -369,7 +372,6 @@ function AdministrarInventario() {
     const queryParams = new URLSearchParams(location.search);
     const id = queryParams.get("id");
     setIdIndice(id);
-    console.log({ IDPROP: id });
 
     if (id === "" || id === null || id === undefined) {
       return;
@@ -475,7 +477,7 @@ function AdministrarInventario() {
 
                     <Grid item xs={6}>
                       <InputGeneral
-                        label="Fecha"
+                        label="Fecha de vencimiento"
                         type="date"
                         icon={<Pool></Pool>}
                         name="fecha"

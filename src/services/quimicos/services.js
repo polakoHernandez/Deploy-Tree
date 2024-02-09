@@ -104,6 +104,23 @@ export const agregarAInventario = async (idProductoQuimico, data) => {
       console.log(respuesta);
       return { state: 200, respuesta: respuesta };
 
+    case 400:
+      respuesta = await response.json();
+
+      switch (respuesta.type) {
+        case "fields_required":
+          return {
+            state: 400,
+            respuesta: "Todos los campos son obligatorios",
+          };
+        case "date_error":
+          return {
+            state: 400,
+            respuesta:
+              "La fecha de expiración debe ser mayor a la fecha actual ",
+          };
+      }
+
     case 401:
       respuesta = await response.json();
       console.log(respuesta);

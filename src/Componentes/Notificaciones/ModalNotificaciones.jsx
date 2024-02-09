@@ -6,6 +6,10 @@ import Modal from "@mui/material/Modal";
 import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import circular from "../../assets/imagePool/PiscinaCircular.png";
+import rectangular from "../../assets/imagePool/PiscinaRectangular.png";
+import ovalada from "../../assets/imagePool/PiscinaOvalada.png";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -89,7 +93,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
                     paddingTop: "30px",
                   }}
                 >
-                  Información General
+                  Información general
                 </Typography>
               </Grid>
 
@@ -163,7 +167,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
 
               <Grid item xs={4} sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  Clase de istalación
+                  Clase de instalación
                 </Typography>
                 <Typography>{pool.typeInstallation}</Typography>
               </Grid>
@@ -191,61 +195,148 @@ export default function ModalNotificaciones({ open, close, pool }) {
                 </Typography>
               </Grid>
 
+              <Grid xs={12}>
+                {pool?.form === "Rectangular" ? (
+                  <Box
+                    sx={{
+                      width: "90%",
+                      marginLeft: "5%",
+                      height: "400px",
+                      // backgroundColor: "cyan",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      position: "relative",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        position: "absolute",
+                        top: "100px",
+                        left: "40%",
+                        transform: "rotate(-30deg)",
+                      }}
+                    >
+                      {pool?.height} m
+                    </Typography>
+                    <Typography
+                      sx={{ position: "absolute", top: "200px", left: "45%" }}
+                    >
+                      {pool?.width} m
+                    </Typography>
+                    <Typography
+                      sx={{ position: "absolute", top: "320px", left: "55%" }}
+                    >
+                      A. {pool?.depth?.depthA} m
+                    </Typography>
+                    <Typography
+                      sx={{ position: "absolute", top: "280px", left: "65%" }}
+                    >
+                      B. {pool?.depth?.depthB} m
+                    </Typography>
+                    <Typography
+                      sx={{ position: "absolute", top: "230px", left: "75%" }}
+                    >
+                      C. {pool?.depth?.depthC} m
+                    </Typography>
+                    <img src={rectangular} className="img_rectangurlar"></img>
+                  </Box>
+                ) : pool?.form === "Circular" ? (
+                  <Box
+                    sx={{
+                      width: "90%",
+                      marginLeft: "5%",
+                      height: "400px",
+                      // backgroundColor: "cyan",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      position: "relative",
+                    }}
+                  >
+                    {/* <Typography sx={{position:"absolute", top:"110px", left:"35%"}}>{pool?.height} m</Typography> */}
+                    <Typography
+                      sx={{ position: "absolute", top: "180px", left: "50%" }}
+                    >
+                      {pool?.width} m
+                    </Typography>
+                    <Typography
+                      sx={{ position: "absolute", top: "270px", left: "20%" }}
+                    >
+                      A. {pool?.depth?.depthA} m
+                    </Typography>
+                    <Typography
+                      sx={{ position: "absolute", top: "190px", left: "20%" }}
+                    >
+                      B. {pool?.depth?.depthB} m
+                    </Typography>
+                    <Typography
+                      sx={{ position: "absolute", top: "120px", left: "20%" }}
+                    >
+                      C. {pool?.depth?.depthC} m
+                    </Typography>
+                    <img src={circular} className="img_rectangurlar"></img>
+                  </Box>
+                ) : pool?.form === "Ovalada" ? (
+                  <Box
+                    sx={{
+                      width: "90%",
+                      marginLeft: "5%",
+                      height: "400px",
+                      // backgroundColor: "cyan",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      position: "relative",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        position: "absolute",
+                        top: "100px",
+                        left: "40%",
+                        transform: "rotate(-30deg)",
+                      }}
+                    >
+                      {pool?.height} m
+                    </Typography>
+                    <Typography
+                      sx={{ position: "absolute", top: "180px", left: "46%" }}
+                    >
+                      {pool?.width} m
+                    </Typography>
+                    <Typography
+                      sx={{ position: "absolute", top: "320px", left: "55%" }}
+                    >
+                      A. {pool?.depth?.depthA} m
+                    </Typography>
+                    <Typography
+                      sx={{ position: "absolute", top: "260px", left: "63%" }}
+                    >
+                      B. {pool?.depth?.depthB} m
+                    </Typography>
+                    <Typography
+                      sx={{ position: "absolute", top: "200px", left: "68%" }}
+                    >
+                      C. {pool?.depth?.depthC} m
+                    </Typography>
+                    <img src={ovalada} className="img_rectangurlar"></img>
+                  </Box>
+                ) : (
+                  ""
+                )}
+              </Grid>
+
               <Grid item xs={4} sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
                   Forma
                 </Typography>
                 <Typography>{pool.form}</Typography>
               </Grid>
-              <Grid item xs={4} sx={{ textAlign: "center" }}>
-                <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  Largo
-                </Typography>
-                <Typography>{pool.height}</Typography>
-              </Grid>
-              <Grid item xs={4} sx={{ textAlign: "center" }}>
-                <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  Ancho
-                </Typography>
-                <Typography>{pool.width}</Typography>
-              </Grid>
 
               <Grid item xs={4} sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  Profundidad A (m)
-                </Typography>
-                <Typography>
-                  {pool.depth && pool.depth.depthA !== undefined
-                    ? pool.depth.depthA
-                    : ""}
-                </Typography>
-              </Grid>
-
-              <Grid item xs={4} sx={{ textAlign: "center" }}>
-                <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  Profundidad B (m)
-                </Typography>
-                <Typography>
-                  {pool.depth && pool.depth.depthB !== undefined
-                    ? pool.depth.depthB
-                    : ""}
-                </Typography>
-              </Grid>
-
-              <Grid item xs={4} sx={{ textAlign: "center" }}>
-                <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  Profundidad C (m)
-                </Typography>
-                <Typography>
-                  {pool.depth && pool.depth.depthC !== undefined
-                    ? pool.depth.depthC
-                    : ""}
-                </Typography>
-              </Grid>
-
-              <Grid item xs={4} sx={{ textAlign: "center" }}>
-                <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  Proundidad máxima (m)
+                  Profundidad máxima (m)
                 </Typography>
                 <Typography>
                   {pool.maxDepth === undefined ? "" : pool.maxDepth}
@@ -253,7 +344,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
               </Grid>
               <Grid item xs={4} sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  Profundidad minima (m)
+                  Profundidad mínima (m)
                 </Typography>
                 <Typography>
                   {pool.minDepth === undefined ? "" : pool.minDepth}
@@ -313,14 +404,14 @@ export default function ModalNotificaciones({ open, close, pool }) {
 
               <Grid item xs={4} sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  P. Recirculació mínimo
+                  P. Recirculación mínimo
                 </Typography>
                 <Typography>{pool.maxDepth}</Typography>
               </Grid>
 
               <Grid item xs={4} sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  P. Recirculació máximo
+                  P. Recirculación máximo
                 </Typography>
                 <Typography>{pool.meanDepth}</Typography>
               </Grid>
@@ -390,7 +481,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
 
                       <Grid item xs={4}>
                         <Typography sx={{ ...styles.fontTylografy }}>
-                          Altua del filtro
+                          Altura del filtro
                         </Typography>
                         <Typography sx={{ ...styles.fontTexto }}>
                           {elemento.filterBedHeight}
@@ -408,7 +499,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
 
                       <Grid item xs={4}>
                         <Typography sx={{ ...styles.fontTylografy }}>
-                          Diametro del filtro
+                          Diámetro del filtro
                         </Typography>
                         <Typography sx={{ ...styles.fontTexto }}>
                           {elemento.filterDiameter}
@@ -417,7 +508,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
 
                       <Grid item xs={4}>
                         <Typography sx={{ ...styles.fontTylografy }}>
-                          Filter Height
+                          Altura del lecho filtrante
                         </Typography>
                         <Typography sx={{ ...styles.fontTexto }}>
                           {elemento.filterHeight}
@@ -520,7 +611,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
                       </Grid>
                       <Grid xs={4}>
                         <Typography sx={{ ...styles.fontTylografy }}>
-                          DataSheet
+                          Hoja de seguridad
                         </Typography>
                         <Box
                           sx={{
@@ -558,7 +649,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
                     paddingTop: "30px",
                   }}
                 >
-                  Sección de Calentador
+                  Sección de calentadores
                 </Typography>
               </Grid>
               {pool === "" || !pool.heaters ? (
@@ -598,7 +689,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
                       </Grid>
                       <Grid xs={4}>
                         <Typography sx={{ ...styles.fontTylografy }}>
-                          DataSheet
+                          Hoja de seguridad
                         </Typography>
                         <Typography>
                           <Box

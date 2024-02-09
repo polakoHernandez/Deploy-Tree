@@ -460,7 +460,7 @@ const Notificaciones = () => {
                                 size="small"
                                 onClick={(e) => {
                                   e.stopPropagation(); // Evitar la propagación del evento
-                                  eliminarNotificacionId(elemento._id);
+                                  // eliminarNotificacionId(elemento._id);
                                 }}
                               >
                                 <Close />
@@ -485,7 +485,7 @@ const Notificaciones = () => {
                             severity="warning"
                             icon={<ErrorOutline fontSize="inherit" />}
                             onClick={() => {
-                              eliminarNotificacionId(elemento._id);
+                              // eliminarNotificacionId(elemento._id);
                               navigate(
                                 `/gestionarPiscinas?id=${elemento?.historyPoolId?.poolId?._id}`
                               );
@@ -494,8 +494,9 @@ const Notificaciones = () => {
                               <IconButton
                                 color="inherit"
                                 size="small"
-                                onClick={(e) =>
-                                  eliminarNotificacionId(elemento._id)
+                                onClick={
+                                  (e) => ""
+                                  // eliminarNotificacionId(elemento._id)
                                 }
                               >
                                 <Close></Close>
@@ -557,7 +558,7 @@ const Notificaciones = () => {
                                 />
                               }
                               onClick={() => {
-                                eliminarNotificacionId(elemento._id);
+                                // eliminarNotificacionId(elemento._id);
                                 mostrarPiscina(
                                   elemento.poolId && elemento.poolId._id
                                 );
@@ -590,7 +591,7 @@ const Notificaciones = () => {
                                   size="small"
                                   onClick={(e) => {
                                     e.stopPropagation(); // Evitar la propagación del evento
-                                    eliminarNotificacionId(elemento._id);
+                                    // eliminarNotificacionId(elemento._id);
                                   }}
                                 >
                                   <Close></Close>
