@@ -530,9 +530,7 @@ function AdministrarInventario() {
                     }
                   ></InputSelect>
                 </Grid>
-                <TablaInventarioId
-                  data={historicoId || "no data"}
-                ></TablaInventarioId>
+                <TablaInventarioId data={historicoId}></TablaInventarioId>
               </Box>
               {/* Vista Lote */}
               <Box sx={{ ...stylesAnimation.tres }}>
@@ -557,9 +555,7 @@ function AdministrarInventario() {
                     ></InputSelect>
                   </Grid>
                 </Box>
-                <TablaInventarioLote
-                  data={historicoLote || "no data"}
-                ></TablaInventarioLote>
+                <TablaInventarioLote data={historicoLote}></TablaInventarioLote>
               </Box>
             </Box>
 

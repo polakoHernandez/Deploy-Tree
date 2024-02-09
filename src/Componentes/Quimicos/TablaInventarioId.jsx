@@ -98,7 +98,7 @@ function TablaInventarioId(data) {
             xl: "1102px",
           },
         }}
-        rows={data.data || ""}
+        rows={data.data}
         columns={columns.map((col) => ({
           ...col,
           headerClassName: "custom-header",
