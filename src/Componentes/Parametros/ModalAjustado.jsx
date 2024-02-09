@@ -116,13 +116,6 @@ function ModalAjustado({
             }
           }
 
-          // const ppmActual = data.valor;
-          // const valorMaximo = CloroPh?.maximo;
-
-          // ppmActual >= valorMaximo?
-          // CloroPh.ajustado===false
-          // :""
-
           break;
       }
     } else if (CloroPh.nombre === "Ph") {
@@ -150,40 +143,43 @@ function ModalAjustado({
           setAbrirAlerta(true);
           setColor("success");
           setMensaje(respuesta.msg);
+          renderizar();
           close();
 
-          const responseNuevo = await fetch(
-            `https://treea-piscinas-api.vercel.app/v1/update-property-isadjusted`,
-            {
-              method: "PUT",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json", // Especificar el tipo de contenido como JSON
-                "x-token": localStorage.getItem("clave"),
-              },
+          if (data.valor < CloroPh.minimo || data.valor > CloroPh.maximo) {
+            const responseNuevo = await fetch(
+              `https://treea-piscinas-api.vercel.app/v1/update-property-isadjusted`,
+              {
+                method: "PUT",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json", // Especificar el tipo de contenido como JSON
+                  "x-token": localStorage.getItem("clave"),
+                },
 
-              body: JSON.stringify({
-                nameParam: CloroPh.nombre,
-                paramId: CloroPh.idPh,
-              }),
+                body: JSON.stringify({
+                  nameParam: CloroPh.nombre,
+                  paramId: CloroPh.idPh,
+                }),
+              }
+            );
+
+            let nuevaRespuesta = "";
+
+            switch (responseNuevo.status) {
+              case 200:
+                nuevaRespuesta = await responseNuevo.json();
+                console.log({ Ready: nuevaRespuesta });
+                renderizar();
+
+                break;
+
+              case 500:
+                nuevaRespuesta = await responseNuevo.json();
+                console.log({ Fail: nuevaRespuesta });
+
+                break;
             }
-          );
-
-          let nuevaRespuesta = "";
-
-          switch (responseNuevo.status) {
-            case 200:
-              nuevaRespuesta = await responseNuevo.json();
-              console.log({ Ready: nuevaRespuesta });
-              renderizar();
-
-              break;
-
-            case 500:
-              nuevaRespuesta = await responseNuevo.json();
-              console.log({ Fail: nuevaRespuesta });
-
-              break;
           }
 
           break;
