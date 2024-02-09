@@ -296,6 +296,7 @@ export default function ModalAjustar({
     });
 
     setProductoRetornadoId(productoRetonrado._id);
+    // alert(productoRetornadoId);
 
     if (
       productoRetonrado?.availableQuantity <= productoRetonrado?.minQuantity
@@ -314,12 +315,9 @@ export default function ModalAjustar({
       if (CloroPh.nombre === "Cloro" && CloroPh.mansaje !== "good") {
         retornahistoricoPool();
         //*Almacenar y guaradr en el local Storage
-
-        localStorage.setItem("AjusteCloro", "true");
       } else if (CloroPh.nombre === "Ph" && CloroPh.mansaje !== "good") {
         retornahistoricoPool();
         setAjustePh(true);
-        localStorage.setItem("AjustePh", "true");
       }
 
       // guardarData();
