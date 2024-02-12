@@ -135,6 +135,8 @@ function AsignarParametros() {
     setDeshabilitar(true);
     setCargando(true);
 
+    alert(valuPisicna);
+
     const response = await fetch(
       "https://treea-piscinas-api.vercel.app/v1/parameterization",
       {
@@ -152,44 +154,53 @@ function AsignarParametros() {
       }
     );
 
+    let respuesta = "";
+
     switch (response.status) {
       case 200:
-        const result = await response.json();
+        alert("Aqui 1");
+        respuesta = await response.json();
         setOpen(true);
         setMensaje("Norma Asignada exitosamente!");
         setColor("success");
         setDeshabilitar(false);
         setCargando(false);
+        console.log(respuesta);
 
         break;
 
       case 400:
+        alert("Aqui 2");
         setOpen(true);
         setMensaje("Todos los campos son obligatorios");
         setColor("error");
         setDeshabilitar(false);
         setCargando(false);
+        respuesta = await response.json();
+        console.log(respuesta);
 
         break;
 
       case 401:
+        alert("Aqui 3");
+
         setOpen(true);
         setMensaje("Token no valido");
         setColor("error");
         setDeshabilitar(false);
         setCargando(false);
+        respuesta = await response.json();
+        console.log(respuesta);
 
+        break;
+
+      default:
+        respuesta = await response.json();
+        console.log(respuesta);
+        alert("no tengo idea");
         break;
     }
 
-    try {
-    } catch (error) {
-      setOpen(true);
-      setMensaje("Error en el servidor");
-      setColor("error");
-      setDeshabilitar(false);
-      setCargando(false);
-    }
     setCargando(false);
   };
 
@@ -515,7 +526,7 @@ function AsignarParametros() {
 
   const crearNorma = async () => {
     setDeshabilitar(true);
-
+    alert(valuPisicna);
     const response = await fetch(
       "https://treea-piscinas-api.vercel.app/v1/parameterization",
       {
@@ -532,43 +543,50 @@ function AsignarParametros() {
         }),
       }
     );
-
+    let respuesta = "";
     switch (response.status) {
       case 200:
-        const result = await response.json();
+        resupuesta = await response.json();
         setOpen(true);
         setMensaje("Parametros Asignados exitosamente!");
         setColor("success");
         setDeshabilitar(false);
+        console.log(respuesta);
 
         break;
 
       case 400:
+        resupuesta = await response.json();
         setOpen(true);
         setMensaje("Todos los campos son obligatorios");
         setColor("error");
         setDeshabilitar(false);
-        alert("Estoy aqui2");
+        alert("Estoy aqui 2");
+        console.log(respuesta);
 
         break;
 
       case 401:
+        resupuesta = await response.json();
         setOpen(true);
         setMensaje("Token no valido");
         setColor("error");
         setDeshabilitar(false);
-        alert("Estoy aqui2");
+        alert("Estoy aqui 3");
+        console.log(respuesta);
 
         break;
-    }
 
-    try {
-    } catch (error) {
-      setOpen(true);
-      setMensaje("Error en el servidor");
-      setColor("error");
-      setDeshabilitar(false);
-      alert("Estoy aqui4");
+      case 500:
+        respuesta = await response.json();
+        setOpen(true);
+        setMensaje("No se");
+        setColor("error");
+        setDeshabilitar(false);
+        alert("Estoy aqui 4");
+        console.log(respuesta);
+
+        break;
     }
 
     setDeshabilitar(false);
@@ -681,7 +699,7 @@ function AsignarParametros() {
                         size={24}
                       ></CircularProgress>
                     ) : (
-                      "Guardar"
+                      "Guardarr"
                     )}
                   </Button>
                 </Grid>

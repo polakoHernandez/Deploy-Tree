@@ -1035,6 +1035,14 @@ function GestionarPiscinas() {
                             </Typography>
                             <Typography>{pool?.city}</Typography>
                           </Grid>
+                          <Grid item xs={4} sx={{ textAlign: "center" }}>
+                            <Typography
+                              sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
+                            >
+                              Dirección
+                            </Typography>
+                            <Typography>{pool?.address}</Typography>{" "}
+                          </Grid>
 
                           <Grid item xs={4} sx={{ textAlign: "center" }}>
                             <Typography
@@ -1306,58 +1314,6 @@ function GestionarPiscinas() {
                             <Typography
                               sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                             >
-                              Forma
-                            </Typography>
-                            <Typography>{pool?.form}</Typography>
-                          </Grid>
-                          <Grid item xs={4} sx={{ textAlign: "center" }}>
-                            <Typography
-                              sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
-                            >
-                              Largo (m)
-                            </Typography>
-                            <Typography>{pool?.height}</Typography>
-                          </Grid>
-                          <Grid item xs={4} sx={{ textAlign: "center" }}>
-                            <Typography
-                              sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
-                            >
-                              Ancho (m)
-                            </Typography>
-                            <Typography>{pool?.width}</Typography>
-                          </Grid>
-
-                          <Grid item xs={4} sx={{ textAlign: "center" }}>
-                            <Typography
-                              sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
-                            >
-                              Profundidad A (m)
-                            </Typography>
-                            <Typography>{pool?.depth?.depthA}</Typography>
-                          </Grid>
-
-                          <Grid item xs={4} sx={{ textAlign: "center" }}>
-                            <Typography
-                              sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
-                            >
-                              Profundidad B (m)
-                            </Typography>
-                            <Typography>{pool?.depth?.depthB}</Typography>
-                          </Grid>
-
-                          <Grid item xs={4} sx={{ textAlign: "center" }}>
-                            <Typography
-                              sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
-                            >
-                              Profundidad C (m)
-                            </Typography>
-                            <Typography>{pool?.depth?.depthC}</Typography>
-                          </Grid>
-
-                          <Grid item xs={4} sx={{ textAlign: "center" }}>
-                            <Typography
-                              sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
-                            >
                               Profundidad máxima (m)
                             </Typography>
                             <Typography>{pool?.maxDepth}</Typography>
@@ -1378,6 +1334,31 @@ function GestionarPiscinas() {
                               Profundidad mínima (m)
                             </Typography>
                             <Typography>{pool?.meanDepth}</Typography>
+                          </Grid>
+                          <Grid item xs={4} style={{ textAlign: "center" }}>
+                            <Typography
+                              sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
+                            >
+                              Volumen (m³)
+                            </Typography>
+                            <Typography>
+                              {" "}
+                              {pool?.poolVolumR === undefined
+                                ? ""
+                                : pool?.poolVolumR}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={4} style={{ textAlign: "center" }}>
+                            <Typography
+                              sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
+                            >
+                              Volumen (L)
+                            </Typography>
+                            <Typography>
+                              {pool?.numberLitersR === undefined
+                                ? ""
+                                : pool?.numberLitersR}
+                            </Typography>
                           </Grid>
                         </Grid>
                       </Box>
@@ -1415,7 +1396,7 @@ function GestionarPiscinas() {
                             <Typography
                               sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                             >
-                              Caudal
+                              Caudal (L/seg)
                             </Typography>
                             <Typography>{pool?.caudal}</Typography>
                           </Grid>
@@ -1432,7 +1413,7 @@ function GestionarPiscinas() {
                             <Typography
                               sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                             >
-                              P. Recirculación mínimo
+                              P. Recirculación mínimo (h)
                             </Typography>
                             <Typography>
                               {pool?.recirculationPeriod?.min}
@@ -1443,7 +1424,7 @@ function GestionarPiscinas() {
                             <Typography
                               sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                             >
-                              P. Recirculación máximo
+                              P. Recirculación máximo (h)
                             </Typography>
                             <Typography>
                               {pool?.recirculationPeriod?.max}
@@ -1525,7 +1506,7 @@ function GestionarPiscinas() {
 
                                 <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
-                                    Altura del filtro
+                                    Altura del filtro (m)
                                   </Typography>
                                   <Typography sx={{ ...styles.fontTexto }}>
                                     {elemento.filterBedHeight}
@@ -1534,7 +1515,7 @@ function GestionarPiscinas() {
 
                                 <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
-                                    Capacidad del filtro
+                                    Capacidad del filtro (L)
                                   </Typography>
                                   <Typography sx={{ ...styles.fontTexto }}>
                                     {elemento.filterCapacity}
@@ -1543,7 +1524,7 @@ function GestionarPiscinas() {
 
                                 <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
-                                    Diámetro del filtro
+                                    Diámetro del filtro (m)
                                   </Typography>
                                   <Typography sx={{ ...styles.fontTexto }}>
                                     {elemento.filterDiameter}
@@ -1552,7 +1533,7 @@ function GestionarPiscinas() {
 
                                 <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
-                                    Altura del lecho filtrante
+                                    Altura del lecho filtrante (m)
                                   </Typography>
                                   <Typography sx={{ ...styles.fontTexto }}>
                                     {elemento.filterHeight}

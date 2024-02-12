@@ -129,6 +129,12 @@ export default function ModalNotificaciones({ open, close, pool }) {
                 </Typography>
                 <Typography>{pool.city}</Typography>
               </Grid>
+              <Grid item xs={4} sx={{ textAlign: "center" }}>
+                <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
+                  Dirección
+                </Typography>
+                <Typography>{pool.address}</Typography>
+              </Grid>
 
               <Grid item xs={4} sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
@@ -329,13 +335,6 @@ export default function ModalNotificaciones({ open, close, pool }) {
 
               <Grid item xs={4} sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  Forma
-                </Typography>
-                <Typography>{pool.form}</Typography>
-              </Grid>
-
-              <Grid item xs={4} sx={{ textAlign: "center" }}>
-                <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
                   Profundidad máxima (m)
                 </Typography>
                 <Typography>
@@ -357,6 +356,22 @@ export default function ModalNotificaciones({ open, close, pool }) {
                 </Typography>
                 <Typography>
                   {pool.meanDepth === undefined ? "" : pool.meanDepth}
+                </Typography>
+              </Grid>
+              <Grid item xs={4} sx={{ textAlign: "center" }}>
+                <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
+                  Volumen (m³){" "}
+                </Typography>
+                <Typography>
+                  {pool?.poolVolumR === undefined ? "" : pool?.poolVolumR}
+                </Typography>
+              </Grid>
+              <Grid item xs={4} sx={{ textAlign: "center" }}>
+                <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
+                  Volumen (L){" "}
+                </Typography>
+                <Typography>
+                  {pool?.numberLitersR === undefined ? "" : pool?.numberLitersR}{" "}
                 </Typography>
               </Grid>
             </Grid>
@@ -391,7 +406,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
               </Grid>
               <Grid item xs={4} sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  Caudal
+                  Caudal (L/seg)
                 </Typography>
                 <Typography>{pool.caudal}</Typography>
               </Grid>
@@ -404,14 +419,14 @@ export default function ModalNotificaciones({ open, close, pool }) {
 
               <Grid item xs={4} sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  P. Recirculación mínimo
+                  P. Recirculación mínimo (h)
                 </Typography>
                 <Typography>{pool.maxDepth}</Typography>
               </Grid>
 
               <Grid item xs={4} sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                  P. Recirculación máximo
+                  P. Recirculación máximo (h)
                 </Typography>
                 <Typography>{pool.meanDepth}</Typography>
               </Grid>
@@ -481,7 +496,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
 
                       <Grid item xs={4}>
                         <Typography sx={{ ...styles.fontTylografy }}>
-                          Altura del filtro
+                          Altura del filtro (m)
                         </Typography>
                         <Typography sx={{ ...styles.fontTexto }}>
                           {elemento.filterBedHeight}
@@ -490,7 +505,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
 
                       <Grid item xs={4}>
                         <Typography sx={{ ...styles.fontTylografy }}>
-                          Capacidad del filtro
+                          Capacidad del filtro (L)
                         </Typography>
                         <Typography sx={{ ...styles.fontTexto }}>
                           {elemento.filterCapacity}
@@ -499,7 +514,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
 
                       <Grid item xs={4}>
                         <Typography sx={{ ...styles.fontTylografy }}>
-                          Diámetro del filtro
+                          Diámetro del filtro (m)
                         </Typography>
                         <Typography sx={{ ...styles.fontTexto }}>
                           {elemento.filterDiameter}
@@ -508,7 +523,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
 
                       <Grid item xs={4}>
                         <Typography sx={{ ...styles.fontTylografy }}>
-                          Altura del lecho filtrante
+                          Altura del lecho filtrante (m)
                         </Typography>
                         <Typography sx={{ ...styles.fontTexto }}>
                           {elemento.filterHeight}

@@ -584,7 +584,7 @@ function MisPiscinas() {
                         <Typography
                           sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                         >
-                          Caudal
+                         Caudal (L/seg)
                         </Typography>
                         <Typography>{pool?.caudal}</Typography>
                       </Grid>
@@ -695,7 +695,7 @@ function MisPiscinas() {
 
                               <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
-                                  Capacidad del filtro
+                                  Capacidad del filtro (L)
                                 </Typography>
                                 <Typography sx={{ ...styles.fontTexto }}>
                                   {elemento.filterCapacity}
@@ -704,7 +704,7 @@ function MisPiscinas() {
 
                               <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
-                                  Diámetro del filtro
+                                  Diámetro del filtro (m)
                                 </Typography>
                                 <Typography sx={{ ...styles.fontTexto }}>
                                   {elemento.filterDiameter}
@@ -713,7 +713,7 @@ function MisPiscinas() {
 
                               <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
-                                  Altura del lecho filtrante
+                                  Altura del lecho filtrante (m)
                                 </Typography>
                                 <Typography sx={{ ...styles.fontTexto }}>
                                   {elemento.filterHeight}
