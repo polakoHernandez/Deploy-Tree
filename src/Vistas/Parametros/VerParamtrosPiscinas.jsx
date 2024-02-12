@@ -160,7 +160,6 @@ function VerParamtrosPiscinas() {
       ></SearchAppBar>
       <Box
         sx={{
-          // backgroundColor: "red",
           paddingBottom: "50px",
           width: "95%",
           height: "500px",
@@ -177,25 +176,31 @@ function VerParamtrosPiscinas() {
               : "translateY(45px)",
         }}
       >
-        <Typography
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-
-            backgroundColor: "rgb(0,164,228)",
-            color: "white",
-            position: "absolute",
-            top: "-40px",
-            right: { xs: "5%", sm: "5%", md: "5%", lg: "2%", xl: "10%" },
-            fontFamily: "'Nunito Sans', sans-serif",
-            width: "150px",
-            height: "40px",
-            borderRadius: "5px 0px 0px 0px",
-          }}
-        >
-          Parámetros
-        </Typography>
+        <Box sx={{ width: "100%", justifyContent: "center", display: "flex" }}>
+          <Box
+            sx={{
+              width: { xs: "90%", sm: "90%", md: "90%", lg: "1170px" },
+              display: "flex",
+              justifyContent: "end",
+            }}
+          >
+            <Typography
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "rgb(0,164,228)",
+                color: "white",
+                fontFamily: "'Nunito Sans', sans-serif",
+                width: "150px",
+                height: "40px",
+                borderRadius: "5px 0px 0px 0px",
+              }}
+            >
+              Parámetros
+            </Typography>
+          </Box>
+        </Box>
 
         <TablaVerParametros
           render={setRender}
