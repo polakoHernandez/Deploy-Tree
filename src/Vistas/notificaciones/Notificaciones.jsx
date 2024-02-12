@@ -448,7 +448,9 @@ const Notificaciones = () => {
                                 } ${
                                   elemento.chemicalProductId &&
                                   elemento.chemicalProductId.units
-                                }`}
+                                } a la fecha ${new Date(
+                                  elemento?.createAt
+                                ).toLocaleDateString()}`}
                               </Typography>
                               <IconButton
                                 sx={{
@@ -521,14 +523,13 @@ const Notificaciones = () => {
                                                         
                             `}
                             <Typography>
-                              {`${elemento?.historyPoolId?.paramChlorine?.message}`}
+                              {elemento?.historyPoolId?.paramChlorine
+                                ?.message === "good"
+                                ? `${elemento?.historyPoolId?.paramChlorine?.nameParam}  esta en el rango permitido`
+                                : `${elemento?.historyPoolId?.paramChlorine?.message}`}
                             </Typography>
 
                             <Typography>
-                              {/* {elemento?.historyPoolId?.paramPh?.message ===
-                              "good"
-                                ? `${elemento?.historyPoolId?.paramPh?.nameParam} esta en el rango permitido`
-                                : `${elemento?.historyPoolId?.paramPh?.message}`} */}
                               {elemento?.historyPoolId?.paramPh?.message ===
                               "good"
                                 ? `${elemento?.historyPoolId?.paramPh?.nameParam}  esta en el rango permitido`

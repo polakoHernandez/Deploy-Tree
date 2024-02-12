@@ -363,6 +363,8 @@ function AsignarParametros() {
         [name]: value,
       };
 
+      console.log(data);
+
       return {
         ...prevData,
         parameter: updatedParametros,
@@ -814,16 +816,15 @@ function AsignarParametros() {
                             marginLeft: { xs: "0%", sm: "0%", md: "5%" },
                           }}
                         >
-                          <InputGeneral
+                          <InputSelect
+                            options={[{ label: "Cloro" }, { label: "Ph" }]}
                             icon={<Pool></Pool>}
                             label="Parámetro"
-                            value={elemento.parameter}
-                            name="nameParam"
                             onChange={(e) =>
                               catchDataParametros(
                                 index,
-                                e.target.name,
-                                e.target.value
+                                "nameParam",
+                                e.target.textContent
                               )
                             }
                           />
