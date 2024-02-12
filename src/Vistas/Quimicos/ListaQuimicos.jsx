@@ -132,7 +132,6 @@ function ListaQuimicos() {
       ></SearchAppBar>
       <Box
         sx={{
-          // backgroundColor: "red",
           paddingBottom: "50px",
           width: "95%",
           height: "500px",
@@ -149,25 +148,38 @@ function ListaQuimicos() {
               : "translateY(45px)",
         }}
       >
-        <Typography
+        <Box
           sx={{
+            width: "100%",
             display: "flex",
-            alignItems: "center",
             justifyContent: "center",
-
-            backgroundColor: "rgb(0,164,228)",
-            color: "white",
-            position: "absolute",
-            top: "-40px",
-            right: { xs: "5%", sm: "5%", md: "10%", lg: "10.8%", xl: "17.5%" },
-            fontFamily: "'Nunito Sans', sans-serif",
-            width: "150px",
-            height: "40px",
-            borderRadius: "5px 0px 0px 0px",
           }}
         >
-          Químicos
-        </Typography>
+          <Box
+            sx={{
+              width: { xs: "90%", sm: "90%", md: "80%", lg: "952px" },
+              // marginLeft: { xs: "5%", sm: "5%", md: "0" },
+              display: "flex",
+              justifyContent: "end",
+            }}
+          >
+            <Typography
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "rgb(0,164,228)",
+                color: "white",
+                fontFamily: "'Nunito Sans', sans-serif",
+                width: "150px",
+                height: "40px",
+                borderRadius: "5px 0px 0px 0px",
+              }}
+            >
+              Químicos
+            </Typography>
+          </Box>
+        </Box>
 
         <TablaListaQuimicos
           data={data || ""}
