@@ -141,7 +141,7 @@ function AsignarParametros() {
     setCargando(true);
 
     const response = await fetch(
-      "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/parameterization",
+      "https://treea-piscinas-api.vercel.app/v1/parameterization",
       {
         method: "POST",
         headers: {
@@ -553,7 +553,7 @@ function AsignarParametros() {
   const crearNorma = async () => {
     setDeshabilitar(true);
     const response = await fetch(
-      "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/parameterization",
+      "https://treea-piscinas-api.vercel.app/v1/parameterization",
       {
         method: "POST",
         headers: {
@@ -735,6 +735,10 @@ function AsignarParametros() {
                         cargando === true
                           ? "rgb(210,210,210)"
                           : "rgb(0,164,228)",
+
+                      "&:hover": {
+                        backgroundColor: "rgb(0,164,228)",
+                      },
                     }}
                     onClick={asignarNorma}
                   >
@@ -744,7 +748,7 @@ function AsignarParametros() {
                         size={24}
                       ></CircularProgress>
                     ) : (
-                      "Guardarr"
+                      "Guardar"
                     )}
                   </Button>
                 </Grid>
