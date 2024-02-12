@@ -37,6 +37,7 @@ function AsignarParametros() {
   const [optionsPiscinas, setOptionsPiscinas] = useState([]);
   const [valuPisicna, setValuPisicna] = useState([]);
   const [cargando, setCargando] = useState(false);
+  const [idPool, setIdpool] = useState("");
 
   //*Estao para renderizar el front
   const [reload, setReload] = useState(false);
@@ -130,15 +131,17 @@ function AsignarParametros() {
     const retorno = listaPiscinas.find((elemento) => elemento.name === piscina);
     setValuPisicna(retorno._id);
   };
+  const obtenerIdPiscina2 = (piscina) => {
+    const retorno = listaPiscinas.find((elemento) => elemento.name === piscina);
+    setIdpool(retorno._id);
+  };
 
   const asignarNorma = async () => {
     setDeshabilitar(true);
     setCargando(true);
 
-    alert(valuPisicna);
-
     const response = await fetch(
-      "https://treea-piscinas-api.vercel.app/v1/parameterization",
+      "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/parameterization",
       {
         method: "POST",
         headers: {
@@ -149,7 +152,7 @@ function AsignarParametros() {
         body: JSON.stringify({
           typeValidation: "Norma",
           normativityId: idNorma,
-          poolId: valuPisicna,
+          poolId: idPool,
         }),
       }
     );
@@ -158,7 +161,6 @@ function AsignarParametros() {
 
     switch (response.status) {
       case 200:
-        alert("Aqui 1");
         respuesta = await response.json();
         setOpen(true);
         setMensaje("Norma Asignada exitosamente!");
@@ -170,20 +172,33 @@ function AsignarParametros() {
         break;
 
       case 400:
-        alert("Aqui 2");
-        setOpen(true);
-        setMensaje("Todos los campos son obligatorios");
-        setColor("error");
-        setDeshabilitar(false);
-        setCargando(false);
         respuesta = await response.json();
-        console.log(respuesta);
+
+        switch (respuesta.type) {
+          case "poolWithParameters":
+            setOpen(true);
+            setMensaje(respuesta.msg);
+            setColor("error");
+            setDeshabilitar(false);
+            setCargando(false);
+            console.log(respuesta);
+            break;
+          case "fields_required":
+            setOpen(true);
+            setMensaje(respuesta?.errors[0].msg);
+            setColor("error");
+            setDeshabilitar(false);
+            setCargando(false);
+            console.log(respuesta);
+            break;
+
+          default:
+            break;
+        }
 
         break;
 
       case 401:
-        alert("Aqui 3");
-
         setOpen(true);
         setMensaje("Token no valido");
         setColor("error");
@@ -193,11 +208,20 @@ function AsignarParametros() {
         console.log(respuesta);
 
         break;
+      case 404:
+        respuesta = await response.json();
+        setOpen(true);
+        setMensaje(respuesta.message);
+        setColor("error");
+        setDeshabilitar(false);
+        setCargando(false);
+        console.log(respuesta);
+
+        break;
 
       default:
         respuesta = await response.json();
         console.log(respuesta);
-        alert("no tengo idea");
         break;
     }
 
@@ -526,9 +550,8 @@ function AsignarParametros() {
 
   const crearNorma = async () => {
     setDeshabilitar(true);
-    alert(valuPisicna);
     const response = await fetch(
-      "https://treea-piscinas-api.vercel.app/v1/parameterization",
+      "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/parameterization",
       {
         method: "POST",
         headers: {
@@ -546,7 +569,7 @@ function AsignarParametros() {
     let respuesta = "";
     switch (response.status) {
       case 200:
-        resupuesta = await response.json();
+        respuesta = await response.json();
         setOpen(true);
         setMensaje("Parametros Asignados exitosamente!");
         setColor("success");
@@ -556,23 +579,44 @@ function AsignarParametros() {
         break;
 
       case 400:
-        resupuesta = await response.json();
-        setOpen(true);
-        setMensaje("Todos los campos son obligatorios");
-        setColor("error");
-        setDeshabilitar(false);
-        alert("Estoy aqui 2");
-        console.log(respuesta);
+        respuesta = await response.json();
+
+        switch (respuesta.type) {
+          case "poolWithParameters":
+            setOpen(true);
+            setMensaje(respuesta.msg);
+            setColor("error");
+            setDeshabilitar(false);
+            console.log(respuesta);
+            break;
+
+          default:
+            setOpen(true);
+            setMensaje("Todos los campos son obligatorios");
+            setColor("error");
+            setDeshabilitar(false);
+            console.log(respuesta);
+            break;
+        }
 
         break;
 
       case 401:
-        resupuesta = await response.json();
+        respuesta = await response.json();
         setOpen(true);
         setMensaje("Token no valido");
         setColor("error");
         setDeshabilitar(false);
-        alert("Estoy aqui 3");
+        console.log(respuesta);
+
+        break;
+
+      case 404:
+        respuesta = await response.json();
+        setOpen(true);
+        setMensaje(respuesta.message);
+        setColor("error");
+        setDeshabilitar(false);
         console.log(respuesta);
 
         break;
@@ -583,7 +627,6 @@ function AsignarParametros() {
         setMensaje("No se");
         setColor("error");
         setDeshabilitar(false);
-        alert("Estoy aqui 4");
         console.log(respuesta);
 
         break;
@@ -669,7 +712,7 @@ function AsignarParametros() {
                 </Grid>
                 <Grid item xs={12}>
                   <InputSelect
-                    onChange={(e) => obtenerIdPiscina(e.target.textContent)}
+                    onChange={(e) => obtenerIdPiscina2(e.target.textContent)}
                     options={optionsPiscinas}
                     icon={<Pool></Pool>}
                     label="Listado de Piscinas"

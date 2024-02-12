@@ -485,7 +485,7 @@ const Notificaciones = () => {
                             severity="warning"
                             icon={<ErrorOutline fontSize="inherit" />}
                             onClick={() => {
-                              // eliminarNotificacionId(elemento._id);
+                              eliminarNotificacionId(elemento._id);
                               navigate(
                                 `/gestionarPiscinas?id=${elemento?.historyPoolId?.poolId?._id}`
                               );
@@ -520,11 +520,11 @@ const Notificaciones = () => {
                             ).toLocaleDateString()}, el sistema generó los siguientes mensajes:                        
                                                         
                             `}
-                            <Typography sx={{ color: "black" }}>
+                            <Typography>
                               {`${elemento?.historyPoolId?.paramChlorine?.message}`}
                             </Typography>
 
-                            <Typography sx={{ color: "black" }}>
+                            <Typography>
                               {/* {elemento?.historyPoolId?.paramPh?.message ===
                               "good"
                                 ? `${elemento?.historyPoolId?.paramPh?.nameParam} esta en el rango permitido`
