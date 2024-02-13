@@ -35,7 +35,7 @@ function AsignarParametros() {
   const [listaPiscinas, setListaPiscinas] = useState([]);
   const [idNorma, setIdNorma] = useState("");
   const [optionsPiscinas, setOptionsPiscinas] = useState([]);
-  const [valuPisicna, setValuPisicna] = useState([]);
+  const [valuPisicna, setValuPisicna] = useState("");
   const [cargando, setCargando] = useState(false);
   const [idPool, setIdpool] = useState("");
 
@@ -598,6 +598,7 @@ function AsignarParametros() {
             setColor("error");
             setDeshabilitar(false);
             console.log(respuesta);
+            console.log(valuPisicna);
             break;
         }
 

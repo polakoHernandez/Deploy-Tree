@@ -462,7 +462,7 @@ const Notificaciones = () => {
                                 size="small"
                                 onClick={(e) => {
                                   e.stopPropagation(); // Evitar la propagación del evento
-                                  // eliminarNotificacionId(elemento._id);
+                                  eliminarNotificacionId(elemento._id);
                                 }}
                               >
                                 <Close />
@@ -496,10 +496,10 @@ const Notificaciones = () => {
                               <IconButton
                                 color="inherit"
                                 size="small"
-                                onClick={
-                                  (e) => ""
-                                  // eliminarNotificacionId(elemento._id)
-                                }
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  eliminarNotificacionId(elemento._id);
+                                }}
                               >
                                 <Close></Close>
                               </IconButton>
@@ -591,7 +591,9 @@ const Notificaciones = () => {
                                   color="inherit"
                                   size="small"
                                   onClick={(e) => {
-                                    e.stopPropagation(); // Evitar la propagación del evento
+                                    e.stopPropagation();
+                                    eliminarNotificacionId(elemento._id);
+                                    // Evitar la propagación del evento
                                     // eliminarNotificacionId(elemento._id);
                                   }}
                                 >
