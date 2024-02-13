@@ -20,10 +20,6 @@ import TablaPrevisualizacion from "../../Componentes/Parametros/TablaPrevisualiz
 function AsignarParametros() {
   //* Estado para guardar la data de los inuts cambiantes
   const [data, setData] = useState({
-    nameNormativity: "",
-    description: "",
-    typeOfWater: "",
-    name: "",
     parameter: [{ nameParam: "", specification: "" }], //*Manera Correcta
     //! cambio porque el backend espera nameParam y no name parameter: [{ name: "", specification: "" }],
   });
@@ -101,13 +97,6 @@ function AsignarParametros() {
         }));
 
         setOptionsPiscinas(newArray);
-
-        // response.pools.forEach((element) => {
-        //   setListaPiscinas((prevData) => [
-        //     ...prevData,
-        //     { label: element.name },
-        //   ]);
-        // });
 
         break;
 
@@ -347,7 +336,7 @@ function AsignarParametros() {
   const agregar = () => {
     setData((prevData) => ({
       ...prevData,
-      parameter: [...prevData.parameter, { name: "", specification: "" }],
+      parameter: [...prevData.parameter, { nameParam: "", specification: "" }],
     }));
   };
 
