@@ -139,6 +139,7 @@ function AsignarParametros() {
   const asignarNorma = async () => {
     setDeshabilitar(true);
     setCargando(true);
+    console.log(idNorma._id);
 
     const response = await fetch(
       "https://treea-piscinas-api.vercel.app/v1/parameterization",
@@ -151,7 +152,7 @@ function AsignarParametros() {
         },
         body: JSON.stringify({
           typeValidation: "Norma",
-          normativityId: idNorma,
+          normativityId: idNorma._id,
           poolId: idPool,
         }),
       }
@@ -186,6 +187,15 @@ function AsignarParametros() {
           case "fields_required":
             setOpen(true);
             setMensaje(respuesta?.errors[0].msg);
+            setColor("error");
+            setDeshabilitar(false);
+            setCargando(false);
+            console.log(respuesta);
+            break;
+
+          case "invalidMongoId":
+            setOpen(true);
+            setMensaje(respuesta?.msg);
             setColor("error");
             setDeshabilitar(false);
             setCargando(false);
@@ -585,6 +595,13 @@ function AsignarParametros() {
 
         switch (respuesta.type) {
           case "poolWithParameters":
+            setOpen(true);
+            setMensaje(respuesta.msg);
+            setColor("error");
+            setDeshabilitar(false);
+            console.log(respuesta);
+            break;
+          case "errorNameParams":
             setOpen(true);
             setMensaje(respuesta.msg);
             setColor("error");

@@ -426,7 +426,7 @@ const Notificaciones = () => {
                                 />
                               }
                               onClick={() => {
-                                // eliminarNotificacionId(elemento._id);
+                                eliminarNotificacionId(elemento._id);
                                 navigate(
                                   `/agregarInventario?id=${elemento.chemicalProductId._id}`
                                 );
@@ -558,8 +558,20 @@ const Notificaciones = () => {
                                   sx={{ marginTop: "8px" }}
                                 />
                               }
+                              action={
+                                <IconButton
+                                  color="inherit"
+                                  size="small"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    eliminarNotificacionId(elemento._id);
+                                  }}
+                                >
+                                  <Close></Close>
+                                </IconButton>
+                              }
                               onClick={() => {
-                                // eliminarNotificacionId(elemento._id);
+                                eliminarNotificacionId(elemento._id);
                                 mostrarPiscina(
                                   elemento.poolId && elemento.poolId._id
                                 );
@@ -587,18 +599,6 @@ const Notificaciones = () => {
                                     ).toLocaleDateString()
                                   }`}
                                 </Typography>
-                                <IconButton
-                                  color="inherit"
-                                  size="small"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    eliminarNotificacionId(elemento._id);
-                                    // Evitar la propagación del evento
-                                    // eliminarNotificacionId(elemento._id);
-                                  }}
-                                >
-                                  <Close></Close>
-                                </IconButton>
                               </Box>
                             </Alert>
                           </Grid>
