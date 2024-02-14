@@ -31,6 +31,7 @@ import rectangular from "../../assets/imagePool/PiscinaRectangular.png";
 import ovalada from "../../assets/imagePool/PiscinaOvalada.png";
 import "../../Estilos/Piscina/misPiscinas.css";
 import { useLocation } from "react-router-dom";
+import * as services from "../../services/pisicinas/gestionarPiscinas/services";
 
 function GestionarPiscinas() {
   const [data, setData] = useState("");
@@ -303,6 +304,27 @@ function GestionarPiscinas() {
 
   const listaDeMisPiscinas = async () => {
     setCargando(true);
+    const rol = localStorage.getItem("rol");
+
+    if (rol === "GESTOR") {
+      services.listarPiscinasPorId().then((res) => {
+        switch (res.status) {
+          case 200:
+            setData(res);
+            const nombrePiscinas = res?.pools?.map((piscina) => ({
+              label: piscina.name,
+            }));
+            setNombresPiscinas(nombrePiscinas);
+            setCargando(false);
+            break;
+
+          default:
+            break;
+        }
+      });
+      return;
+    }
+
     try {
       const tokenSend = localStorage.getItem("clave");
       const response = await fetch(
@@ -324,6 +346,7 @@ function GestionarPiscinas() {
           const responeData = await response.json();
 
           setData(responeData);
+          console.log({ ESTE: responeData });
           setCargando(false);
           const nombrePiscinas = responeData?.pools?.map((piscina) => ({
             label: piscina.name,
