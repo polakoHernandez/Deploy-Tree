@@ -160,6 +160,15 @@ function CrearUsuario() {
           limpiar();
           break;
 
+        case 401:
+          respuesta = await response.json();
+          setCargando(false);
+          setOpen(true);
+          setSeverity("error");
+          setMensaje(respuesta.msg);
+          limpiar();
+          break;
+
         case 400:
           respuesta = await response.json();
 

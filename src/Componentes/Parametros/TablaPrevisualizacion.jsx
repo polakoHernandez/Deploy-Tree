@@ -117,7 +117,7 @@ export default function TablaPrevisualizacion({
     {
       field: "name",
       headerName: "Parámetro",
-      width: 200,
+      width: 120,
       headerAlign: "center",
       editable: true,
     },
@@ -131,7 +131,7 @@ export default function TablaPrevisualizacion({
     {
       field: "minRange",
       headerName: "Mínimo",
-      width: 120,
+      width: 100,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -140,7 +140,7 @@ export default function TablaPrevisualizacion({
     {
       field: "maxRange",
       headerName: "Máximo",
-      width: 120,
+      width: 100,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -149,7 +149,7 @@ export default function TablaPrevisualizacion({
     {
       field: "maxValueSpecification",
       headerName: "Valor máximo",
-      width: 150,
+      width: 120,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -158,7 +158,7 @@ export default function TablaPrevisualizacion({
     {
       field: "tal vez",
       headerName: "Análisis y reporte",
-      width: 175,
+      width: 150,
       headerAlign: "center",
       editable: true,
       renderCell: (params) =>
@@ -191,7 +191,7 @@ export default function TablaPrevisualizacion({
       }}
     >
       <DataGrid
-        sx={{ width: { xs: "95%", sm: "95%", md: "967px" } }}
+        sx={{ width: { xs: "95%", sm: "95%", md: "70%", lg: "791px" } }}
         rows={data || ""}
         columns={columns.map((col) => ({
           ...col,

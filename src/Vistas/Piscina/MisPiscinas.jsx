@@ -818,6 +818,7 @@ function MisPiscinas() {
                                   // backgroundColor: "pink",
                                   display: "flex",
                                   justifyContent: "center",
+                                  marginBottom:"30px"
                                 }}
                               >
                                 <img
@@ -915,6 +916,7 @@ function MisPiscinas() {
                                     marginLeft: "40%",
                                     borderBottom: "2px solid black",
                                     marginBottom: "5px",
+                                    marginTop: "10px"
                                   }}
                                 >
                                   Calentador {index + 1}

@@ -3,6 +3,7 @@ import SearchAppBar from "../../Componentes/General/NavBar";
 import DataGridDemo from "../../Componentes/General/Tabla";
 import { Box, Typography } from "@mui/material";
 import ModalGeneral from "../../Componentes/General/Modal";
+import Alertas from "../../Componentes/General/Alertas";
 
 function ListaDeUsuarios() {
   document.body.style.overflow = "scroll";
@@ -17,6 +18,10 @@ function ListaDeUsuarios() {
   const [data, setData] = useState([]);
   const [cargando, setCargando] = useState(false);
   // Funcion para listar todos los usuarios
+
+  const [openAlerta, setOpenAlerta] = useState(false);
+  const [message, setMessage] = useState(false);
+  const [severity, setSeverity] = useState(false);
 
   // Estados para recargar los datos
   const [reload, setReload] = useState(false);
@@ -38,8 +43,11 @@ function ListaDeUsuarios() {
 
       switch (response.status) {
         case 401:
-          setCargando(false);
-          setOpenModal(true);
+          const respuesta = await response.json();
+          setOpenAlerta(true);
+          setMessage(respuesta.msg);
+          setSeverity("error");
+
           break;
 
         case 200:
@@ -174,11 +182,12 @@ function ListaDeUsuarios() {
         ></DataGridDemo>
       </Box>
 
-      <ModalGeneral
-        open={openModal}
-        mensaje1="UPS!"
-        mensaje2="Su Sesión Ha Expirado"
-      ></ModalGeneral>
+      <Alertas
+        open={openAlerta}
+        mensaje={message}
+        severity={severity}
+        cerrar={() => setOpenAlerta(false)}
+      ></Alertas>
     </Box>
   );
 }

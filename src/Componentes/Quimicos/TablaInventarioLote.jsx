@@ -50,7 +50,7 @@ function TablaInventarioLote(data) {
       }}
     >
       <DataGrid
-        sx={{ width: { xs: "95%", sm: "95%", md: "653px" } }}
+        sx={{ width: { xs: "95%", sm: "70%", md: "653px", lg: "653px" } }}
         rows={data.data}
         columns={columns.map((col) => ({
           ...col,
