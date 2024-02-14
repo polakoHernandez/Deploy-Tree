@@ -124,31 +124,6 @@ function CrearUsuario() {
   };
 
   const crearUsuario = async () => {
-    if (data.celular === "") {
-      setMensaje("El celular debe ser un número");
-      setOpen(true);
-      setSeverity("warning");
-      return;
-    } else if (
-      data.email === "" ||
-      data.nombre === "" ||
-      data.rol === "" ||
-      data.apellidos == "" ||
-      data.password === "" ||
-      data.confirm === "" ||
-      data.cedula === ""
-    ) {
-      setOpen(true);
-      setMensaje("Todos los campos son obligatorios");
-      setSeverity("warning");
-      return;
-    } else if (data.password !== data.confirm) {
-      setMensaje("Las contraseñas no coinciden");
-      setOpen(true);
-      setSeverity("error");
-      return;
-    }
-
     setCargando(true);
     try {
       const response = await fetch(
@@ -173,9 +148,11 @@ function CrearUsuario() {
         }
       );
 
+      let respuesta = "";
+
       switch (response.status) {
         case 200:
-          const responeData = await response.json();
+          respuesta = await response.json();
           setCargando(false);
           setOpen(true);
           setSeverity("success");
@@ -184,17 +161,24 @@ function CrearUsuario() {
           break;
 
         case 400:
-          const response400 = await response.json();
-          setOpen(true);
-          setSeverity("error");
+          respuesta = await response.json();
 
-          setMensaje(
-            "Minimo 7 caracteres, un numero, una minúscula, una mayúscula y un carácter especial para la contraseña"
-          );
-          setCargando(false);
+          switch (respuesta.type) {
+            case "fields_required":
+              setOpen(true);
+              setSeverity("error");
+              setMensaje(respuesta.errors[0].msg);
+              setCargando(false);
+              console.log(respuesta);
+              break;
+
+            default:
+              break;
+          }
           break;
 
         case 500:
+          respuesta = await response.json();
           setOpen(true);
           setSeverity("error");
           setMensaje("Error en el servidor");

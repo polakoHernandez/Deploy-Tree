@@ -554,7 +554,7 @@ function AsignarParametros() {
 
     setDeshabilitar(true);
     const response = await fetch(
-      "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/parameterization",
+      "https://treea-piscinas-api.vercel.app/v1/parameterization",
       {
         method: "POST",
         headers: {

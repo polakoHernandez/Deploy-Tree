@@ -14,8 +14,8 @@ function ModalData({ data, open, close }) {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: { xs: "80%", md: "50%", lg: "50%", xl: "60%" },
-    height: { xs: "500px", sm: "500px", md: "500px", lg: "400px", xl: "500px" },
+    width: { xs: "80%", sm: "80%", md: "90%", lg: "70%", xl: "60%" },
+    height: { xs: "500px", sm: "500px", md: "500px", lg: "500px", xl: "500px" },
     bgcolor: "background.paper",
     //   border: "2px solid #000",
     boxShadow: 24,
@@ -42,8 +42,8 @@ function ModalData({ data, open, close }) {
   const columns = [
     {
       field: "name",
-      headerName: "NOMBRE",
-      width: 150,
+      headerName: "Nombre",
+      width: 120,
       headerAlign: "center",
     },
     {
@@ -142,7 +142,7 @@ function ModalData({ data, open, close }) {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                height: "50vh",
+                height: "300px",
                 marginBottom: "10px",
               }}
             >
@@ -151,9 +151,9 @@ function ModalData({ data, open, close }) {
                   width: {
                     xs: "100%",
                     sm: "100%",
-                    md: "100%",
-                    lg: "100%",
-                    xl: "711px",
+                    md: "681px",
+                    lg: "681px",
+                    xl: "681px",
                   },
                 }}
                 rows={data.parameter}

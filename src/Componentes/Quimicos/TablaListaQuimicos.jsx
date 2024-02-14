@@ -145,10 +145,6 @@ export default function TablaListaQuimicos({
       width: 130,
       align: "center",
       headerAlign: "center",
-      valueFormatter: (params) => {
-        const truncatedNumber = Math.floor(params.value * 100) / 100;
-        return truncatedNumber.toFixed(2);
-      },
     },
 
     {

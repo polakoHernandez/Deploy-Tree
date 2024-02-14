@@ -609,7 +609,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
 
                       <Grid xs={4}>
                         <Typography sx={{ ...styles.fontTylografy }}>
-                          Flujo
+                          Caudal (L/seg)
                         </Typography>
                         <Typography sx={{ ...styles.fontTexto }}>
                           {elemento.pumpFlow}

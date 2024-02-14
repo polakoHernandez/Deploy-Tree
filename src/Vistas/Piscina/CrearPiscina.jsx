@@ -590,15 +590,6 @@ function CrearPiscina() {
   };
 
   const crearPiscina = async () => {
-    // for (const key in data) {
-    //    if (data.hasOwnProperty(key) && data[key] === "") {
-    //      setOpen(true);
-    //      setColor("error");
-    //      setMensaje("Todos los campos son obligatorios!");
-    //      return; // At least one attribute is empty
-    //    }
-    //  }
-
     setDeshabilitar(true);
 
     const formData = new FormData();
@@ -686,13 +677,10 @@ function CrearPiscina() {
 
       case 400:
         const respuesta = await response.json();
-        const mensjae = respuesta.errors.map((item) => item.msg);
-        const mensajeMostrar = mensjae.join(",");
         setOpen(true);
-        setMensaje(mensajeMostrar);
+        setMensaje(respuesta.errors[0].msg);
         setColor("error");
         setDeshabilitar(false);
-        console.log("MI RESPUESTA");
         console.log(respuesta.errors);
 
         break;
@@ -755,7 +743,7 @@ function CrearPiscina() {
               }}
               onClick={() => setContador(2)}
             >
-              medidas
+              Medidas
             </Typography>
             <Typography
               sx={{
@@ -1077,7 +1065,7 @@ function CrearPiscina() {
                     <InputGeneral
                       value={data.caudal}
                       type="number"
-                      label="Caudal"
+                      label="Caudal (L/seg)"
                       placeholder="Ingrese el caudal"
                       icon={<PoolIcon></PoolIcon>}
                       onChange={(e) =>
@@ -1189,7 +1177,7 @@ function CrearPiscina() {
                           <InputGeneral
                             type="number"
                             name="altura"
-                            label="Altura"
+                            label="Altura (m)"
                             icon={<Pool></Pool>}
                             onChange={(e) =>
                               catchDataFiltros(index, "altura", e.target.value)
@@ -1207,7 +1195,7 @@ function CrearPiscina() {
                             }
                             type="number"
                             name="diametro"
-                            label="Diametro"
+                            label=" Diámetro (m)"
                             icon={<Pool></Pool>}
                           ></InputGeneral>
                         </Grid>
@@ -1222,7 +1210,7 @@ function CrearPiscina() {
                             }
                             type="number"
                             name="capacidad"
-                            label="Capacidad"
+                            label="Capacidad (L)"
                             icon={<Pool></Pool>}
                           ></InputGeneral>
                         </Grid>
@@ -1237,7 +1225,7 @@ function CrearPiscina() {
                             }
                             type="number"
                             name="lecho"
-                            label="Altura de lecho filtrante"
+                            label="Altura de lecho filtrante (m)"
                             icon={<Pool></Pool>}
                           ></InputGeneral>
                         </Grid>
@@ -1274,7 +1262,7 @@ function CrearPiscina() {
                           <Grid item xs={12} sm={12} md={4}>
                             <InputGeneral
                               type="number"
-                              label="Flujo"
+                              label="Caudal (L/seg)"
                               name="flujo"
                               icon={<Pool></Pool>}
                               onChange={(e) => catchDataBombas(index, e)}

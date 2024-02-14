@@ -840,7 +840,7 @@ function MisPiscinas() {
 
                               <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
-                                  Flujo
+                                  Caudal (L/seg)
                                 </Typography>
                                 <Typography sx={{ ...styles.fontTexto }}>
                                   {elemento.pumpFlow}

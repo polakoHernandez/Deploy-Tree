@@ -262,7 +262,7 @@ export default function DataGridDemo({
         getRowId={(data) => data.ID}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 6 },
+            paginationModel: { page: 0, pageSize: 10 },
           },
         }}
         // pageSizeOptions={[6, 7]}
