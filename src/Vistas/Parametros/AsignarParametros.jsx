@@ -550,9 +550,11 @@ function AsignarParametros() {
   };
 
   const crearNorma = async () => {
+    console.log({ paametros: data.parameter, pool: valuPisicna });
+
     setDeshabilitar(true);
     const response = await fetch(
-      "https://treea-piscinas-api.vercel.app/v1/parameterization",
+      "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/parameterization",
       {
         method: "POST",
         headers: {
@@ -598,9 +600,9 @@ function AsignarParametros() {
             console.log(respuesta);
             break;
 
-          default:
+          case "fields_required":
             setOpen(true);
-            setMensaje("Todos los campos son obligatorios");
+            setMensaje(respuesta.errors[0].msg);
             setColor("error");
             setDeshabilitar(false);
             console.log(respuesta);
@@ -919,6 +921,7 @@ function AsignarParametros() {
                             }}
                           >
                             <InputGeneral
+                              type="number"
                               value={elemento.maximo}
                               icon={<Pool></Pool>}
                               label="Máximo"
