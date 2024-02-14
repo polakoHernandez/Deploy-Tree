@@ -13,6 +13,7 @@ import circular from "../../assets/imagePool/PiscinaCircular.png"
 import rectangular from "../../assets/imagePool/PiscinaRectangular.png"
 import ovalada from "../../assets/imagePool/PiscinaOvalada.png"
 import "../../Estilos/Piscina/misPiscinas.css"
+import * as services from "../../services/pisicinas/misPisicnas/services"
 
 function MisPiscinas() {
   const location = useLocation();
@@ -84,7 +85,45 @@ function MisPiscinas() {
 
   const listaDeMisPiscinas = async () => {
     const idUser = localStorage.getItem("id");
+    const rol = localStorage.getItem("rol")
     setCargando(true);
+
+
+    if(rol  ==="GERENTE"){
+
+
+      services.listarPisicnas().then((res)=>{
+        console.log(res)
+        
+
+        switch (res.status) {
+          case 200:
+
+                setData(res)
+                const nombrePiscinas = res?.poolCreatedByUser?.map(
+                  (pisicina) =>( 
+                    {
+                      label: pisicina.name,
+                    },
+                  
+                ));
+                setListaNombresPiscinas(nombrePiscinas);
+                    setCargando(false)
+            break;
+        
+          default:
+            break;
+        }
+        
+      })
+
+
+        return
+
+    }
+
+
+
     try {
       const tokenSend = localStorage.getItem("clave");
       const response = await fetch(
@@ -104,6 +143,7 @@ function MisPiscinas() {
 
         case 200:
           const responeData = await response.json();
+          console.log(responeData)
           console.log(responeData?.poolCreatedByUser);
           const nombrePiscinas = responeData?.poolCreatedByUser?.map(
             (pisicina) =>( 
