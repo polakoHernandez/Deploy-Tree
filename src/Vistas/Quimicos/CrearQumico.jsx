@@ -181,15 +181,9 @@ const CrearQuimico = () => {
     {
       label: "Kilogramos",
     },
-    {
-      label: "Gramos",
-    },
 
     {
       label: "Litros",
-    },
-    {
-      label: "Galones",
     },
   ];
 
