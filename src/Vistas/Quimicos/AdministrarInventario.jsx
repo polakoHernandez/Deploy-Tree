@@ -341,21 +341,6 @@ function AdministrarInventario() {
     });
   };
 
-  //*fuction to download data json like excel
-  const exportToExcel = () => {
-    OrganizarDataPorFecha(historicoId, fechaInicial, fechaFinal).then((res) => {
-      organizarDataExcel(res).then((respuesta) => {
-        // Desde este punto construyo el xlsx
-        const ws = XLSX.utils.json_to_sheet(respuesta); // sección para convertir json a hoja
-        const wb = XLSX.utils.book_new(); // sección para crear un nuevo libro de excel
-        XLSX.utils.book_append_sheet(wb, ws, "InventarioId"); // sección para incluir datos en la hoja
-
-        // Guardar el archivo
-        XLSX.writeFile(wb, "Inventario.xlsx"); // sección para descargar el archivo con formato xlsx
-      });
-    });
-  };
-
   useEffect(() => {
     listarProductosQuimicos().then((res) => {
       setListaQuimicos(res?.chemicalProducts);
@@ -584,7 +569,7 @@ function AdministrarInventario() {
                       <Button
                         variant="contained"
                         color="success"
-                        // onClick={exportToExcel}
+                        disabled={historicoId === "" ? true : false}
                         endIcon={<Description></Description>}
                         onClick={() => setShowReport(true)}
                       >
@@ -592,29 +577,6 @@ function AdministrarInventario() {
                       </Button>
                     </Box>
                   </Box>
-                  {/* <label>Fecha inicial</label>
-                  <InputGeneral
-                    type="date"
-                    onChange={(e) =>
-                      setFechaInicia((fecha) => {
-                        const fechaActual = new Date(e.target.value);
-                        fechaActual.setDate(fechaActual.getDate() + 1);
-                        return fechaActual.toISOString().split("T")[0];
-                      })
-                    }
-                  ></InputGeneral>
-
-                  <label>Fecha Final</label>
-                  <InputGeneral
-                    type="date"
-                    onChange={(e) =>
-                      setFechaFinal((fecha) => {
-                        const fechaActual = new Date(e.target.value);
-                        fechaActual.setDate(fechaActual.getDate() + 1);
-                        return fechaActual.toISOString().split("T")[0];
-                      })
-                    }
-                  ></InputGeneral> */}
                 </Grid>
                 <TablaInventarioId data={historicoId}></TablaInventarioId>
               </Box>
@@ -663,6 +625,7 @@ function AdministrarInventario() {
         cerrar={() => setOpen(false)}
       ></Alertas>
       <ModalReporte
+        data={historicoId}
         open={showRepor}
         close={() => setShowReport(false)}
       ></ModalReporte>
