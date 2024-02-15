@@ -31,6 +31,7 @@ import {
   opcionesInputs,
   obtenerId,
   organizarDataExcel,
+  OrganizarDataPorFecha,
 } from "../../utils/quimicos/utils";
 import AgregarInventario from "./AgregarInventario";
 import * as XLSX from "xlsx";
@@ -341,13 +342,17 @@ function AdministrarInventario() {
 
   //*fuction to download data json like excel
   const exportToExcel = () => {
-    // Desde este punto construyo el xlsx
-    const ws = XLSX.utils.json_to_sheet(arrayxmlx); // sección para convertir json a hoja
-    const wb = XLSX.utils.book_new(); // sección para crear un nuevo libro de excel
-    XLSX.utils.book_append_sheet(wb, ws, "InventarioId"); // sección para incluir datos en la hoja
+    OrganizarDataPorFecha(historicoId, fechaInicial, fechaFinal).then((res) => {
+      organizarDataExcel(res).then((respuesta) => {
+        // Desde este punto construyo el xlsx
+        const ws = XLSX.utils.json_to_sheet(respuesta); // sección para convertir json a hoja
+        const wb = XLSX.utils.book_new(); // sección para crear un nuevo libro de excel
+        XLSX.utils.book_append_sheet(wb, ws, "InventarioId"); // sección para incluir datos en la hoja
 
-    // Guardar el archivo
-    XLSX.writeFile(wb, "Inventario.xlsx"); // sección para descargar el archivo con formato xlsx
+        // Guardar el archivo
+        XLSX.writeFile(wb, "Inventario.xlsx"); // sección para descargar el archivo con formato xlsx
+      });
+    });
   };
 
   useEffect(() => {
@@ -563,14 +568,7 @@ function AdministrarInventario() {
                   <InputGeneral
                     type="date"
                     onChange={(e) => {
-                      const newFechaInicia = e.target.value;
-                      setFechaInicia(newFechaInicia);
-                      const array = organizarDataExcel(
-                        historicoId,
-                        newFechaInicia,
-                        fechaFinal
-                      );
-                      setArrayxmlx(array);
+                      setFechaInicia(e.target.value);
                     }}
                   ></InputGeneral>
 
@@ -578,14 +576,7 @@ function AdministrarInventario() {
                   <InputGeneral
                     type="date"
                     onChange={(e) => {
-                      const newFechaFinal = e.target.value;
-                      setFechaFinal(newFechaFinal);
-                      const array = organizarDataExcel(
-                        historicoId,
-                        fechaInicial,
-                        newFechaFinal
-                      );
-                      setArrayxmlx(array);
+                      setFechaFinal(e.target.value);
                     }}
                   ></InputGeneral>
                 </Grid>

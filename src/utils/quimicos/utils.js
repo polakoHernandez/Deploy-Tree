@@ -18,21 +18,20 @@ export const obtenerDataInputs = (name, value, state) => {
   }));
 };
 
-// export const OrganizarDataPorFecha = (array, fechaInicial, fechaFinal) => {
-//   let filteredArray = array.filter((obj) => {
-//     return obj.fecha >= fechaInicial && obj.fecha <= fechaFinal;
-//   });
-
-//   console.log({ MIDATA: filteredArray });
-// };
-
-export const organizarDataExcel = (array, fechaInicial, fechaFinal) => {
-  let filteredArray = array.filter((obj) => {
-    return obj.fecha >= fechaInicial && obj.fecha <= fechaFinal;
+export const OrganizarDataPorFecha = async (
+  array,
+  fechaInicial,
+  fechaFinal
+) => {
+  let filteredArray = await array.filter((obj) => {
+    return obj.fecha >= fechaInicial || obj.fecha <= fechaFinal;
   });
 
-  console.log(filteredArray);
-  const arrayOrganizado = filteredArray.map((item) => ({
+  return filteredArray;
+};
+
+export const organizarDataExcel = async (array) => {
+  const arrayOrganizado = await array.map((item) => ({
     Fecha: new Date(item.fecha).toLocaleDateString(),
     Responsable: item.responsable,
     Producto: item.productoQuimico,
