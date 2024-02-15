@@ -13,6 +13,7 @@ import {
   KeyboardDoubleArrowRight,
   KeyboardDoubleArrowLeft,
   Pool,
+  Description,
 } from "@mui/icons-material";
 import InputSelect from "../../Componentes/General/InputSelect";
 import InputGeneral from "../../Componentes/General/InputGeneral";
@@ -26,8 +27,13 @@ import {
   listarHistoricoLote,
   agregarAInventario,
 } from "../../services/quimicos/services";
-import { opcionesInputs, obtenerId } from "../../utils/quimicos/utils";
+import {
+  opcionesInputs,
+  obtenerId,
+  organizarDataExcel,
+} from "../../utils/quimicos/utils";
 import AgregarInventario from "./AgregarInventario";
+import * as XLSX from "xlsx";
 
 function AdministrarInventario() {
   const [mover, setMover] = useState(false); //MOvercon Piscina
@@ -45,6 +51,13 @@ function AdministrarInventario() {
   });
 
   const location = useLocation();
+
+  //* Estado para captuar el rano de fechas
+  const [fechaInicial, setFechaInicia] = useState("");
+  const [fechaFinal, setFechaFinal] = useState("");
+  const [arrayxmlx, setArrayxmlx] = useState("");
+
+  //*Estado para guardar el array a enviar al xmlx
 
   //*Estados para abrir la alerta
   const [open, setOpen] = useState(false);
@@ -326,6 +339,17 @@ function AdministrarInventario() {
     });
   };
 
+  //*fuction to download data json like excel
+  const exportToExcel = () => {
+    // Desde este punto construyo el xlsx
+    const ws = XLSX.utils.json_to_sheet(arrayxmlx); // sección para convertir json a hoja
+    const wb = XLSX.utils.book_new(); // sección para crear un nuevo libro de excel
+    XLSX.utils.book_append_sheet(wb, ws, "InventarioId"); // sección para incluir datos en la hoja
+
+    // Guardar el archivo
+    XLSX.writeFile(wb, "Inventario.xlsx"); // sección para descargar el archivo con formato xlsx
+  };
+
   useEffect(() => {
     listarProductosQuimicos().then((res) => {
       setListaQuimicos(res?.chemicalProducts);
@@ -529,6 +553,41 @@ function AdministrarInventario() {
                       listarInventarioId(listaQuimicos, e.target.textContent)
                     }
                   ></InputSelect>
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={exportToExcel}
+                  >
+                    {<Description></Description>}
+                  </Button>
+                  <InputGeneral
+                    type="date"
+                    onChange={(e) => {
+                      const newFechaInicia = e.target.value;
+                      setFechaInicia(newFechaInicia);
+                      const array = organizarDataExcel(
+                        historicoId,
+                        newFechaInicia,
+                        fechaFinal
+                      );
+                      setArrayxmlx(array);
+                    }}
+                  ></InputGeneral>
+
+                  <label>Fecha Final</label>
+                  <InputGeneral
+                    type="date"
+                    onChange={(e) => {
+                      const newFechaFinal = e.target.value;
+                      setFechaFinal(newFechaFinal);
+                      const array = organizarDataExcel(
+                        historicoId,
+                        fechaInicial,
+                        newFechaFinal
+                      );
+                      setArrayxmlx(array);
+                    }}
+                  ></InputGeneral>
                 </Grid>
                 <TablaInventarioId data={historicoId}></TablaInventarioId>
               </Box>

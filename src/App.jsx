@@ -21,6 +21,7 @@ import VerDataParametro from "./Vistas/Parametros/VerDataParametro";
 import ListaQuimicos from "./Vistas/Quimicos/ListaQuimicos";
 import ActualizarQuimico from "./Vistas/Quimicos/ActualizarQuimico";
 import AdministrarInventario from "./Vistas/Quimicos/AdministrarInventario";
+import ExportToExcel from "./Reporte";
 
 function App() {
   return (
@@ -109,6 +110,10 @@ function App() {
           <Route
             path="/administrarInventario"
             element={<AdministrarInventario></AdministrarInventario>}
+          ></Route>
+          <Route
+            path="/reporte"
+            element={<ExportToExcel></ExportToExcel>}
           ></Route>
         </Routes>
       </BrowserRouter>

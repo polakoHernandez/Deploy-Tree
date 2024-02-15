@@ -74,6 +74,8 @@ function TablaInventarioId(data) {
     return Math.random().toString(36).substring(2) + Date.now().toString(36);
   };
 
+  console.log(data);
+
   return (
     <Box
       sx={{

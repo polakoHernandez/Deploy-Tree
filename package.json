@@ -30,7 +30,8 @@
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.1",
     "swiper": "^11.0.5",
-    "web-push": "^3.6.7"
+    "web-push": "^3.6.7",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.1/xlsx-0.20.1.tgz"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
