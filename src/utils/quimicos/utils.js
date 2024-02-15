@@ -23,8 +23,15 @@ export const OrganizarDataPorFecha = async (
   fechaInicial,
   fechaFinal
 ) => {
+  console.log(fechaInicial, fechaFinal);
+
   let filteredArray = await array.filter((obj) => {
-    return obj.fecha >= fechaInicial || obj.fecha <= fechaFinal;
+    return (
+      new Date(obj.fecha).toLocaleDateString() >=
+        new Date(fechaInicial).toLocaleDateString() &&
+      new Date(obj.fecha).toLocaleDateString() <=
+        new Date(fechaFinal).toLocaleDateString()
+    );
   });
 
   return filteredArray;

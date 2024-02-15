@@ -565,19 +565,28 @@ function AdministrarInventario() {
                   >
                     {<Description></Description>}
                   </Button>
+                  <label>Fecha inicial</label>
                   <InputGeneral
                     type="date"
-                    onChange={(e) => {
-                      setFechaInicia(e.target.value);
-                    }}
+                    onChange={(e) =>
+                      setFechaInicia((fecha) => {
+                        const fechaActual = new Date(e.target.value);
+                        fechaActual.setDate(fechaActual.getDate() + 1);
+                        return fechaActual.toISOString().split("T")[0];
+                      })
+                    }
                   ></InputGeneral>
 
                   <label>Fecha Final</label>
                   <InputGeneral
                     type="date"
-                    onChange={(e) => {
-                      setFechaFinal(e.target.value);
-                    }}
+                    onChange={(e) =>
+                      setFechaFinal((fecha) => {
+                        const fechaActual = new Date(e.target.value);
+                        fechaActual.setDate(fechaActual.getDate() + 1);
+                        return fechaActual.toISOString().split("T")[0];
+                      })
+                    }
                   ></InputGeneral>
                 </Grid>
                 <TablaInventarioId data={historicoId}></TablaInventarioId>

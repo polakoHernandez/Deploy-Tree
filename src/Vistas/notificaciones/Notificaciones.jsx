@@ -444,7 +444,7 @@ const Notificaciones = () => {
                                   elemento.chemicalProductId.name
                                 }  está próximo a finalizar, solo quedan ${
                                   elemento.chemicalProductId &&
-                                  elemento.chemicalProductId.recordedQuantity
+                                  elemento.chemicalProductId.availableQuantity
                                 } ${
                                   elemento.chemicalProductId &&
                                   elemento.chemicalProductId.units
