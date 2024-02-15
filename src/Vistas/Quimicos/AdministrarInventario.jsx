@@ -33,8 +33,8 @@ import {
   organizarDataExcel,
   OrganizarDataPorFecha,
 } from "../../utils/quimicos/utils";
-import AgregarInventario from "./AgregarInventario";
 import * as XLSX from "xlsx";
+import ModalReporte from "../../Componentes/Quimicos/ModalReporte";
 
 function AdministrarInventario() {
   const [mover, setMover] = useState(false); //MOvercon Piscina
@@ -58,7 +58,8 @@ function AdministrarInventario() {
   const [fechaFinal, setFechaFinal] = useState("");
   const [arrayxmlx, setArrayxmlx] = useState("");
 
-  //*Estado para guardar el array a enviar al xmlx
+  //*Estado para mostrar la modal reportes
+  const [showRepor, setShowReport] = useState(false);
 
   //*Estados para abrir la alerta
   const [open, setOpen] = useState(false);
@@ -558,14 +559,40 @@ function AdministrarInventario() {
                       listarInventarioId(listaQuimicos, e.target.textContent)
                     }
                   ></InputSelect>
-                  <Button
-                    variant="contained"
-                    color="success"
-                    onClick={exportToExcel}
+                  <Box
+                    sx={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "10px",
+                    }}
                   >
-                    {<Description></Description>}
-                  </Button>
-                  <label>Fecha inicial</label>
+                    <Box
+                      sx={{
+                        width: {
+                          xs: "95%",
+                          sm: "95%",
+                          md: "97.3%",
+                          lg: "1102px",
+                          xl: "1102px",
+                        },
+
+                        display: "flex",
+                        justifyContent: "end",
+                      }}
+                    >
+                      <Button
+                        variant="contained"
+                        color="success"
+                        // onClick={exportToExcel}
+                        endIcon={<Description></Description>}
+                        onClick={() => setShowReport(true)}
+                      >
+                        Generar reporte
+                      </Button>
+                    </Box>
+                  </Box>
+                  {/* <label>Fecha inicial</label>
                   <InputGeneral
                     type="date"
                     onChange={(e) =>
@@ -587,7 +614,7 @@ function AdministrarInventario() {
                         return fechaActual.toISOString().split("T")[0];
                       })
                     }
-                  ></InputGeneral>
+                  ></InputGeneral> */}
                 </Grid>
                 <TablaInventarioId data={historicoId}></TablaInventarioId>
               </Box>
@@ -635,6 +662,10 @@ function AdministrarInventario() {
         mensaje={mensaje}
         cerrar={() => setOpen(false)}
       ></Alertas>
+      <ModalReporte
+        open={showRepor}
+        close={() => setShowReport(false)}
+      ></ModalReporte>
     </Box>
   );
 }

@@ -2,6 +2,7 @@ const styles = {
   generalContainer: {
     overflowX: "hidden",
     height: "100vh",
+    position: "relative",
     // backgroundColor: "red",
   },
 
