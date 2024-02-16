@@ -269,7 +269,6 @@ export default function ModalAjustar({
         setMensaje2(respues.message);
         setColor2("success");
         setActivarCalcular(false);
-        // alert(JSON.stringify({ probandoRespuesa: respues }));
         close();
         historyChemicalProduct(respues._id);
         renderizar();
@@ -278,12 +277,20 @@ export default function ModalAjustar({
       case 404:
         const respues2 = await respuesta.json();
         setActivarCalcular(false);
+        console.log(respues2);
+
+        break;
+      case 400:
+        const respues4 = await respuesta.json();
+        setActivarCalcular(false);
+        console.log(respues4);
 
         break;
 
       case 500:
         const respues3 = await respuesta.json();
         setActivarCalcular(false);
+        console.log(respues3);
 
         break;
     }
