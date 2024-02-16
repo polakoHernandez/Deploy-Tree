@@ -36,7 +36,7 @@ export const organizarDataExcel = async (array) => {
     Nombre: item?.Nombre,
     Responsable: item.Responsable,
     Piscina: item.Piscina,
-    Estado: item?.Estado,
+    Estado: item?.Estado ? "Activo" : "Inactivo",
   }));
 
   return arrayOrganizado;

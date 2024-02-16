@@ -14,6 +14,8 @@ import InputSelect from "../../Componentes/General/InputSelect";
 import Tabla from "../../Componentes/Parametros/Tabla";
 import { Pool, Add, Delete } from "@mui/icons-material";
 import TablaPrevisualizacion from "../../Componentes/Parametros/TablaPrevisualizacion";
+import { Description } from "@mui/icons-material";
+import { organizarDataExcel } from "../../utils/parametros/CrearParametrosUtils";
 
 function CrearParametro() {
   //* Estado para guardar la data de info general
@@ -362,6 +364,8 @@ function CrearParametro() {
     vistaNormas: {
       display: contador === 2 ? "flex" : "none",
       height: "100%",
+      display: "flex",
+      flexDirection: "column",
     },
 
     guardar: {
@@ -424,6 +428,19 @@ function CrearParametro() {
       label: "Analisis y reporte",
     },
   ];
+
+  //*fuction to download data json like excel
+  const exportToExcel = () => {
+    organizarDataExcel(listaParametros.normativities).then((respuesta) => {
+      // Desde este punto construyo el xlsx
+      const ws = XLSX.utils.json_to_sheet(respuesta); // sección para convertir json a hoja
+      const wb = XLSX.utils.book_new(); // sección para crear un nuevo libro de excel
+      XLSX.utils.book_append_sheet(wb, ws, "Reporte"); // sección para incluir datos en la hoja
+
+      // Guardar el archivo
+      XLSX.writeFile(wb, "parametros.xlsx"); // sección para descargar el archivo con formato xlsx
+    });
+  };
 
   useEffect(() => {
     listarParametros();
@@ -635,6 +652,36 @@ function CrearParametro() {
             </Box>
           </Box>
           <Box sx={{ ...styles.vistaNormas }}>
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  width: {
+                    xs: "95%",
+                    sm: "95%",
+                    md: "751px",
+                    display: "flex",
+                    justifyContent: "end",
+                  },
+                  paddingTop: "10px",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  color="success"
+                  disabled={listaParametros === "" ? true : false}
+                  endIcon={<Description></Description>}
+                  onClick={exportToExcel}
+                >
+                  Generar reporte
+                </Button>
+              </Box>
+            </Box>
             <Tabla
               contador={contador}
               reloadData={handleReloadData}
