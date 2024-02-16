@@ -364,7 +364,6 @@ function CrearParametro() {
     vistaNormas: {
       display: contador === 2 ? "flex" : "none",
       height: "100%",
-      display: "flex",
       flexDirection: "column",
     },
 
@@ -655,7 +654,7 @@ function CrearParametro() {
             <Box
               sx={{
                 width: "100%",
-                display: "flex",
+                display: contador === 2 ? "flex" : "none",
                 justifyContent: "center",
               }}
             >
@@ -665,7 +664,7 @@ function CrearParametro() {
                     xs: "95%",
                     sm: "95%",
                     md: "751px",
-                    display: "flex",
+                    display: contador === 2 ? "flex" : "none",
                     justifyContent: "end",
                   },
                   paddingTop: "10px",
