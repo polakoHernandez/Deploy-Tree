@@ -32,6 +32,8 @@ export default function ModalAjustar({
   idHistorico,
   renderizar,
 }) {
+  console.log({ data: data });
+
   const [nombreParametro, setNombreParametro] = useState(CloroPh?.nombre);
 
   const [tipo, setTipo] = useState("");
@@ -240,6 +242,9 @@ export default function ModalAjustar({
     }
   };
 
+  //!AQUI ENVIAR ID DEL CLORO O DEL PH
+  //!recordId = id cloro || id ph
+  //!recordType =  nombre Cloro || Nombre Ph
   const guardarData = async () => {
     setActivarCalcular(true);
 
@@ -257,6 +262,8 @@ export default function ModalAjustar({
           category: tipo,
           productId: productoRetornadoId,
           historyPoolId: idHistoricoNuevo,
+          recordId: CloroPh.idCloro || CloroPh.idPh,
+          recordType: CloroPh.nombre,
         }),
       }
     );

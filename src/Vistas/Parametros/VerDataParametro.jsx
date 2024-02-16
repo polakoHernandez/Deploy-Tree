@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from "react";
 import SearchAppBar from "../../Componentes/General/NavBar";
 import Alertas from "../../Componentes/General/Alertas";
-import {
-  Box,
-  Typography,
-  Grid,
-  IconButton,
-  Button,
-  CircularProgress,
-} from "@mui/material";
-import InputGeneral from "../../Componentes/General/InputGeneral";
-import InputSelect from "../../Componentes/General/InputSelect";
+import { Box, Typography, Button } from "@mui/material";
 import Tabla from "../../Componentes/Parametros/Tabla";
-import { Pool, Add, Delete } from "@mui/icons-material";
-import TablaPrevisualizacion from "../../Componentes/Parametros/TablaPrevisualizacion";
 import { useLocation } from "react-router-dom";
 import TablaDataParametro from "../../Componentes/Parametros/TablaDataParametro";
+import { Description } from "@mui/icons-material";
+import { organizarDataExcel } from "../../utils/parametros/ParametrosUtil";
 
 function VerDataParametro() {
   //* Estado para guardar la data de info general
@@ -157,9 +148,6 @@ function VerDataParametro() {
     switch (respuesta.status) {
       case 200:
         const response = await respuesta.json();
-        console.log({
-          PARAMETERID: response.parameterizationId,
-        });
 
         const typeValidation = response?.parameterizationId?.typeValidation;
 
@@ -175,7 +163,6 @@ function VerDataParametro() {
             fecha: response?.parameterizationId?.createAt,
           };
 
-          console.log({ PARAMETROS: parametros, PISCINA: piscina });
           const arrayOrganizado = parametros.map((elemento) => ({
             ...elemento,
             piscina: piscina.name,
@@ -186,7 +173,6 @@ function VerDataParametro() {
             validacion: typeValidation,
           }));
 
-          console.log({ ARRAYORGANIZADO: arrayOrganizado });
           setDataOrganizada(arrayOrganizado);
         } else if (typeValidation === "Norma") {
           const piscina = response?.parameterizationId?.poolId[0].name;
@@ -212,7 +198,6 @@ function VerDataParametro() {
             validacion: typeValidation,
           }));
 
-          console.log({ ARRAYORGANIZADONORAM: arrayOrganizado });
           setDataOrganizada(arrayOrganizado);
         }
 
@@ -225,6 +210,19 @@ function VerDataParametro() {
       case 500:
         break;
     }
+  };
+
+  //*Funcion para descargar a formato Excel
+  const exportToExcel = () => {
+    organizarDataExcel(dataOrganizada).then((respuesta) => {
+      // Desde este punto construyo el xlsx
+      const ws = XLSX.utils.json_to_sheet(respuesta); // sección para convertir json a hoja
+      const wb = XLSX.utils.book_new(); // sección para crear un nuevo libro de excel
+      XLSX.utils.book_append_sheet(wb, ws, "Reporte"); // sección para incluir datos en la hoja
+
+      // Guardar el archivo
+      XLSX.writeFile(wb, "Paramertrización.xlsx"); // sección para descargar el archivo con formato xlsx
+    });
   };
 
   const crearNorma = async () => {
@@ -355,7 +353,7 @@ function VerDataParametro() {
       //! para cambiar el color backgroundColor: "red",
       height: "8%",
       display: "flex",
-      justifyContent: "end",
+      justifyContent: "space-between",
       // backgroundColor: "red",
     },
 
@@ -511,6 +509,15 @@ function VerDataParametro() {
       ></SearchAppBar>
       <Box sx={{ ...styles.mainBox }}>
         <Box sx={{ ...styles.containerEncabezado }}>
+          <Button
+            variant="contained"
+            color="success"
+            disabled={listaParametros === "" ? true : false}
+            endIcon={<Description></Description>}
+            onClick={exportToExcel}
+          >
+            Generar reporte
+          </Button>
           <Typography
             sx={{ ...styles.crearNorma }}
             onClick={() => setContador(1)}

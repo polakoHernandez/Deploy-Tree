@@ -27,6 +27,7 @@ export default function TablaDataParametro({
   reloadData,
   contador,
 }) {
+  console.log(data);
   const navigate = useNavigate("");
 
   const [habilitar, setHabilitar] = useState(false);

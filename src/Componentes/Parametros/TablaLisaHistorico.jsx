@@ -15,13 +15,14 @@ export default function TablaLisaHistorico({
   idPool,
   renderizar,
 }) {
-  console.log({ ESTE: data });
+  console.log({ ESTADATA: data });
   const [rowIdCounter, setRowIdCounter] = useState(1);
   const [openModalAjustar, setOpenModalAjustar] = useState(false);
   const [abrirModal, setAbrirModal] = useState(false);
   const [prop2, setProp2] = useState(false);
   const [openModalDetalle, setOpenModalDetalle] = useState(false);
   const [dataDetalle, setDataDetalle] = useState("");
+  const [dataNeider, setDataNeider] = useState("");
 
   const handleIncrementRowId = () => {
     setRowIdCounter((prevCounter) => prevCounter + 1);
@@ -234,6 +235,7 @@ export default function TablaLisaHistorico({
       ></ModalAjustado>
 
       <ModalAjustar
+        data={data}
         renderizar={renderizar}
         idHistorico={idHistorico}
         CloroPh={DataPropModal}
