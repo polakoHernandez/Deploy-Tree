@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import SearchAppBar from "../../Componentes/General/NavBar";
-import DataGridDemo from "../../Componentes/General/Tabla";
-import { Box, Typography } from "@mui/material";
-import ModalGeneral from "../../Componentes/General/Modal";
+import { Box, Typography, Button } from "@mui/material";
 import TablaVerParametros from "../../Componentes/Parametros/TablaVerParametros";
 import { useNavigate } from "react-router-dom";
-
+import { organizarDataParametros } from "../../utils/parametros/utils.js";
+import { Description } from "@mui/icons-material";
+import ModalReporte from "../../Componentes/Parametros/ModalReporte.jsx";
 function VerParamtrosPiscinas() {
   document.body.style.overflow = "scroll";
   const [mover, setMover] = useState(false); //MOvercon Piscina
@@ -23,6 +23,12 @@ function VerParamtrosPiscinas() {
   const [render, setRender] = useState(0);
 
   const navigate = useNavigate();
+
+  //*Estado para guardar la data organizada
+  const [dataOrganizada, setDataOrganizada] = useState("");
+
+  //*Estado para mostrar la modal reporte
+  const [showRepor, setShowReport] = useState(false);
 
   // Estados para recargar los datos
   const [reload, setReload] = useState(false);
@@ -51,31 +57,13 @@ function VerParamtrosPiscinas() {
 
         case 200:
           const responeData = await response.json();
-
-          const parametros = responeData?.parameterizations?.map(
-            (elemento) => elemento.parameters
+          console.log(responeData);
+          organizarDataParametros(responeData.parameterizations).then(
+            (respuesta) => {
+              setDataOrganizada(respuesta);
+            }
           );
-          const registro = responeData?.parameterizations?.map((elemento) => ({
-            id: elemento._id,
-            estado: elemento.state,
-            validacion: elemento.typeValidation,
-            fecha: elemento.createAt,
-          }));
 
-          // const piscina = responeData?.parameterizations?.poolId[0];
-          // const registro = {
-          //   id: responeData?.parameterizations?._id,
-          //   validacion: responeData?.parameterizations?.typeValidation,
-          //   estado: responeData?.parameterizations?.estado,
-          //   fecha: responeData?.parameterizations?.createAt,
-          // };
-
-          console.log({ NUEVOREGISTRO: registro });
-          console.log({ PARAMETROS: parametros });
-          // console.log(piscina);
-          // console.log(registro);
-
-          console.log({ EstoEnvio: responeData.parameterizations });
           setData(responeData.parameterizations);
           setCargando(false);
           break;
@@ -181,9 +169,18 @@ function VerParamtrosPiscinas() {
             sx={{
               width: { xs: "90%", sm: "90%", md: "90%", lg: "1170px" },
               display: "flex",
-              justifyContent: "end",
+              justifyContent: "space-between",
             }}
           >
+            <Button
+              variant="contained"
+              color="success"
+              disabled={data === "" ? true : false}
+              endIcon={<Description></Description>}
+              onClick={() => setShowReport(true)}
+            >
+              Generar reporte
+            </Button>
             <Typography
               sx={{
                 display: "flex",
@@ -214,6 +211,11 @@ function VerParamtrosPiscinas() {
           reloadData={handleReloadData}
         ></TablaVerParametros>
       </Box>
+      <ModalReporte
+        data={dataOrganizada}
+        open={showRepor}
+        close={() => setShowReport(false)}
+      ></ModalReporte>
     </Box>
   );
 }

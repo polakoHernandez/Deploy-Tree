@@ -11,7 +11,7 @@ import InputGeneral from "../General/InputGeneral";
 import {
   OrganizarDataPorFecha,
   organizarDataExcel,
-} from "../../utils/quimicos/utils";
+} from "../../utils/parametros/utils";
 
 function ModalReporte({ open, close, data }) {
   const [fechaInicial, setFechaInicia] = useState("");
@@ -23,6 +23,12 @@ function ModalReporte({ open, close, data }) {
   //*fuction to download data json like excel
   const exportToExcel = () => {
     OrganizarDataPorFecha(data, fechaInicial, fechaFinal).then((res) => {
+      console.log({
+        data: data,
+        fecha: fechaInicial,
+        fecha2: fechaFinal,
+        respuesta: res,
+      });
       if (res.length === 0) {
         setNoRegister(true);
         setTimeout(() => {
@@ -35,10 +41,10 @@ function ModalReporte({ open, close, data }) {
         // Desde este punto construyo el xlsx
         const ws = XLSX.utils.json_to_sheet(respuesta); // sección para convertir json a hoja
         const wb = XLSX.utils.book_new(); // sección para crear un nuevo libro de excel
-        XLSX.utils.book_append_sheet(wb, ws, "InventarioId"); // sección para incluir datos en la hoja
+        XLSX.utils.book_append_sheet(wb, ws, "Reporte"); // sección para incluir datos en la hoja
 
         // Guardar el archivo
-        XLSX.writeFile(wb, "Inventario.xlsx"); // sección para descargar el archivo con formato xlsx
+        XLSX.writeFile(wb, "parametros.xlsx"); // sección para descargar el archivo con formato xlsx
       });
     });
   };
