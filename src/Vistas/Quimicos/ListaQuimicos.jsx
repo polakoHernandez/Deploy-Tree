@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import SearchAppBar from "../../Componentes/General/NavBar";
-import DataGridDemo from "../../Componentes/General/Tabla";
-import { Box, Typography } from "@mui/material";
-import ModalGeneral from "../../Componentes/General/Modal";
-import TablaVerParametros from "../../Componentes/Parametros/TablaVerParametros";
-import { useNavigate } from "react-router-dom";
+import { Box, Typography, Button } from "@mui/material";
 import TablaListaQuimicos from "../../Componentes/Quimicos/TablaListaQuimicos";
+import { Description } from "@mui/icons-material";
+import { organizarDataExcel } from "../../utils/quimicos/listaUtils";
 
 function ListaQuimicos() {
   document.body.style.overflow = "scroll";
@@ -21,10 +19,20 @@ function ListaQuimicos() {
   const [cargando, setCargando] = useState(false);
   // Funcion para listar todos los usuarios
 
-  const navigate = useNavigate();
-
   // Estados para recargar los datos
   const [reload, setReload] = useState(false);
+
+  //*Funcion para generar el reporte
+  const descargarData = () => {
+    organizarDataExcel(data).then((respuesta) => {
+      const ws = XLSX.utils.json_to_sheet(respuesta); // sección para convertir json a hoja
+      const wb = XLSX.utils.book_new(); // sección para crear un nuevo libro de excel
+      XLSX.utils.book_append_sheet(wb, ws, "Quimicos"); // sección para incluir datos en la hoja
+
+      // Guardar el archivo
+      XLSX.writeFile(wb, "lista.xlsx"); // sección
+    });
+  };
 
   const listarUsuarios = async () => {
     setCargando(true);
@@ -160,9 +168,18 @@ function ListaQuimicos() {
               width: { xs: "90%", sm: "90%", md: "80%", lg: "952px" },
               // marginLeft: { xs: "5%", sm: "5%", md: "0" },
               display: "flex",
-              justifyContent: "end",
+              justifyContent: "space-between",
             }}
           >
+            <Button
+              variant="contained"
+              color="success"
+              disabled={data === "" ? true : false}
+              endIcon={<Description></Description>}
+              onClick={() => descargarData(true)}
+            >
+              Generar reporte
+            </Button>
             <Typography
               sx={{
                 display: "flex",
