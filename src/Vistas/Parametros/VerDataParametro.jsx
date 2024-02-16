@@ -509,15 +509,17 @@ function VerDataParametro() {
       ></SearchAppBar>
       <Box sx={{ ...styles.mainBox }}>
         <Box sx={{ ...styles.containerEncabezado }}>
-          <Button
-            variant="contained"
-            color="success"
-            disabled={listaParametros === "" ? true : false}
-            endIcon={<Description></Description>}
-            onClick={exportToExcel}
-          >
-            Generar reporte
-          </Button>
+          <Box>
+            <Button
+              variant="contained"
+              color="success"
+              disabled={listaParametros === "" ? true : false}
+              endIcon={<Description></Description>}
+              onClick={exportToExcel}
+            >
+              Generar reporte
+            </Button>
+          </Box>
           <Typography
             sx={{ ...styles.crearNorma }}
             onClick={() => setContador(1)}

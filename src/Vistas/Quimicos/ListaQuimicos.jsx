@@ -171,15 +171,17 @@ function ListaQuimicos() {
               justifyContent: "space-between",
             }}
           >
-            <Button
-              variant="contained"
-              color="success"
-              disabled={data === "" ? true : false}
-              endIcon={<Description></Description>}
-              onClick={() => descargarData(true)}
-            >
-              Generar reporte
-            </Button>
+            <Box>
+              <Button
+                variant="contained"
+                color="success"
+                disabled={data === "" ? true : false}
+                endIcon={<Description></Description>}
+                onClick={() => descargarData(true)}
+              >
+                Generar reporte
+              </Button>
+            </Box>
             <Typography
               sx={{
                 display: "flex",

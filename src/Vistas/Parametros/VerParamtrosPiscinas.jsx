@@ -172,15 +172,17 @@ function VerParamtrosPiscinas() {
               justifyContent: "space-between",
             }}
           >
-            <Button
-              variant="contained"
-              color="success"
-              disabled={data === "" ? true : false}
-              endIcon={<Description></Description>}
-              onClick={() => setShowReport(true)}
-            >
-              Generar reporte
-            </Button>
+            <Box>
+              <Button
+                variant="contained"
+                color="success"
+                disabled={data === "" ? true : false}
+                endIcon={<Description></Description>}
+                onClick={() => setShowReport(true)}
+              >
+                Generar reporte
+              </Button>
+            </Box>
             <Typography
               sx={{
                 display: "flex",
