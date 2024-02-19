@@ -24,7 +24,7 @@ function FormularioLogin({ estilo }) {
   const [respuesta, seRespuesta] = useState("");
   const [open, setOpen] = useState(false);
   const [color, setColor] = useState("error");
-  const [mensaje, setMensaje] = useState("Usuario no encontrado");
+  const [mensaje, setMensaje] = useState("!Usuario no encontrado!");
   const [datos, setDatos] = useState({
     email: "",
     password: "",
@@ -318,16 +318,32 @@ function FormularioLogin({ estilo }) {
                 marginTop: { xs: "0", sm: "-15px", md: "0" },
               }}
             >
-              <a href="" className="icon icon-2">
+              <a
+                href="https://web.facebook.com/treeaenterprises"
+                target="_blank"
+                className="icon icon-2"
+              >
                 <FacebookIcon></FacebookIcon>
               </a>
-              <a href="" className="icon icon-2">
+              <a
+                target="_blank"
+                href="https://www.instagram.com/treeaenterprises/"
+                className="icon icon-2"
+              >
                 <InstagramIcon></InstagramIcon>
               </a>
-              <a href="" className="icon icon-2">
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/tree-a-enterprises-164776101/"
+                className="icon icon-2"
+              >
                 <LinkedInIcon></LinkedInIcon>
               </a>
-              <a href="" className="icon icon-2">
+              <a
+                target="_blank"
+                href="https://wa.me/573225100966"
+                className="icon icon-2"
+              >
                 <WhatsAppIcon></WhatsAppIcon>
               </a>
             </Box>

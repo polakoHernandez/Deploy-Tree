@@ -261,7 +261,7 @@ export default function ModalAjustar({
         body: JSON.stringify({
           category: tipo,
           productId: productoRetornadoId,
-          historyPoolId: CloroPh._id,
+          historyPoolId: CloroPh.idGlobal,
           recordId: CloroPh.idCloro || CloroPh.idPh,
           recordType: CloroPh.nombre,
         }),
