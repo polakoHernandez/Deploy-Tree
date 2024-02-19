@@ -55,7 +55,7 @@ function ModalAjustado({
 
     if (CloroPh.nombre === "Cloro") {
       const response = await fetch(
-        `https://treea-piscinas-api.vercel.app/v1/history-pool-param/${idHistorico}`,
+        `https://treea-piscinas-api.vercel.app/v1/history-pool-param/${CloroPh.idGlobal}`,
         {
           method: "PUT",
           headers: {
@@ -120,7 +120,7 @@ function ModalAjustado({
       }
     } else if (CloroPh.nombre === "Ph") {
       const response = await fetch(
-        `https://treea-piscinas-api.vercel.app/v1/history-pool-param/${idHistorico}`,
+        `https://treea-piscinas-api.vercel.app/v1/history-pool-param/${CloroPh.idGlobal}`,
         {
           method: "PUT",
           headers: {

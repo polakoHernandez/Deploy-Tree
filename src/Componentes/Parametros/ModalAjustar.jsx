@@ -207,7 +207,7 @@ export default function ModalAjustar({
 
   const retornahistoricoPool = async () => {
     const respuesta = await fetch(
-      `https://treea-piscinas-api.vercel.app/v1/history-pool-param/${idHistoricoNuevo}`,
+      `https://treea-piscinas-api.vercel.app/v1/history-pool-param/${CloroPh.idGlobal}`,
       {
         method: "GET",
         headers: {
