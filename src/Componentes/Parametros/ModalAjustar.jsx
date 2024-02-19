@@ -122,7 +122,7 @@ export default function ModalAjustar({
           // const updateProp = {
           //   nameParam: CloroPh.nombre,
           // };
-
+          //!Debo recisar los id correspondientes que estan llegando
           const response = await fetch(
             `https://treea-piscinas-api.vercel.app/v1/history-pool/${dataClorPh.historyPoolId._id}/${dataClorPh.historyPoolId.paramChlorine._id}`,
             {
@@ -261,7 +261,7 @@ export default function ModalAjustar({
         body: JSON.stringify({
           category: tipo,
           productId: productoRetornadoId,
-          historyPoolId: idHistoricoNuevo,
+          historyPoolId: CloroPh._id,
           recordId: CloroPh.idCloro || CloroPh.idPh,
           recordType: CloroPh.nombre,
         }),

@@ -33,6 +33,9 @@ import "../../Estilos/Piscina/misPiscinas.css";
 import { useLocation } from "react-router-dom";
 import * as services from "../../services/pisicinas/gestionarPiscinas/services";
 
+// const originalConsoleLog = console.log;
+// console.log = function () {};
+
 function GestionarPiscinas() {
   const [data, setData] = useState("");
   const [pool, setPool] = useState("");
@@ -520,58 +523,6 @@ function GestionarPiscinas() {
           }));
         }
 
-        //*
-
-        // if (response?.testTest[0]?.typeValidation === "Manual") {
-        //   //*Ph
-        //   const minRange =
-        //     response.testTest[0]?.parameters[1]?.minRange !== undefined
-        //       ? response.testTest[0]?.parameters[1]?.minRange
-        //       : 0;
-
-        //   const maxRange =
-        //     response?.testTest[0]?.parameters[1]?.maxRange !== undefined
-        //       ? response.testTest[0]?.parameters[1]?.maxRange
-        //       : 0;
-
-        //   //*Cloro
-        //   const maximo =
-        //     response.testTest[0]?.parameters[0]?.maxValueSpecification !==
-        //     undefined
-        //       ? response.testTest[0]?.parameters[0]?.maxValueSpecification
-        //       : 0;
-
-        //   setRango((prevDatos) => ({
-        //     max: maximo,
-        //     minRange: minRange,
-        //     maxRange: maxRange,
-        //   }));
-        // } else if (response?.testTest[0]?.typeValidation === "Norma") {
-        //   const maximo =
-        //     response.testTest[0]?.normativityId?.parameter[0]
-        //       .maxValueSpecification !== undefined
-        //       ? response.testTest[0]?.normativityId?.parameter[0]
-        //           .maxValueSpecification
-        //       : 0;
-
-        //   const minRange =
-        //     response.testTest[0]?.normativityId?.parameter[1].minRange !==
-        //     undefined
-        //       ? response.testTest[0]?.normativityId?.parameter[1].minRange
-        //       : 0;
-        //   const maxRange =
-        //     response.testTest[0]?.normativityId?.parameter[1].maxRange !==
-        //     undefined
-        //       ? response.testTest[0]?.normativityId?.parameter[1].maxRange
-        //       : 0;
-
-        //   setRango((prevDatos) => ({
-        //     max: maximo,
-        //     minRange: minRange,
-        //     maxRange: maxRange,
-        //   }));
-        // }
-
         //! se procede a hacer un nuevo mapeo para asignar Cloro y Ph en los inputs en la vista parametrso
 
         break;
@@ -605,16 +556,16 @@ function GestionarPiscinas() {
 
     switch (respuesta.status) {
       case 200:
+        console.log("HOLA");
         const response = await respuesta.json();
         // setMiHistorico(response.historyPoolIdFormatted);
-        console.log({ NEIDER: response });
-
+        // originalConsoleLog({ NEIDER: response?.historyPoolIdFormatted });
         setIdHistoricoRetornado(response?.historyPoolId[0]?._id);
         setIdHistorico(response?.historyPoolId[0]?._id);
-        console.log(response?.historyPoolId[0]?.paramPh._id);
 
         const newArray = response?.historyPoolIdFormatted?.flatMap((elemento) =>
           elemento.parameters.map((parametro, index) => ({
+            idGlobal: elemento._id,
             idPh: parametro?.phId,
             idCloro: parametro?.chlorineId,
             id: index * Math.random(),
@@ -634,7 +585,7 @@ function GestionarPiscinas() {
           }))
         );
 
-        console.log({ TENGOID: newArray });
+        console.log({ AQUI: newArray });
 
         setMiHistorico(newArray);
 

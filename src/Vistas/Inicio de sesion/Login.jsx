@@ -33,7 +33,7 @@ function Login() {
   };
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = "3158093483";
+    const phoneNumber = "573225100966";
     const message = "Me gustaría hablar contigo";
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
       message
@@ -76,16 +76,32 @@ function Login() {
           >
             <p className="mensaje3">Conoce más acerca de nosotros</p>
             <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-              <a href="" className="icon">
+              <a
+                href="https://web.facebook.com/treeaenterprises"
+                target="_blank"
+                className="icon"
+              >
                 <FacebookIcon></FacebookIcon>
               </a>
-              <a href="" className="icon">
+              <a
+                href="https://www.instagram.com/treeaenterprises/"
+                target="_blank"
+                className="icon"
+              >
                 <InstagramIcon></InstagramIcon>
               </a>
-              <a href="" className="icon">
+              <a
+                href="https://www.linkedin.com/in/tree-a-enterprises-164776101/"
+                target="_blank"
+                className="icon"
+              >
                 <LinkedInIcon></LinkedInIcon>
               </a>
-              <a href="" className="icon">
+              <a
+                href="https://wa.me/573225100966"
+                className="icon"
+                target="_blank"
+              >
                 <WhatsAppIcon></WhatsAppIcon>
               </a>
             </Box>
