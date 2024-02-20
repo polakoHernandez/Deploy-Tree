@@ -1,9 +1,88 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, CircularProgress } from "@mui/material";
 import "../../Estilos/Inicio de sesion/FormularioContrasena.css";
+import { recuperarContrasena } from "../../services/login/services";
+import Alertas from "../../Componentes/General/Alertas";
 
 function FormularioContrasena({ open, close }) {
+  const [data, setData] = useState({
+    email: "",
+  });
+  const [openAlert, setOpenAlert] = useState(false);
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState("");
+  const [deshabilitar, setDeshabilitar] = useState(false);
+  const [render, setRender] = useState(0);
+
+  const catchDataInput = (value) => {
+    setData({
+      email: value,
+    });
+  };
+
+  const enviarPeticion = () => {
+    setDeshabilitar(true);
+
+    if (!data["email"]) {
+      setDeshabilitar(false);
+      setMessage("Ingrese un correo");
+      setSeverity("error");
+      setOpenAlert(true);
+      return;
+    }
+
+    recuperarContrasena(data["email"]).then((res) => {
+      console.log(res);
+
+      switch (res?.status) {
+        case 200:
+          setRender(render + 1);
+          setOpenAlert(true);
+          setMessage(res.respuesta.msg);
+          setSeverity("success");
+          setDeshabilitar(false);
+          break;
+
+        case 401:
+          setOpenAlert(true);
+          setMessage(res.respuesta.msg);
+          setSeverity("error");
+          setDeshabilitar(false);
+          break;
+
+        case 404:
+          setOpenAlert(true);
+          setMessage(res.respuesta.msg);
+          setSeverity("error");
+          setDeshabilitar(false);
+          break;
+
+        case 500:
+          setOpenAlert(true);
+          setMessage(res.respuesta.msg);
+          setSeverity("error");
+          setDeshabilitar(false);
+          break;
+
+        default:
+          setOpenAlert(true);
+          // setMessage(res.respuesta.msg);
+          setSeverity("error");
+          setDeshabilitar(false);
+          console.log(res);
+
+          break;
+      }
+    });
+  };
+
+  useEffect(() => {
+    setData(() => ({
+      email: "",
+    }));
+  }, [render]);
+
   return (
     <motion.div
       initial={{
@@ -109,14 +188,28 @@ function FormularioContrasena({ open, close }) {
                   </Box>
                   <Box className="container-input-motion">
                     <motion.input
+                      value={data.email}
+                      onChange={(e) => catchDataInput(e.target.value)}
                       className="input-motion"
                       placeholder="Ingrese su correo..."
                     ></motion.input>
                   </Box>
                 </Box>
                 <Box className="button-container">
-                  <Button variant="contained" className="btn-motion">
-                    Enviar
+                  <Button
+                    disabled={deshabilitar}
+                    variant="contained"
+                    className="btn-motion"
+                    onClick={enviarPeticion}
+                  >
+                    {deshabilitar ? (
+                      <CircularProgress
+                        color="inherit"
+                        size={24}
+                      ></CircularProgress>
+                    ) : (
+                      "Enviar"
+                    )}
                   </Button>
                 </Box>
                 <Box className="button-container">
@@ -134,6 +227,12 @@ function FormularioContrasena({ open, close }) {
           </Grid>
         </Grid>
       </Box>
+      <Alertas
+        open={openAlert}
+        severity={severity}
+        mensaje={message}
+        cerrar={() => setOpenAlert(false)}
+      ></Alertas>
     </motion.div>
   );
 }

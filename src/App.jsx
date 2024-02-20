@@ -22,6 +22,7 @@ import ListaQuimicos from "./Vistas/Quimicos/ListaQuimicos";
 import ActualizarQuimico from "./Vistas/Quimicos/ActualizarQuimico";
 import AdministrarInventario from "./Vistas/Quimicos/AdministrarInventario";
 import ExportToExcel from "./Reporte";
+import CambiarPassword from "./Vistas/Inicio de sesion/CambiarPassword";
 
 function App() {
   return (
@@ -114,6 +115,11 @@ function App() {
           <Route
             path="/reporte"
             element={<ExportToExcel></ExportToExcel>}
+          ></Route>
+
+          <Route
+            path="/reset-password/:idUser/:token"
+            element={<CambiarPassword></CambiarPassword>}
           ></Route>
         </Routes>
       </BrowserRouter>
