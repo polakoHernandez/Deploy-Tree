@@ -17,7 +17,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import Alertas from "../General/Alertas";
 import { useNavigate } from "react-router-dom";
 
-function FormularioLogin({ estilo }) {
+function FormularioLogin({ estilo, openPassword }) {
   const navigate = useNavigate("");
   const [cargando, setCargando] = useState(false);
   const [see, setSee] = useState(false);
@@ -293,7 +293,9 @@ function FormularioLogin({ estilo }) {
                 "Iniciar Sesion"
               )}
             </Button>
-            <p className="olvido">Olvide mi contraseña</p>
+            <p className="olvido" onClick={() => openPassword(true)}>
+              Olvide mi contraseña
+            </p>
           </Grid>
 
           {/* Contenedor logos */}

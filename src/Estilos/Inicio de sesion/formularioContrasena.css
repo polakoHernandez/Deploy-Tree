@@ -1,0 +1,80 @@
+.texto-msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  /* background-color: aqua; */
+  height: 300px;
+  font-family: Nunito Sans, sans-serif;
+  font-size: 30px;
+}
+
+.container-correo-span-txt {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container-txt-span {
+  width: 90%;
+  font-family: Nunito Sans, sans-serif;
+}
+
+.container-inputs-motion {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.container-correo-txt {
+  /* background-color: blueviolet; */
+  width: 80%;
+}
+
+.correo-txt {
+  /* background-color: aqua; */
+  font-family: Nunito Sans, sans-serif;
+  font-size: 20px;
+}
+
+.container-input-motion {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.input-motion {
+  width: 85%;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid rgb(0, 164, 228);
+  outline: none;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.input-motion:focus {
+  width: 85%;
+  height: 30px;
+  border-radius: 5px;
+  border: 2px solid rgb(0, 164, 228);
+  outline: none;
+  padding-left: 10px;
+  padding-right: 10p;
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.btn-motion {
+  width: 90%;
+}
+
+.btn-motion:hover {
+  scale: 1;
+}

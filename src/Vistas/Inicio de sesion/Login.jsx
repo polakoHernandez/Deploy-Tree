@@ -9,7 +9,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FormularioLogin from "../../Componentes/Inicio de sesion/FormularioLogin";
-import Alertas from "../../Componentes/General/Alertas";
+import FormularioContrasena from "../../Componentes/Inicio de sesion/FormularioContrasena";
 
 function Login() {
   const [mvIconTree, setMvIconTree] = useState("no");
@@ -18,6 +18,7 @@ function Login() {
   const [mvNoCuenta, setMvNoCuenta] = useState("no");
   const [mvFormulario, setMvFormulario] = useState("mv-formulario");
   const [visible, setVisible] = useState("ocultar");
+  const [openPassword, setOpenPassword] = useState(false);
 
   const [scroll, setScroll] = useState(false);
 
@@ -254,9 +255,14 @@ function Login() {
         </Grid>
       </Grid>
       <FormularioLogin
+        openPassword={setOpenPassword}
         estilo={mvFormulario}
         visibilidad={visible}
       ></FormularioLogin>
+      <FormularioContrasena
+        open={openPassword}
+        close={setOpenPassword}
+      ></FormularioContrasena>
     </Box>
   );
 }
