@@ -5,6 +5,7 @@ import styles from "../../Estilos/Usuarios/MiPerfil";
 import { motion } from "framer-motion";
 import { listarUsuario } from "../../services/usuario/sevices";
 import { Edit } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 const MiPerfil = () => {
   const [mover, setMover] = useState(false); //MOvercon Piscina
   const [moverUsuario, setMoverUsuarios] = useState(false);
@@ -12,6 +13,7 @@ const MiPerfil = () => {
   const [moverQuimicos, setMoverQuimicos] = useState(false);
   const [moverPerfil, setMoverPerfil] = useState(false);
   const [data, setData] = useState("");
+  const navigate = useNavigate();
 
   //Funciones para mover la caja contenedora
   const moverTabla = () => {
@@ -144,6 +146,19 @@ const MiPerfil = () => {
                   >
                     <Tooltip title="Editar">
                       <IconButton
+                        onClick={() => {
+                          navigate(`/EditarUsuario?data=${data}`, {
+                            state: {
+                              _id: data._id,
+                              ID: data.ID,
+                              name: data.name,
+                              lastName: data.lastName,
+                              email: data.email,
+                              cellPhone: data.cellPhone,
+                              role: data.role,
+                            },
+                          });
+                        }}
                         color="success"
                         sx={{
                           border: "1px solid green",

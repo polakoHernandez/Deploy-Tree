@@ -72,7 +72,7 @@ function CambiarPassword({ open, close }) {
             setDeshabilitar(false);
             setTimeout(() => {
               navigate("/");
-            }, [1000]);
+            }, 1000);
             break;
 
           case 401:
