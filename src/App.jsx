@@ -10,7 +10,6 @@ import EditarUsuario from "./Vistas/Usuarios/EditarUsuario";
 import MisPiscinas from "./Vistas/Piscina/MisPiscinas";
 import GestionarPiscinas from "./Vistas/Piscina/GestionarPiscinas";
 import CrearQuimico from "./Vistas/Quimicos/CrearQumico";
-import AgregarInventario from "./Vistas/Quimicos/AgregarInventario";
 import CrearParametro from "./Vistas/Parametros/CrearParametro";
 import EditarNorma from "./Vistas/Parametros/EditarNorma";
 import AsignarParametros from "./Vistas/Parametros/AsignarParametros";
@@ -118,7 +117,7 @@ function App() {
           ></Route>
 
           <Route
-            path="/reset-password/:idUser/:token"
+            path="/password-reset/:idUser/:token"
             element={<CambiarPassword></CambiarPassword>}
           ></Route>
         </Routes>

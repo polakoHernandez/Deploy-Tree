@@ -1,85 +1,130 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Box, Button, Grid, CircularProgress } from "@mui/material";
-import { recuperarContrasena } from "../../services/login/services";
+import { cambiarContrasena } from "../../services/login/services";
 import Alertas from "../../Componentes/General/Alertas";
 import "../../Estilos/Inicio de sesion/CambiarPassword.css";
 import logo from "../../../public/Logo-tree-a.ico";
 
 function CambiarPassword({ open, close }) {
-  const [data, setData] = useState({
-    email: "",
-  });
+  const [data, setData] = useState("");
+  const [openAlerta, setOpenAlerta] = useState(false);
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState("");
+  const [deshabilitar, setDeshabilitar] = useState(false);
 
   const [render, setRender] = useState(0);
+  const [urlData, setUrlData] = useState({
+    token: "",
+    id: "",
+  });
 
-  const catchDataInput = (value) => {
-    setData({
-      email: value,
+  const catchUrl = () => {
+    // Obtén la cadena de búsqueda de la URL actual
+    const queryString = window.location.pathname;
+
+    // Extrae los valores de idUser y token de la cadena de búsqueda
+    const [, idUser, token] = queryString.match(
+      /\/password-reset\/([^\/]+)\/([^\/]+)/
+    );
+
+    setUrlData({
+      token: token,
+      id: idUser,
     });
+  };
+
+  const catchDataInput = (name, value) => {
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const enviarPeticion = () => {
     setDeshabilitar(true);
 
-    if (!data["email"]) {
+    if (!data["password"] || !data["confirm"]) {
       setDeshabilitar(false);
-      setMessage("Ingrese un correo");
+      setMessage("Todos los campos son obligatorios");
       setSeverity("error");
-      setOpenAlert(true);
+      setOpenAlerta(true);
+      return;
+    } else if (data["password"] !== data["confirm"]) {
+      setDeshabilitar(false);
+      setMessage("Las contraseñas no coinciden");
+      setSeverity("error");
+      setOpenAlerta(true);
       return;
     }
 
-    recuperarContrasena(data["email"]).then((res) => {
-      console.log(res);
+    cambiarContrasena(urlData["id"], urlData["token"], data["password"]).then(
+      (res) => {
+        console.log(res);
 
-      switch (res?.status) {
-        case 200:
-          setRender(render + 1);
-          setOpenAlert(true);
-          setMessage(res.respuesta.msg);
-          setSeverity("success");
-          setDeshabilitar(false);
-          break;
+        switch (res?.status) {
+          case 200:
+            setRender(render + 1);
+            setOpenAlerta(true);
+            setMessage(res.respuesta.msg);
+            setSeverity("success");
+            setDeshabilitar(false);
+            break;
 
-        case 401:
-          setOpenAlert(true);
-          setMessage(res.respuesta.msg);
-          setSeverity("error");
-          setDeshabilitar(false);
-          break;
+          case 401:
+            setOpenAlerta(true);
+            setMessage(res.respuesta.msg);
+            setSeverity("error");
+            setDeshabilitar(false);
+            break;
 
-        case 404:
-          setOpenAlert(true);
-          setMessage(res.respuesta.msg);
-          setSeverity("error");
-          setDeshabilitar(false);
-          break;
+          case 400:
+            if (res.respuesta.type === "fields_required") {
+              setOpenAlerta(true);
+              setMessage(res.respuesta.errors[0].msg);
+              setSeverity("error");
+              setDeshabilitar(false);
+              return;
+            }
+            setOpenAlerta(true);
+            setMessage(res.respuesta.msg);
+            setSeverity("error");
+            setDeshabilitar(false);
+            break;
 
-        case 500:
-          setOpenAlert(true);
-          setMessage(res.respuesta.msg);
-          setSeverity("error");
-          setDeshabilitar(false);
-          break;
+          case 500:
+            setOpenAlerta(true);
+            setMessage(
+              res.respuesta.msg === "jwt expired"
+                ? "Su link ha expirado"
+                : res.respuesta.msg
+            );
+            setSeverity("error");
+            setDeshabilitar(false);
+            break;
 
-        default:
-          setOpenAlert(true);
-          // setMessage(res.respuesta.msg);
-          setSeverity("error");
-          setDeshabilitar(false);
-          console.log(res);
+          default:
+            setOpenAlerta(true);
+            setSeverity("error");
+            setDeshabilitar(false);
+            console.log(res);
 
-          break;
+            break;
+        }
       }
-    });
+    );
   };
 
   useEffect(() => {
     setData(() => ({
-      email: "",
+      password: "",
+      confirm: "",
     }));
   }, [render]);
+
+  useEffect(() => {
+    catchUrl();
+  }, []);
 
   return (
     <Box className="container-general">
@@ -180,6 +225,8 @@ function CambiarPassword({ open, close }) {
                     <label className="labels">Contraseña</label>
                   </Box>
                   <motion.input
+                    onChange={(e) => catchDataInput("password", e.target.value)}
+                    value={data["password"]}
                     className="input-motion"
                     type="password"
                   ></motion.input>
@@ -187,15 +234,26 @@ function CambiarPassword({ open, close }) {
                     <label className="labels">Confirmar contraseña</label>
                   </Box>
                   <motion.input
+                    value={data["confirm"]}
+                    onChange={(e) => catchDataInput("confirm", e.target.value)}
                     className="input-motion"
                     type="password"
                   ></motion.input>
                   <Button
+                    disabled={deshabilitar}
+                    onClick={enviarPeticion}
                     variant="contained"
                     className="button-motion"
                     sx={{ marginTop: "10px" }}
                   >
-                    Enviar
+                    {deshabilitar ? (
+                      <CircularProgress
+                        color="inherit"
+                        size={24}
+                      ></CircularProgress>
+                    ) : (
+                      "Enviar"
+                    )}
                   </Button>
                   <Button
                     sx={{ marginTop: "10px" }}
@@ -211,6 +269,12 @@ function CambiarPassword({ open, close }) {
           </Grid>
         </Box>
       </motion.div>
+      <Alertas
+        open={openAlerta}
+        severity={severity}
+        cerrar={() => setOpenAlerta(false)}
+        mensaje={message}
+      ></Alertas>
     </Box>
   );
 }
