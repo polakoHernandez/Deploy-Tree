@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, IconButton, Tooltip, Typography } from "@mui/material";
 import SearchAppBar from "../../Componentes/General/NavBar";
 import styles from "../../Estilos/Usuarios/MiPerfil";
 import { motion } from "framer-motion";
 import { listarUsuario } from "../../services/usuario/sevices";
+import { Edit } from "@mui/icons-material";
 const MiPerfil = () => {
   const [mover, setMover] = useState(false); //MOvercon Piscina
   const [moverUsuario, setMoverUsuarios] = useState(false);
@@ -132,66 +133,100 @@ const MiPerfil = () => {
                   width: "80%",
                   height: "70%",
                   paddingLeft: "30px",
+                  marginTop: "-30px",
                 }}
               >
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                   <motion.div
-                    initial={{ opacity: 0 }}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 1.8 }}
+                  >
+                    <Tooltip title="Editar">
+                      <IconButton
+                        color="success"
+                        sx={{
+                          border: "1px solid green",
+                          borderRadius: "0px",
+                        }}
+                      >
+                        <Edit></Edit>
+                      </IconButton>
+                    </Tooltip>
+                  </motion.div>
+                </Grid>
+                <Grid item xs={6} sx={{ cursor: "pointer" }}>
+                  <motion.div
+                    initial={{ opacity: 0, cursor: "pointer" }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
                   >
-                    <Typography sx={{ ...styles.typos }}>Documento</Typography>
-                    <Typography>{data?.ID}</Typography>
+                    <motion.div whileHover={{ scale: 1.1 }}>
+                      <Typography sx={{ ...styles.typos }}>
+                        Documento
+                      </Typography>
+                      <Typography>{data?.ID}</Typography>
+                    </motion.div>
                   </motion.div>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} sx={{ cursor: "pointer" }}>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6 }}
                   >
-                    <Typography sx={{ ...styles.typos }}>Nombre</Typography>
-                    <Typography>{data?.name}</Typography>
+                    <motion.div whileHover={{ scale: 1.1 }}>
+                      <Typography sx={{ ...styles.typos }}>Nombre</Typography>
+                      <Typography>{data?.name}</Typography>
+                    </motion.div>
                   </motion.div>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} sx={{ cursor: "pointer" }}>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.8 }}
                   >
-                    <Typography sx={{ ...styles.typos }}>Apellido</Typography>
-                    <Typography>{data?.lastName}</Typography>
+                    <motion.div whileHover={{ scale: 1.1 }}>
+                      <Typography sx={{ ...styles.typos }}>Apellido</Typography>
+                      <Typography>{data?.lastName}</Typography>
+                    </motion.div>
                   </motion.div>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} sx={{ cursor: "pointer" }}>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1 }}
                   >
-                    <Typography sx={{ ...styles.typos }}>Correo</Typography>
-                    <Typography>{data?.email}</Typography>
+                    <motion.div whileHover={{ scale: 1.1 }}>
+                      <Typography sx={{ ...styles.typos }}>Correo</Typography>
+                      <Typography>{data?.email}</Typography>
+                    </motion.div>
                   </motion.div>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} sx={{ cursor: "pointer" }}>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.2 }}
                   >
-                    <Typography sx={{ ...styles.typos }}>Rol</Typography>
-                    <Typography>{data?.role}</Typography>
+                    <motion.div whileHover={{ scale: 1.1 }}>
+                      <Typography sx={{ ...styles.typos }}>Rol</Typography>
+                      <Typography>{data?.role}</Typography>
+                    </motion.div>
                   </motion.div>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} sx={{ cursor: "pointer" }}>
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.4 }}
                   >
-                    <Typography sx={{ ...styles.typos }}>Telefono</Typography>
-                    <Typography>{data?.cellPhone}</Typography>
+                    <motion.div whileHover={{ scale: 1.1 }}>
+                      <Typography sx={{ ...styles.typos }}>Teléfono</Typography>
+                      <Typography>{data?.cellPhone}</Typography>
+                    </motion.div>
                   </motion.div>
                 </Grid>
               </Grid>

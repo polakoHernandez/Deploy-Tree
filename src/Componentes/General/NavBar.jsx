@@ -749,6 +749,7 @@ export default function SearchAppBar({
               }}
             >
               <ListItemButton
+                onClick={() => navigate("/MiPerfil")}
                 sx={{
                   pl: 4,
                   borderBottom: "1px solid white",

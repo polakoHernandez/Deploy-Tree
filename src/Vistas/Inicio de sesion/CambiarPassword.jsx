@@ -5,6 +5,7 @@ import { cambiarContrasena } from "../../services/login/services";
 import Alertas from "../../Componentes/General/Alertas";
 import "../../Estilos/InicioDeSesion/cambiarPassword.css";
 import logo from "../../../public/Logo-Tree-a.ico";
+import { useNavigate } from "react-router-dom";
 
 function CambiarPassword({ open, close }) {
   const [data, setData] = useState("");
@@ -12,7 +13,7 @@ function CambiarPassword({ open, close }) {
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState("");
   const [deshabilitar, setDeshabilitar] = useState(false);
-
+  const navigate = useNavigate();
   const [render, setRender] = useState(0);
   const [urlData, setUrlData] = useState({
     token: "",
@@ -69,6 +70,9 @@ function CambiarPassword({ open, close }) {
             setMessage(res.respuesta.msg);
             setSeverity("success");
             setDeshabilitar(false);
+            setTimeout(() => {
+              navigate("/");
+            }, [1000]);
             break;
 
           case 401:
@@ -260,6 +264,7 @@ function CambiarPassword({ open, close }) {
                     variant="contained"
                     color="error"
                     className="button-motion"
+                    onClick={() => navigate("/")}
                   >
                     cancelar
                   </Button>

@@ -544,6 +544,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
             <Collapse in={openPerfil} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 <ListItemButton
+                  onClick={() => navigate("/MiPerfil")}
                   sx={{
                     pl: 4,
                     "&:hover": {
