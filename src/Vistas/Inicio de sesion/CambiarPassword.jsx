@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { Box, Button, Grid, CircularProgress } from "@mui/material";
 import { cambiarContrasena } from "../../services/login/services";
 import Alertas from "../../Componentes/General/Alertas";
-import "../../Estilos/InicioDeSesion/CambiarPassword.css";
-import logo from "../../../public/Logo-tree-a.ico";
+import "../../Estilos/InicioDeSesion/cambiarPassword.css";
+import logo from "../../../public/Logo-Tree-a.ico";
 
 function CambiarPassword({ open, close }) {
   const [data, setData] = useState("");
