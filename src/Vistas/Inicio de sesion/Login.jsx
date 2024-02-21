@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Grid, Button } from "@mui/material";
-import "../../Estilos/Inicio de sesion/login.css";
+import "../../Estilos/InicioDeSesion/login.css";
 import imagen from "../../assets/pool1.jpg";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";

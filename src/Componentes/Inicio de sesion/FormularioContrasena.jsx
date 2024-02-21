@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Box, Button, Grid, CircularProgress } from "@mui/material";
-import "../../Estilos/Inicio de sesion/FormularioContrasena.css";
+import "../../Estilos/InicioDeSesion/FormularioContrasena.css";
 import { recuperarContrasena } from "../../services/login/services";
 import Alertas from "../../Componentes/General/Alertas";
 

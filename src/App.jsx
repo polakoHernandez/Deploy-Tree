@@ -22,7 +22,7 @@ import ActualizarQuimico from "./Vistas/Quimicos/ActualizarQuimico";
 import AdministrarInventario from "./Vistas/Quimicos/AdministrarInventario";
 import ExportToExcel from "./Reporte";
 import CambiarPassword from "./Vistas/Inicio de sesion/CambiarPassword";
-
+import MiPerfil from "./Vistas/Usuarios/MiPerfil";
 function App() {
   return (
     <>
@@ -120,6 +120,7 @@ function App() {
             path="/password-reset/:idUser/:token"
             element={<CambiarPassword></CambiarPassword>}
           ></Route>
+          <Route path="/miPerfil" element={<MiPerfil></MiPerfil>}></Route>
         </Routes>
       </BrowserRouter>
     </>

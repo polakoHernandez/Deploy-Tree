@@ -8,8 +8,7 @@ export const recuperarContrasena = async (email) => {
         "x-token": localStorage.getItem("clave"),
         "content-type": "application/json",
       },
-      credentials: "include",
-      mode: "cors",
+
       body: JSON.stringify({
         email: email,
       }),
@@ -50,8 +49,7 @@ export const cambiarContrasena = async (id, token, password) => {
         "x-token": localStorage.getItem("clave"),
         "content-type": "application/json",
       },
-      credentials: "include",
-      mode: "cors",
+
       body: JSON.stringify({
         password: password,
       }),
