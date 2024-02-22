@@ -190,7 +190,7 @@ function FormularioContrasena({ open, close }) {
                     <motion.input
                       value={data.email}
                       onChange={(e) => catchDataInput(e.target.value)}
-                      className="input-motion"
+                      className="input-motion-2"
                       placeholder="Ingrese su correo..."
                     ></motion.input>
                   </Box>

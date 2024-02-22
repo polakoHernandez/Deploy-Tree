@@ -74,6 +74,36 @@
   padding-right: 10p;
 }
 
+.input-motion-2 {
+  width: 85%;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid rgb(0, 164, 228);
+  outline: none;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.input-motion-2:focus {
+  width: 85%;
+  height: 30px;
+  border-radius: 5px;
+  border: 2px solid rgb(0, 164, 228);
+  outline: none;
+  padding-left: 10px;
+  padding-right: 10p;
+}
+
+.input-motion-2:hover {
+  width: 85%;
+  height: 30px;
+  border-radius: 5px;
+  border: 2px solid rgb(0, 164, 228);
+  outline: none;
+  padding-left: 10px;
+  padding-right: 10p;
+}
+
 .button-container {
   width: 100%;
   display: flex;
