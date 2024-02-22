@@ -44,7 +44,7 @@ function AsignarParametros() {
   //*funcion para listar los parametros
   const listarParametros = async () => {
     const respuesta = await fetch(
-      "https://treea-piscinas-api.vercel.app/v1/normativities",
+      "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/normativities",
       {
         method: "GET",
         headers: {

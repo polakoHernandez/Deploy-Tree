@@ -273,7 +273,7 @@ export default function ModalListaQuimicos({ data, open, close }) {
                       borderBottom: "3px solid rgb(0,164,228)",
                     }}
                   >
-                    Hoja de seguridad
+                    Ficha técnica
                   </Typography>
                   <Box>
                     <a href={data?.dataSheet} target="_blank">

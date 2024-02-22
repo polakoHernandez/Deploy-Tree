@@ -221,38 +221,39 @@ function CrearPiscina() {
   const limpiar = (event) => {
     setData({
       nombre: "",
+      departamento: "",
+      municipio: "",
       direccion: "",
       uso: "",
       caracteristica: "",
-      temperatura: "",
-      temperaturaExterna: "",
+      temperatura: 0,
+      temperaturaExterna: 0,
       estructura: "",
       instalacion: "",
       fotoPiscina: "",
       forma: "",
-      largo: "",
-      ancho: "",
-      profundidad: "",
-      profundidadB: "",
-      profundidadC: "",
+      largo: 0,
+      ancho: 0,
+
+      profundidad: 0,
+      profundidadB: 0,
+      profundidadC: 0,
+
       operacion: "",
-      caudal: "",
+      caudal: 0,
       climatizado: "",
-      recirculacionMinimo: "",
-      recirculacionMaximo: "",
+      recirculacionMaximo: 0,
+      recirculacionMinimo: 0,
+
       dosificacion: "",
       filtro: [
-        { filtro: "", lecho: "", altura: "", diametro: "", capacidad: "" },
+        { filtro: "", altura: "", diametro: "", capacidad: "", lecho: "" },
       ],
-      alturaFiltro: "",
-      cantidadFiltro: "",
-      caudalBomba: "",
-      cantidadBomba: "",
-      marcaBomba: "",
-      referenciaBomba: "",
-      cantidadCalentador: "",
-      referenciaCalentador: "",
-      marcaCalentador: "",
+      bomba: [
+        { flujo: "", referencia: "", marca: "", dataSheet: "", foto: "" },
+      ],
+      calentador: [{ referencia: "", marca: "", dataSheet: "" }],
+      fotoPiscina: "",
     });
   };
 
@@ -670,9 +671,8 @@ function CrearPiscina() {
         setMensaje("Piscina Creada exitosamente!");
         setColor("success");
         crearNotificacion(idPool);
-
         setDeshabilitar(false);
-
+        limpiar();
         break;
 
       case 400:
@@ -822,6 +822,7 @@ function CrearPiscina() {
                   </Grid>
                   <Grid item xs={12} sm={12} md={4} sx={{ height: "90px" }}>
                     <InputSelect
+                      value={{ label: data.departamento } || ""}
                       inputRef={refGeneral}
                       options={nombreDepartamento}
                       label="Departamento"
@@ -837,6 +838,7 @@ function CrearPiscina() {
 
                   <Grid item xs={12} sm={12} md={4} sx={{ height: "90px" }}>
                     <InputSelect
+                      value={{ label: data.municipio } || ""}
                       options={nombreMunicipio}
                       label="Ciudad/Municipio"
                       placeholder="Seleccione"
@@ -861,6 +863,7 @@ function CrearPiscina() {
                   </Grid>
                   <Grid item xs={12} sm={12} md={4} sx={{ height: "90px" }}>
                     <InputSelect
+                      value={{ label: data.uso } || ""}
                       options={usos}
                       label="Uso"
                       placeholder="Seleccione"
@@ -873,6 +876,7 @@ function CrearPiscina() {
                   </Grid>
                   <Grid item xs={12} sm={12} md={4} sx={{ height: "90px" }}>
                     <InputSelect
+                      value={{ label: data.caracteristica } || ""}
                       options={caracteristicas}
                       label="Características"
                       placeholder="Seleccione"
@@ -887,7 +891,7 @@ function CrearPiscina() {
                     <InputGeneral
                       type="number"
                       value={data.temperatura}
-                      label="Temperatura °C"
+                      label="Temperatura de la piscina (°C)"
                       placeholder="*C"
                       icon={<PoolIcon></PoolIcon>}
                       name="temperatura"
@@ -900,7 +904,7 @@ function CrearPiscina() {
                     <InputGeneral
                       type="number"
                       value={data.temperaturaExterna}
-                      label="Temperatura externa °C"
+                      label="Temperatura externa (°C)"
                       placeholder="Seleccione"
                       icon={<PoolIcon></PoolIcon>}
                       name="temperaturaExterna"
@@ -911,6 +915,7 @@ function CrearPiscina() {
                   </Grid>
                   <Grid item xs={12} sm={12} md={4} sx={{ height: "90px" }}>
                     <InputSelect
+                      value={{ label: data.estructura } || ""}
                       options={estructura}
                       label="Estructura"
                       placeholder="Seleccione"
@@ -923,6 +928,7 @@ function CrearPiscina() {
                   </Grid>
                   <Grid item xs={12} sm={12} md={4} sx={{ height: "90px" }}>
                     <InputSelect
+                      value={{ label: data.instalacion } || ""}
                       options={instalacion}
                       label="Clase de instalación"
                       placeholder="Seleccione"
@@ -950,6 +956,8 @@ function CrearPiscina() {
                     <InputBuscar
                       onChange={(e) => {
                         seleccionarData("fotoPiscina", e.target.files[0]);
+                        console.log(e.target.value);
+                        console.log(e.target.files[0]);
                       }}
                       label="Foto"
                     ></InputBuscar>
@@ -967,6 +975,7 @@ function CrearPiscina() {
                 <Grid container>
                   <Grid item xs={12} sm={12} md={6}>
                     <InputSelect
+                      value={{ label: data.forma } || ""}
                       label="Forma"
                       options={forma}
                       icon={<PoolIcon></PoolIcon>}
@@ -1050,6 +1059,7 @@ function CrearPiscina() {
                 <Grid container>
                   <Grid item xs={12} sm={12} md={6}>
                     <InputSelect
+                      value={{ label: data.operacion } || ""}
                       options={operacion}
                       label="Sistema de operación"
                       placeholder="Seleccione"
@@ -1076,6 +1086,7 @@ function CrearPiscina() {
 
                   <Grid item xs={12} sm={12} md={6}>
                     <InputSelect
+                      value={{ label: data.climatizado } || ""}
                       options={si_no}
                       label="Climatizado"
                       placeholder="Seleccione"
@@ -1114,6 +1125,7 @@ function CrearPiscina() {
 
                   <Grid item xs={12} sm={12} md={6}>
                     <InputSelect
+                      value={{ label: data.dosificacion } || ""}
                       options={si_no}
                       label="Dosificación automática"
                       placeholder="Seleccione"
@@ -1169,7 +1181,7 @@ function CrearPiscina() {
                             }
                             name="filtro"
                             icon={<Pool></Pool>}
-                            label="filtro"
+                            label="Filtro"
                             options={filtros}
                           ></InputSelect>
                         </Grid>
@@ -1289,7 +1301,7 @@ function CrearPiscina() {
 
                           <Grid item xs={12} sm={12} md={4}>
                             <InputBuscar
-                              label="Hoja de seguridad"
+                              label="Ficha técnica"
                               name="dataSheet"
                               icon={<Pool></Pool>}
                               onChange={(e) => catchDataBombasFiles(index, e)}
@@ -1355,7 +1367,7 @@ function CrearPiscina() {
                           </Grid>
                           <Grid item xs={12} sm={12} md={4}>
                             <InputBuscar
-                              label="Hoja de seguridad"
+                              label="Ficha técnica"
                               name="dataSheet"
                               icon={<Pool></Pool>}
                               onChange={(e) =>
@@ -1419,7 +1431,10 @@ function CrearPiscina() {
                 onClick={() => decrementar()}
               ></KeyboardDoubleArrowLeftIcon>
               <KeyboardDoubleArrowRightIcon
-                sx={styles.arrows}
+                sx={{
+                  ...styles.arrows,
+                  display: contador === 4 ? "none" : "flex",
+                }}
                 onClick={() => incrementar()}
               ></KeyboardDoubleArrowRightIcon>
             </Box>

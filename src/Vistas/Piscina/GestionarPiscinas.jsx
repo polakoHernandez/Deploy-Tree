@@ -1602,7 +1602,7 @@ function GestionarPiscinas() {
                                 </Grid>
                                 <Grid item xs={4}>
                                   <Typography sx={{ ...styles.fontTypografy }}>
-                                    Hoja de datos
+                                    Ficha técnica
                                   </Typography>
                                   <Box
                                     sx={{
@@ -1688,7 +1688,7 @@ function GestionarPiscinas() {
                                     <Typography
                                       sx={{ ...styles.fontTypografy }}
                                     >
-                                      Hoja de datos
+                                      Ficha técnica
                                     </Typography>
                                     <Typography>
                                       <Box

@@ -339,7 +339,7 @@ function MisPiscinas() {
                             paddingTop: "30px",
                           }}
                         >
-                          Información General
+                          Información general
                         </Typography>
                       </Grid>
 
@@ -412,7 +412,7 @@ function MisPiscinas() {
                         <Typography
                           sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                         >
-                          Temperatura °C
+                          Temperatura de la piscina (°C)
                         </Typography>
                         <Typography>{pool?.temperature}°C</Typography>
                       </Grid>
@@ -421,7 +421,7 @@ function MisPiscinas() {
                         <Typography
                           sx={{ fontFamily: "'Nunito Sans', sans-serif" }}
                         >
-                          Temperatura externa °C
+                          Temperatura externa (°C)
                         </Typography>
                         <Typography>{pool?.externalTemperature}°C</Typography>
                       </Grid>
@@ -858,7 +858,7 @@ function MisPiscinas() {
                               </Grid>
                               <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
-                                  Hoja de datos
+                                  Ficha técnica
                                 </Typography>
                                 <Box
                                   sx={{
@@ -940,7 +940,7 @@ function MisPiscinas() {
                               </Grid>
                               <Grid item xs={4}>
                                 <Typography sx={{ ...styles.fontTypografy }}>
-                                  Hoja de datos
+                                  Ficha técnica
                                 </Typography>
                                 <Typography>
                                   <Box

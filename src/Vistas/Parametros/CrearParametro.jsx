@@ -31,6 +31,7 @@ function CrearParametro() {
   const [mensaje, setMensaje] = useState("");
   const [color, setColor] = useState("");
   const [renderNorma, setRenderNorma] = useState(0);
+  const [render, setRender] = useState(0);
 
   //*Estao para renderizar el front
   const [reload, setReload] = useState(false);
@@ -154,6 +155,7 @@ function CrearParametro() {
       case 200:
         const response = await respuesta.json();
         setLisaParametros(response);
+        setRender(rennder + 1);
         break;
 
       case 401:
@@ -168,7 +170,7 @@ function CrearParametro() {
     setDeshabilitar(true);
 
     const response = await fetch(
-      "https://treea-piscinas-api.vercel.app/v1/normativity",
+      "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/normativity",
       {
         method: "POST",
         headers: {
@@ -185,6 +187,8 @@ function CrearParametro() {
       }
     );
 
+    let respuesta = "";
+
     switch (response.status) {
       case 200:
         const result = await response.json();
@@ -197,10 +201,13 @@ function CrearParametro() {
         break;
 
       case 400:
-        setOpen(true);
-        setMensaje("Todos los campos son obligatorios");
-        setColor("error");
-        setDeshabilitar(false);
+        respuesta = await response.json();
+        if (respuesta.type === "fields_required") {
+          setOpen(true);
+          setMensaje(respuesta.errors[0].msg);
+          setColor("error");
+          setDeshabilitar(false);
+        }
 
         break;
 
@@ -211,14 +218,21 @@ function CrearParametro() {
         setDeshabilitar(false);
 
         break;
-    }
+      case 422:
+        setOpen(true);
+        setMensaje("Todos los campos son obliatorios");
+        setColor("error");
+        setDeshabilitar(false);
 
-    try {
-    } catch (error) {
-      setOpen(true);
-      setMensaje("Error en el servidor");
-      setColor("error");
-      setDeshabilitar(false);
+        break;
+      case 500:
+        respuesta = await response.json();
+        setOpen(true);
+        setMensaje("Token no valido");
+        setColor("error");
+        setDeshabilitar(false);
+        console.log(respuesta);
+        break;
     }
   };
   //*ontaodor para mostrar las vistas
@@ -404,11 +418,11 @@ function CrearParametro() {
 
   const listaOpciones = [
     {
-      label: "Agua Residual",
+      label: "Agua residual",
     },
 
     {
-      label: "Agua Potale",
+      label: "Agua potable",
     },
 
     {
@@ -443,7 +457,7 @@ function CrearParametro() {
 
   useEffect(() => {
     listarParametros();
-  }, [renderNorma]);
+  }, [render]);
 
   // useEffect(() => {
   //   listarParametros();
@@ -683,7 +697,7 @@ function CrearParametro() {
             </Box>
             <Tabla
               contador={contador}
-              reloadData={handleReloadData}
+              reloadData={() => setRender(render + 1)}
               data={
                 listaParametros.length === 0
                   ? ""

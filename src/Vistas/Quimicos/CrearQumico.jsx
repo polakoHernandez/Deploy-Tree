@@ -373,7 +373,7 @@ const CrearQuimico = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputBuscar
-                    label="Hoja de seguridad"
+                    label="Ficha técnica"
                     onChange={catchFiles}
                     name="hojaSeguridad"
                   ></InputBuscar>

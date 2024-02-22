@@ -626,7 +626,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
                       </Grid>
                       <Grid xs={4}>
                         <Typography sx={{ ...styles.fontTylografy }}>
-                          Hoja de seguridad
+                          Ficha técnica
                         </Typography>
                         <Box
                           sx={{
@@ -704,7 +704,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
                       </Grid>
                       <Grid xs={4}>
                         <Typography sx={{ ...styles.fontTylografy }}>
-                          Hoja de seguridad
+                          Ficha técnica
                         </Typography>
                         <Typography>
                           <Box
