@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Box, Button, Grid, CircularProgress } from "@mui/material";
+import { Box, Button, Grid, CircularProgress, IconButton } from "@mui/material";
 import { cambiarContrasena } from "../../services/login/services";
 import Alertas from "../../Componentes/General/Alertas";
 import "../../Estilos/InicioDeSesion/cambiarPassword.css";
 import logo from "../../../public/Logo-Tree-a.ico";
 import { useNavigate } from "react-router-dom";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function CambiarPassword({ open, close }) {
   const [data, setData] = useState("");
@@ -15,6 +16,7 @@ function CambiarPassword({ open, close }) {
   const [deshabilitar, setDeshabilitar] = useState(false);
   const navigate = useNavigate();
   const [render, setRender] = useState(0);
+  const [show, setShow] = useState(false);
   const [urlData, setUrlData] = useState({
     token: "",
     id: "",
@@ -228,21 +230,126 @@ function CambiarPassword({ open, close }) {
                   <Box sx={{ width: "90%" }}>
                     <label className="labels">Contraseña</label>
                   </Box>
-                  <motion.input
-                    onChange={(e) => catchDataInput("password", e.target.value)}
-                    value={data["password"]}
-                    className="input-motion"
-                    type="password"
-                  ></motion.input>
+                  <></>
+                  <Box
+                    sx={{
+                      width: "90%",
+                      position: "relative",
+                    }}
+                  >
+                    <IconButton
+                      onClick={() => setShow(!show)}
+                      sx={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "10px",
+                        backgroundColor: "white",
+                        borderRadius: "0px",
+                        height: "10px",
+                        display: show ? "content" : "none",
+
+                        "&:hover": {
+                          position: "absolute",
+                          right: "10px",
+                          top: "10px",
+                          backgroundColor: "white",
+                          borderRadius: "0px",
+                          height: "10px",
+                        },
+                      }}
+                    >
+                      <Visibility></Visibility>
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setShow(!show)}
+                      sx={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "10px",
+                        backgroundColor: "white",
+                        borderRadius: "0px",
+                        height: "10px",
+                        display: show ? "none" : "content",
+
+                        "&:hover": {
+                          position: "absolute",
+                          right: "10px",
+                          top: "10px",
+                          backgroundColor: "white",
+                          borderRadius: "0px",
+                          height: "10px",
+                        },
+                      }}
+                    >
+                      <VisibilityOff></VisibilityOff>
+                    </IconButton>
+                    <motion.input
+                      onChange={(e) =>
+                        catchDataInput("password", e.target.value)
+                      }
+                      value={data["password"]}
+                      className="input-motion"
+                      type={show ? "text" : "password"}
+                    ></motion.input>
+                  </Box>
                   <Box sx={{ width: "90%" }}>
                     <label className="labels">Confirmar contraseña</label>
                   </Box>
-                  <motion.input
-                    value={data["confirm"]}
-                    onChange={(e) => catchDataInput("confirm", e.target.value)}
-                    className="input-motion"
-                    type="password"
-                  ></motion.input>
+                  <Box sx={{ width: "90%", position: "relative" }}>
+                    <IconButton
+                      onClick={() => setShow(!show)}
+                      sx={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "10px",
+                        backgroundColor: "white",
+                        borderRadius: "0px",
+                        height: "10px",
+                        display: !show ? "none" : "content",
+
+                        "&:hover": {
+                          position: "absolute",
+                          right: "10px",
+                          top: "10px",
+                          backgroundColor: "white",
+                          borderRadius: "0px",
+                          height: "10px",
+                        },
+                      }}
+                    >
+                      <Visibility></Visibility>
+                    </IconButton>
+                    <IconButton
+                      onClick={() => setShow(!show)}
+                      sx={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "10px",
+                        backgroundColor: "white",
+                        borderRadius: "0px",
+                        height: "10px",
+                        display: show ? "none" : "content",
+                        "&:hover": {
+                          position: "absolute",
+                          right: "10px",
+                          top: "10px",
+                          backgroundColor: "white",
+                          borderRadius: "0px",
+                          height: "10px",
+                        },
+                      }}
+                    >
+                      <VisibilityOff></VisibilityOff>
+                    </IconButton>
+                    <motion.input
+                      value={data["confirm"]}
+                      onChange={(e) =>
+                        catchDataInput("confirm", e.target.value)
+                      }
+                      className="input-motion"
+                      type={show ? "tex" : "password"}
+                    ></motion.input>
+                  </Box>
                   <Button
                     disabled={deshabilitar}
                     onClick={enviarPeticion}
