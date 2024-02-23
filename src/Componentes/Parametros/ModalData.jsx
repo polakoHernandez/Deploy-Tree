@@ -31,6 +31,7 @@ function ModalData({ data, open, close }) {
       justifyContent: "center",
       fontFamily: "'Nunito Sans', sans-serif",
       fontSize: "25px",
+      marginBottom: "30px",
     },
 
     subtitle: {

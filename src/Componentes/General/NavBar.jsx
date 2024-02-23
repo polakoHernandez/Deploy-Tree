@@ -527,6 +527,35 @@ export default function SearchAppBar({
                 <ChevronRightIcon></ChevronRightIcon>
               </ListItemButton>
               <ListItemButton
+                onClick={() => navigate("/listaNormas")}
+                sx={{
+                  pl: 4,
+                  borderBottom: "1px solid white",
+
+                  // "&:hover": {
+                  //   backgroundColor: "white",
+                  // },
+                }}
+              >
+                <ListItemText
+                  primary={
+                    <Typography
+                      sx={{
+                        fontFamily: "'Nunito Sans', sans-serif",
+                        color: "white",
+                        width: "100%",
+                        // "&:hover": {
+                        //   color: "rgb(0,164,228)",
+                        // },
+                      }}
+                    >
+                      Lista de normas
+                    </Typography>
+                  }
+                />
+                <ChevronRightIcon></ChevronRightIcon>
+              </ListItemButton>
+              <ListItemButton
                 onClick={() => navigate("/asignarParametros")}
                 sx={{
                   pl: 4,

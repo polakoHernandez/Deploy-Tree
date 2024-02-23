@@ -110,20 +110,20 @@ export default function DataGridDemo({
     {
       field: "nameNormativity",
       headerName: "Nombre",
-      width: 250,
+      width: 300,
       headerAlign: "center",
     },
     {
       field: "typeOfWater",
       headerName: "Tipo de agua",
-      width: 150,
+      width: 180,
       headerAlign: "center",
     },
 
     {
       field: "state",
       headerName: "Estado",
-      width: 150,
+      width: 200,
       align: "center",
       headerAlign: "center",
       // valueFormatter: (params) => (params.value ? "ACTIVO" : "INACTIVO"),
@@ -147,7 +147,7 @@ export default function DataGridDemo({
     {
       field: "accion",
       headerName: "Administrar",
-      width: 200,
+      width: 219,
       headerAlign: "center",
       renderCell: (params) => (
         <Box
@@ -207,7 +207,7 @@ export default function DataGridDemo({
       }}
     >
       <DataGrid
-        sx={{ width: { xs: "95%", sm: "95%", md: "751px" } }}
+        sx={{ width: { xs: "95%", sm: "95%", md: "751px", lg: "900px" } }}
         rows={data || ""}
         columns={columns.map((col) => ({
           ...col,

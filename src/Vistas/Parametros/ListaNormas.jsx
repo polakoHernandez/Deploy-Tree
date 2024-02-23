@@ -17,7 +17,7 @@ import TablaPrevisualizacion from "../../Componentes/Parametros/TablaPrevisualiz
 import { Description } from "@mui/icons-material";
 import { organizarDataExcel } from "../../utils/parametros/CrearParametrosUtils";
 
-function CrearParametro() {
+function ListaNormas() {
   //* Estado para guardar la data de info general
   const [data, setData] = useState({
     nameNormativity: "",
@@ -253,7 +253,7 @@ function CrearParametro() {
     }
   };
   //*ontaodor para mostrar las vistas
-  const [contador, setContador] = useState(1);
+  const [contador, setContador] = useState(2);
 
   const [mover, setMover] = useState(false); //MOvercon Piscina
   const [moverUsuario, setMoverUsuarios] = useState(false);
@@ -358,9 +358,9 @@ function CrearParametro() {
     },
 
     crearNorma: {
-      backgroundColor: "rgb(0,164,228)",
-      color: "white",
-      border: "",
+      backgroundColor: contador === 1 ? "white" : "rgb(0,164,228)",
+      color: contador === 1 ? "black" : "white",
+      border: contador === 1 ? "1px solid black" : "",
       width: "150px",
       display: "flex",
       justifyContent: "center",
@@ -491,12 +491,7 @@ function CrearParametro() {
       ></SearchAppBar>
       <Box sx={{ ...styles.mainBox }}>
         <Box sx={{ ...styles.containerEncabezado }}>
-          <Typography
-            sx={{ ...styles.crearNorma }}
-            onClick={() => setContador(1)}
-          >
-            Crear norma
-          </Typography>
+          <Typography sx={{ ...styles.crearNorma }}>Lista de normas</Typography>
         </Box>
         <Box sx={{ ...styles.containerFormulario }}>
           <Box sx={{ ...styles.containerGrid }}>
@@ -752,4 +747,4 @@ function CrearParametro() {
   );
 }
 
-export default CrearParametro;
+export default ListaNormas;

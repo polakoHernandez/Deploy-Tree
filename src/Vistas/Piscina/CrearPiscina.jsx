@@ -56,7 +56,13 @@ function CrearPiscina() {
 
     dosificacion: "",
     filtro: [
-      { filtro: "", altura: "", diametro: "", capacidad: "", lecho: "" },
+      {
+        filtro: "",
+        altura: "",
+        diametro: "",
+        capacidad: "",
+        lecho: "",
+      },
     ],
     bomba: [{ flujo: "", referencia: "", marca: "", dataSheet: "", foto: "" }],
     calentador: [{ referencia: "", marca: "", dataSheet: "" }],
@@ -219,7 +225,7 @@ function CrearPiscina() {
   //*Funcion para limpiar a data
 
   const limpiar = (event) => {
-    setData({
+    setData((prevData) => ({
       nombre: "",
       departamento: "",
       municipio: "",
@@ -246,15 +252,27 @@ function CrearPiscina() {
       recirculacionMinimo: 0,
 
       dosificacion: "",
-      filtro: [
-        { filtro: "", altura: "", diametro: "", capacidad: "", lecho: "" },
-      ],
-      bomba: [
-        { flujo: "", referencia: "", marca: "", dataSheet: "", foto: "" },
-      ],
-      calentador: [{ referencia: "", marca: "", dataSheet: "" }],
-      fotoPiscina: "",
-    });
+      filtro: prevData.filtro.map((item) => ({
+        filtro: "",
+        altura: "",
+        diametro: "",
+        capacidad: "",
+        lecho: "",
+      })),
+      bomba: prevData.bomba.map(() => ({
+        flujo: "",
+        referencia: "",
+        marca: "",
+        dataSheet: "",
+        foto: "",
+      })),
+
+      calentador: prevData.calentador.map(() => ({
+        referencia: "",
+        marca: "",
+        dataSheet: "",
+      })),
+    }));
   };
 
   //Estado abrir alerta
@@ -1172,6 +1190,7 @@ function CrearPiscina() {
                         </Grid>
                         <Grid item xs={12} sm={12} md={4}>
                           <InputSelect
+                            value={{ label: data.filtro[index].filtro }}
                             onChange={(e) =>
                               catchDataFiltros(
                                 index,
@@ -1187,6 +1206,7 @@ function CrearPiscina() {
                         </Grid>
                         <Grid item xs={12} sm={12} md={4}>
                           <InputGeneral
+                            value={data.filtro[index].altura}
                             type="number"
                             name="altura"
                             label="Altura (m)"
@@ -1198,6 +1218,7 @@ function CrearPiscina() {
                         </Grid>
                         <Grid item xs={12} sm={12} md={4}>
                           <InputGeneral
+                            value={data.filtro[index].diametro}
                             onChange={(e) =>
                               catchDataFiltros(
                                 index,
@@ -1213,6 +1234,7 @@ function CrearPiscina() {
                         </Grid>
                         <Grid item xs={12} sm={12} md={4}>
                           <InputGeneral
+                            value={data.filtro[index].capacidad}
                             onChange={(e) =>
                               catchDataFiltros(
                                 index,
@@ -1228,6 +1250,7 @@ function CrearPiscina() {
                         </Grid>
                         <Grid item xs={12} sm={12} md={4}>
                           <InputGeneral
+                            value={data.filtro[index].lecho}
                             onChange={(e) =>
                               catchDataFiltros(
                                 index,
@@ -1273,6 +1296,7 @@ function CrearPiscina() {
                           </Grid>
                           <Grid item xs={12} sm={12} md={4}>
                             <InputGeneral
+                              value={data.bomba[index].flujo}
                               type="number"
                               label="Caudal (L/seg)"
                               name="flujo"
@@ -1283,6 +1307,7 @@ function CrearPiscina() {
 
                           <Grid item xs={12} sm={12} md={4}>
                             <InputGeneral
+                              value={data.bomba[index].referencia}
                               label="Referencia"
                               name="referencia"
                               icon={<Pool></Pool>}
@@ -1292,6 +1317,7 @@ function CrearPiscina() {
 
                           <Grid item xs={12} sm={12} md={4}>
                             <InputGeneral
+                              value={data.bomba[index].marca}
                               label="Marca"
                               name="marca"
                               icon={<Pool></Pool>}
@@ -1351,6 +1377,7 @@ function CrearPiscina() {
                           </Grid>
                           <Grid item xs={12} sm={12} md={4}>
                             <InputGeneral
+                              value={data.calentador[index].referencia}
                               label="Referencia"
                               name="referencia"
                               icon={<Pool></Pool>}
@@ -1360,6 +1387,7 @@ function CrearPiscina() {
                           <Grid item xs={12} sm={12} md={4}>
                             <InputGeneral
                               label="Marca"
+                              value={data.calentador[index].marca}
                               name="marca"
                               icon={<Pool></Pool>}
                               onChange={(e) => catchDataCalentadores(index, e)}
@@ -1370,9 +1398,10 @@ function CrearPiscina() {
                               label="Ficha técnica"
                               name="dataSheet"
                               icon={<Pool></Pool>}
-                              onChange={(e) =>
-                                catchDataCalentadoresFiles(index, e)
-                              }
+                              onChange={(e) => {
+                                catchDataCalentadoresFiles(index, e);
+                                console.log(e.target.files);
+                              }}
                             ></InputBuscar>
                           </Grid>
                         </Grid>

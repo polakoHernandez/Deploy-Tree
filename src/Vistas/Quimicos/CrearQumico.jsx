@@ -282,10 +282,26 @@ const CrearQuimico = () => {
 
       case 400:
         respuesta = await response.json();
+        if (respuesta.type === "date_error") {
+          setHabilitar(false);
+          setOpenAlerta(true);
+          setMensaje(respuesta?.msg);
+          setColor("error");
+        } else {
+          alert("si entro");
+          setHabilitar(false);
+          setOpenAlerta(true);
+          setMensaje(respuesta?.errors[0].msg);
+          setColor("error");
+        }
 
+        break;
+
+      case 422:
+        respuesta = await response.json();
         setHabilitar(false);
         setOpenAlerta(true);
-        setMensaje(respuesta?.errors[0]?.msg);
+        setMensaje(respuesta?.msg?.chemicalFunction);
         setColor("error");
         console.log(respuesta);
         break;
@@ -334,14 +350,16 @@ const CrearQuimico = () => {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputSelect
+                    value={{ label: data.nombre }}
                     options={listaNombres}
                     icon={<Pool></Pool>}
                     label="Nombre"
                     name="nombre"
                     type="text"
-                    onChange={(e) =>
-                      catchSelect("nombre", e.target.textContent)
-                    }
+                    onChange={(e) => {
+                      catchSelect("nombre", e.target.textContent);
+                      console.log(e.target.textContent);
+                    }}
                   ></InputSelect>
                 </Grid>
 
@@ -373,7 +391,7 @@ const CrearQuimico = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputBuscar
-                    label="Ficha técnica"
+                    label="Hoja de seguridad"
                     onChange={catchFiles}
                     name="hojaSeguridad"
                   ></InputBuscar>
@@ -391,7 +409,7 @@ const CrearQuimico = () => {
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
                     onChange={catchData}
-                    label="Densidad"
+                    label="Densidad (%)"
                     icon={<Pool></Pool>}
                     name="densidad"
                     type="number"

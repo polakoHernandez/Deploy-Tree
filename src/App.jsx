@@ -23,6 +23,7 @@ import AdministrarInventario from "./Vistas/Quimicos/AdministrarInventario";
 import ExportToExcel from "./Reporte";
 import CambiarPassword from "./Vistas/Inicio de sesion/CambiarPassword";
 import MiPerfil from "./Vistas/Usuarios/MiPerfil";
+import ListaNormas from "./Vistas/Parametros/ListaNormas";
 function App() {
   return (
     <>
@@ -119,6 +120,10 @@ function App() {
           <Route
             path="/password-reset/:idUser/:token"
             element={<CambiarPassword></CambiarPassword>}
+          ></Route>
+          <Route
+            path="/listaNormas"
+            element={<ListaNormas></ListaNormas>}
           ></Route>
           <Route path="/miPerfil" element={<MiPerfil></MiPerfil>}></Route>
         </Routes>

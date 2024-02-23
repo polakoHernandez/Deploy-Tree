@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
   const navigate = useNavigate("");
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [openPiscina, setOpenPiscina] = React.useState(false);
   const [openParam, setOpenParam] = React.useState(false);
   const [openQuimicos, setOpenQuimicos] = React.useState(false);
@@ -395,6 +395,36 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
                 </ListItemButton>
               </List>
             </Collapse>
+            <Collapse in={openParam} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton
+                  onClick={() => navigate("/listaNormas")}
+                  sx={{
+                    pl: 4,
+                    "&:hover": {
+                      backgroundColor: "white",
+                    },
+                  }}
+                >
+                  <ListItemText
+                    primary={
+                      <Typography
+                        sx={{
+                          fontFamily: "'Nunito Sans', sans-serif",
+                          color: "white",
+                          "&:hover": {
+                            color: "rgb(0,164,228)",
+                          },
+                        }}
+                      >
+                        Lista de normas
+                      </Typography>
+                    }
+                  />
+                </ListItemButton>
+              </List>
+            </Collapse>
+
             {/* Cuarto Item */}
             <ListItemButton
               onClick={() => abrirQuimicos()}
