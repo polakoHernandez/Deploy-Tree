@@ -157,7 +157,7 @@ function ListaNormas() {
   //*funcion para listar los parametros
   const listarParametros = async () => {
     const respuesta = await fetch(
-      "https://treea-piscinas-api.vercel.app/v1/normativities",
+      "https://treea-piscinas-api.vercel.app/v1/normativities-lists",
       {
         method: "GET",
         headers: {

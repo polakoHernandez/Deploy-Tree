@@ -203,6 +203,24 @@ const CrearQuimico = () => {
     "expirationDate",
   ];
 
+  const limpiar = () => {
+    setData({
+      nombre: "",
+      funcion: "",
+      imagenProducto: "",
+      fichaTecnica: "",
+      hojaSeguridad: "",
+      concentracion: "",
+      densidad: "",
+      proveedor: "",
+      unidades: "",
+      cantidadMinima: "",
+      ingreso: "",
+      lote: "",
+      fecha: "",
+    });
+  };
+
   const crearNotificacion = async (id) => {
     try {
       const response = await fetch(
@@ -250,6 +268,9 @@ const CrearQuimico = () => {
   };
 
   const crearrQuimico = async () => {
+    limpiar();
+    return;
+
     setHabilitar(true);
     const body = crearFormulario();
 
@@ -365,6 +386,7 @@ const CrearQuimico = () => {
 
                 <Grid item xs={12} sm={12} md={4}>
                   <InputSelect
+                    value={{ label: data.funcion }}
                     options={listaFunciones}
                     icon={<Pool></Pool>}
                     label="Función"
@@ -398,6 +420,7 @@ const CrearQuimico = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
+                    value={data.concentracion}
                     onChange={catchData}
                     icon={<Pool></Pool>}
                     label="Concentracion (%)"
@@ -408,6 +431,7 @@ const CrearQuimico = () => {
 
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
+                    value={data.densidad}
                     onChange={catchData}
                     label="Densidad (%)"
                     icon={<Pool></Pool>}
@@ -417,6 +441,7 @@ const CrearQuimico = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
+                    value={data.proveedor}
                     onChange={catchData}
                     label="Proveedor"
                     icon={<Pool></Pool>}
@@ -425,6 +450,7 @@ const CrearQuimico = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputSelect
+                    value={{ label: data.unidades }}
                     options={listaUnidades}
                     label="Unidades"
                     icon={<Pool></Pool>}
@@ -435,6 +461,7 @@ const CrearQuimico = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
+                    value={data.cantidadMinima}
                     onChange={catchData}
                     label="Cantidad mínima"
                     icon={<Pool></Pool>}
@@ -445,6 +472,7 @@ const CrearQuimico = () => {
 
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
+                    value={data.ingreso}
                     onChange={catchData}
                     label="Ingreso"
                     icon={<Pool></Pool>}
@@ -455,6 +483,7 @@ const CrearQuimico = () => {
 
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
+                    value={data.lote}
                     onChange={catchData}
                     label="Lote"
                     icon={<Pool></Pool>}
