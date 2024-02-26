@@ -525,7 +525,11 @@ const ActualizarQuimico = () => {
 
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
-                    value={new Date(data.fecha).toLocaleDateString()}
+                    value={
+                      data.fecha
+                        ? new Date(data.fecha).toISOString().split("T")[0]
+                        : ""
+                    }
                     onChange={catchData}
                     icon={<Pool></Pool>}
                     type="date"
