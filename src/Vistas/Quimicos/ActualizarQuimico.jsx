@@ -303,6 +303,9 @@ const ActualizarQuimico = () => {
         setHabilitar(false);
         console.log(respuesta);
         limpiar();
+        setTimeout(() => {
+          navigate("/listaQuimicos");
+        }, 1000);
 
         break;
 

@@ -11,7 +11,7 @@ function InputGeneral({
   name,
   type,
   onChange,
-  ref,
+  inputRef,
   value,
   error,
   disabled,
@@ -44,7 +44,7 @@ function InputGeneral({
           disabled={disabled}
           error={error}
           value={value}
-          ref={ref}
+          inputRef={inputRef}
           onChange={onChange}
           name={name}
           variant="outlined"
