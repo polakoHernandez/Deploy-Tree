@@ -12,13 +12,12 @@ import InputSelect from "../../Componentes/General/InputSelect";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import Alertas from "../../Componentes/General/Alertas";
 import ModalGeneral from "../../Componentes/General/Modal";
-import { useLocation } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
 function EditarUsuario() {
   document.body.style.overflow = "scroll";
 
   const location = useLocation();
-
+  const navigate = useNavigate();
   const { _id, ID, name, lastName, email, cellPhone, role } = location.state;
 
   const [openModal, setOpenModal] = useState(false);
@@ -173,6 +172,9 @@ function EditarUsuario() {
           setSeverity("success");
           setMensaje("Actualizado con éxito");
           limpiar();
+          setTimeout(() => {
+            navigate("/listaDeUsuarios");
+          }, 1000);
           break;
 
         case 401:

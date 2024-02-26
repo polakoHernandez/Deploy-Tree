@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Box, Grid, Typography, Button, CircularProgress } from "@mui/material";
 import { Pool } from "@mui/icons-material";
 import SearchAppBar from "../../Componentes/General/NavBar";
@@ -35,6 +35,9 @@ const CrearQuimico = () => {
   const [mensaje, setMensaje] = useState("");
   const [color, setColor] = useState("");
 
+  const inputRef = useRef(null);
+  const refImagen = useRef(null);
+  const refSeguridad = useRef(null);
   //Funciones para mover la caja contenedora
   const moverTabla = () => {
     setMover(!mover);
@@ -204,12 +207,16 @@ const CrearQuimico = () => {
   ];
 
   const limpiar = () => {
+    // inputRef.current.file = "";
+    inputRef.current.value = "";
+    refImagen.current.value = "";
+    refSeguridad.current.value = "";
     setData({
       nombre: "",
       funcion: "",
       imagenProducto: "",
-      fichaTecnica: "",
-      hojaSeguridad: "",
+      fichaTecnica: "Seleccione un archivo",
+      hojaSeguridad: "Seleccione un archivo",
       concentracion: "",
       densidad: "",
       proveedor: "",
@@ -268,9 +275,6 @@ const CrearQuimico = () => {
   };
 
   const crearrQuimico = async () => {
-    limpiar();
-    return;
-
     setHabilitar(true);
     const body = crearFormulario();
 
@@ -297,7 +301,7 @@ const CrearQuimico = () => {
         }
 
         setHabilitar(false);
-        console.log(respuesta);
+        limpiar();
 
         break;
 
@@ -309,7 +313,6 @@ const CrearQuimico = () => {
           setMensaje(respuesta?.msg);
           setColor("error");
         } else {
-          alert("si entro");
           setHabilitar(false);
           setOpenAlerta(true);
           setMensaje(respuesta?.errors[0].msg);
@@ -324,7 +327,6 @@ const CrearQuimico = () => {
         setOpenAlerta(true);
         setMensaje(respuesta?.msg?.chemicalFunction);
         setColor("error");
-        console.log(respuesta);
         break;
 
       case 401:
@@ -333,7 +335,6 @@ const CrearQuimico = () => {
         setHabilitar(false);
         setOpenAlerta(true);
         setColor("error");
-        console.log(respuesta);
         break;
 
       case 500:
@@ -343,7 +344,6 @@ const CrearQuimico = () => {
         setOpenAlerta(true);
         setMensaje("Error en el sevidor");
         setColor("error");
-        console.log(respuesta);
         break;
     }
     setHabilitar(false);
@@ -379,7 +379,6 @@ const CrearQuimico = () => {
                     type="text"
                     onChange={(e) => {
                       catchSelect("nombre", e.target.textContent);
-                      console.log(e.target.textContent);
                     }}
                   ></InputSelect>
                 </Grid>
@@ -399,6 +398,7 @@ const CrearQuimico = () => {
 
                 <Grid item xs={12} sm={12} md={4}>
                   <InputBuscar
+                    inputRef={refImagen}
                     label="Imagen producto"
                     onChange={catchFiles}
                     name="imagenProducto"
@@ -406,6 +406,7 @@ const CrearQuimico = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputBuscar
+                    inputRef={inputRef}
                     label="Ficha técnica"
                     onChange={catchFiles}
                     name="fichaTecnica"
@@ -413,6 +414,7 @@ const CrearQuimico = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputBuscar
+                    inputRef={refSeguridad}
                     label="Hoja de seguridad"
                     onChange={catchFiles}
                     name="hojaSeguridad"
@@ -493,6 +495,7 @@ const CrearQuimico = () => {
 
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
+                    value={data.fecha}
                     onChange={catchData}
                     icon={<Pool></Pool>}
                     type="date"
@@ -505,7 +508,9 @@ const CrearQuimico = () => {
                     disabled={habilitar}
                     variant="contained"
                     sx={{ ...styles.button }}
-                    onClick={() => crearrQuimico()}
+                    onClick={() => {
+                      crearrQuimico();
+                    }}
                   >
                     {habilitar ? (
                       <CircularProgress

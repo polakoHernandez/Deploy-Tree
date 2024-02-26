@@ -413,14 +413,6 @@ function AgregarInventario() {
     }
   };
 
-  // useEffect(() => {
-  //   obtenerProductoId(idProp);
-  // }, [idProp]);
-
-  // useEffect(() => {
-  //   obtenerProducto(idProp);
-  // }, [guardarRender]);
-
   useEffect(() => {
     listarProductosQuimicos();
   }, [render]);
@@ -505,6 +497,7 @@ function AgregarInventario() {
 
                     <Grid item xs={6}>
                       <InputGeneral
+                        value={dataText.cantidad}
                         type="number"
                         label="Cantidad"
                         icon={<Pool></Pool>}
@@ -514,6 +507,7 @@ function AgregarInventario() {
                     </Grid>
                     <Grid item xs={6}>
                       <InputSelect
+                        value={{ label: dataText.unidades }}
                         options={listaUnidades}
                         label="Unidades"
                         icon={<Pool></Pool>}
@@ -526,6 +520,7 @@ function AgregarInventario() {
 
                     <Grid item xs={6}>
                       <InputGeneral
+                        value={dataText.lote}
                         label="Lote"
                         icon={<Pool></Pool>}
                         name="lote"
@@ -535,6 +530,7 @@ function AgregarInventario() {
 
                     <Grid item xs={6}>
                       <InputGeneral
+                        value={dataText.fecha}
                         label="Fecha"
                         type="date"
                         icon={<Pool></Pool>}

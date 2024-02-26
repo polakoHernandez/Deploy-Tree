@@ -21,9 +21,12 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { Add, Delete, Poll, Pool } from "@mui/icons-material";
 
 function CrearPiscina() {
-  //Referencia a inputs
+  //*Referencia a inputs
 
-  // const filtroRef = useRef();
+  const imagePoolRef = useRef(null);
+  const tecnicaBomba = useRef(null);
+  const fotoBomba = useRef(null);
+  const tecnicaCalentador = useRef(null);
 
   const refGeneral = useRef("");
 
@@ -225,6 +228,10 @@ function CrearPiscina() {
   //*Funcion para limpiar a data
 
   const limpiar = (event) => {
+    imagePoolRef.current.value = "";
+    tecnicaBomba.current.value = "";
+    fotoBomba.current.value = "";
+    tecnicaCalentador.current.value = "";
     setData((prevData) => ({
       nombre: "",
       departamento: "",
@@ -972,10 +979,9 @@ function CrearPiscina() {
                     }}
                   >
                     <InputBuscar
+                      inputRef={imagePoolRef}
                       onChange={(e) => {
                         seleccionarData("fotoPiscina", e.target.files[0]);
-                        console.log(e.target.value);
-                        console.log(e.target.files[0]);
                       }}
                       label="Foto"
                     ></InputBuscar>
@@ -1327,6 +1333,7 @@ function CrearPiscina() {
 
                           <Grid item xs={12} sm={12} md={4}>
                             <InputBuscar
+                              inputRef={tecnicaBomba}
                               label="Ficha técnica"
                               name="dataSheet"
                               icon={<Pool></Pool>}
@@ -1336,6 +1343,7 @@ function CrearPiscina() {
 
                           <Grid item xs={12} sm={12} md={4}>
                             <InputBuscar
+                              inputRef={fotoBomba}
                               label="Foto"
                               name="foto"
                               icon={<Pool></Pool>}
@@ -1395,6 +1403,7 @@ function CrearPiscina() {
                           </Grid>
                           <Grid item xs={12} sm={12} md={4}>
                             <InputBuscar
+                              inputRef={tecnicaCalentador}
                               label="Ficha técnica"
                               name="dataSheet"
                               icon={<Pool></Pool>}

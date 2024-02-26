@@ -311,6 +311,7 @@ function AdministrarInventario() {
           setSeverity("success");
           setRender(render + 1);
           setHabilitar(false);
+          limpiar();
 
           break;
         case 401:
@@ -338,6 +339,15 @@ function AdministrarInventario() {
 
           break;
       }
+    });
+  };
+
+  const limpiar = () => {
+    setData({
+      cantidad: "",
+      unidades: "",
+      lote: "",
+      fecha: "",
     });
   };
 
@@ -458,6 +468,7 @@ function AdministrarInventario() {
 
                     <Grid item xs={6}>
                       <InputGeneral
+                        value={data.cantidad}
                         type="number"
                         label="Cantidad"
                         icon={<Pool></Pool>}
@@ -469,6 +480,7 @@ function AdministrarInventario() {
                     </Grid>
                     <Grid item xs={6}>
                       <InputSelect
+                        value={{ label: data.unidades }}
                         options={listaUnidades}
                         label="Unidades"
                         icon={<Pool></Pool>}
@@ -481,6 +493,7 @@ function AdministrarInventario() {
 
                     <Grid item xs={6}>
                       <InputGeneral
+                        value={data.lote}
                         label="Lote"
                         icon={<Pool></Pool>}
                         name="lote"
@@ -492,6 +505,7 @@ function AdministrarInventario() {
 
                     <Grid item xs={6}>
                       <InputGeneral
+                        value={data.fecha}
                         label="Fecha de vencimiento"
                         type="date"
                         icon={<Pool></Pool>}

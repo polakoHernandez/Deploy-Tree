@@ -6,7 +6,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-function InputPassword({ label, placeholder, name, onChange }) {
+function InputPassword({ label, placeholder, name, onChange, value }) {
   const [see, setSee] = useState(false);
   const theme = createTheme({
     palette: {
@@ -32,6 +32,7 @@ function InputPassword({ label, placeholder, name, onChange }) {
         </InputLabel>
         <TextField
           // disabled={estadoBoton}
+          value={value}
           onChange={onChange}
           name={name}
           variant="outlined"

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "@mui/material";
 
-function InputBuscar({ label, onChange, value, ref, name }) {
+function InputBuscar({ label, onChange, value, inputRef, name }) {
   const [file, setFile] = useState("");
 
   const handleFileChange = (event) => {
@@ -25,8 +24,7 @@ function InputBuscar({ label, onChange, value, ref, name }) {
       <input
         value={value}
         name={name}
-        ref={ref}
-        // value={value}
+        ref={inputRef}
         type="file"
         id="fileInput"
         accept=".pdf, .png, .jpg, .jpeg, .gif"

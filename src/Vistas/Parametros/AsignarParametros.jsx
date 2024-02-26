@@ -34,6 +34,14 @@ function AsignarParametros() {
   const [valuPisicna, setValuPisicna] = useState("");
   const [cargando, setCargando] = useState(false);
   const [idPool, setIdpool] = useState("");
+  const [normaAsigned, setNormaAsigned] = useState({
+    norma: "",
+    piscina: "",
+  });
+
+  const [piscinaAssigned, setPiscinaAssigned] = useState({
+    piscina: "",
+  });
 
   //*Estao para renderizar el front
   const [reload, setReload] = useState(false);
@@ -114,15 +122,49 @@ function AsignarParametros() {
       (element) => element.nameNormativity == norma
     );
     setIdNorma(retonro);
+    setNormaAsigned((prevData) => ({
+      ...prevData,
+      norma: norma,
+    }));
   };
 
   const obtenerIdPiscina = (piscina) => {
     const retorno = listaPiscinas.find((elemento) => elemento.name === piscina);
     setValuPisicna(retorno._id);
+    setPiscinaAssigned((prevData) => ({
+      ...prevData,
+      piscina: piscina,
+    }));
   };
   const obtenerIdPiscina2 = (piscina) => {
     const retorno = listaPiscinas.find((elemento) => elemento.name === piscina);
     setIdpool(retorno._id);
+    setNormaAsigned((prevData) => ({
+      ...prevData,
+      piscina: piscina,
+    }));
+  };
+
+  const limpiar = () => {
+    setNormaAsigned({
+      norma: "",
+      piscina: "",
+    });
+  };
+
+  const limpiarManual = () => {
+    setPiscinaAssigned({
+      piscina: "",
+    });
+
+    const vacio = data.parameter.map((item) => ({
+      nameParam: "",
+      specification: "",
+    }));
+    setData((prevData) => ({
+      ...prevData,
+      parameter: vacio,
+    }));
   };
 
   const asignarNorma = async () => {
@@ -158,6 +200,7 @@ function AsignarParametros() {
         setDeshabilitar(false);
         setCargando(false);
         console.log(respuesta);
+        limpiar();
 
         break;
 
@@ -550,7 +593,11 @@ function AsignarParametros() {
   };
 
   const crearNorma = async () => {
+    limpiarManual();
+    // return;
+
     console.log({ paametros: data.parameter, pool: valuPisicna });
+    return;
 
     setDeshabilitar(true);
     const response = await fetch(
@@ -714,6 +761,7 @@ function AsignarParametros() {
                 </Grid>
                 <Grid item xs={12}>
                   <InputSelect
+                    value={{ label: normaAsigned.norma }}
                     onChange={(e) => obtenerIdNorma(e.target.textContent)}
                     options={listaNormas}
                     icon={<Pool></Pool>}
@@ -723,11 +771,12 @@ function AsignarParametros() {
                 </Grid>
                 <Grid item xs={12}>
                   <InputSelect
+                    value={{ label: normaAsigned.piscina }}
                     onChange={(e) => obtenerIdPiscina2(e.target.textContent)}
                     options={optionsPiscinas}
                     icon={<Pool></Pool>}
-                    label="Listado de Piscinas"
-                    placeholder="Seleccione una norma"
+                    label="Listado de piscinas"
+                    placeholder="Seleccione una pisicna"
                   ></InputSelect>
                 </Grid>
                 <Grid item xs={12}></Grid>
@@ -757,7 +806,7 @@ function AsignarParametros() {
                         size={24}
                       ></CircularProgress>
                     ) : (
-                      "Guardar"
+                      "Guardarxx"
                     )}
                   </Button>
                 </Grid>
@@ -786,11 +835,12 @@ function AsignarParametros() {
                 </Grid>
                 <Grid item xs={12}>
                   <InputSelect
+                    value={{ label: piscinaAssigned.piscina }}
                     onChange={(e) => obtenerIdPiscina(e.target.textContent)}
                     options={optionsPiscinas}
                     icon={<Pool></Pool>}
-                    label="Listado de Piscinas"
-                    placeholder="Seleccione una norma"
+                    label="Listado de piscinas"
+                    placeholder="Seleccione una pisicna xxx"
                   ></InputSelect>
                 </Grid>
 
@@ -830,6 +880,9 @@ function AsignarParametros() {
                           }}
                         >
                           <InputSelect
+                            value={{
+                              label: elemento.nameParam,
+                            }}
                             options={[{ label: "Cloro" }, { label: "Ph" }]}
                             icon={<Pool></Pool>}
                             label="Parámetro"
@@ -851,6 +904,9 @@ function AsignarParametros() {
                           }}
                         >
                           <InputSelect
+                            value={{
+                              label: elemento.specification,
+                            }}
                             icon={<Pool></Pool>}
                             label="Especificación"
                             options={listaEspecificaciones}
@@ -974,7 +1030,7 @@ function AsignarParametros() {
                         size={24}
                       ></CircularProgress>
                     ) : (
-                      "Guardar"
+                      "GuardarOO"
                     )}
                   </Button>
                 </Grid>

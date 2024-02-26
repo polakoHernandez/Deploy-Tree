@@ -63,6 +63,17 @@ function CrearUsuario() {
     setMoverPerfil(!moverPerfil);
   };
 
+  const [data, setData] = useState({
+    cedula: "",
+    nombre: "",
+    apellidos: "",
+    celular: "",
+    rol: "",
+    password: "",
+    confirm: "",
+    email: "",
+  });
+
   const limpiar = (event) => {
     setData({
       cedula: "",
@@ -75,17 +86,6 @@ function CrearUsuario() {
       email: "",
     });
   };
-
-  const [data, setData] = useState({
-    cedula: "",
-    nombre: "",
-    apellidos: "",
-    celular: "",
-    rol: "",
-    password: "",
-    confirm: "",
-    email: "",
-  });
 
   const [open, setOpen] = useState(false);
   const [mensaje, setMensaje] = useState("");
@@ -166,7 +166,6 @@ function CrearUsuario() {
           setOpen(true);
           setSeverity("error");
           setMensaje(respuesta.msg);
-          limpiar();
           break;
 
         case 400:
@@ -282,6 +281,7 @@ function CrearUsuario() {
         <Grid container>
           <Grid item xs={12} sm={6}>
             <InputGeneral
+              value={data.cedula}
               name="cedula"
               type="text"
               label="Cedula"
@@ -292,6 +292,7 @@ function CrearUsuario() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputGeneral
+              value={data.nombre}
               name="nombre"
               type="text"
               label="Nombre"
@@ -302,6 +303,7 @@ function CrearUsuario() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputGeneral
+              value={data.apellidos}
               name="apellidos"
               type="text"
               label="Apellidos"
@@ -312,6 +314,7 @@ function CrearUsuario() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputGeneral
+              value={data.celular}
               name="celular"
               type="number"
               label="Celular"
@@ -322,6 +325,7 @@ function CrearUsuario() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputGeneral
+              value={data.email}
               name="email"
               type="email"
               label="Correo electrónico"
@@ -332,6 +336,7 @@ function CrearUsuario() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputSelect
+              value={{ label: data.rol }}
               name="rol"
               label="Rol"
               placeholder="seleccione su rol"
@@ -342,6 +347,7 @@ function CrearUsuario() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputPassword
+              value={data.password}
               name="password"
               placeholder="Ingrese su contraseña"
               label="Contraseña"
@@ -350,6 +356,7 @@ function CrearUsuario() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <InputPassword
+              value={data.confirm}
               name="confirm"
               placeholder="Ingrese su contraseña"
               label="Confirmar contraseña"

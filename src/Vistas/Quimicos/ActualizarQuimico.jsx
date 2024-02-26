@@ -8,7 +8,7 @@ import InputBuscar from "../../Componentes/General/InputBuscar";
 import InputGeneral from "../../Componentes/General/InputGeneral";
 import InputSelect from "../../Componentes/General/InputSelect";
 import Alertas from "../../Componentes/General/Alertas";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const ActualizarQuimico = () => {
   //   Estados para mover el fromualrio
   const [mover, setMover] = useState(false); //MOvercon Piscina
@@ -38,7 +38,7 @@ const ActualizarQuimico = () => {
   const [color, setColor] = useState("");
   const [idPropp, setIdPropp] = useState("");
   const location = useLocation();
-
+  const navigate = useNavigate();
   //Funciones para mover la caja contenedora
   const moverTabla = () => {
     setMover(!mover);
@@ -302,6 +302,7 @@ const ActualizarQuimico = () => {
 
         setHabilitar(false);
         console.log(respuesta);
+        limpiar();
 
         break;
 
@@ -363,6 +364,25 @@ const ActualizarQuimico = () => {
         respuesta = await response.json();
         console.log({ Fail: respuesta });
     }
+  };
+
+  const limpiar = () => {
+    setData({
+      nombre: "",
+      funcion: "",
+      imagenProducto: "",
+      fichaTecnica: "",
+      hojaSeguridad: "",
+      concentracion: "",
+      densidad: "",
+      proveedor: "",
+      unidades: "",
+      cantidadMinima: "",
+      ingreso: "",
+      lote: "",
+      fecha: "",
+      disponible: "",
+    });
   };
 
   useEffect(() => {
@@ -505,7 +525,7 @@ const ActualizarQuimico = () => {
 
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
-                    value={data?.fecha}
+                    value={new Date(data.fecha).toLocaleDateString()}
                     onChange={catchData}
                     icon={<Pool></Pool>}
                     type="date"
