@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import {
@@ -17,6 +17,8 @@ function ModalReporte({ open, close, data }) {
   const [fechaInicial, setFechaInicia] = useState("");
   const [fechaFinal, setFechaFinal] = useState("");
   const [notRegister, setNoRegister] = useState(false);
+  const dateRef = useRef(null);
+  const dateFinalRef = useRef(null);
 
   console.log({ dataRepote: data });
 
@@ -45,6 +47,10 @@ function ModalReporte({ open, close, data }) {
 
         // Guardar el archivo
         XLSX.writeFile(wb, "parametros.xlsx"); // sección para descargar el archivo con formato xlsx
+        dateRef.current.value = "";
+        dateFinalRef.current.value = "";
+        setFechaFinal("");
+        setFechaFinal("");
       });
     });
   };
@@ -136,7 +142,15 @@ function ModalReporte({ open, close, data }) {
         </motion.div>
         <Box>
           <Box sx={{ width: "100%", display: "flex", justifyContent: "end" }}>
-            <IconButton onClick={close}>
+            <IconButton
+              onClick={() => {
+                close();
+                dateRef.current.value = "";
+                dateFinalRef.current.value = "";
+                setFechaFinal("");
+                setFechaFinal("");
+              }}
+            >
               <Close></Close>
             </IconButton>
           </Box>
@@ -168,6 +182,7 @@ function ModalReporte({ open, close, data }) {
           <Grid>
             <InputGeneral
               label="Fecha inicial"
+              inputRef={dateRef}
               icon={<Pool></Pool>}
               type="date"
               onChange={(e) =>
@@ -181,6 +196,7 @@ function ModalReporte({ open, close, data }) {
           </Grid>
           <Grid>
             <InputGeneral
+              inputRef={dateFinalRef}
               label="Fecha final"
               icon={<Pool></Pool>}
               type="date"
