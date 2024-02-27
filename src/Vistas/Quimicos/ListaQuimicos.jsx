@@ -165,7 +165,7 @@ function ListaQuimicos() {
         >
           <Box
             sx={{
-              width: { xs: "90%", sm: "90%", md: "80%", lg: "952px" },
+              width: { xs: "90%", sm: "90%", md: "80%", lg: "1031px" },
               // marginLeft: { xs: "5%", sm: "5%", md: "0" },
               display: "flex",
               justifyContent: "space-between",

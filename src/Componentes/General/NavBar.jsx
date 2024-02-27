@@ -25,6 +25,7 @@ export default function SearchAppBar({
   moverPerfil,
 }) {
   const navigate = useNavigate("");
+  const [rol, setRol] = useState("");
 
   // Estado para abrir el drawer
   const [abrirDrawer, setAbrirDrawer] = useState(false);
@@ -130,6 +131,9 @@ export default function SearchAppBar({
 
   useEffect(() => {
     listarNotificaciones();
+  }, []);
+  useEffect(() => {
+    setRol(localStorage.getItem("rol"));
   }, []);
 
   return (
@@ -345,7 +349,11 @@ export default function SearchAppBar({
               borderRadius: "3px",
               height: "70px",
               width: "200px",
-              display: { xs: "none", sm: "none", md: "flex" },
+              display: {
+                xs: "none",
+                sm: "none",
+                md: rol === "Gestor" ? "none" : "flex",
+              },
               flexDirection: "row",
               justifyContent: "space-around",
               alignItems: "center",

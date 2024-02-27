@@ -99,6 +99,7 @@ const estilos = {
     justifyContent: "center",
     fontFamily: "'Nunito Sans', sans-serif",
     fontSize: "25px",
+    marginBottom: "20px",
   },
 
   subtitle: {

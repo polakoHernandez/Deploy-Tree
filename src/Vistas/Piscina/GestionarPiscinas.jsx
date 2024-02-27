@@ -102,6 +102,23 @@ function GestionarPiscinas() {
     ppmDeseadoPh2: "",
   });
 
+  const limiarParametros = () => {
+    setDataParametro({
+      PPMactualCloro: "",
+      PPMactualPh: "",
+      fecha: "",
+    });
+  };
+
+  const limpiarAforo = () => {
+    setDataAforo({
+      fechaFinal: "",
+      fechaInicio: "",
+      cantidadPersonas: "",
+      horasDeUso: "",
+    });
+  };
+
   // Funciones para capturara datos de parametros ya foror
   const capTurarDatosAforo = (event) => {
     const { name, value } = event.target;
@@ -137,7 +154,7 @@ function GestionarPiscinas() {
     ) {
       setOpenAlerta(true);
       setMensaje("Todos los campos son obligatorios");
-      setColor("warning");
+      setColor("error");
       return;
     }
 
@@ -172,6 +189,8 @@ function GestionarPiscinas() {
         setDeshabilitar(false);
         setPeticion(false);
         setContadorAforo(contadorAforo + 1);
+        limpiarAforo();
+
         break;
 
       case 404:
@@ -347,7 +366,6 @@ function GestionarPiscinas() {
           const responeData = await response.json();
 
           setData(responeData);
-          console.log({ ESTE: responeData });
           setCargando(false);
           const nombrePiscinas = responeData?.pools?.map((piscina) => ({
             label: piscina.name,
@@ -445,6 +463,7 @@ function GestionarPiscinas() {
 
         crearNotificacion(response._id);
         setRenderTabla(renderTabla + 1);
+        limiarParametros();
         break;
 
       case 400:
@@ -486,8 +505,7 @@ function GestionarPiscinas() {
     switch (respuesta.status) {
       case 200:
         const response = await respuesta.json();
-
-        //*
+        console.log({ WEY: response?.testTest[0] });
 
         const typeValidation = response?.testTest[0]?.typeValidation;
 
@@ -554,7 +572,6 @@ function GestionarPiscinas() {
 
     switch (respuesta.status) {
       case 200:
-        console.log("HOLA");
         const response = await respuesta.json();
         // setMiHistorico(response.historyPoolIdFormatted);
         // originalConsoleLog({ NEIDER: response?.historyPoolIdFormatted });
@@ -582,8 +599,6 @@ function GestionarPiscinas() {
             apellido: elemento.modifiedBy.lastName || "",
           }))
         );
-
-        console.log({ AQUI: newArray });
 
         setMiHistorico(newArray);
 
@@ -847,7 +862,7 @@ function GestionarPiscinas() {
                         },
                       }}
                     >
-                      Crear Aforo
+                      Crear aforo
                     </Typography>
                     <Typography
                       onClick={() => {
@@ -1743,6 +1758,7 @@ function GestionarPiscinas() {
                         </Grid>
                         <Grid item xs={12} sm={12}>
                           <InputGeneal
+                            value={dataParametro.fecha}
                             name="fecha"
                             onChange={capTurarDatosParametros}
                             type="date"
@@ -2013,6 +2029,7 @@ function GestionarPiscinas() {
 
                         <Grid item xs={12} sm={6}>
                           <InputGeneal
+                            value={dataAforo.fechaInicio}
                             name="fechaInicio"
                             onChange={capTurarDatosAforo}
                             label="Fecha inicio"
@@ -2023,6 +2040,7 @@ function GestionarPiscinas() {
 
                         <Grid item xs={12} sm={6}>
                           <InputGeneal
+                            value={dataAforo.fechaFinal}
                             name="fechaFinal"
                             onChange={capTurarDatosAforo}
                             label="Fecha final"
@@ -2033,6 +2051,7 @@ function GestionarPiscinas() {
 
                         <Grid item xs={12} sm={6}>
                           <InputGeneal
+                            value={dataAforo.cantidadPersonas}
                             name="cantidadPersonas"
                             onChange={capTurarDatosAforo}
                             label="Cantidad de personas"
@@ -2043,9 +2062,10 @@ function GestionarPiscinas() {
 
                         <Grid item xs={12} sm={6}>
                           <InputGeneal
+                            value={dataAforo.horasDeUso}
                             name="horasDeUso"
                             onChange={capTurarDatosAforo}
-                            label="Horas de uso"
+                            label="Tiempo de uso(h)"
                             type="number"
                             icon={<PoolIcon></PoolIcon>}
                           ></InputGeneal>

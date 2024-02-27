@@ -111,7 +111,7 @@ export default function TablaListaQuimicos({
     {
       field: "name",
       headerName: "Nombre",
-      width: 200,
+      width: 250,
       headerAlign: "center",
       renderCell: (params) => {
         return params?.value === null
@@ -150,7 +150,7 @@ export default function TablaListaQuimicos({
     {
       field: "accion",
       headerName: "Administrar",
-      width: 120,
+      width: 150,
       headerAlign: "center",
       renderCell: (params) => (
         <Box
@@ -203,7 +203,7 @@ export default function TablaListaQuimicos({
     >
       <DataGrid
         sx={{
-          width: { xs: "90%", sm: "90%", md: "80%", lg: "952px" },
+          width: { xs: "90%", sm: "90%", md: "80%", lg: "1031px" },
         }}
         rows={data}
         columns={columns.map((col) => ({

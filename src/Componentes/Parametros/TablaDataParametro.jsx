@@ -118,8 +118,8 @@ export default function TablaDataParametro({
   const columns = [
     {
       field: "validacion",
-      headerName: "Nombre de la norma",
-      width: 200,
+      headerName: "norma",
+      width: 100,
       headerAlign: "center",
       editable: true,
     },
@@ -150,8 +150,8 @@ export default function TablaDataParametro({
     },
     {
       field: "nameParam" || "name",
-      headerName: "Nombre del parámetro",
-      width: 170,
+      headerName: "Parámetro",
+      width: 100,
       headerAlign: "center",
       renderCell: (params) => {
         return params.row.name || params.row.nameParam;
@@ -161,7 +161,7 @@ export default function TablaDataParametro({
     {
       field: "specification",
       headerName: "Especificación",
-      width: 150,
+      width: 120,
       headerAlign: "center",
       editable: true,
     },
@@ -214,7 +214,7 @@ export default function TablaDataParametro({
     {
       field: "estado",
       headerName: "Estado",
-      width: 150,
+      width: 120,
       headerAlign: "center",
       renderCell: (params) => (
         <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
@@ -250,8 +250,8 @@ export default function TablaDataParametro({
   return (
     <Box
       sx={{
-        width: { xs: "90%", sm: "90%", md: "90%", lg: "90%", xl: "95%" },
-        marginLeft: { xs: "5%", xl: "2.5%" },
+        width: { xs: "90%", sm: "90%", md: "90%", lg: "95%", xl: "95%" },
+        marginLeft: { xs: "5%", lg: "2.5%", xl: "2.5%" },
         marginTop: "40px",
         marginBottom: "30px",
         display: contador === 2 ? "none" : "content",

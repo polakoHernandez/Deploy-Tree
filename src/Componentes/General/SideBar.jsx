@@ -24,6 +24,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
   const [openParam, setOpenParam] = React.useState(false);
   const [openQuimicos, setOpenQuimicos] = React.useState(false);
   const [openPerfil, setOpenPerfil] = React.useState(false);
+  const [rol, setRol] = React.useState("");
 
   const abrirPisicina = () => {
     setOpenPiscina(!openPiscina);
@@ -64,6 +65,10 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
     setOpenQuimicos(false);
     setOpenPerfil(!openPerfil);
   };
+
+  React.useEffect(() => {
+    setRol(localStorage.getItem("rol"));
+  }, []);
 
   return (
     <div>
@@ -196,6 +201,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
               onClick={() => abrirUsuario()}
               sx={{
                 borderBottom: "1px solid white",
+                display: rol === "Gestor" ? "none" : "flex",
               }}
             >
               <ListItemIcon>

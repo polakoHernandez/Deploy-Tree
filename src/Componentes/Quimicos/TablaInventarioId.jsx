@@ -28,14 +28,14 @@ function TablaInventarioId(data) {
     {
       field: "responsable",
       headerName: "Responsable",
-      width: 150,
+      width: 210,
       headerAlign: "center",
     },
 
     {
       field: "productoQuimico",
       headerName: "Nombre",
-      width: 150,
+      width: 171,
       headerAlign: "center",
     },
     {
@@ -47,7 +47,7 @@ function TablaInventarioId(data) {
     {
       field: "entrada",
       headerName: "Entrada",
-      width: 100,
+      width: 80,
       headerAlign: "center",
     },
     {
@@ -59,13 +59,13 @@ function TablaInventarioId(data) {
     {
       field: "cantidadDisponible",
       headerName: "Saldo",
-      width: 150,
+      width: 120,
       headerAlign: "center",
     },
     {
       field: "tipo",
       headerName: "Tipo",
-      width: 151,
+      width: 120,
       headerAlign: "center",
     },
   ];

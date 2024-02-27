@@ -518,6 +518,7 @@ const ActualizarQuimico = () => {
 
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
+                    disabled={true}
                     value={data.lote}
                     onChange={catchData}
                     label="Lote"
@@ -542,6 +543,7 @@ const ActualizarQuimico = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral
+                    disabled={true}
                     value={data?.disponible}
                     onChange={catchData}
                     icon={<Pool></Pool>}

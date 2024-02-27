@@ -64,20 +64,7 @@ export default function ModalNotificaciones({ open, close, pool }) {
             </IconButton>
           </Box>
 
-          {/* Seccion de Informacion General */}
           <Box>
-            {/* foto
-                    Nombre
-                    departamento
-                    ciudad/Muicipio
-                    Direccion
-                    Uso
-                    Caracterisicas
-                    Temperatura
-                    Tempertaura Externa
-                    Estructura
-                    Clase de instalacion */}
-
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography

@@ -124,6 +124,22 @@ function CrearUsuario() {
   };
 
   const crearUsuario = async () => {
+    if (!validarContrasena(data.password)) {
+      setCargando(false);
+      setOpen(true);
+      setSeverity("error");
+      setMensaje(
+        "la contraseña debe tener al menos 7 caracteres, una mayúscula, una minúscula, un número y un carácter especial"
+      );
+      return;
+    } else if (data.password !== data.confirm) {
+      setCargando(false);
+      setOpen(true);
+      setSeverity("error");
+      setMensaje("Las contraseñas no coinciden");
+      return;
+    }
+
     setCargando(true);
     try {
       const response = await fetch(
