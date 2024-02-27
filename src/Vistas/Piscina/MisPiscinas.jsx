@@ -14,6 +14,7 @@ import rectangular from "../../assets/imagePool/PiscinaRectangular.png"
 import ovalada from "../../assets/imagePool/PiscinaOvalada.png"
 import "../../Estilos/Piscina/misPiscinas.css"
 import * as services from "../../services/pisicinas/misPisicnas/services"
+import InputSelectPool from "../../Componentes/General/InputSelectPool";
 
 function MisPiscinas() {
   const location = useLocation();
@@ -247,7 +248,7 @@ function MisPiscinas() {
                 <Box
                   sx={{
                     // backgroundColor: "red",
-                    height: "80px",
+                    height: "40px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "start",
@@ -263,13 +264,14 @@ function MisPiscinas() {
                       marginRight: { md: "5%" },
                     }}
                   >
-                    <InputSelect
+                    <InputSelectPool
+                    size="small"
                       label="Buscar piscina"
                       options={listaNombresPiscinas}
                       icon={<Pool></Pool>}
                       placeholder="Selecciones una piscina"
                       onChange={(e)=>obtenerIdPorNombre(e.target.textContent)}
-                    ></InputSelect>
+                    ></InputSelectPool>
                   </Box>
                 </Box>
               </Grid>
@@ -283,7 +285,8 @@ function MisPiscinas() {
                       md: "5%",
                       lg: "-5%",
                     },
-                    // backgroundColor: "antiquewhite",
+                    marginTop:"-50px",
+                    //  backgroundColor: "antiquewhite",
                     height: "45px",
                     display: "flex",
                     justifyContent: "end",
@@ -311,11 +314,11 @@ function MisPiscinas() {
                   sx={{
                     overflowY: "scroll",
                     backgroundColor: "white",
-                    height: { xs: "62vh", sm: "70vh", md: "63vh", lg:"60vh", xl:"60vh" },
+                    height: { xs: "62vh", sm: "70vh", md: "63vh", lg:"70vh", xl:"60vh" },
                     width: { xs: "95%", sm: "95%", md: "90%", lg:"100%" },
-                    marginLeft: {xs:"2.5%", sm:"2.5%", md:"5%", lg:"-5%"},
+                    marginLeft: {xs:"2.5%", sm:"2.5%", md:"5%", lg:"-5%"},                    // marginTop:"-60px",
                     borderRadius: "5px",
-                    // backgroundColor:"red",
+                    // backgroundColor:"purple",
                     boxShadow: "0px 5px 5px 0px black",
                     border: "1px solid black",
                   }}
