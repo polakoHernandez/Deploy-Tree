@@ -32,9 +32,7 @@ import ovalada from "../../assets/imagePool/PiscinaOvalada.png";
 import "../../Estilos/Piscina/misPiscinas.css";
 import { useLocation } from "react-router-dom";
 import * as services from "../../services/pisicinas/gestionarPiscinas/services";
-
-// const originalConsoleLog = console.log;
-// console.log = function () {};
+import InputSelectPool from "../../Componentes/General/InputSelectPool";
 
 function GestionarPiscinas() {
   const [data, setData] = useState("");
@@ -705,26 +703,27 @@ function GestionarPiscinas() {
                   <Box
                     sx={{
                       // backgroundColor: "blue",
-                      height: "100px",
+                      height: "70px",
                       width: { xs: "100%", sm: "50%" },
                       marginTop: {
                         xs: "20px",
                         sm: "50px",
                         md: "0px",
-                        lg: "20px",
+                        lg: "-15px",
                         xl: "15px",
                       },
                       marginRight: { xs: "2%", sm: "1%", md: "7%", lg: "5%" },
                       marginBottom: { xs: "0px", sm: "80px", md: "0px" },
                     }}
                   >
-                    <InputSelect
+                    <InputSelectPool
+                      size="small"
                       label="Buscar piscina"
                       options={nombresPiscinas}
                       icon={<Pool></Pool>}
                       placeholder="Seleccione una piscina"
                       onChange={(e) => obtenerIdPorNombre(e.target.textContent)}
-                    ></InputSelect>
+                    ></InputSelectPool>
                   </Box>
                 </Box>
               </Grid>
@@ -734,6 +733,7 @@ function GestionarPiscinas() {
                     width: "100%",
                     //backgroundColor: "blue",
                     marginLeft: { xs: "-8%", md: "-5%", lg: "-5%" },
+                    marginTop: "-20px",
                     // backgroundColor: "antiquewhite",
                     height: "45px",
                     display: "flex",
@@ -924,7 +924,7 @@ function GestionarPiscinas() {
                       xs: "62vh",
                       sm: "70vh",
                       md: "63vh",
-                      lg: "60vh",
+                      lg: "64vh",
                       xl: "60vh",
                     },
                     width: { xs: "95%", sm: "95%", md: "90%", lg: "100%" },
