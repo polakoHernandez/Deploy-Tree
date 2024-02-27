@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import PersonOffIcon from "@mui/icons-material/PersonOff";
 import PersonIcon from "@mui/icons-material/Person";
 import ModalData from "../Parametros/ModalData";
+import Alertas from "../General/Alertas";
 
 export default function DataGridDemo({
   data,
@@ -30,7 +31,9 @@ export default function DataGridDemo({
 
   const [habilitar, setHabilitar] = useState(false);
   const [datosRow, setDatosRows] = useState("");
-
+  const [openAlert, setOpenAlert] = useState(false);
+  const [severity, setSeverity] = useState(false);
+  const [message, setMessage] = useState("");
   //Datos para mostrar en la modal
 
   //Estaod para abrir la modal
@@ -63,7 +66,12 @@ export default function DataGridDemo({
           break;
 
         case 400:
-          alert("Usuario no encontrado");
+          let response = await respuesta.json();
+          if (response.type === "deactivateNormativity") {
+            setOpenAlert(true);
+            setSeverity("error");
+            setMessage(response.msg);
+          }
           setHabilitar(false);
           break;
 
@@ -224,6 +232,12 @@ export default function DataGridDemo({
         getCellClassName={(params) => "cell"}
       />
       <ModalData data={datosRow} open={open} close={close}></ModalData>
+      <Alertas
+        open={openAlert}
+        severity={severity}
+        mensaje={message}
+        cerrar={() => setOpenAlert(false)}
+      ></Alertas>
     </Box>
   );
 }

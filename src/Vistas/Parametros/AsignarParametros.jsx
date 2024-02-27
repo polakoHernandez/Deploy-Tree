@@ -593,11 +593,7 @@ function AsignarParametros() {
   };
 
   const crearNorma = async () => {
-    limpiarManual();
-    // return;
-
     console.log({ paametros: data.parameter, pool: valuPisicna });
-    return;
 
     setDeshabilitar(true);
     const response = await fetch(
@@ -625,6 +621,7 @@ function AsignarParametros() {
         setColor("success");
         setDeshabilitar(false);
         console.log(respuesta);
+        limpiarManual();
 
         break;
 
@@ -806,7 +803,7 @@ function AsignarParametros() {
                         size={24}
                       ></CircularProgress>
                     ) : (
-                      "Guardarxx"
+                      "Guardar"
                     )}
                   </Button>
                 </Grid>
@@ -840,7 +837,7 @@ function AsignarParametros() {
                     options={optionsPiscinas}
                     icon={<Pool></Pool>}
                     label="Listado de piscinas"
-                    placeholder="Seleccione una pisicna xxx"
+                    placeholder="Seleccione una pisicna"
                   ></InputSelect>
                 </Grid>
 
@@ -1030,7 +1027,7 @@ function AsignarParametros() {
                         size={24}
                       ></CircularProgress>
                     ) : (
-                      "GuardarOO"
+                      "Guardar"
                     )}
                   </Button>
                 </Grid>
