@@ -226,7 +226,7 @@ function EditarUsuario() {
             moverQuimicos ||
             moverPerfil
               ? "258px"
-              : " 128px",
+              : " 97px",
 
           right: { xs: "5%", sm: "5%" },
           width: "150px",
@@ -249,7 +249,7 @@ function EditarUsuario() {
           borderRadius: "5px",
           boxShadow: "0px 5px 5px 0px black",
           width: "90%",
-          height: "500px",
+          height: { xs: "70%", lg: "75vh", xl: "75vh" },
           marginLeft: "5%",
           marginTop: "190px",
           marginBottom: "50px",
@@ -264,7 +264,7 @@ function EditarUsuario() {
             moverQuimicos ||
             moverPerfil
               ? "translateY(30px)"
-              : "translatey(-100px)",
+              : "translatey(-130px)",
           transition: "ease 0.1s",
         }}
       >

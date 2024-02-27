@@ -81,7 +81,7 @@ const CrearQuimico = () => {
 
   const stylesAnimation = {
     mainBox: {
-      //backgroundColor: "red",
+      // backgroundColor: "cyan",
       height: "87%",
       transition: "ease 0.3s",
       transform:

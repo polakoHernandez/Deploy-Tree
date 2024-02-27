@@ -256,7 +256,7 @@ export default function TablaVerParametros({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: 500,
+        height: "70vh",
       }}
     >
       <DataGrid

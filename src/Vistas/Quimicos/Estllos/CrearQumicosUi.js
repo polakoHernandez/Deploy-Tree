@@ -14,19 +14,22 @@ const styles = {
   },
 
   encabezado: {
-    // backgroundColor: "cyan",
+    // backgroundColor: "blue",
+    width: "110%",
     height: "40px",
     display: "flex",
     justifyContent: "end",
     aligItems: "center",
+    marginLeft: "-5%",
   },
 
   containerFormulario: {
     backgroundColor: "white",
+    width: "110%",
     height: "85%",
+    marginLeft: "-5%",
     overflowY: "scroll",
-    backgroundColor: "white",
-    marginLeft: "2.5%",
+    // backgroundColor: "pink",
     borderRadius: "5px",
     boxShadow: "0px 5px 5px 0px black",
     border: "1px solid black",

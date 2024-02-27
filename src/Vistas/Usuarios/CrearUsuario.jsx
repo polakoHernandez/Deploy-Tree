@@ -212,8 +212,7 @@ function CrearUsuario() {
         overflowX: "hidden",
         overflowY: "scroll",
         position: "relative",
-        // backgroundColor: "blue",
-        height: "100vh",
+        height: "99vh",
       }}
     >
       <SearchAppBar
@@ -254,11 +253,12 @@ function CrearUsuario() {
       </Typography>
       <Box
         sx={{
+          // backgroundColor: "red",
           border: "1px solid black",
           borderRadius: "5px",
           boxShadow: "0px 5px 5px 0px black",
           width: "90%",
-          height: "500px",
+          height: { xs: "70%", lg: "75%", xl: "75%" },
           marginLeft: "5%",
           marginTop: "190px",
           // marginBottom: "50px",
