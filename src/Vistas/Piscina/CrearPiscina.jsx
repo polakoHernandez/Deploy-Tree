@@ -365,12 +365,12 @@ function CrearPiscina() {
   //   Estlos de componentes animados
   const styleAnimation = {
     mainBox: {
-      //   backgroundColor: "red",
-      width: "90%",
-      marginLeft: "5%",
+      // backgroundColor: "blue",
+      width: "100%",
+      marginLeft: "0%",
       marginTop: "10px",
       transition: "ease 0.2s",
-      height: "480px",
+      height: "80%",
       transform:
         mover || moverUsuario || moverParametros || moverQuimicos || moverPerfil
           ? "translateY( 180px)"
@@ -1495,6 +1495,7 @@ const styles = {
   generalContainer: {
     overflowX: "hidden",
     height: "100vh",
+    // backgroundColor: "red",
   },
 
   crearPiscina: {
@@ -1512,10 +1513,10 @@ const styles = {
   },
 
   contenedorInputs: {
-    backgroundColor: "white",
+    // backgroundColor: "cyan",
     width: "90%",
     marginLeft: "5%",
-    height: "89%",
+    height: { xs: "89%", lg: "89%", xl: "90%" },
     borderRadius: "5px",
     boxShadow: "0px 5px 5px 0px black",
     border: "1px solid black",
