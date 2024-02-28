@@ -207,6 +207,11 @@ const Notificaciones = () => {
   };
 
   const listarNotificaciones = async () => {
+    const rol = localStorage.getItem("rol");
+
+    if (rol === "GERENTE") {
+    }
+
     try {
       const tokenSend = localStorage.getItem("clave");
       const respuesta = await fetch(

@@ -519,9 +519,9 @@ function GestionarPiscinas() {
           );
 
           setRango((prevDatos) => ({
-            max: cloro?.maxValueSpecification,
-            minRange: ph?.minRange,
-            maxRange: ph?.maxRange,
+            max: cloro?.maxValueSpecification || "",
+            minRange: ph?.minRange || "",
+            maxRange: ph?.maxRange || "",
           }));
         } else if (typeValidation == "Norma") {
           const normativityId = response?.testTest[0].normativityId.parameter;
@@ -533,9 +533,15 @@ function GestionarPiscinas() {
           );
 
           setRango((prevDatos) => ({
-            max: cloro?.maxValueSpecification,
-            minRange: ph?.minRange,
-            maxRange: ph?.maxRange,
+            max: cloro?.maxValueSpecification || "",
+            minRange: ph?.minRange || "",
+            maxRange: ph?.maxRange || "",
+          }));
+        } else {
+          setRango((prevDatos) => ({
+            max: "",
+            minRange: "",
+            maxRange: "",
           }));
         }
 

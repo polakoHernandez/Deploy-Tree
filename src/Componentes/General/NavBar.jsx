@@ -352,7 +352,7 @@ export default function SearchAppBar({
               display: {
                 xs: "none",
                 sm: "none",
-                md: rol === "Gestor" ? "none" : "flex",
+                md: rol === "GESTOR" ? "none" : "flex",
               },
               flexDirection: "row",
               justifyContent: "space-around",

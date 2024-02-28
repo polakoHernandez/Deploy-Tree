@@ -691,6 +691,7 @@ function CrearPiscina() {
     switch (response.status) {
       case 200:
         const result = await response.json();
+        console.log({ result: result, sattus: 200 });
         const idPool = result._id;
         setOpen(true);
         setMensaje("Piscina Creada exitosamente!");
@@ -698,10 +699,13 @@ function CrearPiscina() {
         crearNotificacion(idPool);
         setDeshabilitar(false);
         limpiar();
+
         break;
 
       case 400:
         const respuesta = await response.json();
+        console.log({ result: respuesta, sattus: 400 });
+
         setOpen(true);
         setMensaje(respuesta.errors[0].msg);
         setColor("error");
@@ -712,13 +716,13 @@ function CrearPiscina() {
 
       case 500:
         const error = await response.json();
+        console.log({ result: error, sattus: 500 });
         setOpen(true);
         setMensaje("Error al crear la pisicina");
         setColor("error");
         setDeshabilitar(false);
         console.log("ESTE ES EL ERROR");
         console.log(error);
-        // alert(JSON.stringify(error));
         break;
     }
   };

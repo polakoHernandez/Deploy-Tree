@@ -159,7 +159,7 @@ function EditarUsuario() {
             ID: data.cedula,
             cellPhone: data.celular,
             email: data.email,
-            role: data.rol.label,
+            role: data.rol.label.toUpperCase(),
           }),
         }
       );
