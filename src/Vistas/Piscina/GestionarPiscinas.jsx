@@ -186,8 +186,12 @@ function GestionarPiscinas() {
         },
         body: JSON.stringify({
           poolId: pool._id,
-          startDate: dataAforo.fechaInicio,
-          endDate: dataAforo.fechaFinal,
+          startDate: new Date(dataAforo.fechaInicio).setDate(
+            new Date(dataAforo.fechaInicio).getDate() + 1
+          ),
+          endDate: new Date(dataAforo.fechaFinal).setDate(
+            new Date(dataAforo.fechaFinal).getDate() + 1
+          ),
           timeUse: dataAforo.horasDeUso,
           quantityPerson: dataAforo.cantidadPersonas,
         }),

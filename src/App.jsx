@@ -24,6 +24,7 @@ import ExportToExcel from "./Reporte";
 import CambiarPassword from "./Vistas/Inicio de sesion/CambiarPassword";
 import MiPerfil from "./Vistas/Usuarios/MiPerfil";
 import ListaNormas from "./Vistas/Parametros/ListaNormas";
+import Probandoo from "./Vistas/Probandoo";
 function App() {
   return (
     <>
@@ -126,6 +127,7 @@ function App() {
             element={<ListaNormas></ListaNormas>}
           ></Route>
           <Route path="/miPerfil" element={<MiPerfil></MiPerfil>}></Route>
+          <Route path="/probando" element={<Probandoo></Probandoo>}></Route>
         </Routes>
       </BrowserRouter>
     </>

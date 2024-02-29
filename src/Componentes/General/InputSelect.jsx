@@ -48,6 +48,7 @@ function InputSelect({
           onChange={onChange}
           value={value}
           ref={inputRef}
+          autoSelect={false}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -56,7 +57,7 @@ function InputSelect({
               focused
               placeholder={placeholder}
               color="luva"
-              // value={value}
+              value={value}
               sx={{
                 width: "90%",
                 marginLeft: "5%",
