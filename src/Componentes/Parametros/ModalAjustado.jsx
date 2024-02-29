@@ -6,7 +6,7 @@ import Modal from "@mui/material/Modal";
 import styled from "@emotion/styled";
 import { Grid, IconButton, CircularProgress } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { Close, Pool } from "@mui/icons-material";
+import { Close, Pool, Tune } from "@mui/icons-material";
 import InputGeneral from "../General/InputGeneral";
 import Alertas from "../General/Alertas";
 
@@ -24,7 +24,7 @@ function ModalAjustado({
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: { xs: "80%", md: "50%", lg: "40%" },
-    height: { xs: "500px", sm: "500px", md: "300px", lg: "300px" },
+    height: { xs: "500px", sm: "500px", md: "400px", lg: "400px" },
     bgcolor: "background.paper",
     //   border: "2px solid #000",
     boxShadow: 24,
@@ -39,15 +39,38 @@ function ModalAjustado({
   const [color, setColor] = useState("");
   const [mensaje, setMensaje] = useState("");
 
+  const [openAviso, setOpenAviso] = useState(false);
+  const [avisoMessage, setAvisoMessage] = useState("");
+  const [severityMessage, setSeverityMessage] = useState("");
+  const [inActivar, setInactivar] = useState(false);
+
   const [data, setData] = useState({
     valor: "",
   });
 
   const catchData = (e) => {
-    setData((prevdata) => ({
-      ...prevdata,
-      [e.target.name]: e.target.value,
-    }));
+    setData((prevdata) => {
+      const newData = {
+        ...prevdata,
+        [e.target.name]: e.target.value,
+      };
+
+      if (newData.valor < 0) {
+        setOpenAviso(true);
+        setAvisoMessage("No puede ingresar números negativos");
+        setSeverityMessage("error");
+        setInactivar(true);
+      } else if (newData.valor === "0") {
+        setOpenAviso(true);
+        setAvisoMessage("Debe ingresar un número mayor a 0");
+        setSeverityMessage("error");
+        setInactivar(true);
+      } else {
+        setInactivar(false);
+      }
+
+      return newData;
+    });
   };
 
   const porFin = async () => {
@@ -244,13 +267,14 @@ function ModalAjustado({
                       fontSize: "15px",
                     }}
                   >
-                    Señor usuario para ajustar el parametro por favor ingrese un
+                    Señor usuario para ajustar el parámetro por favor ingrese un
                     valor que este dentro del rango permitido
                   </Typography>
                 </Box>
               </Grid>
               <Grid item xs={12}>
                 <InputGeneral
+                  placeholder="0"
                   name="valor"
                   onChange={catchData}
                   label="PPM actual"
@@ -261,7 +285,7 @@ function ModalAjustado({
               <Grid item xs={6}>
                 <Button
                   onClick={() => porFin()}
-                  disabled={desactivar}
+                  disabled={desactivar || inActivar ? true : false}
                   variant="contained"
                   sx={{
                     marginTop: "10px",
@@ -280,6 +304,12 @@ function ModalAjustado({
               </Grid>
             </Grid>
           </Box>
+          <Alertas
+            open={openAviso}
+            mensaje={avisoMessage}
+            severity={severityMessage}
+            cerrar={() => setOpenAviso(false)}
+          ></Alertas>
         </Box>
       </Modal>
       <Alertas

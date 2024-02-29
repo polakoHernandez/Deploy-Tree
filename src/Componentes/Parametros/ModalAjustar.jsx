@@ -249,7 +249,7 @@ export default function ModalAjustar({
     setActivarCalcular(true);
 
     const respuesta = await fetch(
-      `https://kcc6rdhv-3000.use2.devtunnels.ms/v1/setting-dosing`,
+      `https://treea-piscinas-api.vercel.app/v1/setting-dosing`,
       {
         method: "POST",
         headers: {

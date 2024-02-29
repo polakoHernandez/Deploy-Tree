@@ -67,9 +67,9 @@ function GestionarPiscinas() {
   // Estados para capturar datos de parametros y aforro
   const [dataParametro, setDataParametro] = useState({
     fecha: "",
-    PPMactualCloro: 0,
+    PPMactualCloro: "",
     PPMdeseadoMaximo: dataRango.max,
-    PPMactualPh: 0,
+    PPMactualPh: "",
     PPMdeseado: dataRango.minRange,
     PPMdeseado2: dataRango.maxRange,
   });
@@ -137,6 +137,11 @@ function GestionarPiscinas() {
         [name]: value,
       };
       if (newData.PPMactualCloro < 0 || newData.PPMactualPh < 0) {
+        setInactivar(true);
+      } else if (
+        newData.PPMactualCloro === "0" ||
+        newData.PPMactualPh === "0"
+      ) {
         setInactivar(true);
       } else {
         setInactivar(false);
@@ -1819,6 +1824,7 @@ function GestionarPiscinas() {
                             }}
                           >
                             <InputGeneal
+                              placeholder="0"
                               value={dataParametro.PPMactualCloro}
                               name="PPMactualCloro"
                               onChange={capTurarDatosParametros}
@@ -1857,6 +1863,7 @@ function GestionarPiscinas() {
                             }}
                           >
                             <InputGeneal
+                              placeholder="0"
                               value={dataParametro.PPMactualPh}
                               name="PPMactualPh"
                               onChange={capTurarDatosParametros}
@@ -1985,6 +1992,26 @@ function GestionarPiscinas() {
                               }}
                             >
                               No puedes ingresar valores negativos
+                            </Typography>
+                            <Typography
+                              sx={{
+                                display:
+                                  dataParametro.PPMactualCloro === "0" ||
+                                  dataParametro.PPMactualPh === "0"
+                                    ? "flex"
+                                    : "none",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                width: "100%",
+                                height: "50px",
+                                borderRadius: "5px",
+                                fontWeight: "bold",
+                                backgroundColor: "rgb(253, 94, 94 )",
+                                color: "white",
+                                marginTop: "10px",
+                              }}
+                            >
+                              Debe ingresar números mayores a 0
                             </Typography>
                           </Box>
                         </Grid>
