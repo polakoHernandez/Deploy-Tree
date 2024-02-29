@@ -201,7 +201,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
               onClick={() => abrirUsuario()}
               sx={{
                 borderBottom: "1px solid white",
-                display: rol === "Gestor" ? "none" : "flex",
+                display: rol === "GESTOR" ? "none" : "flex",
               }}
             >
               <ListItemIcon>

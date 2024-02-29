@@ -96,36 +96,72 @@ export default function SearchAppBar({
   };
 
   const listarNotificaciones = async () => {
-    try {
-      const tokenSend = localStorage.getItem("clave");
-      const respuesta = await fetch(
-        "https://treea-piscinas-api.vercel.app/v1/notifications-manager",
-        {
-          method: "GET",
-          headers: {
-            Accpet: "Application/json",
-            "x-token": tokenSend,
-          },
+    const rol = localStorage.getItem("rol");
+
+    if (rol === "GERENTE") {
+      try {
+        const tokenSend = localStorage.getItem("clave");
+        const respuesta = await fetch(
+          "https://treea-piscinas-api.vercel.app/v1/notifications-manager",
+          {
+            method: "GET",
+            headers: {
+              Accpet: "Application/json",
+              "x-token": tokenSend,
+            },
+          }
+        );
+
+        switch (respuesta.status) {
+          case 200:
+            const respo = await respuesta.json();
+            setNotificaciones(respo.notifications.length);
+
+            break;
+
+          case 401:
+            const response = await respuesta.json();
+            console.log(response);
+            break;
+
+          default:
+            break;
         }
-      );
-
-      switch (respuesta.status) {
-        case 200:
-          const respo = await respuesta.json();
-          setNotificaciones(respo.notifications.length);
-
-          break;
-
-        case 401:
-          const response = await respuesta.json();
-          console.log(response);
-          break;
-
-        default:
-          break;
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else if (rol === "GESTOR") {
+      try {
+        const tokenSend = localStorage.getItem("clave");
+        const respuesta = await fetch(
+          "https://treea-piscinas-api.vercel.app/v1/notifications-gestor",
+          {
+            method: "GET",
+            headers: {
+              Accpet: "Application/json",
+              "x-token": tokenSend,
+            },
+          }
+        );
+
+        switch (respuesta.status) {
+          case 200:
+            const respo = await respuesta.json();
+            setNotificaciones(respo.notifications.length);
+
+            break;
+
+          case 401:
+            const response = await respuesta.json();
+            console.log(response);
+            break;
+
+          default:
+            break;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

@@ -249,7 +249,7 @@ export default function ModalAjustar({
     setActivarCalcular(true);
 
     const respuesta = await fetch(
-      `https://treea-piscinas-api.vercel.app/v1/setting-dosing`,
+      `https://kcc6rdhv-3000.use2.devtunnels.ms/v1/setting-dosing`,
       {
         method: "POST",
         headers: {
@@ -289,6 +289,11 @@ export default function ModalAjustar({
         break;
       case 400:
         const respues4 = await respuesta.json();
+        if (respues4.type === "noInventory") {
+          setAbrirAlerta(true);
+          setMensaje(respues4.msg);
+          setColor("error");
+        }
         setActivarCalcular(false);
         console.log(respues4);
 
@@ -310,32 +315,31 @@ export default function ModalAjustar({
     });
 
     setProductoRetornadoId(productoRetonrado._id);
-    // alert(productoRetornadoId);
 
     if (
-      productoRetonrado?.availableQuantity <= productoRetonrado?.minQuantity
+      productoRetonrado?.availableQuantity <= productoRetonrado?.minQuantity &&
+      productoRetonrado?.availableQuantity > 0
     ) {
       setAbrirAlerta(true);
       setColor("error");
-      setMensaje(
-        `No hay inventario del producto quimíco ${productoRetonrado.name}`
-      );
+      setMensaje(`Queda poco iniventario de ${productoRetonrado.name}`);
+    } else if (productoRetonrado?.availableQuantity <= 0) {
+      setAbrirAlerta(true);
+      setColor("error");
+      setMensaje(`No hay inventario de ${productoRetonrado.name}`);
       setDeshabilitar(true);
-    } else {
-      setDeshabilitar(false);
-      //!Pendinete llamar al enpoint /history-pool/{poolId}/{historyId}
-      // alert(CloroPh.ajustado);
-
-      if (CloroPh.nombre === "Cloro" && CloroPh.mansaje !== "good") {
-        retornahistoricoPool();
-        //*Almacenar y guaradr en el local Storage
-      } else if (CloroPh.nombre === "Ph" && CloroPh.mansaje !== "good") {
-        retornahistoricoPool();
-        setAjustePh(true);
-      }
-
-      // guardarData();
     }
+
+    if (CloroPh.nombre === "Cloro" && CloroPh.mansaje !== "good") {
+      retornahistoricoPool();
+      //*Almacenar y guaradr en el local Storage
+    } else if (CloroPh.nombre === "Ph" && CloroPh.mansaje !== "good") {
+      retornahistoricoPool();
+      setAjustePh(true);
+    }
+
+    //   // guardarData();
+    // }
 
     setDataEnviar((prev) => ({
       ...prev,

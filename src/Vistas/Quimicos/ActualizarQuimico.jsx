@@ -37,8 +37,14 @@ const ActualizarQuimico = () => {
   const [mensaje, setMensaje] = useState("");
   const [color, setColor] = useState("");
   const [idPropp, setIdPropp] = useState("");
+  const [dataSimulada, setDataSimulada] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  const [mostrarArchivo, setMostrarArchivo] = useState({
+    ficha: false,
+    hoja: false,
+    image: false,
+  });
   //Funciones para mover la caja contenedora
   const moverTabla = () => {
     setMover(!mover);
@@ -101,10 +107,14 @@ const ActualizarQuimico = () => {
   };
 
   //*Funcion para capturar los files d elos inputBuscar
-  const catchFiles = (e) => {
+  const catchFiles = (e, archivo) => {
     setData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.files[0],
+    }));
+    setMostrarArchivo((prevData) => ({
+      ...prevData,
+      [archivo]: true,
     }));
   };
 
@@ -113,6 +123,22 @@ const ActualizarQuimico = () => {
       ...prevData,
       [nombre]: value,
     }));
+  };
+
+  const extractFileName = (fichaTecnica, imagenProducto, hojaSeguridad) => {
+    // Extraer el nombre del archivo de la URL
+    let ficha = fichaTecnica.split("/");
+    ficha = ficha[ficha.length - 1];
+    let image = imagenProducto.split("/");
+    image = image[image.length - 1];
+    let hoja = hojaSeguridad.split("/");
+    hoja = hoja[hoja.length - 1];
+
+    setDataSimulada({
+      fichaTecnica: ficha,
+      hojaSeguridad: hoja,
+      imagenProducto: image,
+    });
   };
 
   const asignarData = (data) => {
@@ -131,6 +157,8 @@ const ActualizarQuimico = () => {
       fecha: data?.expirationDate,
       disponible: data?.availableQuantity,
     }));
+
+    extractFileName(data.safetyDataSheet, data.image, data.dataSheet);
   };
 
   const listaFunciones = [
@@ -444,25 +472,39 @@ const ActualizarQuimico = () => {
                   <InputBuscar
                     // value={data?.imagenProducto}
                     label="Imagen producto"
-                    onChange={catchFiles}
+                    onChange={(e) => catchFiles(e, "image")}
                     name="imagenProducto"
                   ></InputBuscar>
+                  <Typography sx={{ fontWeight: "bold" }}>
+                    {mostrarArchivo.image === false
+                      ? dataSimulada?.imagenProducto
+                      : ""}
+                  </Typography>{" "}
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputBuscar
-                    // data={data?.fichaTecnica}
                     label="Ficha técnica"
-                    onChange={catchFiles}
+                    onChange={(e) => catchFiles(e, "ficha")}
                     name="fichaTecnica"
                   ></InputBuscar>
+                  <Typography sx={{ fontWeight: "bold" }}>
+                    {mostrarArchivo.ficha === false
+                      ? dataSimulada?.fichaTecnica
+                      : ""}
+                  </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputBuscar
                     // value={data?.hojaSeguridad}
-                    label="Ficha técnica"
-                    onChange={catchFiles}
+                    label="Hoja de seguridad"
+                    onChange={(e) => catchFiles(e, "hoja")}
                     name="hojaSeguridad"
                   ></InputBuscar>
+                  <Typography sx={{ fontWeight: "bold" }}>
+                    {mostrarArchivo.hoja === false
+                      ? dataSimulada?.hojaSeguridad
+                      : ""}
+                  </Typography>{" "}
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                   <InputGeneral

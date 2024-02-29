@@ -210,101 +210,197 @@ const Notificaciones = () => {
     const rol = localStorage.getItem("rol");
 
     if (rol === "GERENTE") {
-    }
+      try {
+        const tokenSend = localStorage.getItem("clave");
+        const respuesta = await fetch(
+          "https://treea-piscinas-api.vercel.app/v1/notifications-manager",
+          {
+            method: "GET",
+            headers: {
+              Accpet: "Application/json",
+              "x-token": tokenSend,
+            },
+          }
+        );
 
-    try {
-      const tokenSend = localStorage.getItem("clave");
-      const respuesta = await fetch(
-        "https://treea-piscinas-api.vercel.app/v1/notifications-manager",
-        {
-          method: "GET",
-          headers: {
-            Accpet: "Application/json",
-            "x-token": tokenSend,
-          },
+        switch (respuesta.status) {
+          case 200:
+            const respo = await respuesta.json();
+            console.log(respo.notifications);
+            setNotificaciones(respo.notifications);
+
+            // Actualizar el contador después de obtener las notificaciones
+            const contadorParametroIncrementado = respo.notifications.reduce(
+              (contador, elemento) =>
+                elemento.typeNotification === "parameterNotification"
+                  ? contador + 1
+                  : contador,
+              0
+            );
+            setContadorParametro(contadorParametroIncrementado);
+
+            const contadorPiscinaIncrementado = respo.notifications.reduce(
+              (contador, elemento) =>
+                elemento.typeNotification === "poolNotification"
+                  ? contador + 1
+                  : contador,
+              0
+            );
+            setContadorPiscina(contadorPiscinaIncrementado);
+
+            const contadorInsumoIncrementado = respo.notifications.reduce(
+              (contador, elemento) =>
+                elemento.typeNotification === "chemicalNotification"
+                  ? contador + 1
+                  : contador,
+              0
+            );
+            setContadorInsumo(contadorInsumoIncrementado);
+
+            break;
+
+          case 401:
+            const response = await respuesta.json();
+            console.log(response);
+            break;
+
+          default:
+            break;
         }
-      );
-
-      switch (respuesta.status) {
-        case 200:
-          const respo = await respuesta.json();
-          console.log(respo.notifications);
-          setNotificaciones(respo.notifications);
-
-          // Actualizar el contador después de obtener las notificaciones
-          const contadorParametroIncrementado = respo.notifications.reduce(
-            (contador, elemento) =>
-              elemento.typeNotification === "parameterNotification"
-                ? contador + 1
-                : contador,
-            0
-          );
-          setContadorParametro(contadorParametroIncrementado);
-
-          const contadorPiscinaIncrementado = respo.notifications.reduce(
-            (contador, elemento) =>
-              elemento.typeNotification === "poolNotification"
-                ? contador + 1
-                : contador,
-            0
-          );
-          setContadorPiscina(contadorPiscinaIncrementado);
-
-          const contadorInsumoIncrementado = respo.notifications.reduce(
-            (contador, elemento) =>
-              elemento.typeNotification === "chemicalNotification"
-                ? contador + 1
-                : contador,
-            0
-          );
-          setContadorInsumo(contadorInsumoIncrementado);
-
-          break;
-
-        case 401:
-          const response = await respuesta.json();
-          console.log(response);
-          break;
-
-        default:
-          break;
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else if (rol === "GESTOR") {
+      try {
+        const tokenSend = localStorage.getItem("clave");
+        const respuesta = await fetch(
+          "https://treea-piscinas-api.vercel.app/v1/notifications-gestor",
+          {
+            method: "GET",
+            headers: {
+              Accpet: "Application/json",
+              "x-token": tokenSend,
+            },
+          }
+        );
+
+        switch (respuesta.status) {
+          case 200:
+            const respo = await respuesta.json();
+            console.log(respo.notifications);
+            setNotificaciones(respo.notifications);
+
+            // Actualizar el contador después de obtener las notificaciones
+            const contadorParametroIncrementado = respo.notifications.reduce(
+              (contador, elemento) =>
+                elemento.typeNotification === "parameterNotification"
+                  ? contador + 1
+                  : contador,
+              0
+            );
+            setContadorParametro(contadorParametroIncrementado);
+
+            const contadorPiscinaIncrementado = respo.notifications.reduce(
+              (contador, elemento) =>
+                elemento.typeNotification === "poolNotification"
+                  ? contador + 1
+                  : contador,
+              0
+            );
+            setContadorPiscina(contadorPiscinaIncrementado);
+
+            const contadorInsumoIncrementado = respo.notifications.reduce(
+              (contador, elemento) =>
+                elemento.typeNotification === "chemicalNotification"
+                  ? contador + 1
+                  : contador,
+              0
+            );
+            setContadorInsumo(contadorInsumoIncrementado);
+
+            break;
+
+          case 401:
+            const response = await respuesta.json();
+            console.log(response);
+            break;
+
+          default:
+            break;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const eliminarNotificacionId = async (id) => {
-    try {
-      const response = await fetch(
-        `https://treea-piscinas-api.vercel.app/v1/notify-manager/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json", // Especificar el tipo de contenido como JSON
-            "x-token": localStorage.getItem("clave"),
-          },
+    const rol = localStorage.getItem("rol");
+
+    if (rol === "GERENTE") {
+      try {
+        const response = await fetch(
+          `https://treea-piscinas-api.vercel.app/v1/notify-manager/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json", // Especificar el tipo de contenido como JSON
+              "x-token": localStorage.getItem("clave"),
+            },
+          }
+        );
+
+        switch (response.status) {
+          case 200:
+            const resuesta = await response.json();
+            console.log(resuesta);
+            setRefrescar((prevRefrescar) => prevRefrescar + 1);
+            break;
+
+          case 400:
+            const respondido = await response.json();
+            console.log(respondido);
+            break;
+
+          default:
+            break;
         }
-      );
-
-      switch (response.status) {
-        case 200:
-          const resuesta = await response.json();
-          console.log(resuesta);
-          setRefrescar((prevRefrescar) => prevRefrescar + 1);
-          break;
-
-        case 400:
-          const respondido = await response.json();
-          console.log(respondido);
-          break;
-
-        default:
-          break;
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else if (rol === "GESTOR") {
+      try {
+        const response = await fetch(
+          `https://treea-piscinas-api.vercel.app/v1/notify-gestor/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json", // Especificar el tipo de contenido como JSON
+              "x-token": localStorage.getItem("clave"),
+            },
+          }
+        );
+
+        switch (response.status) {
+          case 200:
+            const resuesta = await response.json();
+            console.log(resuesta);
+            setRefrescar((prevRefrescar) => prevRefrescar + 1);
+            break;
+
+          case 400:
+            const respondido = await response.json();
+            console.log(respondido);
+            break;
+
+          default:
+            break;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

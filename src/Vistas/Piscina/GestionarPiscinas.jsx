@@ -399,30 +399,59 @@ function GestionarPiscinas() {
   };
 
   const crearNotificacion = async (id) => {
-    try {
-      const response = await fetch(
-        "https://treea-piscinas-api.vercel.app/v1/notify-manager",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "x-token": localStorage.getItem("clave"),
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            historyPoolId: id,
-            userId: localStorage.getItem("id"),
-          }),
+    const rol = localStorage.getItem("rol");
+
+    if (rol === "GERENTE") {
+      try {
+        const response = await fetch(
+          "https://treea-piscinas-api.vercel.app/v1/notify-manager",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "x-token": localStorage.getItem("clave"),
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              historyPoolId: id,
+              userId: localStorage.getItem("id"),
+            }),
+          }
+        );
+
+        switch (response.status) {
+          case 200:
+            const respuesta = await response.json();
+
+            break;
         }
-      );
+      } catch (error) {}
+    } else if (rol === "GESTOR") {
+      try {
+        const response = await fetch(
+          "https://treea-piscinas-api.vercel.app/v1/notify-gestor",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "x-token": localStorage.getItem("clave"),
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              historyPoolId: id,
+              userId: localStorage.getItem("id"),
+            }),
+          }
+        );
 
-      switch (response.status) {
-        case 200:
-          const respuesta = await response.json();
+        switch (response.status) {
+          case 200:
+            const respuesta = await response.json();
 
-          break;
-      }
-    } catch (error) {}
+            break;
+        }
+      } catch (error) {}
+    }
   };
 
   const enviarParametros = async () => {
