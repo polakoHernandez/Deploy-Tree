@@ -47,6 +47,7 @@ function GestionarPiscinas() {
   const [contadorAforo, setContadorAforo] = useState(0);
   const [idHistoricoRetornado, setIdHistoricoRetornado] = useState("");
   const [deshabilidar, setDeshabilitar] = useState(false);
+  const [inActivar, setInactivar] = useState(false);
   const [dataRango, setRango] = useState({
     max: 0,
     minRange: 0,
@@ -130,10 +131,18 @@ function GestionarPiscinas() {
 
   const capTurarDatosParametros = (event) => {
     const { name, value } = event.target;
-    setDataParametro((prevDatos) => ({
-      ...prevDatos,
-      [name]: value,
-    }));
+    setDataParametro((prevDatos) => {
+      const newData = {
+        ...prevDatos,
+        [name]: value,
+      };
+      if (newData.PPMactualCloro < 0 || newData.PPMactualPh < 0) {
+        setInactivar(true);
+      } else {
+        setInactivar(false);
+      }
+      return newData;
+    });
   };
 
   const obtenerIdPorNombre = (nombre) => {
@@ -1953,7 +1962,39 @@ function GestionarPiscinas() {
                               width: "90%",
                               marginLeft: "5%",
                               // backgroundColor: "red",
-                              paddingTop: "10px",
+                              // paddingTop: "10px",
+                            }}
+                          >
+                            {/* {dataParametro.PPMactualCloro > dataRango.max  ? ( */}
+
+                            <Typography
+                              sx={{
+                                display:
+                                  dataParametro.PPMactualCloro < 0 ||
+                                  dataParametro.PPMactualPh < 0
+                                    ? "flex"
+                                    : "none",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                width: "100%",
+                                height: "50px",
+                                borderRadius: "5px",
+                                fontWeight: "bold",
+                                backgroundColor: "rgb(253, 94, 94 )",
+                                color: "white",
+                              }}
+                            >
+                              No puedes ingresar valores negativos
+                            </Typography>
+                          </Box>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Box
+                            sx={{
+                              width: "90%",
+                              marginLeft: "5%",
+                              // backgroundColor: "red",
+                              // paddingTop: "10px",
                             }}
                           >
                             {/* {dataParametro.PPMactualCloro > dataRango.max  ? ( */}
@@ -2004,7 +2045,13 @@ function GestionarPiscinas() {
 
                         <Grid item xs={12}>
                           <Button
-                            disabled={deshabilidar}
+                            disabled={
+                              deshabilidar || inActivar === true
+                                ? true
+                                : deshabilidar || inActivar === false
+                                ? false
+                                : ""
+                            }
                             onClick={() => enviarParametros()}
                             variant="contained"
                             sx={{
