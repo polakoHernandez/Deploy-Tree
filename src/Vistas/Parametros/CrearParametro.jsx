@@ -551,18 +551,19 @@ function CrearParametro() {
                         </Box>
                       </Grid>
                       <Grid item xs={12} sm={12} md={6}>
-                        <InputGeneral
-                          value={data.parameter[index].name}
+                        <InputSelect
+                          options={[{ label: "Cloro" }, { label: "Ph" }]}
+                          value={{ label: data.parameter[index].name }}
                           icon={<Pool></Pool>}
                           label="Parámetro"
                           name="name"
-                          onChange={(e) =>
+                          onChange={(e) => {
                             catchDataParametros(
                               index,
-                              e.target.name,
-                              e.target.value
-                            )
-                          }
+                              "name",
+                              e.target.textContent
+                            );
+                          }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={12} md={6}>

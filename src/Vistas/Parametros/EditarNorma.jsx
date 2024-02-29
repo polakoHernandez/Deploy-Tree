@@ -13,11 +13,11 @@ import InputGeneral from "../../Componentes/General/InputGeneral";
 import InputSelect from "../../Componentes/General/InputSelect";
 import Tabla from "../../Componentes/Parametros/Tabla";
 import { Pool, Add, Delete } from "@mui/icons-material";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 function EditarNorma() {
   const location = useLocation();
   const id = new URLSearchParams(location.search).get("Id");
-
+  const navigate = useNavigate();
   //* estado para cargar la vista
   const [mostrarVista, setMostrarVista] = useState(false);
 
@@ -235,6 +235,10 @@ function EditarNorma() {
         setMensaje("Norma actualizada exitosamente!");
         setColor("success");
         setDeshabilitar(false);
+        limpiar();
+        setTimeout(() => {
+          navigate("/listaNormas");
+        }, 1000);
 
         break;
 
@@ -482,6 +486,16 @@ function EditarNorma() {
     },
   ];
 
+  const limpiar = () => {
+    setData({
+      nameNormativity: "",
+      description: "",
+      typeOfWater: "",
+      name: "",
+      parameter: [{ name: "", specification: "" }],
+    });
+  };
+
   useEffect(() => {
     listarParametros();
   }, []);
@@ -571,17 +585,14 @@ function EditarNorma() {
                         </Box>
                       </Grid>
                       <Grid item xs={12} sm={12} md={6}>
-                        <InputGeneral
+                        <InputSelect
+                          options={[{ label: "Cloro" }, { label: "Ph" }]}
                           icon={<Pool></Pool>}
                           label="Parámetro"
-                          value={elemento.name}
+                          value={{ label: elemento.name }}
                           name="name"
                           onChange={(e) =>
-                            catchDataParametros(
-                              index,
-                              e.target.name,
-                              e.target.value
-                            )
+                            catchDataParametros(index, "name", e.target.value)
                           }
                         />
                       </Grid>
@@ -690,7 +701,7 @@ function EditarNorma() {
                         size={24}
                       ></CircularProgress>
                     ) : (
-                      "Guardar"
+                      "Guardarxx"
                     )}
                   </Button>
                 </Grid>
