@@ -592,7 +592,11 @@ function EditarNorma() {
                           value={{ label: elemento.name }}
                           name="name"
                           onChange={(e) =>
-                            catchDataParametros(index, "name", e.target.value)
+                            catchDataParametros(
+                              index,
+                              "name",
+                              e.target.textContent
+                            )
                           }
                         />
                       </Grid>

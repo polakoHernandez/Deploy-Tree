@@ -213,7 +213,7 @@ const Notificaciones = () => {
       try {
         const tokenSend = localStorage.getItem("clave");
         const respuesta = await fetch(
-          "https://treea-piscinas-api.vercel.app/v1/notifications-manager",
+          "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/notifications-manager",
           {
             method: "GET",
             headers: {
@@ -250,7 +250,9 @@ const Notificaciones = () => {
 
             const contadorInsumoIncrementado = respo.notifications.reduce(
               (contador, elemento) =>
-                elemento.typeNotification === "chemicalNotification"
+                elemento.typeNotification === "chemicalNotification" ||
+                elemento.typeNotification === "lowInventory" ||
+                elemento.typeNotification === "noInventory"
                   ? contador + 1
                   : contador,
               0
@@ -311,7 +313,9 @@ const Notificaciones = () => {
 
             const contadorInsumoIncrementado = respo.notifications.reduce(
               (contador, elemento) =>
-                elemento.typeNotification === "chemicalNotification"
+                elemento.typeNotification === "chemicalNotification" ||
+                elemento.typeNotification === "lowInventory" ||
+                elemento.typeNotification === "noInventory"
                   ? contador + 1
                   : contador,
               0
@@ -552,6 +556,110 @@ const Notificaciones = () => {
                                 } a la fecha ${new Date(
                                   elemento?.createAt
                                 ).toLocaleDateString()}`}
+                              </Typography>
+                              <IconButton
+                                sx={{
+                                  position: "absolute",
+                                  top: 10,
+                                  right: 10,
+                                }}
+                                color="inherit"
+                                size="small"
+                                onClick={(e) => {
+                                  e.stopPropagation(); // Evitar la propagación del evento
+                                  eliminarNotificacionId(elemento._id);
+                                }}
+                              >
+                                <Close />
+                              </IconButton>
+                            </Alert>
+                          </Grid>
+                        ) : elemento.typeNotification === "noInventory" ? (
+                          <Grid item xs={12} key={index}>
+                            <Alert
+                              id={elemento._id}
+                              sx={{
+                                marginBottom: "10px",
+                                // backgroundColor: "blue",
+                                display: "flex",
+                                flexDirection: "row",
+                                position: "relative",
+                              }}
+                              variant="filled"
+                              severity="error"
+                              icon={
+                                <ErrorOutline
+                                  fontSize="inherit"
+                                  sx={{ marginTop: "8px" }}
+                                />
+                              }
+                              onClick={() => {
+                                eliminarNotificacionId(elemento._id);
+                                navigate(
+                                  `/agregarInventario?id=${elemento.chemicalProductId._id}`
+                                );
+                              }}
+                            >
+                              <Typography
+                                sx={{
+                                  marginTop: "5px",
+                                  width: { xs: "80%", sm: "90%" },
+                                  // Ajusta el tamaño del Typography para ocupar el espacio disponible
+                                }}
+                              >
+                                {elemento?.noInventory}
+                              </Typography>
+                              <IconButton
+                                sx={{
+                                  position: "absolute",
+                                  top: 10,
+                                  right: 10,
+                                }}
+                                color="inherit"
+                                size="small"
+                                onClick={(e) => {
+                                  e.stopPropagation(); // Evitar la propagación del evento
+                                  eliminarNotificacionId(elemento._id);
+                                }}
+                              >
+                                <Close />
+                              </IconButton>
+                            </Alert>
+                          </Grid>
+                        ) : elemento.typeNotification === "lowInventory" ? (
+                          <Grid item xs={12} key={index}>
+                            <Alert
+                              id={elemento._id}
+                              sx={{
+                                marginBottom: "10px",
+                                // backgroundColor: "blue",
+                                display: "flex",
+                                flexDirection: "row",
+                                position: "relative",
+                              }}
+                              variant="filled"
+                              severity="error"
+                              icon={
+                                <ErrorOutline
+                                  fontSize="inherit"
+                                  sx={{ marginTop: "8px" }}
+                                />
+                              }
+                              onClick={() => {
+                                eliminarNotificacionId(elemento._id);
+                                navigate(
+                                  `/agregarInventario?id=${elemento.chemicalProductId._id}`
+                                );
+                              }}
+                            >
+                              <Typography
+                                sx={{
+                                  marginTop: "5px",
+                                  width: { xs: "80%", sm: "90%" },
+                                  // Ajusta el tamaño del Typography para ocupar el espacio disponible
+                                }}
+                              >
+                                {elemento?.lowInventory}
                               </Typography>
                               <IconButton
                                 sx={{

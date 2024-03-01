@@ -228,7 +228,7 @@ const CrearQuimico = () => {
     });
   };
 
-  const crearNotificacion = async (id) => {
+  const crearNotificacion = async (id, availableQuantity) => {
     const rol = localStorage.getItem("rol");
 
     if (rol === "GERENTE") {
@@ -245,6 +245,7 @@ const CrearQuimico = () => {
             body: JSON.stringify({
               chemicalProductId: id,
               userId: localStorage.getItem("id"),
+              recordedQuantity: availableQuantity,
             }),
           }
         );
@@ -270,6 +271,7 @@ const CrearQuimico = () => {
             body: JSON.stringify({
               chemicalProductId: id,
               userId: localStorage.getItem("id"),
+              recordedQuantity: availableQuantity,
             }),
           }
         );
@@ -308,7 +310,7 @@ const CrearQuimico = () => {
     const body = crearFormulario();
 
     const response = await fetch(
-      "https://treea-piscinas-api.vercel.app/v1/chemical-product",
+      "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/chemical-product",
       {
         method: "POST",
         headers: {
@@ -322,11 +324,12 @@ const CrearQuimico = () => {
     switch (response.status) {
       case 200:
         respuesta = await response.json();
+        console.log({ WEY: respuesta });
         setOpenAlerta(true);
         setMensaje("producto creado con exíto");
         setColor("success");
         if (respuesta.minQuantity > respuesta.availableQuantity) {
-          crearNotificacion(respuesta._id);
+          crearNotificacion(respuesta._id, respuesta.availableQuantity);
         }
 
         setHabilitar(false);

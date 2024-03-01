@@ -458,7 +458,7 @@ function AdministrarInventario() {
                     <Grid item xs={12}>
                       <InputSelect
                         options={opcionesInpts || [{ label: "No data" }]}
-                        label="Lista de químicos"
+                        label="Lista de químicos1"
                         icon={<Pool></Pool>}
                         onChange={(e) =>
                           obtenerInfoIndice(listaQuimicos, e.target.textContent)

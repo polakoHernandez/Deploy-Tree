@@ -249,7 +249,7 @@ export default function ModalAjustar({
     setActivarCalcular(true);
 
     const respuesta = await fetch(
-      `https://treea-piscinas-api.vercel.app/v1/setting-dosing`,
+      `https://kcc6rdhv-3000.use2.devtunnels.ms/v1/setting-dosing`,
       {
         method: "POST",
         headers: {
@@ -316,19 +316,19 @@ export default function ModalAjustar({
 
     setProductoRetornadoId(productoRetonrado._id);
 
-    if (
-      productoRetonrado?.availableQuantity <= productoRetonrado?.minQuantity &&
-      productoRetonrado?.availableQuantity > 0
-    ) {
-      setAbrirAlerta(true);
-      setColor("error");
-      setMensaje(`Queda poco iniventario de ${productoRetonrado.name}`);
-    } else if (productoRetonrado?.availableQuantity <= 0) {
-      setAbrirAlerta(true);
-      setColor("error");
-      setMensaje(`No hay inventario de ${productoRetonrado.name}`);
-      setDeshabilitar(true);
-    }
+    // if (
+    //   productoRetonrado?.availableQuantity <= productoRetonrado?.minQuantity &&
+    //   productoRetonrado?.availableQuantity > 0
+    // ) {
+    //   setAbrirAlerta(true);
+    //   setColor("error");
+    //   setMensaje(`Queda poco iniventario de ${productoRetonrado.name}`);
+    // } else if (productoRetonrado?.availableQuantity <= 0) {
+    //   setAbrirAlerta(true);
+    //   setColor("error");
+    //   setMensaje(`No hay inventario de ${productoRetonrado.name}`);
+    //   setDeshabilitar(true);
+    // }
 
     if (CloroPh.nombre === "Cloro" && CloroPh.mansaje !== "good") {
       retornahistoricoPool();
