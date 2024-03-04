@@ -31,6 +31,7 @@ export default function ModalAjustar({
   CloroPh,
   idHistorico,
   renderizar,
+  renderizarNotificaciones,
 }) {
   console.log({ data: data });
 
@@ -279,12 +280,14 @@ export default function ModalAjustar({
         close();
         historyChemicalProduct(respues._id);
         renderizar();
+        renderizarNotificaciones();
         break;
 
       case 404:
         const respues2 = await respuesta.json();
         setActivarCalcular(false);
         console.log(respues2);
+        renderizarNotificaciones();
 
         break;
       case 400:
@@ -293,6 +296,7 @@ export default function ModalAjustar({
           setAbrirAlerta(true);
           setMensaje(respues4.msg);
           setColor("error");
+          renderizarNotificaciones();
         }
         setActivarCalcular(false);
         console.log(respues4);
@@ -303,6 +307,7 @@ export default function ModalAjustar({
         const respues3 = await respuesta.json();
         setActivarCalcular(false);
         console.log(respues3);
+        renderizarNotificaciones();
 
         break;
     }

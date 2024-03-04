@@ -53,6 +53,7 @@ function GestionarPiscinas() {
     minRange: 0,
     maxRange: 0,
   });
+  const [renderNotificaciones, setRenderNotificaciones] = useState(0);
 
   document.body.style.overflow = "hidden";
   const [idProp, setIdProp] = useState("");
@@ -440,6 +441,7 @@ function GestionarPiscinas() {
         switch (response.status) {
           case 200:
             const respuesta = await response.json();
+            setRenderNotificaciones(renderNotificaciones + 1);
 
             break;
         }
@@ -465,6 +467,7 @@ function GestionarPiscinas() {
         switch (response.status) {
           case 200:
             const respuesta = await response.json();
+            setRenderNotificaciones(renderNotificaciones + 1);
 
             break;
         }
@@ -713,6 +716,7 @@ function GestionarPiscinas() {
         moverParametros={moverTablaParametros}
         moverQuimicos={moverTablaQuimicos} //
         moverPerfil={moverTablaPerfil}
+        renderNotificaciones={renderNotificaciones} //
       ></SearchAppBar>
 
       {cargando ? (
@@ -2102,7 +2106,7 @@ function GestionarPiscinas() {
                                 color="inherit"
                               ></CircularProgress>
                             ) : (
-                              "Guardar"
+                              "Guardarx"
                             )}
                           </Button>
                         </Grid>
@@ -2287,6 +2291,9 @@ function GestionarPiscinas() {
                         </Grid>
 
                         <TablaLisaHistorico
+                          renderizarNotificaciones={() =>
+                            setRenderNotificaciones(renderNotificaciones + 1)
+                          }
                           renderizar={() => setRenderTabla(renderTabla + 1)}
                           idPool={pool?._id}
                           idHistorico={historicoId}

@@ -16,6 +16,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Notifications } from "@mui/icons-material";
+import ModalPerfil from "../Perfil/ModalPerfil";
 
 export default function SearchAppBar({
   onClick,
@@ -39,6 +40,7 @@ export default function SearchAppBar({
   const [menuParametros, setMenuParametros] = useState(false);
   const [menuQuimicos, setMenuQuimicos] = useState(false);
   const [menuPerfil, setMenuPerfil] = useState(false);
+  const [mostrarPerfil, setMostrarPerfil] = useState(false);
 
   // Funciones para abrir los menus
   const abriMenuPiscina = () => {
@@ -823,7 +825,9 @@ export default function SearchAppBar({
               }}
             >
               <ListItemButton
-                onClick={() => navigate("/MiPerfil")}
+                onClick={() => {
+                  setMostrarPerfil(true);
+                }}
                 sx={{
                   pl: 4,
                   borderBottom: "1px solid white",
@@ -936,6 +940,10 @@ export default function SearchAppBar({
         abrirDrawer={abrirDrawer}
         cerraDrawer={() => cerrarDrawer()}
       ></TemporaryDrawer>
+      <ModalPerfil
+        open={mostrarPerfil}
+        close={() => setMostrarPerfil(false)}
+      ></ModalPerfil>
     </Box>
   );
 }

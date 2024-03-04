@@ -14,6 +14,7 @@ const CrearQuimico = () => {
   const [moverUsuario, setMoverUsuarios] = useState(false);
   const [moverParametros, setMoverParametros] = useState(false);
   const [moverQuimicos, setMoverQuimicos] = useState(false);
+  const [renderNotificaciones, setRenderNotificaciones] = useState(0);
   const [moverPerfil, setMoverPerfil] = useState(false);
   const [data, setData] = useState({
     nombre: "",
@@ -253,6 +254,7 @@ const CrearQuimico = () => {
         switch (response.status) {
           case 200:
             const respuesta = await response.json();
+            setRenderNotificaciones(renderNotificaciones + 1);
 
             break;
         }
@@ -389,6 +391,7 @@ const CrearQuimico = () => {
         moverParametros={moverTablaParametros}
         moverQuimicos={moverTablaQuimicos} //
         moverPerfil={moverTablaPerfil}
+        renderNotificaciones={renderNotificaciones} //
       ></SearchAppBar>
 
       <Box sx={{ ...stylesAnimation.mainBox }}>

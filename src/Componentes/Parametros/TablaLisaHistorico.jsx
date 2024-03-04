@@ -14,6 +14,7 @@ export default function TablaLisaHistorico({
   idHistorico,
   idPool,
   renderizar,
+  renderizarNotificaciones,
 }) {
   console.log({ ESTADATA: data });
   const [rowIdCounter, setRowIdCounter] = useState(1);
@@ -235,6 +236,7 @@ export default function TablaLisaHistorico({
       ></ModalAjustado>
 
       <ModalAjustar
+        renderizarNotificaciones={renderizarNotificaciones}
         data={data}
         renderizar={renderizar}
         idHistorico={idHistorico}

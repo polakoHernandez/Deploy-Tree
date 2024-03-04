@@ -5,6 +5,15 @@ const styles = {
     // backgroundColor: "red",
   },
 
+  tittle: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    aligItems: "center",
+    fontFamily: "'Nunito Sans', sans-serif",
+    fontSize: "30px",
+  },
+
   container: {
     width: "80%",
     marginTop: "10px",
