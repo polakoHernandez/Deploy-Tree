@@ -27,6 +27,7 @@ function CrearPiscina() {
   const tecnicaBomba = useRef(null);
   const fotoBomba = useRef(null);
   const tecnicaCalentador = useRef(null);
+  const [renderNotificaciones, setRenderNotificaciones] = useState(0);
 
   const refGeneral = useRef("");
 
@@ -609,6 +610,7 @@ function CrearPiscina() {
       switch (response.status) {
         case 200:
           const respuesta = await response.json();
+          setRenderNotificaciones(renderNotificaciones + 1);
 
           break;
       }
@@ -743,6 +745,7 @@ function CrearPiscina() {
         moverParametros={moverTablaParametros}
         moverQuimicos={moverTablaQuimicos} //
         moverPerfil={moverTablaPerfil}
+        renderNotificaciones={renderNotificaciones} //
       ></SearchAppBar>
       <Box sx={styleAnimation.mainBox}>
         <Box sx={styleAnimation.containerVentanas}>

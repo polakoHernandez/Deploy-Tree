@@ -27,6 +27,7 @@ const Notificaciones = () => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [dataPiscina, setDataPiscina] = useState([]);
+  const [renderNotificaciones, setRenderNotificaciones] = useState(0);
 
   //   Estados para mover el fromualrio
   const [mover, setMover] = useState(false); //MOvercon Piscina
@@ -213,7 +214,7 @@ const Notificaciones = () => {
       try {
         const tokenSend = localStorage.getItem("clave");
         const respuesta = await fetch(
-          "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/notifications-manager",
+          "https://treea-piscinas-api.vercel.app/v1/notifications-manager",
           {
             method: "GET",
             headers: {
@@ -360,6 +361,7 @@ const Notificaciones = () => {
             const resuesta = await response.json();
             console.log(resuesta);
             setRefrescar((prevRefrescar) => prevRefrescar + 1);
+            setRenderNotificaciones(renderNotificaciones + 1);
             break;
 
           case 400:
@@ -460,6 +462,7 @@ const Notificaciones = () => {
         moverParametros={moverTablaParametros}
         moverQuimicos={moverTablaQuimicos} //
         moverPerfil={moverTablaPerfil}
+        renderNotificaciones={renderNotificaciones} //
       ></SearchAppBar>
 
       <Box sx={{ ...stylesAnimation.mainBox }}>

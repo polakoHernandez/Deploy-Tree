@@ -23,6 +23,7 @@ export default function SearchAppBar({
   moverParametros,
   moverQuimicos,
   moverPerfil,
+  renderNotificaciones,
 }) {
   const navigate = useNavigate("");
   const [rol, setRol] = useState("");
@@ -167,7 +168,7 @@ export default function SearchAppBar({
 
   useEffect(() => {
     listarNotificaciones();
-  }, []);
+  }, [renderNotificaciones]);
   useEffect(() => {
     setRol(localStorage.getItem("rol"));
   }, []);

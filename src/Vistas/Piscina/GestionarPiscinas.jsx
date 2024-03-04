@@ -475,7 +475,7 @@ function GestionarPiscinas() {
   const enviarParametros = async () => {
     setDeshabilitar(true);
     const respuesta = await fetch(
-      "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/history-pool",
+      "https://treea-piscinas-api.vercel.app/v1/history-pool",
       {
         method: "POST",
         headers: {

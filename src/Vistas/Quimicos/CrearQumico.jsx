@@ -310,7 +310,7 @@ const CrearQuimico = () => {
     const body = crearFormulario();
 
     const response = await fetch(
-      "https://kcc6rdhv-3000.use2.devtunnels.ms/v1/chemical-product",
+      "https://treea-piscinas-api.vercel.app/v1/chemical-product",
       {
         method: "POST",
         headers: {
