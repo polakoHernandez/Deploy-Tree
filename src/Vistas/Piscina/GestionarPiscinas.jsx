@@ -416,6 +416,11 @@ function GestionarPiscinas() {
       const respuesta = data?.pools?.find((element) => element?._id === idPool);
       setPool(respuesta);
       setContador(2);
+
+      const index = data?.pools?.findIndex(
+        (element) => element?._id === idPool
+      );
+      setPosicion(index);
     }
   };
 
