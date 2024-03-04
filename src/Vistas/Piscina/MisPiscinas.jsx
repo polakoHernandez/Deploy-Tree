@@ -281,8 +281,8 @@ function MisPiscinas() {
                     }}
                   >
                     <InputSelectPool
-                      value={{label:pool.name}}
-                    size="small"
+                      value={{label:pool.name || ""} }
+                      size="small"
                       label="Buscar piscina"
                       options={listaNombresPiscinas}
                       icon={<Pool></Pool>}

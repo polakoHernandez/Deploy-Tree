@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {
@@ -13,7 +13,9 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import Slider from "react-slick";
 import pool from "../../assets/pool1.jpg";
 import "../../Estilos/General/SliderVertical.css";
-function SliderVertical({ data, obtenerId }) {
+function SliderVertical({ data, obtenerId, posicion }) {
+  const sliderRef = useRef(null);
+
   const NextArrow = (props) => {
     const { style, onClick } = props;
     return (
@@ -52,6 +54,12 @@ function SliderVertical({ data, obtenerId }) {
       </IconButton>
     );
   };
+
+  useEffect(() => {
+    if (sliderRef.current) {
+      sliderRef.current.slickGoTo(posicion);
+    }
+  }, [posicion]);
 
   const settings = {
     dots: false,
@@ -94,7 +102,7 @@ function SliderVertical({ data, obtenerId }) {
 
   return (
     <Box sx={{ ...styles.slyderContainer }}>
-      <Slider {...settings}>
+      <Slider {...settings} ref={sliderRef}>
         {data.pools.map((pool) => (
           <Box key={pool._id}>
             <Card

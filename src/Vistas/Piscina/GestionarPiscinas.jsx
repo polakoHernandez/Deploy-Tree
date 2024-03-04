@@ -54,6 +54,7 @@ function GestionarPiscinas() {
     maxRange: 0,
   });
   const [renderNotificaciones, setRenderNotificaciones] = useState(0);
+  const [posicion, setPosicion] = useState(0);
 
   document.body.style.overflow = "hidden";
   const [idProp, setIdProp] = useState("");
@@ -154,6 +155,9 @@ function GestionarPiscinas() {
   const obtenerIdPorNombre = (nombre) => {
     const respuesta = data?.pools?.find((element) => element.name === nombre);
     setPool(respuesta);
+
+    const index = data?.pools?.findIndex((element) => element.name === nombre);
+    setPosicion(index);
   };
 
   //Funciones para crear Parametros y aforo
@@ -261,11 +265,9 @@ function GestionarPiscinas() {
         break;
 
       case 404:
-        alert("Token no valido");
         break;
 
       case 404:
-        alert("No encontraodr");
         break;
 
       case 500:
@@ -738,6 +740,7 @@ function GestionarPiscinas() {
             >
               {data && (
                 <SliderVertical
+                  posicion={posicion}
                   data={data}
                   obtenerId={obetnerId}
                 ></SliderVertical>
@@ -789,6 +792,7 @@ function GestionarPiscinas() {
                     }}
                   >
                     <InputSelectPool
+                      value={{ label: pool.name || "" }}
                       size="small"
                       label="Buscar piscina"
                       options={nombresPiscinas}
