@@ -23,6 +23,7 @@ function MisPiscinas() {
   const [pool, setPool] = useState("");
   const [cargando, setCargando] = useState(false);
   const [listaNombresPiscinas, setListaNombresPiscinas] = useState([]);
+  const [posicion, setPosicion] = useState(0)
   //   Estados para mover el fromualrio
   const [mover, setMover] = useState(false); //MOvercon Piscina
   const [moverUsuario, setMoverUsuarios] = useState(false);
@@ -166,13 +167,27 @@ function MisPiscinas() {
     setCargando(false);
   };
 
-  const obtenerIdPorNombre =(nombrePisicna)=>{
-  const respuesta = data?.poolCreatedByUser?.find(
-      (element) => element.name === nombrePisicna
+ 
+
+  const obtenerIdPorNombre = (nombrePiscina) => {
+    const respuesta = data?.poolCreatedByUser?.find(
+      (element) => element.name === nombrePiscina
     );
-    setPool(respuesta);
   
-  }
+    if (respuesta) {
+      setPool(respuesta);
+  
+      const index = data.poolCreatedByUser.findIndex(
+        (element) => element.name === nombrePiscina
+      );
+  
+      setPosicion(index);
+    } else {
+      // Handle the case when 'respuesta' is null (element not found)
+      console.log(`No pool found with the name ${nombrePiscina}`);
+    }
+  };
+  
 
   const obetnerId = async (idPool) => {
     const respuesta = data?.poolCreatedByUser?.find(
@@ -215,6 +230,7 @@ function MisPiscinas() {
             >
               {data && (
                 <SliderVertical
+                  posicion={posicion}
                   data={data}
                   obtenerId={obetnerId}
                 ></SliderVertical>
@@ -265,12 +281,15 @@ function MisPiscinas() {
                     }}
                   >
                     <InputSelectPool
+                      value={{label:pool.name}}
                     size="small"
                       label="Buscar piscina"
                       options={listaNombresPiscinas}
                       icon={<Pool></Pool>}
                       placeholder="Selecciones una piscina"
-                      onChange={(e)=>obtenerIdPorNombre(e.target.textContent)}
+                      onChange={(e)=>{obtenerIdPorNombre(e.target.textContent)                        
+                     
+                      }}
                     ></InputSelectPool>
                   </Box>
                 </Box>

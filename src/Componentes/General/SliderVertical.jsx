@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {
@@ -13,7 +13,10 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import Slider from "react-slick";
 import pool from "../../assets/pool1.jpg";
 import "../../Estilos/General/SliderVertical.css";
-function SliderVertical({ data, obtenerId }) {
+
+function SliderVertical({ data, obtenerId, posicion }) {
+  const sliderRef = useRef(null);
+
   const NextArrow = (props) => {
     const { style, onClick } = props;
     return (
@@ -32,7 +35,6 @@ function SliderVertical({ data, obtenerId }) {
     );
   };
 
-  //*This funcnion returne me the arrows for the carrusel
   const PrevArrow = (props) => {
     const { style, onClick } = props;
     return (
@@ -43,7 +45,6 @@ function SliderVertical({ data, obtenerId }) {
           position: "absolute",
           bottom: "-50px",
           left: "45%",
-          color: "white",
           zIndex: "99",
           color: "black",
         }}
@@ -53,6 +54,12 @@ function SliderVertical({ data, obtenerId }) {
     );
   };
 
+  useEffect(() => {
+    if (sliderRef.current) {
+      sliderRef.current.slickGoTo(posicion);
+    }
+  }, [posicion]);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -60,6 +67,7 @@ function SliderVertical({ data, obtenerId }) {
     slidesToShow: 1,
     slidesToScroll: 1,
     vertical: true,
+    initialSlide: posicion,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
@@ -67,7 +75,6 @@ function SliderVertical({ data, obtenerId }) {
   const styles = {
     slyderContainer: {
       position: "absolute",
-      // backgroundColor: "blue",
       width: "35%",
       height: "100%",
       paddingTop: "20vh",
@@ -96,17 +103,23 @@ function SliderVertical({ data, obtenerId }) {
 
   return (
     <Box sx={{ ...styles.slyderContainer }}>
-      <Slider {...settings}>
-        {data.poolCreatedByUser.map((pool) => (
+      <Slider {...settings} ref={sliderRef}>
+        {data.poolCreatedByUser.map((pool, index) => (
           <Box key={pool._id}>
             <Card
               sx={styles.cardStyle}
-              onClick={() => obtenerId(pool._id)}
-              //   id={pool._id}
+              onClick={() => {
+                obtenerId(pool._id);
+              }}
+              id={index}
             >
               <CardActionArea>
                 <Box sx={{ ...styles.boxImage }}>
-                  <img src={pool.photo} className="img-pools"></img>
+                  <img
+                    src={pool.photo}
+                    className="img-pools"
+                    alt={`pool-${index}`}
+                  />
                 </Box>
                 <CardContent>
                   <Typography sx={styles.typographyStyle}>
