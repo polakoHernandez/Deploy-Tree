@@ -55,6 +55,8 @@ function GestionarPiscinas() {
   });
   const [renderNotificaciones, setRenderNotificaciones] = useState(0);
   const [posicion, setPosicion] = useState(0);
+  const [sinParametrizacion, setSinParametrizacion] = useState(false);
+  const [paraInactivo, setParaInactivo] = useState(false);
 
   document.body.style.overflow = "hidden";
   const [idProp, setIdProp] = useState("");
@@ -562,44 +564,101 @@ function GestionarPiscinas() {
     switch (respuesta.status) {
       case 200:
         const response = await respuesta.json();
-        console.log({ WEY: response?.testTest[0] });
+        console.log({ WEY: response?.testTest[0]?.state });
 
+        const global = response?.testTest[0]?.state;
+        console.log({ GLOBAL: global });
         const typeValidation = response?.testTest[0]?.typeValidation;
 
-        if (typeValidation == "Manual") {
-          const ph = response.testTest[0].parameters.find(
-            (elemento) => elemento.minRange
-          );
-
-          const cloro = response.testTest[0].parameters.find(
-            (elemento) => elemento.maxValueSpecification
-          );
-
-          setRango((prevDatos) => ({
-            max: cloro?.maxValueSpecification || "",
-            minRange: ph?.minRange || "",
-            maxRange: ph?.maxRange || "",
-          }));
-        } else if (typeValidation == "Norma") {
-          const normativityId = response?.testTest[0].normativityId.parameter;
-
-          const ph = normativityId?.find((elemento) => elemento.minRange);
-
-          const cloro = normativityId?.find(
-            (elemento) => elemento.maxValueSpecification
-          );
-
-          setRango((prevDatos) => ({
-            max: cloro?.maxValueSpecification || "",
-            minRange: ph?.minRange || "",
-            maxRange: ph?.maxRange || "",
-          }));
-        } else {
+        if (global === undefined) {
           setRango((prevDatos) => ({
             max: "",
             minRange: "",
             maxRange: "",
           }));
+          setInactivar(true);
+          setSinParametrizacion(true);
+          setParaInactivo(false);
+          return;
+        } else if (!global) {
+          setInactivar(true);
+          setParaInactivo(true);
+          setSinParametrizacion(false);
+
+          if (typeValidation == "Manual") {
+            const ph = response.testTest[0].parameters.find(
+              (elemento) => elemento.minRange
+            );
+
+            const cloro = response.testTest[0].parameters.find(
+              (elemento) => elemento.maxValueSpecification
+            );
+
+            setRango((prevDatos) => ({
+              max: cloro?.maxValueSpecification || "",
+              minRange: ph?.minRange || "",
+              maxRange: ph?.maxRange || "",
+            }));
+          } else if (typeValidation == "Norma") {
+            const normativityId = response?.testTest[0].normativityId.parameter;
+
+            const ph = normativityId?.find((elemento) => elemento.minRange);
+
+            const cloro = normativityId?.find(
+              (elemento) => elemento.maxValueSpecification
+            );
+
+            setRango((prevDatos) => ({
+              max: cloro?.maxValueSpecification || "",
+              minRange: ph?.minRange || "",
+              maxRange: ph?.maxRange || "",
+            }));
+          } else {
+            setRango((prevDatos) => ({
+              max: "",
+              minRange: "",
+              maxRange: "",
+            }));
+          }
+        } else if (global) {
+          setParaInactivo(false);
+          setSinParametrizacion(false);
+          setInactivar(false);
+          if (typeValidation == "Manual") {
+            const ph = response.testTest[0].parameters.find(
+              (elemento) => elemento.minRange
+            );
+
+            const cloro = response.testTest[0].parameters.find(
+              (elemento) => elemento.maxValueSpecification
+            );
+
+            setRango((prevDatos) => ({
+              max: cloro?.maxValueSpecification || "",
+              minRange: ph?.minRange || "",
+              maxRange: ph?.maxRange || "",
+            }));
+          } else if (typeValidation == "Norma") {
+            const normativityId = response?.testTest[0].normativityId.parameter;
+
+            const ph = normativityId?.find((elemento) => elemento.minRange);
+
+            const cloro = normativityId?.find(
+              (elemento) => elemento.maxValueSpecification
+            );
+
+            setRango((prevDatos) => ({
+              max: cloro?.maxValueSpecification || "",
+              minRange: ph?.minRange || "",
+              maxRange: ph?.maxRange || "",
+            }));
+          } else {
+            setRango((prevDatos) => ({
+              max: "",
+              minRange: "",
+              maxRange: "",
+            }));
+          }
         }
 
         //! se procede a hacer un nuevo mapeo para asignar Cloro y Ph en los inputs en la vista parametrso
@@ -2083,6 +2142,49 @@ function GestionarPiscinas() {
                               }}
                             >
                               Cloro está dentro del rango permitido
+                            </Typography>
+                          </Box>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Box
+                            sx={{
+                              width: "90%",
+                              marginLeft: "5%",
+                              // backgroundColor: "red",
+                              // paddingTop: "10px",
+                            }}
+                          >
+                            {/* {dataParametro.PPMactualCloro > dataRango.max  ? ( */}
+                            <Typography
+                              sx={{
+                                fontWeight: "bold",
+                                display: paraInactivo ? "flex" : "none",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                borderRadius: "5px",
+                                width: "100%",
+                                height: "50px",
+                                backgroundColor: "rgb( 253, 94, 94 )",
+                                color: "white",
+                              }}
+                            >
+                              La parametrización esta inactiva
+                            </Typography>
+
+                            <Typography
+                              sx={{
+                                display: sinParametrizacion ? "flex" : "none",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                width: "100%",
+                                height: "50px",
+                                borderRadius: "5px",
+                                fontWeight: "bold",
+                                backgroundColor: "rgb( 253, 94, 94 )",
+                                color: "white",
+                              }}
+                            >
+                              No tiene parametrización asignada
                             </Typography>
                           </Box>
                         </Grid>
