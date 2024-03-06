@@ -15,6 +15,7 @@ import ScienceIcon from "@mui/icons-material/Science";
 import Co2Icon from "@mui/icons-material/Co2";
 import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router-dom";
+import ModalPerfil from "../Perfil/ModalPerfil";
 
 export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
   const navigate = useNavigate("");
@@ -25,6 +26,7 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
   const [openQuimicos, setOpenQuimicos] = React.useState(false);
   const [openPerfil, setOpenPerfil] = React.useState(false);
   const [rol, setRol] = React.useState("");
+  const [mostrarPerfil, setMostrarPerfil] = React.useState(false);
 
   const abrirPisicina = () => {
     setOpenPiscina(!openPiscina);
@@ -580,7 +582,9 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
             <Collapse in={openPerfil} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 <ListItemButton
-                  onClick={() => navigate("/MiPerfil")}
+                  onClick={() => {
+                    setMostrarPerfil(true);
+                  }}
                   sx={{
                     pl: 4,
                     "&:hover": {
@@ -668,6 +672,10 @@ export default function TemporaryDrawer({ abrirDrawer, cerraDrawer }) {
           </List>
         </Box>
       </Drawer>
+      <ModalPerfil
+        open={mostrarPerfil}
+        close={() => setMostrarPerfil(false)}
+      ></ModalPerfil>
     </div>
   );
 }

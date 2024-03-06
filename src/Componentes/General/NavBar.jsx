@@ -937,6 +937,8 @@ export default function SearchAppBar({
         </Toolbar>
       </AppBar>
       <TemporaryDrawer
+        mostrarPerfil={mostrarPerfil}
+        close={() => setMostrarPerfil(false)}
         abrirDrawer={abrirDrawer}
         cerraDrawer={() => cerrarDrawer()}
       ></TemporaryDrawer>
