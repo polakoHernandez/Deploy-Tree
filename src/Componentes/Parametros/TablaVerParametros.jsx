@@ -17,6 +17,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ModalDataParametros from "../../Componentes/Parametros/ModalDataParametros";
 import ModalUpdateParametros from "../../Componentes/Parametros/ModalUpdateParametros";
 import Alertas from "../General/Alertas";
+import ModalActivo from "./ModalActivo";
 
 export default function TablaVerParametros({
   data,
@@ -78,7 +79,7 @@ export default function TablaVerParametros({
         case 404:
           setOpenAlerta(true);
           setSeverity("error");
-          setMessage("Ya hay una asigancion activa");
+          setMessage("Ya existe una asignación activa!");
           setHabilitar(false);
           break;
 
@@ -113,7 +114,7 @@ export default function TablaVerParametros({
         case 404:
           setOpenAlerta(true);
           setSeverity("error");
-          setMessage("Ya hay una asigancion activa");
+          setMessage(" Ya existe una asignación activa");
           setHabilitar(false);
           break;
 
@@ -314,11 +315,11 @@ export default function TablaVerParametros({
         open={openUpdate}
         close={() => setopenUpdate(false)}
       ></ModalUpdateParametros>
-      <Alertas
+
+      <ModalActivo
         open={openAlerta}
-        mensaje={message}
-        severity={severity}
-      ></Alertas>
+        close={() => setOpenAlerta(false)}
+      ></ModalActivo>
     </Box>
   );
 }
