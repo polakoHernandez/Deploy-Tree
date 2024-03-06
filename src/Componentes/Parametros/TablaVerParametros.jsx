@@ -16,6 +16,7 @@ import PersonOffIcon from "@mui/icons-material/PersonOff";
 import PersonIcon from "@mui/icons-material/Person";
 import ModalDataParametros from "../../Componentes/Parametros/ModalDataParametros";
 import ModalUpdateParametros from "../../Componentes/Parametros/ModalUpdateParametros";
+import Alertas from "../General/Alertas";
 
 export default function TablaVerParametros({
   data,
@@ -34,6 +35,10 @@ export default function TablaVerParametros({
 
   //Datos para mostrar en la modal
   const [datosRow, setDatosRows] = useState("");
+
+  const [openAlerta, setOpenAlerta] = useState(false);
+  const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState("");
 
   //Estaod para abrir la modal
   const [open, setOpen] = useState(false);
@@ -70,6 +75,12 @@ export default function TablaVerParametros({
           alert("Usuario no encontrado");
           setHabilitar(false);
           break;
+        case 404:
+          setOpenAlerta(true);
+          setSeverity("error");
+          setMessage("Ya hay una asigancion activa");
+          setHabilitar(false);
+          break;
 
         case 500:
           alert("Error en el servidor");
@@ -96,6 +107,13 @@ export default function TablaVerParametros({
         case 200:
           console.log(await respuesta.json());
           reloadData();
+          setHabilitar(false);
+          break;
+
+        case 404:
+          setOpenAlerta(true);
+          setSeverity("error");
+          setMessage("Ya hay una asigancion activa");
           setHabilitar(false);
           break;
 
@@ -296,6 +314,11 @@ export default function TablaVerParametros({
         open={openUpdate}
         close={() => setopenUpdate(false)}
       ></ModalUpdateParametros>
+      <Alertas
+        open={openAlerta}
+        mensaje={message}
+        severity={severity}
+      ></Alertas>
     </Box>
   );
 }

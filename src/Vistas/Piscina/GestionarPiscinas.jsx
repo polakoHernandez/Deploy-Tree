@@ -2217,7 +2217,7 @@ function GestionarPiscinas() {
                                 color="inherit"
                               ></CircularProgress>
                             ) : (
-                              "Guardarx"
+                              "Guardar"
                             )}
                           </Button>
                         </Grid>
